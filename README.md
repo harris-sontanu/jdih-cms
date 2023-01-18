@@ -1,2 +1,2 @@
-# jdih-admin
-JDIH backend web application
+# JDIH CMS
+JDIH Content Management System Application
