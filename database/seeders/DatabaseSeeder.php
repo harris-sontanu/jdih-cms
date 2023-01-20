@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MemberSeeder::class,
             SettingSeeder::class,
+            TypeSeeder::class,
         ]);
     }
 }
