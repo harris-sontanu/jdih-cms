@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             MemberSeeder::class,
             SettingSeeder::class,
             TypeSeeder::class,
+            CategorySeeder::class,
+            InstituteSeeder::class,
         ]);
     }
 }
