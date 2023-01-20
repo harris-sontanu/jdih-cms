@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             CategorySeeder::class,
             InstituteSeeder::class,
+            MatterSeeder::class,
         ]);
     }
 }
