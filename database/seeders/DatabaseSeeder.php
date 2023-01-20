@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             InstituteSeeder::class,
             MatterSeeder::class,
+            FieldSeeder::class,
         ]);
     }
 }
