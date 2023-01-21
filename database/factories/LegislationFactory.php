@@ -32,8 +32,8 @@ class LegislationFactory extends Factory
             'code_number'   => $number,
             'number'        => $number,
             'year'          => Carbon::parse($dt)->year,
-
-
+            'call_number'   => $category->type_id == 2 ? fake()->bothify('### ??? ?') : null,
+            
         ];
     }
 }
