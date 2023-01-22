@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             InstituteSeeder::class,
             MatterSeeder::class,
             FieldSeeder::class,
+            LegislationSeeder::class,
+            LegislationMatterSeeder::class,
+            
         ]);
     }
 }
