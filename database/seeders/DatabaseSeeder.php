@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             FieldSeeder::class,
             LegislationSeeder::class,
             LegislationMatterSeeder::class,
-            
+            LegislationRelationshipSeeder::class,
         ]);
     }
 }
