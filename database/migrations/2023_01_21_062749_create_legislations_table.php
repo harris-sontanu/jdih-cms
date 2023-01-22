@@ -35,6 +35,20 @@ return new class extends Migration
             $table->string('publisher')->nullable();
             $table->text('source')->nullable();
             $table->text('subject')->nullable();
+            $table->integer('institute_id')
+                ->unsigned()
+                ->nullable();
+            $table->foreign('institute_id')
+                ->references('id')
+                ->on('institutes')
+                ->nullOnDelete();
+            $table->integer('field_id')
+                ->unsigned()
+                ->nullable();
+            $table->foreign('field_id')
+                ->references('id')
+                ->on('fields')
+                ->nullOnDelete();
             $table->string('status')->nullable();
             $table->string('language')->nullable();
             $table->string('author')->nullable();

@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Field;
+use App\Models\Institute;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -52,6 +54,8 @@ class LegislationFactory extends Factory
             'publisher'     => $category->type_id == 2 ? fake()->words(rand(2, 4), true) : null,
             'source'        => $category->type_id == 2 ? null : fake()->words(rand(2, 4), true),
             'subject'       => fake()->sentence(),
+            'institute_id'  => $category->type_id == 1 ? Institute::all()->random() : null,
+            'field_id'      => Field::all()->random(),
             'status'        => $category->type_id == 1 ? (rand(0, 1) ? 'berlaku' : 'tidak berlaku') : ($category->type_id == 4 ? 'tetap' : null),
             'language'      => 'Indonesia',
             'author'        => fake()->words(rand(2, 4), true),
