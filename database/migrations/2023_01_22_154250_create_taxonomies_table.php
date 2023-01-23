@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('taxonomyable_id')
+            $table->integer('taxonomyable_id')
+                ->unsigned()
                 ->nullable();
             $table->string('taxonomyable_type')
                 ->nullable();
