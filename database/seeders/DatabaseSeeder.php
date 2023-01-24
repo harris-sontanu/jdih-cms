@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             LegislationSeeder::class,
             LegislationMatterSeeder::class,
             LegislationRelationshipSeeder::class,
+            TaxonomySeeder::class,
         ]);
     }
 }
