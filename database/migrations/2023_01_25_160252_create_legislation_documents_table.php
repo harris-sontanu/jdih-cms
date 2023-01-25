@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('legislation_documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('legislation_id')
+            $table->foreignId('media_id')
                 ->constrained()
                 ->cascadeOnDelete();
             $table->enum('type', ['master', 'abstract', 'attachment', 'cover']);
             $table->tinyInteger('order')->default(1);
-            $table->string('path');
-            $table->string('name');
             $table->integer('download')
                 ->default(0);
-            $table->timestamps();
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('legislation_documents');
     }
 };
