@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('taxonomies', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['news', 'page', 'forum']);
+            $table->enum('type', ['news', 'page', 'employee', 'forum']);
             $table->string('name');
             $table->string('slug');
             $table->text('desc')->nullable();

@@ -17,11 +17,11 @@ class TaxonomyFactory extends Factory
      */
     public function definition()
     {   
-        $types = ['news', 'page'];
+        $types = ['news', 'page', 'employee'];
         $name = fake()->unique()->words(1, true);
 
         return [
-            'type'      => $types[rand(0, 1)],
+            'type'      => $types[rand(0, 2)],
             'name'      => Str::title($name),
             'slug'      => Str::slug($name),
             'desc'      => fake()->paragraph(rand(1, 3))

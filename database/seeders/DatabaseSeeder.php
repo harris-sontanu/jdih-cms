@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +30,7 @@ class DatabaseSeeder extends Seeder
             LegislationRelationshipSeeder::class,
             TaxonomySeeder::class,
             PostSeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }
