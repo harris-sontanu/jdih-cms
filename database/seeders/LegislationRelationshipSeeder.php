@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Legislation;
-use App\Models\Legislation_relationship;
+use App\Models\LegislationRelationship;
 
 class LegislationRelationshipSeeder extends Seeder
 {
@@ -36,11 +36,11 @@ class LegislationRelationshipSeeder extends Seeder
                             ->random();
 
                         // Check if the relationship doesn't exist
-                        if (Legislation_relationship::where('legislation_id', $law->id)
+                        if (LegislationRelationship::where('legislation_id', $law->id)
                             ->where('related_to', $relatedTo->id)
                             ->where('type', 'status')->doesntExist())
                             {
-                                Legislation_relationship::create([
+                                LegislationRelationship::create([
                                     'legislation_id'=> $law->id,
                                     'related_to'    => $relatedTo->id,
                                     'type'          => 'status',
@@ -56,11 +56,11 @@ class LegislationRelationshipSeeder extends Seeder
                             ->random();
 
                         // Check if the relationship doesn't exist
-                        if (Legislation_relationship::where('legislation_id', $law->id)
+                        if (LegislationRelationship::where('legislation_id', $law->id)
                             ->where('related_to', $relatedTo->id)
                             ->where('type', 'legislation')->doesntExist())
                             {
-                                Legislation_relationship::create([
+                                LegislationRelationship::create([
                                     'legislation_id'=> $law->id,
                                     'related_to'    => $relatedTo->id,
                                     'type'          => 'legislation',
@@ -76,11 +76,11 @@ class LegislationRelationshipSeeder extends Seeder
                             ->random();
 
                         // Check if the relationship doesn't exist
-                        if (Legislation_relationship::where('legislation_id', $law->id)
+                        if (LegislationRelationship::where('legislation_id', $law->id)
                             ->where('related_to', $relatedTo->id)
                             ->where('type', 'document')->doesntExist())
                             {
-                                Legislation_relationship::create([
+                                LegislationRelationship::create([
                                     'legislation_id'=> $law->id,
                                     'related_to'    => $relatedTo->id,
                                     'type'          => 'document',

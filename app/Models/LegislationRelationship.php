@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Legislation_relationship extends Model
+class LegislationRelationship extends Model
 {
     use HasFactory;
 

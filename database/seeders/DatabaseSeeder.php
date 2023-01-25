@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             TaxonomySeeder::class,
             PostSeeder::class,
             EmployeeSeeder::class,
+            EmployeeTaxonomySeeder::class,
         ]);
     }
 }
