@@ -15,4 +15,9 @@ class Question extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

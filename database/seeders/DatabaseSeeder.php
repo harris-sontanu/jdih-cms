@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             EmployeeTaxonomySeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
+            VoteSeeder::class,
         ]);
     }
 }
