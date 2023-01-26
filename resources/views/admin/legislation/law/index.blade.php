@@ -86,7 +86,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor') 
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                             @endcannot
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'category') {{ 'sorting_' . $sort }} @endif">
@@ -116,16 +116,16 @@
                     <tbody>
                         @forelse ($laws as $law)
                             <tr>
-                                @cannot('isAuthor') 
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $law->id }}"></td>
                                 @endcannot
-                                <td><span title="{{ $law->category_name }}" data-bs-popup="tooltip">{{ $law->category_abbrev }}</span></td>
+                                <td><span title="{{ $law->category->name }}" data-bs-popup="tooltip">{{ $law->category->abbrev }}</span></td>
                                 <td class="text-center">{{ $law->code_number }}</td>
                                 <td class="text-center">{{ $law->year; }}</td>
                                 <td><span class="fw-semibold">{{ $law->title; }}</span></td>
                                 <td class="text-center">{!! $law->statusBadge !!}</td>
                                 <td class="text-center">
-                                    <img src="{{ $law->userPictureUrl($law->user_picture, $law->user_name) }}" alt="{{ $law->user_name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $law->user_name }}">
+                                    <img src="{{ $law->userPictureUrl($law->user->picture, $law->user->name) }}" alt="{{ $law->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $law->user->name }}">
                                 </td>
                                 <td>
                                     <span class="d-block">{!! $law->publicationLabel() !!}</span>
@@ -140,27 +140,27 @@
                                                     @method('PUT')
                                                     @csrf
                                                     <button type="submit" class="btn btn-link p-0 text-body mx-1" data-bs-popup="tooltip" title="Kembalikan"><i class="ph-arrow-arc-left"></i></button>
-                                                </form>                                        
+                                                </form>
                                             @endcan
-                                            
+
                                             @can('forceDelete', $law)
                                                 <form class="delete-form" action="{{ route('admin.legislation.law.force-destroy', $law->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-link p-0 text-body" data-bs-popup="tooltip" title="Hapus"><i class="ph-x"></i></button>
-                                                </form>                                           
+                                                </form>
                                             @endcan
                                         @else
                                             @can('update', $law)
-                                                <a href="{{ route('admin.legislation.law.edit', $law->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Ubah"><i class="ph-pen"></i></a>                                                
+                                                <a href="{{ route('admin.legislation.law.edit', $law->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Ubah"><i class="ph-pen"></i></a>
                                             @endcan
-                                            
+
                                             @can('delete', $law)
                                                 <form action="{{ route('admin.legislation.law.destroy', $law->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-link p-0 text-body mx-1" data-bs-popup="tooltip" title="Buang"><i class="ph-trash"></i></button>
-                                                </form>                                               
+                                                </form>
                                             @endcan
                                         @endif
                                     </div>

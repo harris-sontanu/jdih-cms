@@ -39,7 +39,7 @@ class LawController extends LegislationController
             'Peraturan Perundang-undangan' => TRUE
         ];
 
-        $laws = Legislation::laws();
+        $laws = Legislation::ofType(1)->with('user');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
