@@ -31,8 +31,8 @@ class ViewServiceProvider extends ServiceProvider
         $settings['appLogoUrl'] = isset($settings['appLogo'])
             ? (Storage::disk('public')->exists($settings['appLogo'])
                 ? Storage::url($settings['appLogo'])
-                : '/assets/jembrana/img/app-logo.png')
-            : '/assets/jembrana/img/app-logo.png';
+                : '/assets/admin/images/logo_icon.svg')
+            : '/assets/admin/images/logo_icon.svg';
 
         $settings['jdihnLogoUrl'] = isset($settings['jdihnLogo'])
             ? (Storage::disk('public')->exists($settings['jdihnLogo'])

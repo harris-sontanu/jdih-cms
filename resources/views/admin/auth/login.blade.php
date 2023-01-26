@@ -19,11 +19,11 @@
                         <div class="card mb-0">
                             <div class="card-body p-4">
                                 <div class="text-center mb-3">
-                                    <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
+                                    <div class="d-inline-flex align-items-center justify-content-center mt-2 mb-3">
                                         <img src="{{ $appLogoUrl }}" class="h-48px" alt="{{ $appName }}">
 									</div>
                                     <h1 class="fw-bold font-title text-indigo"><span class="text-pink">JDIH</span> Admin</h1>
-                                    <span class="d-block px-4">{!! $appDesc !!}</span>
+                                    {{-- <span class="d-block px-4">{!! $appDesc !!}</span> --}}
                                 </div>
 
                                 <div class="mb-3">
@@ -67,13 +67,17 @@
                                     <button type="submit" class="btn btn-indigo w-100">Masuk<i class="ph-sign-in ps-2"></i></button>
                                 </div>
 
-                                <span class="d-block text-center text-muted">© Hak cipta
-                                    @if (now()->year === 2022)
-                                        2022
-                                    @else
-                                        2022 - {{ now()->year }}
-                                    @endif
-                                    <a href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
+                                <span class="d-block text-center text-muted">
+                                    <span class="d-block">
+                                        © Hak cipta
+                                        @if (now()->year === 2022)
+                                            2022
+                                        @else
+                                            2022 - {{ now()->year }}
+                                        @endif
+                                        <a class="link-indigo" href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
+                                    </span>
+                                    <span class="text-muted">{{ $appName }} v5.0.1</span>
                                 </span>
                             </div>
                         </div>
