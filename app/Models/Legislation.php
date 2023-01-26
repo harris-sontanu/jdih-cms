@@ -53,7 +53,6 @@ class Legislation extends Model
         'note',
     ];
 
-
     protected $casts  = [
         'approved'     => 'date',
         'published'    => 'date',
@@ -72,17 +71,17 @@ class Legislation extends Model
 
     public function statusRelationships()
     {
-        return $this->hasMany(Legislation_relationship::class)->where('type', 'status');
+        return $this->hasMany(LegislationRelationship::class)->where('type', 'status');
     }
 
     public function lawRelationships()
     {
-        return $this->hasMany(Legislation_relationship::class)->where('type', 'legislation');
+        return $this->hasMany(LegislationRelationship::class)->where('type', 'legislation');
     }
 
     public function documentRelationships()
     {
-        return $this->hasMany(Legislation_relationship::class)->where('type', 'document');
+        return $this->hasMany(LegislationRelationship::class)->where('type', 'document');
     }
 
     public function matters()
@@ -510,6 +509,11 @@ class Legislation extends Model
     public function scopeLatestPublished($query)
     {
         return $query->orderBy('published_at', 'desc');
+    }
+
+    public function scopeOfType($query, $typeId)
+    {
+        return $query->whereRelation('category', 'type_id', '=', $typeId);
     }
 
     public function scopeLaws($query)

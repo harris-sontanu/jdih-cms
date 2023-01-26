@@ -143,45 +143,47 @@
 			</div>
 			<!-- /basic table -->
 
-			<div class="card">
+            @isset($latestNews)
+                <div class="card">
 
-				<div class="card-header d-sm-flex py-sm-0">
-					<h5 class="py-sm-3 mb-sm-0">Berita Terbaru</h5>
-					<div class="ms-sm-auto my-sm-auto">
-						<a href="{{ route('admin.news.create') }}" class="btn btn-light" ><i class="ph-plus me-2"></i>Tambah Berita</a>
-					</div>
-				</div>
+                    <div class="card-header d-sm-flex py-sm-0">
+                        <h5 class="py-sm-3 mb-sm-0">Berita Terbaru</h5>
+                        <div class="ms-sm-auto my-sm-auto">
+                            <a href="{{ route('admin.news.create') }}" class="btn btn-light" ><i class="ph-plus me-2"></i>Tambah Berita</a>
+                        </div>
+                    </div>
 
-				<div class="card-body pb-0">
-					<div class="row">
-						@php $i = 0; @endphp
-						@foreach ($latestNews as $news)
-							@if ($i === 0)
-								<div class="col-xl-6">
-							@else
-								</div><div class="col-xl-6">
-							@endif
+                    <div class="card-body pb-0">
+                        <div class="row">
+                            @php $i = 0; @endphp
+                            @foreach ($latestNews as $news)
+                                @if ($i === 0)
+                                    <div class="col-xl-6">
+                                @else
+                                    </div><div class="col-xl-6">
+                                @endif
 
-							<div class="d-sm-flex align-items-sm-start mb-3">
-								<a href="{{ route('admin.news.show', $news->id) }}" class="d-inline-block position-relative me-sm-3 mb-3 mb-sm-0">
-									<img src="@if($news->cover){{ $news->cover->mediaThumbUrl }}@endif" class="flex-shrink-0 rounded" width="100">
-								</a>
+                                <div class="d-sm-flex align-items-sm-start mb-3">
+                                    <a href="{{ route('admin.news.show', $news->id) }}" class="d-inline-block position-relative me-sm-3 mb-3 mb-sm-0">
+                                        <img src="@if($news->cover){{ $news->cover->mediaThumbUrl }}@endif" class="flex-shrink-0 rounded" width="100">
+                                    </a>
 
-								<div class="flex-fill">
-									<h6 class="mb-1"><a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a></h6>
-									<ul class="list-inline list-inline-bullet text-muted mb-2">
-										<li class="list-inline-item fs-sm"><abbr data-bs-popup="tooltip" title="{{ $news->dateFormatted($news->published_at, true) }}">{{ $news->dateFormatted($news->published_at) }}</abbr></li>
-										<li class="list-inline-item fs-sm"><a href="{{ route('admin.news.index', ['taxonomy' => $news->taxonomy->id]) }}" class="text-body">{{ $news->taxonomy->name }}</a></li>
-									</ul>
-									{!! $news->excerpt !!}
-								</div>
-							</div>
-							@php $i++; @endphp
-						@endforeach
-						</div>
-					</div>
-				</div>
-			</div>
+                                    <div class="flex-fill">
+                                        <h6 class="mb-1"><a href="{{ route('admin.news.show', $news->id) }}">{{ $news->title }}</a></h6>
+                                        <ul class="list-inline list-inline-bullet text-muted mb-2">
+                                            <li class="list-inline-item fs-sm"><abbr data-bs-popup="tooltip" title="{{ $news->dateFormatted($news->published_at, true) }}">{{ $news->dateFormatted($news->published_at) }}</abbr></li>
+                                            <li class="list-inline-item fs-sm"><a href="{{ route('admin.news.index', ['taxonomy' => $news->taxonomy->id]) }}" class="text-body">{{ $news->taxonomy->name }}</a></li>
+                                        </ul>
+                                        {!! $news->excerpt !!}
+                                    </div>
+                                </div>
+                                @php $i++; @endphp
+                            @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endisset
 
 		</div>
 
@@ -189,69 +191,75 @@
 
 			<div class="sidebar-content">
 
-                <!-- Basic area chart -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <h4 class="mb-0">{{ $countVoters }}</h4>
-                            <div class="d-inline-flex ms-auto">
-                                <a class="text-body" data-card-action="reload">
-                                    <i class="ph-arrow-clockwise"></i>
-                                </a>
+                @isset($countVoters)
+                    <!-- Basic area chart -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="mb-0">{{ $countVoters }}</h4>
+                                <div class="d-inline-flex ms-auto">
+                                    <a class="text-body" data-card-action="reload">
+                                        <i class="ph-arrow-clockwise"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div>
+                                Responden hari ini
+                                <div class="text-muted fs-sm">Rata-rata: <span id="avg-voters"></span> responden</div>
                             </div>
                         </div>
 
-                        <div>
-                            Responden hari ini
-                            <div class="text-muted fs-sm">Rata-rata: <span id="avg-voters"></span> responden</div>
-                        </div>
+                        <div id="vote-line-chart"></div>
                     </div>
+                    <!-- /basic area chart -->
+                @endisset
 
-                    <div id="vote-line-chart"></div>
-                </div>
-                <!-- /basic area chart -->
+                @isset($countVisitors)
+                    <!-- Basic bar chart -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h4 class="mb-0">{{ $countVisitors }}</h4>
+                                {!! $visitPercentage !!}
+                            </div>
 
-                <!-- Basic bar chart -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <h4 class="mb-0">{{ $countVisitors }}</h4>
-                            {!! $visitPercentage !!}
-                        </div>
-
-                        <div>
-                            Pengunjung hari ini
-                            <div class="text-muted fs-sm">Rata-rata: <span id="avg-visitor"></span> orang</div>
-                        </div>
-                    </div>
-
-                    <div class="container-fluid">
-                        <div id="visitor-bar-chart"></div>
-                    </div>
-                </div>
-                <!-- /basic bar chart -->
-
-                <!-- Basic line chart -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <h4 class="mb-0">{{ $countDownloads }}</h4>
-                            <div class="d-inline-flex ms-auto">
-                                <a class="text-body" data-card-action="reload">
-                                    <i class="ph-arrow-clockwise"></i>
-                                </a>
+                            <div>
+                                Pengunjung hari ini
+                                <div class="text-muted fs-sm">Rata-rata: <span id="avg-visitor"></span> orang</div>
                             </div>
                         </div>
 
-                        <div>
-                            Produk Hukum yang diunduh hari ini
-                            <div class="text-muted fs-sm">Rata-rata: <span id="avg-downloads"></span> buah</div>
+                        <div class="container-fluid">
+                            <div id="visitor-bar-chart"></div>
                         </div>
                     </div>
+                    <!-- /basic bar chart -->
+                @endisset
 
-                    <div id="download-line-chart"></div>
-                </div>
-                <!-- /basic line chart -->
+                @isset($countDownloads)
+                    <!-- Basic line chart -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="mb-0">{{ $countDownloads }}</h4>
+                                <div class="d-inline-flex ms-auto">
+                                    <a class="text-body" data-card-action="reload">
+                                        <i class="ph-arrow-clockwise"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div>
+                                Produk Hukum yang diunduh hari ini
+                                <div class="text-muted fs-sm">Rata-rata: <span id="avg-downloads"></span> buah</div>
+                            </div>
+                        </div>
+
+                        <div id="download-line-chart"></div>
+                    </div>
+                    <!-- /basic line chart -->
+                @endisset
 
 				<div class="card">
                     <div class="sidebar-section-header border-bottom">
