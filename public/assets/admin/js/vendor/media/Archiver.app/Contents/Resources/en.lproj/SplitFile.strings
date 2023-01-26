@@ -1,0 +1,27 @@
+/* Class = "NSMenuItem"; title = "KB"; ObjectID = "0XO-Xc-TTb"; */
+"KB" = "KB";
+
+/* Class = "NSButtonCell"; title = "Checksum"; ObjectID = "3V8-x5-sSo"; */
+"Checksum" = "Checksum";
+
+/* Class = "NSTextFieldCell"; title = "Chunk size:"; ObjectID = "3sA-vj-4z4"; */
+"Chunk size:" = "Chunk size:";
+
+/* Class = "NSTextFieldCell"; title = "WinZip compatible archive"; ObjectID = "6WH-Tw-h14"; */
+"WinZip compatible archive" = "WinZip compatible archive";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "72Y-y9-5Ld"; */
+"OtherViews" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "GB"; ObjectID = "9Y9-Ho-EBD"; */
+"GB" = "GB";
+
+/* Class = "NSMenuItem"; title = "MB"; ObjectID = "Hjl-zS-R4a"; */
+"MB" = "MB";
+
+/* Class = "NSTextFieldCell"; title = "Split File: Choose compression type"; ObjectID = "SIM-No-dV5"; */
+"Split File: Choose compression type" = "Split File: Choose compression type";
+
+/* Class = "NSTextFieldCell"; title = "10"; ObjectID = "rS0-le-Cg8"; */
+"10" = "10";
+

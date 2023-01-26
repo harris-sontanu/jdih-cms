@@ -1,0 +1,129 @@
+/* Class = "NSTextFieldCell"; title = "Archive Name:"; ObjectID = "1kq-MY-meh"; */
+"Archive Name:" = "Archive Name:";
+
+/* Class = "NSMenuItem"; title = "JPEG (Low Quality)"; ObjectID = "4MX-6s-6NX"; */
+"JPEG (Low Quality)" = "JPEG (Low Quality)";
+
+/* Class = "NSMenuItem"; title = "JPEG-2000"; ObjectID = "8au-Zg-RLT"; */
+"JPEG-2000" = "JPEG-2000";
+
+/* Class = "NSButtonCell"; title = "Make ZIP compatible"; ObjectID = "9Hk-z7-xSk"; */
+"Make ZIP compatible" = "Make ZIP compatible";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "B2G-vT-tht"; */
+"None" = "None";
+
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "FEa-yx-fFQ"; */
+"Password:" = "Password:";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "FSf-3t-txt"; */
+"OtherViews" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "M4A (High Quality)"; ObjectID = "Jcd-ud-2P2"; */
+"M4A (High Quality)" = "M4A (High Quality)";
+
+/* Class = "NSMenuItem"; title = "PNG"; ObjectID = "KhR-N3-uKb"; */
+"PNG" = "PNG";
+
+/* Class = "NSTextFieldCell"; title = "Audio Pre Compression:"; ObjectID = "MKD-r0-tef"; */
+"Audio Pre Compression:" = "Audio Pre Compression:";
+
+/* Class = "NSMenuItem"; title = "TGA"; ObjectID = "Mbg-eN-hFo"; */
+"TGA" = "TGA";
+
+/* Class = "NSTextFieldCell"; title = "WinZip compatible archive"; ObjectID = "Nqq-Yj-jYY"; */
+"WinZip compatible archive" = "WinZip compatible archive";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "OEj-Ze-ij1"; */
+"OtherViews" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "TIFF"; ObjectID = "Rft-qs-g9Y"; */
+"TIFF" = "TIFF";
+
+/* Class = "NSTextFieldCell"; title = "Repeat Password:"; ObjectID = "TmC-eS-6Zw"; */
+"Repeat Password:" = "Repeat Password:";
+
+/* Class = "NSTextFieldCell"; title = "Create Archive: Choose archive type"; ObjectID = "U97-eK-DT2"; */
+"Create Archive: Choose archive type" = "Create Archive: Choose archive type";
+
+/* Class = "NSMenuItem"; title = "MP4 (Low Quality)"; ObjectID = "W11-SB-W9g"; */
+"MP4 (Low Quality)" = "MP4 (Low Quality)";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "WJD-9I-tf1"; */
+"None" = "None";
+
+/* Class = "NSMenuItem"; title = "PDF"; ObjectID = "Zqr-rr-0YD"; */
+"PDF" = "PDF";
+
+/* Class = "NSMenuItem"; title = "EXR"; ObjectID = "af7-o3-URR"; */
+"EXR" = "EXR";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "c3U-Fh-fQj"; */
+"OtherViews" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "PSD"; ObjectID = "c6z-LV-Q8S"; */
+"PSD" = "PSD";
+
+/* Class = "NSMenuItem"; title = "Lowest"; ObjectID = "cbk-9q-uit"; */
+"Lowest" = "Lowest";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "d1G-XT-YuO"; */
+"None" = "None";
+
+/* Class = "NSMenuItem"; title = "JPEG (Medium Quality)"; ObjectID = "dY2-pY-8Hd"; */
+"JPEG (Medium Quality)" = "JPEG (Medium Quality)";
+
+/* Class = "NSButtonCell"; title = "Show Password"; ObjectID = "dka-EO-Hpr"; */
+"Show Password" = "Show Password";
+
+/* Class = "NSMenuItem"; title = "M4A (Low Quality)"; ObjectID = "fa2-df-YYJ"; */
+"M4A (Low Quality)" = "M4A (Low Quality)";
+
+/* Class = "NSMenuItem"; title = "MP4 (Medium Quality)"; ObjectID = "gik-U1-5Qd"; */
+"MP4 (Medium Quality)" = "MP4 (Medium Quality)";
+
+/* Class = "NSMenuItem"; title = "GIF"; ObjectID = "gs4-po-sCE"; */
+"GIF" = "GIF";
+
+/* Class = "NSMenuItem"; title = "MP4 (High Quality)"; ObjectID = "hZP-pZ-x4h"; */
+"MP4 (High Quality)" = "MP4 (High Quality)";
+
+/* Class = "NSTextFieldCell"; title = "Archive"; ObjectID = "jtW-3O-DPo"; */
+"Archive" = "Archive";
+
+/* Class = "NSTextFieldCell"; title = "Passwords do not match!"; ObjectID = "kLW-Wf-QLP"; */
+"Passwords do not match!" = "Passwords do not match!";
+
+/* Class = "NSMenuItem"; title = "M4A (Lowest Quality)"; ObjectID = "lWm-eq-Tvy"; */
+"M4A (Lowest Quality)" = "M4A (Lowest Quality)";
+
+/* Class = "NSMenuItem"; title = "Medium"; ObjectID = "mua-Pv-9Z8"; */
+"Medium" = "Medium";
+
+/* Class = "NSMenuItem"; title = "BMP"; ObjectID = "oW9-IL-9jo"; */
+"BMP" = "BMP";
+
+/* Class = "NSTextFieldCell"; title = "Image Pre Compression:"; ObjectID = "ola-FM-GWd"; */
+"Image Pre Compression:" = "Image Pre Compression:";
+
+/* Class = "NSTextFieldCell"; title = "Compression Level:"; ObjectID = "q0m-ky-7Iz"; */
+"Compression Level:" = "Compression Level:";
+
+/* Class = "NSMenuItem"; title = "M4A (Medium Quality)"; ObjectID = "qpU-02-aq5"; */
+"M4A (Medium Quality)" = "M4A (Medium Quality)";
+
+/* Class = "NSMenuItem"; title = "SGI"; ObjectID = "tU4-Ap-6il"; */
+"SGI" = "SGI";
+
+/* Class = "NSButtonCell"; title = "Encrypt"; ObjectID = "ts8-5p-pkq"; */
+"Encrypt" = "Encrypt";
+
+/* Class = "NSMenuItem"; title = "MP4 (Lowest Quality)"; ObjectID = "tuv-iN-q4z"; */
+"MP4 (Lowest Quality)" = "MP4 (Lowest Quality)";
+
+/* Class = "NSMenuItem"; title = "Highest"; ObjectID = "y0m-cN-Koi"; */
+"Highest" = "Highest";
+
+/* Class = "NSMenuItem"; title = "JPEG (High Quality)"; ObjectID = "ye9-ER-Itt"; */
+"JPEG (High Quality)" = "JPEG (High Quality)";
+

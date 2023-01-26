@@ -1,0 +1,249 @@
+/* Class = "NSButtonCell"; title = "Check Now"; ObjectID = "85"; */
+"Check Now" = "Check Now";
+
+/* Class = "NSTextFieldCell"; title = "When Archiver is started it will automatically look for a newer version."; ObjectID = "86"; */
+"When Archiver is started it will automatically look for a newer version." = "When Archiver is started it will automatically look for a newer version.";
+
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "87"; */
+"Automatically check for updates" = "Automatically check for updates";
+
+/* Class = "NSButtonCell"; title = "Play sound"; ObjectID = "104"; */
+"Play sound" = "Play sound";
+
+/* Class = "NSTextFieldCell"; title = "Output files to:"; ObjectID = "108"; */
+"Output files to:" = "Output files to:";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "118"; */
+"OtherViews" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Current"; ObjectID = "119"; */
+"Current" = "Current";
+
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "120"; */
+"Other..." = "Other...";
+
+/* Class = "NSMenuItem"; title = "Same folder as input files"; ObjectID = "128"; */
+"Same folder as input files" = "Same folder as input files";
+
+/* Class = "NSMenuItem"; title = "Ask me"; ObjectID = "129"; */
+"Ask me" = "Ask me";
+
+/* Class = "NSButtonCell"; title = "Send anonymous system profile"; ObjectID = "132"; */
+"Send anonymous system profile" = "Send anonymous system profile";
+
+/* Class = "NSButtonCell"; title = "Keep archive"; ObjectID = "145"; */
+"Keep archive" = "Keep archive";
+
+/* Class = "NSButtonCell"; title = "Move archive to Trash"; ObjectID = "146"; */
+"Move archive to Trash" = "Move archive to Trash";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "147"; */
+"Radio" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Delete archive immediately"; ObjectID = "148"; */
+"Delete archive immediately" = "Delete archive immediately";
+
+/* Class = "NSTextFieldCell"; title = "After extracting an archive:"; ObjectID = "150"; */
+"After extracting an archive:" = "After extracting an archive:";
+
+/* Class = "NSButtonCell"; title = "Show output files in Finder"; ObjectID = "173"; */
+"Show output files in Finder" = "Show output files in Finder";
+
+/* Class = "NSTextFieldCell"; title = "Deleting archives immediately cannot be undone."; ObjectID = "179"; */
+"Deleting archives immediately cannot be undone." = "Deleting archives immediately cannot be undone.";
+
+/* Class = "NSTextFieldCell"; title = "When extracting multiple archives only the last extracted archive will be shown."; ObjectID = "181"; */
+"When extracting multiple archives only the last extracted archive will be shown." = "When extracting multiple archives only the last extracted archive will be shown.";
+
+/* Class = "NSTextFieldCell"; title = "When a command completes:"; ObjectID = "183"; */
+"When a command completes:" = "When a command completes:";
+
+/* Class = "NSTextFieldCell"; title = "Skip previewing the contents of archives and extract immediately. Press the Shift key while adding files to temporarily invert this feature."; ObjectID = "191"; */
+"Skip previewing the contents of archives and extract immediately. Press the Shift key while adding files to temporarily invert this feature." = "Skip previewing the contents of archives and extract immediately. Press the Shift key while adding files to temporarily invert this feature.";
+
+/* Class = "NSButtonCell"; title = "Skip preview"; ObjectID = "192"; */
+"Skip preview" = "Skip preview";
+
+/* Class = "NSTextFieldCell"; title = "Drag and drop extract:"; ObjectID = "193"; */
+"Drag and drop extract:" = "Drag and drop extract:";
+
+/* Class = "NSTextFieldCell"; title = "Skip the option to add more files and go straight to the create options. Press the Shift key while adding files to temporarily invert this feature."; ObjectID = "199"; */
+"Skip the option to add more files and go straight to the create options. Press the Shift key while adding files to temporarily invert this feature." = "Skip the option to add more files and go straight to the create options. Press the Shift key while adding files to temporarily invert this feature.";
+
+/* Class = "NSButtonCell"; title = "Skip preview"; ObjectID = "200"; */
+"Skip preview" = "Skip preview";
+
+/* Class = "NSTextFieldCell"; title = "Creating archives:"; ObjectID = "201"; */
+"Creating archives:" = "Creating archives:";
+
+/* Class = "NSButtonCell"; title = "Go back to start"; ObjectID = "215"; */
+"Go back to start" = "Go back to start";
+
+/* Class = "NSTextFieldCell"; title = "Look inside application bundles when browsing extracted archives"; ObjectID = "238"; */
+"Look inside application bundles when browsing extracted archives" = "Look inside application bundles when browsing extracted archives";
+
+/* Class = "NSButtonCell"; title = "Inspect application bundles"; ObjectID = "239"; */
+"Inspect application bundles" = "Inspect application bundles";
+
+/* Class = "NSTextFieldCell"; title = "Browsing extracted archives:"; ObjectID = "240"; */
+"Browsing extracted archives:" = "Browsing extracted archives:";
+
+/* Class = "NSTextFieldCell"; title = "Creating archives:"; ObjectID = "241"; */
+"Creating archives:" = "Creating archives:";
+
+/* Class = "NSTextFieldCell"; title = "When creating archives ignore Mac OS X hidden files and directories such as .DS_Store and resource forks."; ObjectID = "243"; */
+"When creating archives ignore Mac OS X hidden files and directories such as .DS_Store and resource forks." = "When creating archives ignore Mac OS X hidden files and directories such as .DS_Store and resource forks.";
+
+/* Class = "NSButtonCell"; title = "Ignore Mac-specific files"; ObjectID = "244"; */
+"Ignore Mac-specific files" = "Ignore Mac-specific files";
+
+/* Class = "NSTextFieldCell"; title = "What to do after extracting archives that were dragged onto the Dock icon or opened by double-clicking. Ignored if Archiver is already running."; ObjectID = "245"; */
+"What to do after extracting archives that were dragged onto the Dock icon or opened by double-clicking. Ignored if Archiver is already running." = "What to do after extracting archives that were dragged onto the Dock icon or opened by double-clicking. Ignored if Archiver is already running.";
+
+/* Class = "NSButtonCell"; title = "Quit when done"; ObjectID = "246"; */
+"Quit when done" = "Quit when done";
+
+/* Class = "NSBox"; title = "Select the file types you want Archiver to handle"; ObjectID = "266"; */
+"Select the file types you want Archiver to handle" = "Select the file types you want Archiver to handle";
+
+/* Class = "NSButtonCell"; title = "war"; ObjectID = "270"; */
+"war" = "war";
+
+/* Class = "NSButtonCell"; title = "chksplit"; ObjectID = "271"; */
+"chksplit" = "chksplit";
+
+/* Class = "NSButtonCell"; title = "xar"; ObjectID = "272"; */
+"xar" = "xar";
+
+/* Class = "NSButtonCell"; title = "zipx"; ObjectID = "273"; */
+"zipx" = "zipx";
+
+/* Class = "NSButtonCell"; title = "zsplit"; ObjectID = "274"; */
+"zsplit" = "zsplit";
+
+/* Class = "NSButtonCell"; title = "split"; ObjectID = "275"; */
+"split" = "split";
+
+/* Class = "NSButtonCell"; title = "rpm"; ObjectID = "276"; */
+"rpm" = "rpm";
+
+/* Class = "NSButtonCell"; title = "jar"; ObjectID = "277"; */
+"jar" = "jar";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "278"; */
+"zip" = "zip";
+
+/* Class = "NSButtonCell"; title = "archiver"; ObjectID = "279"; */
+"archiver" = "archiver";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "280"; */
+"zip" = "zip";
+
+/* Class = "NSButtonCell"; title = "arj"; ObjectID = "281"; */
+"arj" = "arj";
+
+/* Class = "NSButtonCell"; title = "7z"; ObjectID = "282"; */
+"7z" = "7z";
+
+/* Class = "NSButtonCell"; title = "cpio"; ObjectID = "283"; */
+"cpio" = "cpio";
+
+/* Class = "NSButtonCell"; title = "lza"; ObjectID = "284"; */
+"lza" = "lza";
+
+/* Class = "NSButtonCell"; title = "sitx"; ObjectID = "285"; */
+"sitx" = "sitx";
+
+/* Class = "NSButtonCell"; title = "rar"; ObjectID = "286"; */
+"rar" = "rar";
+
+/* Class = "NSButtonCell"; title = "sit"; ObjectID = "287"; */
+"sit" = "sit";
+
+/* Class = "NSButtonCell"; title = "Z"; ObjectID = "288"; */
+"Z" = "Z";
+
+/* Class = "NSButtonCell"; title = "tbz"; ObjectID = "289"; */
+"tbz" = "tbz";
+
+/* Class = "NSButtonCell"; title = "tar"; ObjectID = "290"; */
+"tar" = "tar";
+
+/* Class = "NSButtonCell"; title = "bz2"; ObjectID = "291"; */
+"bz2" = "bz2";
+
+/* Class = "NSButtonCell"; title = "lha"; ObjectID = "292"; */
+"lha" = "lha";
+
+/* Class = "NSButtonCell"; title = "cab"; ObjectID = "293"; */
+"cab" = "cab";
+
+/* Class = "NSButtonCell"; title = "pax"; ObjectID = "294"; */
+"pax" = "pax";
+
+/* Class = "NSButtonCell"; title = "sea"; ObjectID = "295"; */
+"sea" = "sea";
+
+/* Class = "NSButtonCell"; title = "adf"; ObjectID = "296"; */
+"adf" = "adf";
+
+/* Class = "NSButtonCell"; title = "gz"; ObjectID = "297"; */
+"gz" = "gz";
+
+/* Class = "NSButtonCell"; title = "exe"; ObjectID = "298"; */
+"exe" = "exe";
+
+/* Class = "NSButtonCell"; title = "hqx"; ObjectID = "299"; */
+"hqx" = "hqx";
+
+/* Class = "NSButtonCell"; title = "tgz"; ObjectID = "300"; */
+"tgz" = "tgz";
+
+/* Class = "NSButtonCell"; title = "Select all"; ObjectID = "301"; */
+"Select all" = "Select all";
+
+/* Class = "NSButtonCell"; title = "Deselect all"; ObjectID = "302"; */
+"Deselect all" = "Deselect all";
+
+/* Class = "NSTextFieldCell"; title = "Archiver will offer RAR as a format when creating Archives. If the required third party RAR utility is not yet installed, Archiver will provide instructions to do so."; ObjectID = "373"; */
+"Archiver will offer RAR as a format when creating Archives. If the required third party RAR utility is not yet installed, Archiver will provide instructions to do so." = "Archiver will offer RAR as a format when creating Archives. If the required third party RAR utility is not yet installed, Archiver will provide instructions to do so.";
+
+/* Class = "NSButtonCell"; title = "Create RAR archives"; ObjectID = "374"; */
+"Create RAR archives" = "Create RAR archives";
+
+/* Class = "NSTextFieldCell"; title = "RAR archives:"; ObjectID = "375"; */
+"RAR archives:" = "RAR archives:";
+
+/* Class = "NSTextFieldCell"; title = "Maximum Simultaneous Tasks:"; ObjectID = "5O9-s8-GP7"; */
+"Maximum Simultaneous Tasks:" = "Maximum Simultaneous Tasks:";
+
+/* Class = "NSButtonCell"; title = "apk"; ObjectID = "6bN-3o-gAc"; */
+"apk" = "apk";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "Ipn-nC-a7k"; */
+"zip" = "zip";
+
+/* Class = "NSButtonCell"; title = "deb"; ObjectID = "Jof-LU-oA6"; */
+"deb" = "deb";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "PX8-Qs-MiK"; */
+"zip" = "zip";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "UQF-hC-Goc"; */
+"zip" = "zip";
+
+/* Class = "NSButtonCell"; title = "pkg"; ObjectID = "WAH-H8-aEe"; */
+"pkg" = "pkg";
+
+/* Class = "NSButtonCell"; title = "aar"; ObjectID = "cxh-We-yUx"; */
+"aar" = "aar";
+
+/* Class = "NSButtonCell"; title = "tar.xz"; ObjectID = "lQw-6m-6zj"; */
+"tar.xz" = "tar.xz";
+
+/* Class = "NSButtonCell"; title = "xz"; ObjectID = "mEL-Ov-xIg"; */
+"xz" = "xz";
+
+/* Class = "NSButtonCell"; title = "zip"; ObjectID = "nYr-VW-aIC"; */
+"zip" = "zip";
+

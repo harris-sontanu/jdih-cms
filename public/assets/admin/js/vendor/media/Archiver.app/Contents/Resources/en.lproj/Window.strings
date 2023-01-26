@@ -1,0 +1,66 @@
+/* Class = "NSToolbarItem"; label = "Export"; ObjectID = "4FF-4k-4iB"; */
+"Export" = "Export";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Export"; ObjectID = "4FF-4k-4iB"; */
+"Export" = "Export";
+
+/* Class = "NSToolbarItem"; label = "Finder"; ObjectID = "4Ut-Y8-UMI"; */
+"Finder" = "Finder";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Finder"; ObjectID = "4Ut-Y8-UMI"; */
+"Finder" = "Finder";
+
+/* Class = "NSToolbarItem"; label = "Combine"; ObjectID = "KlO-rX-JRk"; */
+"Combine" = "Combine";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Combine"; ObjectID = "KlO-rX-JRk"; */
+"Combine" = "Combine";
+
+/* Class = "NSToolbarItem"; label = "Split"; ObjectID = "Kyx-CF-25P"; */
+"Split" = "Split";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Split"; ObjectID = "Kyx-CF-25P"; */
+"Split" = "Split";
+
+/* Class = "NSToolbarItem"; label = "Back"; ObjectID = "RCw-Pd-vIs"; */
+"Back" = "Back";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Back"; ObjectID = "RCw-Pd-vIs"; */
+"Back" = "Back";
+
+/* Class = "NSToolbarItem"; label = "Archive"; ObjectID = "YRh-14-y2l"; */
+"Archive" = "Archive";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Archive"; ObjectID = "YRh-14-y2l"; */
+"Archive" = "Archive";
+
+/* Class = "NSToolbarItem"; label = "Cancel"; ObjectID = "adi-ld-fdP"; */
+"Cancel" = "Cancel";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Cancel"; ObjectID = "adi-ld-fdP"; */
+"Cancel" = "Cancel";
+
+/* Class = "NSToolbarItem"; label = "Done"; ObjectID = "gCI-bY-c6d"; */
+"Done" = "Done";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Done"; ObjectID = "gCI-bY-c6d"; */
+"Done" = "Done";
+
+/* Class = "NSToolbarItem"; label = "Extract"; ObjectID = "oWN-Es-otJ"; */
+"Extract" = "Extract";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Extract"; ObjectID = "oWN-Es-otJ"; */
+"Extract" = "Extract";
+
+/* Class = "NSToolbarItem"; label = "Convert"; ObjectID = "pAh-ZR-IsC"; */
+"Convert" = "Convert";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Convert"; ObjectID = "pAh-ZR-IsC"; */
+"Convert" = "Convert";
+
+/* Class = "NSToolbarItem"; label = "Forward"; ObjectID = "vHt-Hx-pUN"; */
+"Forward" = "Forward";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Forward"; ObjectID = "vHt-Hx-pUN"; */
+"Forward" = "Forward";
+

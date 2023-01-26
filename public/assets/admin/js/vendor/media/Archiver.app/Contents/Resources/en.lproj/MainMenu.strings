@@ -1,0 +1,138 @@
+/* Class = "NSMenu"; title = "MainMenu"; ObjectID = "29"; */
+"MainMenu" = "MainMenu";
+
+/* Class = "NSMenuItem"; title = "Archiver"; ObjectID = "56"; */
+"Archiver" = "Archiver";
+
+/* Class = "NSMenu"; title = "Archiver"; ObjectID = "57"; */
+"Archiver" = "Archiver";
+
+/* Class = "NSMenuItem"; title = "About Archiver"; ObjectID = "58"; */
+"About Archiver" = "About Archiver";
+
+/* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "129"; */
+"Preferences..." = "Preferences...";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"Services" = "Services";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"Services" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide Archiver"; ObjectID = "134"; */
+"Hide Archiver" = "Hide Archiver";
+
+/* Class = "NSMenuItem"; title = "Quit Archiver"; ObjectID = "136"; */
+"Quit Archiver" = "Quit Archiver";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"Hide Others" = "Hide Others";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"Show All" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "157"; */
+"Copy" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "158"; */
+"Undo" = "Undo";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "160"; */
+"Cut" = "Cut";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "163"; */
+"Edit" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
+"Delete" = "Delete";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "169"; */
+"Edit" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "171"; */
+"Paste" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "172"; */
+"Select All" = "Select All";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "173"; */
+"Redo" = "Redo";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "2747"; */
+"Window" = "Window";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "2748"; */
+"Window" = "Window";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "2749"; */
+"Minimize" = "Minimize";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "2750"; */
+"Zoom" = "Zoom";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "2752"; */
+"Bring All to Front" = "Bring All to Front";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "2756"; */
+"File" = "File";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "2757"; */
+"File" = "File";
+
+/* Class = "NSMenuItem"; title = "Open…"; ObjectID = "2759"; */
+"Open…" = "Open…";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "2762"; */
+"Close" = "Close";
+
+/* Class = "NSMenuItem"; title = "Action"; ObjectID = "2883"; */
+"Action" = "Action";
+
+/* Class = "NSMenu"; title = "Action"; ObjectID = "2884"; */
+"Action" = "Action";
+
+/* Class = "NSMenuItem"; title = "Clean"; ObjectID = "2885"; */
+"Clean" = "Clean";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "3006"; */
+"Help" = "Help";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "3007"; */
+"Help" = "Help";
+
+/* Class = "NSMenuItem"; title = "Archiver Help"; ObjectID = "3008"; */
+"Archiver Help" = "Archiver Help";
+
+/* Class = "NSMenuItem"; title = "Main Window"; ObjectID = "7725"; */
+"Main Window" = "Main Window";
+
+/* Class = "NSMenuItem"; title = "Combine"; ObjectID = "9Zi-Cc-cAB"; */
+"Combine" = "Combine";
+
+/* Class = "NSMenuItem"; title = "Split"; ObjectID = "EIl-1g-TK6"; */
+"Split" = "Split";
+
+/* Class = "NSMenuItem"; title = "Extract"; ObjectID = "GyC-aG-h77"; */
+"Extract" = "Extract";
+
+/* Class = "NSMenuItem"; title = "Archive"; ObjectID = "H6h-DS-Mre"; */
+"Archive" = "Archive";
+
+/* Class = "NSMenuItem"; title = "Cancel"; ObjectID = "THD-8e-uh0"; */
+"Cancel" = "Cancel";
+
+/* Class = "NSMenuItem"; title = "Finder"; ObjectID = "WrF-Oj-NaW"; */
+"Finder" = "Finder";
+
+/* Class = "NSMenuItem"; title = "Convert"; ObjectID = "fKl-Vr-5ze"; */
+"Convert" = "Convert";
+
+/* Class = "NSMenuItem"; title = "Done"; ObjectID = "g6S-qq-2Ol"; */
+"Done" = "Done";
+
+/* Class = "NSMenuItem"; title = "Export"; ObjectID = "m1m-6C-wsU"; */
+"Export" = "Export";
+
+/* Class = "NSMenuItem"; title = "Back"; ObjectID = "wur-KP-rnE"; */
+"Back" = "Back";
+

@@ -1,0 +1,27 @@
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "7fR-KD-uV9"; */
+"Name" = "Name";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "CzG-5Y-aVy"; */
+"Text Cell" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "QWZ-da-tz2"; */
+"Table View Cell" = "Table View Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Size"; ObjectID = "e5c-Hx-IcK"; */
+"Size" = "Size";
+
+/* Class = "NSTextFieldCell"; title = "20 Files"; ObjectID = "end-NQ-5KF"; */
+"20 Files" = "20 Files";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "f9g-y1-24e"; */
+"Text Cell" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "gM5-oY-hbm"; */
+"Table View Cell" = "Table View Cell";
+
+/* Class = "NSTabViewItem"; label = "OutlineView"; ObjectID = "kC1-4k-pKL"; */
+"OutlineView" = "OutlineView";
+
+/* Class = "NSTabViewItem"; label = "GridView"; ObjectID = "tnX-78-gjL"; */
+"GridView" = "GridView";
+

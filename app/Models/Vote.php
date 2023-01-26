@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Vote extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'ipv4',
+        'answer_id',
+    ];
+
+    public function answer()
+    {
+        return $this->belongsTo(Answer::class);
+    }
 }

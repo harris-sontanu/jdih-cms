@@ -1,0 +1,177 @@
+
+/* Class = "NSWindow"; title = "Register"; ObjectID = "42"; */
+"42.title" = "Registrieren";
+
+/* Class = "NSTextFieldCell"; title = "Please enter your license key:"; ObjectID = "49"; */
+"49.title" = "Bitte geben Sie Ihren Lizenzschlüssel ein:";
+
+/* Class = "NSTextFieldCell"; placeholderString = "RCSK-XXXX-XXXX-XXXX-XXXX"; ObjectID = "51"; */
+"51.placeholderString" = "RCSK-XXXX-XXXX-XXXX-XXXX";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "53"; */
+"53.title" = "Sichern";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "55"; */
+"55.title" = "Abbrechen";
+
+/* Class = "NSBox"; title = "Your license key"; ObjectID = "63"; */
+"63.title" = "Ihr Lizenzschlüssel";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "65"; */
+"65.title" = "Schließen";
+
+/* Class = "NSTextFieldCell"; title = "Thank you for registering!"; ObjectID = "69"; */
+"69.title" = "Danke für Ihre Registrierung!";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Not Licensed"; ObjectID = "73"; */
+"73.placeholderString" = "Nicht lizenziert";
+
+/* Class = "NSTextFieldCell"; title = "/path/to/license/file"; ObjectID = "73"; */
+"73.title" = "/path/to/license/file";
+
+/* Class = "NSTextFieldCell"; title = "You can find your license file through the above path."; ObjectID = "86"; */
+"86.title" = "Sie finden Ihre Lizenzdatei am oben angegebenen Pfad.";
+
+/* Class = "NSTextFieldCell"; title = "Your trial will expire in %{value1}@ days."; ObjectID = "98"; */
+"98.title" = "Ihre Versuchsperiode läuft in %{value1}@ Tagen ab.";
+
+/* Class = "NSTextFieldCell"; title = "Please buy %{value1}@ to use the application beyond the expiry date."; ObjectID = "99"; */
+"99.title" = "Bitte kaufen Sie %{value1}@ um es nach Ablauf der Versuchsperiode weiter zu verwenden.";
+
+/* Class = "NSButtonCell"; title = "Buy..."; ObjectID = "104"; */
+"104.title" = "Kaufen...";
+
+/* Class = "NSButtonCell"; title = "Try"; ObjectID = "106"; */
+"106.title" = "Probieren";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "108"; */
+"108.title" = "Registrieren...";
+
+/* Class = "NSTextFieldCell"; title = "Your trial period has expired."; ObjectID = "119"; */
+"119.title" = "Ihre Versuchsperiode ist abgelaufen.";
+
+/* Class = "NSTextFieldCell"; title = "To continue using %{value1}@ please buy a license key or register yours if you already have one."; ObjectID = "120"; */
+"120.title" = "Um %{value1}@  weiter zu verwenden, kaufen Sie bitte einen Lizenzschlüssel order registrieren Sie Ihren falls Sie schon einen haben.";
+
+/* Class = "NSButtonCell"; title = "Buy..."; ObjectID = "121"; */
+"121.title" = "Kaufen...";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "122"; */
+"122.title" = "Registrieren...";
+
+/* Class = "NSButtonCell"; title = "Quit"; ObjectID = "123"; */
+"123.title" = "Beenden";
+
+/* Class = "NSTextFieldCell"; title = "%{value3}@. You can try this version for another %{value2}@ days, but you will need to buy an upgrade to continue using %{value1}@ after that."; ObjectID = "139"; */
+"139.title" = "%{value3}@. Sie können diese Version noch für %{value2}@ Tage probieren, danach ist der Kauf eines Upgrades erforderlich um %{value1}@ weiter zu verwenden.";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "140"; */
+"140.title" = "Registrieren...";
+
+/* Class = "NSTextFieldCell"; title = "Your license requires an upgrade."; ObjectID = "141"; */
+"141.title" = "Ihr Lizenzschlüssel erfordert ein Upgrade.";
+
+/* Class = "NSButtonCell"; title = "Upgrade..."; ObjectID = "142"; */
+"142.title" = "Upgraden...";
+
+/* Class = "NSButtonCell"; title = "Try"; ObjectID = "143"; */
+"143.title" = "Probieren";
+
+/* Class = "NSTextFieldCell"; title = "%{value2}@. Since your trial period for this version has expired, please buy an upgrade to continue using %{value1}@."; ObjectID = "154"; */
+"154.title" = "%{value2}@. Ihre Versuchsperiode ist abgelaufen, bitte kaufen Sie ein Upgrade um %{value1}@ weiter zu verwenden.";
+
+/* Class = "NSButtonCell"; title = "Upgrade..."; ObjectID = "155"; */
+"155.title" = "Upgraden...";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "156"; */
+"156.title" = "Registrieren...";
+
+/* Class = "NSButtonCell"; title = "Quit"; ObjectID = "157"; */
+"157.title" = "Beenden";
+
+/* Class = "NSTextFieldCell"; title = "Your license requires an upgrade."; ObjectID = "158"; */
+"158.title" = "Ihr Lizenzschlüssel erfordert ein Upgrade.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "Please buy %{value1}@ to use the application beyond the expiry date."; ObjectID = "233"; */
+"233.ibShadowedDisplayPattern" = "Bitte kaufen Sie %{value1}@ um es nach Ablauf der Versuchsperiode weiter zu verwenden.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "Your trial will expire in %{value1}@ days."; ObjectID = "234"; */
+"234.ibShadowedDisplayPattern" = "Ihre Versuchsperiode läuft in %{value1}@ Tagen ab.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "To continue using %{value1}@ please buy a license key or register yours if you already have one."; ObjectID = "238"; */
+"238.ibShadowedDisplayPattern" = "Um %{value1}@  weiter zu verwenden, kaufen Sie bitte einen Lizenzschlüssel order registrieren Sie Ihren falls Sie schon einen haben.";
+
+/* Class = "NSTextFieldCell"; title = "The license key is invalid"; ObjectID = "259"; */
+"259.title" = "Der Lizenzschlüssel ist ungültig";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "%{value2}@. Since your trial period for this version has expired, please buy an upgrade to continue using %{value1}@."; ObjectID = "274"; */
+"274.ibShadowedDisplayPattern" = "%{value2}@. Ihre Versuchsperiode ist abgelaufen, bitte kaufen Sie ein Upgrade um %{value1}@ weiter zu verwenden.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "%{value3}@. You can try this version for another %{value2}@ days, but you will need to buy an upgrade to continue using %{value1}@ after that."; ObjectID = "276"; */
+"276.ibShadowedDisplayPattern" = "%{value3}@. Sie können diese Version noch für %{value2}@ Tage probieren, danach ist der Kauf eines Upgrades erforderlich um %{value1}@ weiter zu verwenden.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "%{value3}@. You can try this version for another %{value2}@ days, but you will need to buy an upgrade to continue using %{value1}@ after that."; ObjectID = "277"; */
+"277.ibShadowedDisplayPattern" = "%{value3}@. Sie können diese Version noch für %{value2}@ Tage probieren, danach ist der Kauf eines Upgrades erforderlich um %{value1}@ weiter zu verwenden.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "%{value3}@. You can try this version for another %{value2}@ days, but you will need to buy an upgrade to continue using %{value1}@ after that."; ObjectID = "279"; */
+"279.ibShadowedDisplayPattern" = "%{value3}@. Sie können diese Version noch für %{value2}@ Tage probieren, danach ist der Kauf eines Upgrades erforderlich um %{value1}@ weiter zu verwenden.";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "%{value2}@. Since your trial period for this version has expired, please buy an upgrade to continue using %{value1}@."; ObjectID = "280"; */
+"280.ibShadowedDisplayPattern" = "%{value2}@. Ihre Versuchsperiode ist abgelaufen, bitte kaufen Sie ein Upgrade um %{value1}@ weiter zu verwenden.";
+
+/* Class = "NSButtonCell"; title = "Buy..."; ObjectID = "CnQ-xJ-KZZ"; */
+"CnQ-xJ-KZZ.title" = "Kaufen...";
+
+/* Class = "NSTextFieldCell"; title = "Thank you for registering!"; ObjectID = "Eho-ou-AGa"; */
+"Eho-ou-AGa.title" = "Danke für Ihre Registrierung!";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Not Licensed"; ObjectID = "IQO-4g-22K"; */
+"IQO-4g-22K.placeholderString" = "Nicht lizenziert";
+
+/* Class = "NSTextFieldCell"; title = "PARACHUTE-XXXX-XXXX-XXXX-XXXX-XXXX"; ObjectID = "IQO-4g-22K"; */
+"IQO-4g-22K.title" = "PARACHUTE-XXXX-XXXX-XXXX-XXXX-XXXX";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "KMZ-vh-bog"; */
+"KMZ-vh-bog.title" = "Registrieren...";
+
+/* Class = "NSTextFieldCell"; title = "Custom behavior"; ObjectID = "S5P-Am-u4r"; */
+"S5P-Am-u4r.title" = "Custom behavior";
+
+/* Class = "NSTextFieldCell"; title = "We recommend you keep a copy of the above license key for your records."; ObjectID = "Szg-sN-NcU"; */
+"Szg-sN-NcU.title" = "Wir empfehlen dass Sie eine Kopie dieses Lizenzschlüssels in Ihren Unterlagen aufbewahren.";
+
+/* Class = "NSButtonCell"; title = "Close"; ObjectID = "TBK-Tt-86h"; */
+"TBK-Tt-86h.title" = "Schließen";
+
+/* Class = "BindingConnection"; ibShadowedDisplayPattern = "Your trial will expire in %{value1}@ days."; ObjectID = "UaC-OQ-921"; */
+"UaC-OQ-921.ibShadowedDisplayPattern" = "Ihre Versuchsperiode läuft in %{value1}@ Tagen ab.";
+
+/* Class = "NSTextFieldCell"; title = "Custom behavior"; ObjectID = "Zjo-hF-369"; */
+"Zjo-hF-369.title" = "Custom behavior";
+
+/* Class = "NSButtonCell"; title = "Register..."; ObjectID = "fPe-zP-6pJ"; */
+"fPe-zP-6pJ.title" = "Registrieren...";
+
+/* Class = "NSTextFieldCell"; title = "Your trial period has expired."; ObjectID = "gLp-T6-9cQ"; */
+"gLp-T6-9cQ.title" = "Ihre Versuchsperiode ist abgelaufen.";
+
+/* Class = "NSTextFieldCell"; title = "Your trial will expire in %{value1}@ days."; ObjectID = "h9q-6h-MZ6"; */
+"h9q-6h-MZ6.title" = "Ihre Versuchsperiode läuft in %{value1}@ Tagen ab.";
+
+/* Class = "NSTextFieldCell"; title = "Lost your license?"; ObjectID = "jb2-yB-Iii"; */
+"jb2-yB-Iii.title" = "Lizenzschlüssel verloren?";
+
+/* Class = "NSButtonCell"; title = "Demo"; ObjectID = "kjD-8J-afb"; */
+"kjD-8J-afb.title" = "Demo";
+
+/* Class = "NSButtonCell"; title = "Try"; ObjectID = "om9-b0-TAj"; */
+"om9-b0-TAj.title" = "Probieren";
+
+/* Class = "NSButtonCell"; title = "Buy..."; ObjectID = "ru6-JB-Crj"; */
+"ru6-JB-Crj.title" = "Kaufen...";
+
+/* Class = "NSBox"; title = "Your license key"; ObjectID = "uU6-ac-3AF"; */
+"uU6-ac-3AF.title" = "Ihr Lizenzschlüssel";
+
+/* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "wiB-lS-fGS"; */
+"wiB-lS-fGS.title" = "Im Finder anzeigen";

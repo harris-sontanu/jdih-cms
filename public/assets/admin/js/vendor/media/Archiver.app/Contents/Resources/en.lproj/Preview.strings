@@ -1,0 +1,27 @@
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "1sp-2r-fC5"; */
+"Text Cell" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "8Jd-Pr-g0E"; */
+"Name" = "Name";
+
+/* Class = "NSTabViewItem"; label = "Tab"; ObjectID = "S7W-Up-52H"; */
+"Tab" = "Tab";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Wuc-9S-FlJ"; */
+"Text Cell" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "dq9-Dg-ldN"; */
+"Table View Cell" = "Table View Cell";
+
+/* Class = "NSTabViewItem"; label = "CollectionView"; ObjectID = "gCl-j7-uWJ"; */
+"CollectionView" = "CollectionView";
+
+/* Class = "NSTextFieldCell"; title = "Preview label"; ObjectID = "obk-Cg-9zO"; */
+"Preview label" = "Preview label";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "v8U-9w-Pw9"; */
+"Table View Cell" = "Table View Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Size"; ObjectID = "xVe-T5-OXk"; */
+"Size" = "Size";
+

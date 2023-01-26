@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+.select2-container {
+  position: relative;
+  z-index: 2;
+  /* float: left; */
+  width: 100%;
+  margin-bottom: 0;
+  display: table;
+  table-layout: fixed;
+}
+
+.font-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.daterangepicker.auto-apply .drp-buttons {
+    display: none;
+}
+
+.scrollable {
+  max-height: 32.5rem;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+	--dt-spacer-y: var(--spacer);
+	--dt-spacer-x: var(--spacer);
+	--dt-filter-width: 15rem;
+	position: relative;
+  }
+
+.table thead th,
+.table thead td {
+  position: relative;
+}
+.table thead .sorting {
+  cursor: pointer;
+  padding-right: calc(var(--dt-spacer-y) * 2);
+}
+.table thead .sorting:before,
+.table thead .sorting:after,
+.table thead .sorting_asc_disabled:before,
+.table thead .sorting_desc_disabled:after {
+  content: "";
+  font-family: var(--icon-font-family);
+  position: absolute;
+  top: 50%;
+  right: var(--dt-spacer-y);
+  font-size: var(--body-font-size);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  display: inline-block;
+  line-height: 1;
+  opacity: 0.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.table thead .sorting:not([class*=sorting_asc]):not([class*=sorting_desc]):before {
+  -webkit-transform: translateY(-20%);
+          transform: translateY(-20%);
+}
+.table thead .sorting:not([class*=sorting_asc]):not([class*=sorting_desc]):after {
+  -webkit-transform: translateY(-80%);
+          transform: translateY(-80%);
+}
+.table thead .sorting:not(.sorting_desc):before, .table thead .sorting_asc_disabled:before {
+  content: "\f31a";
+}
+.table thead .sorting:not(.sorting_asc):after, .table thead .sorting_desc_disabled:after {
+  content: "\f31d";
+}
+.table thead .sorting_asc:before, .table thead .sorting_asc:after, .table thead .sorting_desc:before, .table thead .sorting_desc:after {
+  opacity: 1;
+}
+.table tbody th.active,
+.table tbody td.active {
+  background-color: var(--table-hover-bg);
+}
+.table .tables_empty {
+  text-align: center;
+}
+
+.tables_processing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: var(--spacer);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: var(--gray-100);
+}
+
+.table-header,
+.table-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  padding: var(--dt-spacer-y);
+  padding-bottom: 0;
+}
+
+.ck.ck-content:not(.ck-comment__input *) {
+  height: 300px;
+  overflow-y: auto;
+}

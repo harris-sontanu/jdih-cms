@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Str::macro('highlightPhrase', function ($input, $searchString) {
+            return str_ireplace($searchString, "<mark>$searchString</mark>", $input);
+        });
     }
 }

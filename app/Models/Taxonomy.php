@@ -10,9 +10,34 @@ class Taxonomy extends Model
     use HasFactory;
 
     /**
-     * Indicates if the model should be timestamped.
+     * The attributes that are mass assignable.
      *
-     * @var bool
+     * @var array<int, string>
      */
-    public $timestamps = false;
+    protected $fillable = [
+        'type',
+        'name',
+        'slug',
+        'desc',
+        'sort',
+    ];
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
+    public function scopeType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
+    public function scopeSorted($query, $request = [])
+    {
+        if (isset($request['order'])) {
+            return $query->orderBy($request['order'], $request['sort']);
+        } else {
+            return $query->orderBy('name', 'asc');
+        }
+    }
 }

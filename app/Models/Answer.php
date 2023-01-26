@@ -15,4 +15,24 @@ class Answer extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'question_id'
+    ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }
