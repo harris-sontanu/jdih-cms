@@ -15,4 +15,9 @@ class LegislationDocument extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
 }

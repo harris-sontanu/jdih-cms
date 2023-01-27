@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('legislation_documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('legislation_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->foreignId('media_id')
                 ->constrained()
                 ->cascadeOnDelete();
