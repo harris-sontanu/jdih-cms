@@ -165,7 +165,7 @@
 
                                 <div class="d-sm-flex align-items-sm-start mb-3">
                                     <a href="{{ route('admin.news.show', $news->id) }}" class="d-inline-block position-relative me-sm-3 mb-3 mb-sm-0">
-                                        <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="flex-shrink-0 rounded" width="100">
+                                        <img src="{{ $news->cover->mediaThumbUrl }}" class="flex-shrink-0 rounded" width="100">
                                     </a>
 
                                     <div class="flex-fill">
