@@ -102,26 +102,26 @@ class LawController extends LegislationController
     private function tabFilters($request)
     {
         return [
-            'total'     => Legislation::laws()
+            'total'     => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Legislation::laws()
+            'draf'      => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Legislation::laws()
+            'terbit'    => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => Legislation::laws()
+            'terjadwal' => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'     => Legislation::laws()
+            'sampah'     => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()

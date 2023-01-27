@@ -69,19 +69,19 @@ class Legislation extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function statusRelationships()
+    public function relations()
     {
-        return $this->hasMany(LegislationRelationship::class)->where('type', 'status');
+        return $this->hasMany(LegislationRelationship::class);
     }
 
-    public function lawRelationships()
+    public function scopeOfRelation($query, $type)
     {
-        return $this->hasMany(LegislationRelationship::class)->where('type', 'legislation');
+        return $query->whereRelation('relations', 'type', $type);
     }
 
-    public function documentRelationships()
+    public function documents()
     {
-        return $this->hasMany(LegislationRelationship::class)->where('type', 'document');
+        return $this->hasMany(LegislationDocument::class);
     }
 
     public function matters()
@@ -351,7 +351,8 @@ class Legislation extends Model
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {
                 $q->where('title', 'LIKE', '%' . $search . '%')
-                ->orWhere('categories.abbrev', 'LIKE', '%' . $search . '%');
+                ->orWhereRelation('category', 'name', 'LIKE', '%' . $search . '%')
+                ->orWhereRelation('category', 'abbrev', 'LIKE', '%' . $search . '%');
             });
         }
     }
@@ -367,7 +368,7 @@ class Legislation extends Model
         }
 
         if ($category = $request->category AND $category = $request->category) {
-            $query->where('legislations.category_id', '=', $category);
+            $query->where('category_id', $category);
         }
 
         if ($code_number = $request->code_number AND $code_number = $request->code_number) {
@@ -375,7 +376,7 @@ class Legislation extends Model
         }
 
         if ($number = $request->number AND $number = $request->number) {
-            $query->where('number', '=', $number);
+            $query->where('number', $number);
         }
 
         if ($month = $request->month AND $month = $request->month) {
@@ -415,11 +416,11 @@ class Legislation extends Model
         }
 
         if ($institute = $request->institute AND $institute = $request->institute) {
-            $query->where('institute_id', '=', $institute);
+            $query->where('institute_id', $institute);
         }
 
         if ($field = $request->field AND $field = $request->field) {
-            $query->where('field_id', '=', $field);
+            $query->where('field_id', $field);
         }
 
         if ($signer = $request->signer AND $signer = $request->signer) {
@@ -431,20 +432,19 @@ class Legislation extends Model
         }
 
         if ($status = $request->status AND $status = $request->status) {
-            $query->where('status', '=', $status);
+            $query->where('status', $status);
         }
 
         if ($matter = $request->matter AND $matter = $request->matter) {
-            $query->join('legislation_matter', 'legislations.id', '=', 'legislation_matter.legislation_id')
-                ->where('legislation_matter.matter_id', $matter);
+            $query->whereRelation('matters', 'id', $matter);
         }
 
         if ($created_at = $request->created_at AND $created_at = $request->created_at) {
-            $query->whereDate('legislations.created_at', Carbon::parse($created_at)->format('Y-m-d'));
+            $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
         }
 
         if ($user = $request->user AND $user = $request->user) {
-            $query->where('legislations.user_id', '=', $user);
+            $query->whereRelation('user', 'id', $user);
         }
 
         if ($request->no_master) {
@@ -513,15 +513,7 @@ class Legislation extends Model
 
     public function scopeOfType($query, $typeId)
     {
-        return $query->whereRelation('category', 'type_id', '=', $typeId);
-    }
-
-    public function scopeLaws($query)
-    {
-        return $query->select(['legislations.*', 'categories.slug AS category_slug', 'categories.abbrev AS category_abbrev', 'categories.name AS category_name', 'users.name AS user_name', 'users.picture AS user_picture'])
-            ->join('categories', 'legislations.category_id', '=', 'categories.id')
-            ->join('users', 'legislations.user_id', '=', 'users.id')
-            ->where('type_id', '=', 1);
+        return $query->whereRelation('category', 'type_id', $typeId);
     }
 
     public function scopeMonographs($query)

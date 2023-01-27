@@ -43,6 +43,14 @@
                                         </script>
                                     @endif
                                 @endempty
+
+                                @isset($legislation->note)
+                                    <div class="mt-4">
+                                        <h5>Catatan</h5>
+
+                                        <p>{{ $legislation->note }}</p>
+                                    </div>
+                                @endisset
                             </div>
                             <div class="col">
                                 <div class="table-responsive">
@@ -149,7 +157,7 @@
 
                 </div>
 
-                @if(!empty($statusRelationships) AND count($statusRelationships) > 0)
+                @if(isset($statusRelationships) AND $statusRelationships->count() > 0)
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mb-0">Keterangan Status</h4>
@@ -162,9 +170,9 @@
                             </ol>
                         </div>
                     </div>
-                @endif
+                @endisset
 
-                @if(!empty($lawRelationships) AND count($lawRelationships) > 0)
+                @if(isset($lawRelationships) AND $lawRelationships->count() > 0)
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mb-0">Peraturan Terkait</h4>
@@ -179,7 +187,7 @@
                     </div>
                 @endif
 
-                @if(!empty($documentRelationships) AND count($documentRelationships) > 0)
+                @if(isset($documentRelationships) AND $documentRelationships->count() > 0)
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mb-0">Dokumen Terkait</h4>
