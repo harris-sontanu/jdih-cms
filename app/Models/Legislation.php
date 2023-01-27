@@ -117,7 +117,7 @@ class Legislation extends Model
             <i class="ph-newspaper m-1"></i></button>';
         } else if ($this->category->type_id === 4) {
             $button = '<button type="button" class="btn btn-flat-danger rounded-pill p-1" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
-            <i class="ph-stamps m-1"></i></button>';
+            <i class="ph-stamp m-1"></i></button>';
         }
 
         return Attribute::make(

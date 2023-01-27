@@ -59,7 +59,7 @@
 									</label>
 
                                     @if (Route::has('password.request'))
-									    <a href="{{ route('password.request') }}" class="ms-auto link-indigo">Lupa kata sandi?</a>
+									    <a href="{{ route('password.request') }}" class="ms-auto">Lupa kata sandi?</a>
                                     @endif
 								</div>
 
@@ -75,7 +75,7 @@
                                         @else
                                             2022 - {{ now()->year }}
                                         @endif
-                                        <a class="link-indigo" href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
+                                        <a href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
                                     </span>
                                     <span class="text-muted">{{ $appName }} v5.0.1</span>
                                 </span>

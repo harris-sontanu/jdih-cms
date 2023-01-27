@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 // use App\Models\Download;
 use App\Models\Legislation;
 use App\Models\Log;
+use App\Models\Post;
 // use App\Models\Visitor;
 use App\Models\Vote;
 use Illuminate\Support\Carbon;
@@ -30,11 +31,12 @@ class DashboardController extends AdminController
             ->take(10)
             ->get();
 
-        // $latestNews = News::with('taxonomy', 'author', 'cover')
-        //     ->published()
-        //     ->latest()
-        //     ->take(4)
-        //     ->get();
+        $latestNews = Post::ofType('news')
+            ->with('taxonomy', 'author', 'cover')
+            ->published()
+            ->latest()
+            ->take(4)
+            ->get();
 
         $countVoters= Vote::select('ipv4')
             ->whereDate('created_at', Carbon::today())
@@ -62,7 +64,7 @@ class DashboardController extends AdminController
             'totalMonographs',
             'totalArticles',
             'totalJudgments',
-            // 'latestNews',
+            'latestNews',
             'latestLogs',
             // 'countVoters',
             // 'countVisitors',
