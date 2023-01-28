@@ -59,6 +59,11 @@ class Media extends Model
         return $this->hasOne(Link::class, 'image_id');
     }
 
+    public function legislationDocuments()
+    {
+        return $this->hasMany(LegislationDocument::class);
+    }
+
     public function mediaUrl(): Attribute
     {
         $mediaUrl = asset('assets/admin/images/placeholders/placeholder.jpg');

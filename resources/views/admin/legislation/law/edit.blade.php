@@ -71,20 +71,20 @@
                                 <span class="fw-semibold"><i class="ph-files me-2"></i>Dokumen</span>
                             </div>
 
-                            @if (count($law->documents) > 0)
+                            @if ($law->documents->count() > 0)
                                 <div class="sidebar-section-body py-0">
                                     @foreach ($law->documents as $document)
                                         <div class="d-flex align-items-start mt-3">
                                             <div class="me-2">
-                                                <i class="{{ $document->extClass; }} ph-2x"></i>
+                                                <i class="{{ $document->media->extClass; }} ph-2x"></i>
                                             </div>
 
                                             <div class="flex-fill overflow-hidden">
-                                                <a href="{{ $document->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->name; }}</a>
+                                                <a href="{{ $document->media->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->media->name; }}</a>
                                                 <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                                     <li class="list-inline-item me-1">{{ $document->typeTranslate }}</li>
-                                                    <li class="list-inline-item mx-1"><a role="button" class="dirdurdaeng" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $document->id }}">Ubah</a></li>
-                                                    <li class="list-inline-item"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $document->id) }}">Hapus</a></li>
+                                                    <li class="list-inline-item mx-1">{{ $document->media->size() }}</li>
+                                                    <li class="list-inline-item"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $document->media->id) }}">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </div>

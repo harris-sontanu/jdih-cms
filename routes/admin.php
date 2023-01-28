@@ -116,7 +116,7 @@ Route::name('admin.')->group(function () {
                 Route::delete('/legislation/judgment/{judgment}/force-destroy', 'forceDestroy')->name('judgment.force-destroy');
             });
 
-            Route::resource('/legislation/document', DocumentController::class);
+            Route::delete('/legislation/document/{id}', DocumentController::class)->name('document.destroy');
 
             Route::post('/legislation/institute/select-options', [InstituteController::class, 'selectOptions'])->name('institute.select-options');
             Route::resource('/legislation/institute', InstituteController::class);
