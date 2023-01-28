@@ -85,6 +85,42 @@ class Media extends Model
         );
     }
 
+    public function ext(): Attribute
+    {
+        $file = explode('.', $this->path);
+        $ext = $file[1];
+
+        return Attribute::make(
+            get: fn ($value) => $ext
+        );
+    }
+
+    public function extClass(): Attribute
+    {
+        $file = explode('.', $this->name);
+        $ext = $file[1];
+
+        if ($ext === 'pdf') {
+            $class = 'ph-file-pdf text-danger';
+        } else if ($ext === 'doc' OR $ext === 'docx') {
+            $class = 'ph-file-doc text-primary';
+        } else if ($ext === 'xls' OR $ext === 'xlsx') {
+            $class = 'ph-file-xls text-success';
+        } else if ($ext === 'ppt' OR $ext === 'pptx') {
+            $class = 'ph-file-ppt text-warning';
+        } else if ($ext === 'zip' OR $ext === 'rar') {
+            $class = 'ph-file-zip text-teal';
+        } else if ($ext === 'txt' OR $ext === 'rtf') {
+            $class = 'ph-file-text text-pink';
+        } else {
+            $class = 'ph-file text-secondary';
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $class
+        );
+    }
+
     public function icon(): Attribute
     {
         $ext = substr(strchr($this->path, '.'), 1);

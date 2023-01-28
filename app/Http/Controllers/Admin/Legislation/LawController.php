@@ -256,15 +256,11 @@ class LawController extends LegislationController
         {
             $file = $request->file('master');
 
-            $documentStorage = $this->documentStorage($legislation, 'master');
-            $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
-
-            $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+            $mediaId = $this->uploadDocument($file, $legislation, 'master');
 
             $legislation->documents()->create([
-                'type'  => 'master',
-                'path'  => $path,
-                'name'  => $file_name,
+                'media_id'  => $mediaId,
+                'type'      => 'master',
             ]);
 
             $legislation->logs()->create([
@@ -277,15 +273,11 @@ class LawController extends LegislationController
         {
             $file = $request->file('abstract');
 
-            $documentStorage = $this->documentStorage($legislation, 'abstract');
-            $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
-
-            $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+            $mediaId = $this->uploadDocument($file, $legislation, 'abstract');
 
             $legislation->documents()->create([
-                'type'  => 'abstract',
-                'path'  => $path,
-                'name'  => $file_name,
+                'media_id'  => $mediaId,
+                'type'      => 'abstract',
             ]);
 
             $legislation->logs()->create([
@@ -300,24 +292,16 @@ class LawController extends LegislationController
 
             // Get the next order
             $currentOrder = $legislation->documents->where('type', 'attachment')->max('order');
-            if (!empty($currentOrder)) {
-                $i = $currentOrder + 1;
-            } else {
-                $i = 1;
-            }
+            $i = isset($currentOrder) ? $currentOrder + 1 : 1;
 
             foreach ($files as $attachment) {
 
-                $documentStorage = $this->documentStorage($legislation, 'attachment', $i);
-                $file_name = $documentStorage['file_name'] . '.' . $attachment->getClientOriginalExtension();
-
-                $path = $attachment->storeAs($documentStorage['path'], $file_name, 'public');
+                $mediaId = $this->uploadDocument($attachment, $legislation, 'attachment');
 
                 $legislation->documents()->create([
-                    'type'  => 'attachment',
-                    'order' => $i,
-                    'path'  => $path,
-                    'name'  => $file_name,
+                    'media_id'  => $mediaId,
+                    'type'      => 'attachment',
+                    'order'     => $i,
                 ]);
 
                 $legislation->logs()->create([
@@ -410,7 +394,7 @@ class LawController extends LegislationController
         $documentRelationships = $legislation->relations()->where('type', 'document')->get();
 
         $masterDoc = $legislation->documents()
-            ->where('type', 'master')
+            ->ofType('master')
             ->first();
 
         $adobeKey = Config::get('services.adobe.key');

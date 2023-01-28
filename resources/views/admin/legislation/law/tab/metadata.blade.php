@@ -141,7 +141,7 @@
                 </div>
                 <div class="form-text text-muted">Bidang Hukum dari topik yang dibahas. Contoh: Hukum Adat.
                     @cannot('isAuthor')
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">Tambah Bidang Hukum</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">+ Tambah Bidang Hukum</a>
                     @endcannot
                 </div>
                 @error('field_id')
@@ -200,7 +200,7 @@
                 </div>
                 <div class="form-text text-muted">Berdasarkan <a href="https://jdih.baliprov.go.id/produk-hukum/peraturan-perundang-undangan/pp/13250">Peraturan Pemerintah Nomor 38 Tahun 2007</a>. Contoh: Pemberdayaan Perempuan dan Perlindungan Anak.
                     @cannot('isAuthor')
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-matter-modal">Tambah Urusan Pemerintahan</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-matter-modal">+ Tambah Urusan Pemerintahan</a>
                     @endcannot
                 </div>
                 @error('matter')
@@ -229,7 +229,7 @@
                 </div>
                 <div class="form-text text-muted">Instansi yang memprakarsai peraturan. Contoh: Biro Hukum Provinsi Bali.
                     @cannot('isAuthor')
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-institute-modal">Tambah Pemrakarsa</a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#create-institute-modal">+ Tambah Pemrakarsa</a>
                     @endcannot
                 </div>
                 @error('institute_id')

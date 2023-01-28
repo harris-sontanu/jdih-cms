@@ -23,8 +23,8 @@
                                 @empty($masterDoc)
                                     <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid rounded">
                                 @else
-                                    @if ($masterDoc->ext === 'pdf' )
-                                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterSource }}" data-name="{{ $legislation->masterName }}" class="rounded" style="height: 720px; width: 100%;">
+                                    @if ($masterDoc->media->ext === 'pdf' )
+                                        <figure id="adobe-dc-view" data-file="{{ $masterDoc->media->mediaUrl }}" data-name="{{ $masterDoc->media->name }}" class="rounded" style="height: 720px; width: 100%;">
                                         </figure>
                                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                                         <script type="text/javascript">
@@ -247,6 +247,10 @@
                             </tbody>
                         </table>
 
+                        <div class="card-footer d-flex justify-content-end align-items-center">
+                            <a href="{{ route('admin.legislation.law.edit', $legislation->id) }}" class="btn btn-indigo">Ubah</a>
+                        </div>
+
                     </div>
 
                     <div class="card">
@@ -255,17 +259,18 @@
                         </div>
 
                         <div class="sidebar-section-body pb-0">
-                            @if (count($legislation->documents) > 0)
+                            @if ($legislation->documents->count() > 0)
                                 @foreach ($legislation->documents as $document)
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="me-2">
-                                            <i class="{{ $document->extClass; }} ph-2x"></i>
+                                            <i class="{{ $document->media->extClass; }} ph-2x"></i>
                                         </div>
 
                                         <div class="flex-fill overflow-hidden">
-                                            <a href="{{ $document->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->name; }}</a>
+                                            <a href="{{ $document->media->mediaUrl }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->media->name; }}</a>
                                             <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                                 <li class="list-inline-item me-1">{{ $document->typeTranslate }}</li>
+                                                <li class="list-inline-item ms-1">{{ $document->media->size() }}</li>
                                             </ul>
                                         </div>
                                     </div>

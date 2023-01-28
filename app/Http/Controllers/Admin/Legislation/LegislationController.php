@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\Log;
 use App\Models\User;
 use App\Models\Download;
+use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -52,19 +53,12 @@ class LegislationController extends AdminController
 
         $storage_path = 'produk-hukum/' . $legislation->category->type->slug . '/' . $legislation->year . '/' . Str::lower($legislation->category->slug);
 
-        switch ($documentType) {
-            case "abstract":
-                $prefix = 'abs';
-                break;
-            case "attachment":
-                $prefix = ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '';
-                break;
-            case "cover":
-                $prefix = 'img';
-                break;
-            default:
-                $prefix = '';
-        }
+        $prefix = match ($documentType) {
+            'abstract'  => 'abs',
+            'attachment'=> ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '',
+            'cover'     => 'img',
+            default     => '',
+        };
 
         $file_name = $legislation->year . $prefix . $file_code . $region_code . $padded_number;
 
@@ -72,6 +66,27 @@ class LegislationController extends AdminController
             'path' => $storage_path,
             'file_name' => $file_name
         ];
+    }
+
+    protected function uploadDocument($file, $legislation, $documentType, $sequence = 1)
+    {
+        $documentStorage = $this->documentStorage($legislation, $documentType, $sequence);
+        $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
+
+        $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+
+        $new_media = Media::create([
+            'name'      => $file_name,
+            'file_name' => $file->getClientOriginalName(),
+            'mime_type' => $file->getClientMimeType(),
+            'path'      => $path,
+            'is_image'  => 0,
+            'size'      => $file->getSize(),
+            'user_id'   => request()->user()->id,
+            'published_at'  => now()->format('Y-m-d H:i:s'),
+        ]);
+
+        return $new_media->id;
     }
 
     protected function deleteDocuments($id)
