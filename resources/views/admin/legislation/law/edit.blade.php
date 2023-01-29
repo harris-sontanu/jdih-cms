@@ -84,7 +84,7 @@
                                                 <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                                     <li class="list-inline-item me-1">{{ $document->typeTranslate }}</li>
                                                     <li class="list-inline-item mx-1">{{ $document->media->size() }}</li>
-                                                    <li class="list-inline-item"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $document->media->id) }}">Hapus</a></li>
+                                                    <li class="list-inline-item ms-1"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $document->media->id) }}">Hapus</a></li>
                                                 </ul>
                                             </div>
                                         </div>

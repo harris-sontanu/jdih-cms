@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('legislation_documents', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('legislation_id')
                 ->constrained()
                 ->cascadeOnDelete();
@@ -24,8 +25,6 @@ return new class extends Migration
             $table->tinyInteger('order')->default(1);
             $table->integer('download')
                 ->default(0);
-
-            $table->primary(['legislation_id', 'media_id']);
         });
     }
 
