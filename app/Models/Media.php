@@ -59,9 +59,9 @@ class Media extends Model
         return $this->hasOne(Link::class, 'image_id');
     }
 
-    public function legislationDocuments()
+    public function legislationDocument()
     {
-        return $this->hasMany(LegislationDocument::class);
+        return $this->hasOne(LegislationDocument::class);
     }
 
     public function mediaUrl(): Attribute
@@ -123,6 +123,32 @@ class Media extends Model
 
         return Attribute::make(
             get: fn ($value) => $class
+        );
+    }
+
+    public function source(): Attribute
+    {
+        $source = asset('assets/admin/images/placeholders/placeholder.jpg');
+        if (!empty($this->path)) {
+            if (Storage::disk('public')->exists($this->path)) $source = Storage::url($this->path);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $source
+        );
+    }
+
+    public function thumbSource(): Attribute
+    {
+        $thumbSource = asset('assets/admin/images/placeholders/placeholder.jpg');
+        if (!empty($this->path)) {
+            $ext = substr(strchr($this->path, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $this->path);
+            if (Storage::disk('public')->exists($thumbnail)) $thumbSource = Storage::url($thumbnail);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $thumbSource
         );
     }
 

@@ -14,21 +14,22 @@ class DocumentController extends LegislationController
 
         $this->removeDocument($media->path);
 
-        if ($media->legislationDocuments->type === 'master') {
+        if ($media->legislationDocument->type === 'master') {
             $documentType = 'Batang Tubuh';
-        } else if ($media->legislationDocuments->type === 'abstract') {
+        } else if ($media->legislationDocument->type === 'abstract') {
             $documentType = 'Abstrak';
-        } else if ($media->legislationDocuments->type === 'attachment') {
+        } else if ($media->legislationDocument->type === 'attachment') {
             $documentType = 'Lampiran';
-        } else if ($media->legislationDocuments->type === 'cover') {
+        } else if ($media->legislationDocument->type === 'cover') {
             $documentType = 'Sampul';
 
             // Remove thumbnail
-            $ext        = substr(strrchr($media->legislationDocuments->path, '.'), 1);
-            $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $media->legislationDocuments->path);
+            $ext        = substr(strrchr($media->legislationDocument->path, '.'), 1);
+            $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $media->legislationDocument->path);
             $this->removeDocument($thumbnail);
         }
-        $media->legislationDocuments->legislation->logs()->create([
+
+        $media->legislationDocument->legislation->logs()->create([
             'user_id'   => $request->user()->id,
             'message'   => 'menghapus dokumen ' . $documentType,
         ]);

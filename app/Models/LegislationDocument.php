@@ -35,6 +35,11 @@ class LegislationDocument extends Model
         return $this->belongsTo(Media::class);
     }
 
+    public function legislation()
+    {
+        return $this->belongsTo(Legislation::class);
+    }
+
     public function typeTranslate(): Attribute
     {
         if ($this->type === 'master') {
