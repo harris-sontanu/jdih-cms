@@ -561,6 +561,7 @@ class LawController extends LegislationController
             }
             else if ($request->action === 'delete')
             {
+                $this->deleteDocuments($law);
                 $law->forceDelete();
                 $message = 'data Peraturan telah berhasil dihapus';
             }
@@ -572,7 +573,7 @@ class LawController extends LegislationController
     public function statusRelationshipRow(Request $request)
     {
         $validated = $request->validate([
-            'statusOptions' => 'required',
+            'statusOptions'   => 'required',
             'statusRelatedTo' => 'required',
             'statusNote'      => 'nullable',
         ]);

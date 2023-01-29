@@ -42,7 +42,12 @@ class LegislationController extends AdminController
         return $antonym;
     }
 
-    protected $selectedCategories = [27, 29, 34, 18, 19];
+    protected $selectedCategories;
+
+    function __construct()
+    {
+        $this->selectedCategories = Category::ofType(1)->inRandomOrder()->take(4)->pluck('id');
+    }
 
     protected function documentStorage($legislation, $documentType, $sequence = 1)
     {
