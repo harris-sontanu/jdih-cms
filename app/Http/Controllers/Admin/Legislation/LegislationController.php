@@ -68,7 +68,7 @@ class LegislationController extends AdminController
         ];
     }
 
-    protected function uploadDocument($file, $legislation, $documentType, $sequence = 1)
+    protected function storeDocument($file, $legislation, $documentType, $sequence = 1)
     {
         $documentStorage = $this->documentStorage($legislation, $documentType, $sequence);
         $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
