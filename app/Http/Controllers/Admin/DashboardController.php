@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Legislation;
 use App\Models\Log;
 use App\Models\Post;
-// use App\Models\Visitor;
+use App\Models\Visitor;
 use App\Models\Vote;
 use Illuminate\Support\Carbon;
 
@@ -44,8 +44,8 @@ class DashboardController extends AdminController
             ->get()
             ->count();
 
-        // $countVisitors = Visitor::countDaily()->get()->count();
-        // $visitPercentage = $this->visitPercentage();
+        $countVisitors = Visitor::countDaily()->get()->count();
+        $visitPercentage = $this->visitPercentage();
 
         // $countDownloads = Download::countDaily()->get()->count();
 
@@ -66,27 +66,27 @@ class DashboardController extends AdminController
             'totalJudgments',
             'latestNews',
             'latestLogs',
-            // 'countVoters',
-            // 'countVisitors',
-            // 'visitPercentage',
+            'countVoters',
+            'countVisitors',
+            'visitPercentage',
             // 'countDownloads',
             'vendors',
         ));
     }
 
-    // private function visitPercentage() {
-    //     $yesterday = Visitor::countDaily(1)->get()->count();
-    //     $twoDaysBefore = Visitor::countDaily(2)->get()->count();
+    private function visitPercentage() {
+        $yesterday = Visitor::countDaily(1)->get()->count();
+        $twoDaysBefore = Visitor::countDaily(2)->get()->count();
 
-    //     $percentage = $twoDaysBefore == 0 ? '&infin;' : ($yesterday - $twoDaysBefore) / $twoDaysBefore * 100;
+        $percentage = $twoDaysBefore == 0 ? '&infin;' : ($yesterday - $twoDaysBefore) / $twoDaysBefore * 100;
 
-    //     $badge = $percentage >= 0
-    //         ? '<span class="badge bg-success rounded-pill ms-auto">+' .round($percentage, 2). '%</span>'
-    //         : ($percentage == '&infin;'
-    //             ? '<span class="badge bg-success rounded-pill ms-auto">&infin;</span>'
-    //             : '<span class="badge bg-danger rounded-pill ms-auto">' .round($percentage, 2). '%</span>'
-    //         );
+        $badge = $percentage >= 0
+            ? '<span class="badge bg-success rounded-pill ms-auto">+' .round($percentage, 2). '%</span>'
+            : ($percentage == '&infin;'
+                ? '<span class="badge bg-success rounded-pill ms-auto">&infin;</span>'
+                : '<span class="badge bg-danger rounded-pill ms-auto">' .round($percentage, 2). '%</span>'
+            );
 
-    //     return $badge;
-    // }
+        return $badge;
+    }
 }

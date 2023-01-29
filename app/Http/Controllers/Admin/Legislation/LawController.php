@@ -66,7 +66,7 @@ class LawController extends LegislationController
 
         $tabFilters = $this->tabFilters($request);
 
-        $categories = Category::laws()->pluck('name', 'id');
+        $categories = Category::ofType(1)->pluck('name', 'id');
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
@@ -160,7 +160,7 @@ class LawController extends LegislationController
             'Tambah' => TRUE
         ];
 
-        $categories = Category::laws()->pluck('name', 'id');
+        $categories = Category::ofType(1)->pluck('name', 'id');
         $statusOptions = $this->statusOptions;
         $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
@@ -431,7 +431,7 @@ class LawController extends LegislationController
             'Ubah' => TRUE
         ];
 
-        $categories = Category::laws()->pluck('name', 'id');
+        $categories = Category::ofType(1)->pluck('name', 'id');
         $statusOptions = $this->statusOptions;
         $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');

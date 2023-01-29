@@ -42,7 +42,7 @@ class LegislationController extends AdminController
         return $antonym;
     }
 
-    protected $selectedCategories = [9, 2];
+    protected $selectedCategories = [27, 29, 34, 18, 19];
 
     protected function documentStorage($legislation, $documentType, $sequence = 1)
     {
@@ -106,10 +106,10 @@ class LegislationController extends AdminController
     public function search(Request $request)
     {
         $term       = $request->search;
-        $laws       = Legislation::laws()->search($request->only(['search']))->latestApproved()->take(3)->get();
-        $monographs = Legislation::monographs()->search($request->only(['search']))->latest()->take(3)->get();
-        $articles   = Legislation::articles()->search($request->only(['search']))->latest()->take(3)->get();
-        $judgments  = Legislation::judgments()->search($request->only(['search']))->latest()->take(3)->get();
+        $laws       = Legislation::ofType(1)->search($request->only(['search']))->latestApproved()->take(3)->get();
+        $monographs = Legislation::ofType(2)->search($request->only(['search']))->latest()->take(3)->get();
+        $articles   = Legislation::ofType(3)->search($request->only(['search']))->latest()->take(3)->get();
+        $judgments  = Legislation::ofType(4)->search($request->only(['search']))->latest()->take(3)->get();
 
         return view('admin.legislation.search', compact('term', 'laws', 'monographs', 'articles', 'judgments'));
     }
@@ -191,7 +191,7 @@ class LegislationController extends AdminController
             $selectedYears[] = now()->format('Y') - $i;
         }
 
-        $categories = Category::laws()->pluck('name', 'id');
+        $categories = Category::ofType(1)->pluck('name', 'id');
         $selectedCategories = $this->selectedCategories;
 
         return view('admin.legislation.statistic.filter', compact(
@@ -219,13 +219,13 @@ class LegislationController extends AdminController
         }
 
         $selectedCategories = ($request->has('categories')) ? $request->categories : $this->selectedCategories;
-        $categories = Category::laws()->whereIn('id', $selectedCategories)->pluck('abbrev', 'id')->toArray();
+        $categories = Category::ofType(1)->whereIn('id', $selectedCategories)->pluck('abbrev', 'id')->toArray();
 
         foreach ($categories as $key => $value) {
 
             $data = [];
             foreach ($years as $year) {
-                $data[] = Legislation::laws()->where('legislations.year', $year)
+                $data[] = Legislation::ofType(1)->where('legislations.year', $year)
                     ->where('legislations.category_id', $key)
                     ->count();
             }
@@ -278,14 +278,14 @@ class LegislationController extends AdminController
         $months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 
         $selectedCategories = ($request->has('categories')) ? $request->categories : $this->selectedCategories;
-        $categories = Category::laws()->whereIn('id', $selectedCategories)->pluck('abbrev', 'id')->toArray();
+        $categories = Category::ofType(1)->whereIn('id', $selectedCategories)->pluck('abbrev', 'id')->toArray();
 
         foreach ($categories as $key => $value) {
 
             $data = [];
             for ($i=0; $i < 12; $i++) {
                 $data[] = [
-                    'value' => Legislation::laws()->where('legislations.year', $year)
+                    'value' => Legislation::ofType(1)->where('legislations.year', $year)
                                 ->whereMonth('legislations.published', $i + 1)
                                 ->where('legislations.category_id', $key)
                                 ->count(),
@@ -357,7 +357,7 @@ class LegislationController extends AdminController
 
             $data = [];
             foreach ($years as $year) {
-                $data[] = Legislation::laws()->where('legislations.year', $year)
+                $data[] = Legislation::ofType(1)->where('legislations.year', $year)
                     ->where('legislations.status', $value)
                     ->count();
             }

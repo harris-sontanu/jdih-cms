@@ -50,24 +50,9 @@ class Category extends Model
         );
     }
 
-    public function scopeLaws($query)
+    public function scopeOfType($query, $type)
     {
-        return $query->where('type_id', 1);
-    }
-
-    public function scopeMonographs($query)
-    {
-        return $query->where('type_id', 2);
-    }
-
-    public function scopeArticles($query)
-    {
-        return $query->where('type_id', 3);
-    }
-
-    public function scopeJudgments($query)
-    {
-        return $query->where('type_id', 4);
+        return $query->where('type_id', $type);
     }
 
     public function scopeSorted($query, $request = [])
