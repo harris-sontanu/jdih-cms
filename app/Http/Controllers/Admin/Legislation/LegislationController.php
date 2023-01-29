@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin\Legislation;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Legislation;
 use App\Models\Category;
-use App\Models\Document;
 use App\Models\Setting;
 use App\Models\Log;
 use App\Models\User;
 use App\Models\Download;
+use App\Models\LegislationDocument;
 use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -89,17 +89,20 @@ class LegislationController extends AdminController
         return $new_media->id;
     }
 
-    protected function deleteDocuments($id)
+    protected function deleteDocuments($legislation)
     {
-        $documents = Document::where('legislation_id', $id)->get();
+        $documents = $legislation->documents->all();
         foreach ($documents as $document) {
-            $this->removeDocument($document->path);
+
+            $this->removeDocument($document->media->path);
 
             if ($document->type === 'cover') {
-                $ext        = substr(strrchr($document->path, '.'), 1);
-                $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $document->path);
+                $ext        = substr(strrchr($document->media->path, '.'), 1);
+                $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $document->media->path);
                 $this->removeDocument($thumbnail);
             }
+
+            $document->media->delete();
         }
     }
 

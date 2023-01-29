@@ -144,7 +144,7 @@
                                             @endcan
 
                                             @can('forceDelete', $law)
-                                                <form class="delete-form" action="{{ route('admin.legislation.law.force-destroy', $law->id) }}" method="POST">
+                                                <form class="delete-form" action="{{ route('admin.legislation.law.force-destroy', $law->id) }}" data-confirm="Apakah Anda yakin menghapus peraturan?" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button type="submit" class="btn btn-link p-0 text-body" data-bs-popup="tooltip" title="Hapus"><i class="ph-x"></i></button>

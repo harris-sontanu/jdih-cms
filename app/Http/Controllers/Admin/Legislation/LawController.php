@@ -750,7 +750,7 @@ class LawController extends LegislationController
     public function forceDestroy(Legislation $legislation)
     {
         // Remove all documents
-        $this->deleteDocuments($legislation->id);
+        $this->deleteDocuments($legislation);
 
         $legislation->forceDelete();
 
