@@ -26,14 +26,14 @@
             new chartBar("#visitor-bar-chart", data, 25, 50, true, "elastic", 1200, 50, "#EF5350", "visitors");
         })
 
-        // $.ajax({
-        //     url: '/admin/visitor/download-chart',
-        //     type: 'POST',
-        //     dataType: 'JSON',
-        // }).done(function(data){
-        //     $('#avg-downloads').html(data[6]['avg'].toFixed());
-        //     new chartLine("#download-line-chart", data, 50, '#2ec7c9', 'rgba(33,150,243,0.5)', '#2ec7c9', '#2ec7c9');
-        // })
+        $.ajax({
+            url: '/admin/visitor/download-chart',
+            type: 'POST',
+            dataType: 'JSON',
+        }).done(function(data){
+            $('#avg-downloads').html(data[6]['avg'].toFixed());
+            new chartLine("#download-line-chart", data, 50, '#2ec7c9', 'rgba(33,150,243,0.5)', '#2ec7c9', '#2ec7c9');
+        })
 
     });
 

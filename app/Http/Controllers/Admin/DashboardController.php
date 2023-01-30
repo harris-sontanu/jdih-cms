@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-// use App\Models\Download;
 use App\Models\Legislation;
 use App\Models\Log;
 use App\Models\Post;
 use App\Models\Visitor;
 use App\Models\Vote;
+use App\Models\LegislationDownloadLog;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends AdminController
@@ -47,7 +47,7 @@ class DashboardController extends AdminController
         $countVisitors = Visitor::countDaily()->get()->count();
         $visitPercentage = $this->visitPercentage();
 
-        // $countDownloads = Download::countDaily()->get()->count();
+        $countDownloads = LegislationDownloadLog::countDaily()->get()->count();
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
@@ -69,7 +69,7 @@ class DashboardController extends AdminController
             'countVoters',
             'countVisitors',
             'visitPercentage',
-            // 'countDownloads',
+            'countDownloads',
             'vendors',
         ));
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Models\Download;
+use App\Models\LegislationDownloadLog;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
 use Carbon\Carbon;
@@ -206,7 +206,7 @@ class VisitorController extends AdminController
         $avg = 0;
         for ($i=6; $i >= 0; $i--) {
             $dt  = Carbon::now();
-            $count  = Download::countDaily($i)->get()->count();
+            $count  = LegislationDownloadLog::countDaily($i)->get()->count();
             $sum    = $sum + $count;
             $avg    = $sum / 1;
             $json[] = [
