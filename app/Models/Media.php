@@ -102,7 +102,7 @@ class Media extends Model
 
     public function extClass(): Attribute
     {
-        $file = explode('.', $this->name);
+        $file = explode('.', $this->path);
         $ext = $file[1];
 
         if ($ext === 'pdf') {
