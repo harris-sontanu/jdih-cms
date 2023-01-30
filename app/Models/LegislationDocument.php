@@ -59,6 +59,6 @@ class LegislationDocument extends Model
 
     public function scopeOfType($query, $type)
     {
-        return $query->where('types', $type);
+        return $query->where('type', $type);
     }
 }

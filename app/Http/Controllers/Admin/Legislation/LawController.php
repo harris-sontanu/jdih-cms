@@ -227,7 +227,7 @@ class LawController extends LegislationController
                 $relatedToId = (int)$request['statusRelatedTo'][$key];
                 $related = Legislation::find($relatedToId);
 
-                $this->storeStatusRelationship($legislation, $related, $value, $request['statusNote'][$key]);
+                $this->storeRelationship($legislation, $related, 'status', $value, $request['statusNote'][$key]);
             }
         }
 
@@ -236,7 +236,7 @@ class LawController extends LegislationController
             foreach ($request['lawRelatedTo'] as $key => $relatedToId) {
                 $related = Legislation::find($relatedToId);
 
-                $this->storeLawRelationship($legislation, $related, $request['lawRelationshipOptions'][$key], $request['lawRelatedNote'][$key]);
+                $this->storeRelationship($legislation, $related, 'legislation', $request['lawRelationshipOptions'][$key], $request['lawRelatedNote'][$key]);
             }
         }
 
@@ -245,7 +245,7 @@ class LawController extends LegislationController
             foreach ($request['docRelatedTo'] as $key => $relatedToId) {
                 $related = Legislation::find($relatedToId);
 
-                $this->storeDocRelationship($legislation, $related, $request['docRelatedNote'][$key]);
+                $this->storeRelationship($legislation, $related, 'document', null, $request['docRelatedNote'][$key]);
             }
         }
     }
@@ -314,62 +314,41 @@ class LawController extends LegislationController
         }
     }
 
-    private function storeStatusRelationship($parent, $related, $status, $note)
+    private function storeRelationship($parent, $related, $type, $status, $note) 
     {
+        $logMessages = [
+            'status'    => 'keterangan status',
+            'legislation'   => 'peraturan terkait',
+            'document'  => 'dokumen terkait',
+        ];
+
         // Insert related legislation
         $parent->relations()->create([
             'related_to'=> $related->id,
-            'type'      => 'status',
+            'type'      => $type,
             'status'    => $status,
             'note'      => $note,
         ]);
 
         $parent->logs()->create([
             'user_id'   => request()->user()->id,
-            'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
+            'message'   => 'menambahkan ' . $logMessages[$type] . ' <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
         ]);
 
-        // Insert related legislation with antonym status
-        $antonymStatus = $this->statusAntonym($status);
-        $related->relations()->create([
-            'related_to'  => $parent->id,
-            'type'        => 'status',
-            'status'      => $antonymStatus,
-        ]);
-
-        $related->logs()->create([
-            'user_id'   => request()->user()->id,
-            'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',
-        ]);
-    }
-
-    private function storeLawRelationship($parent, $related, $status, $note)
-    {
-        $parent->relations()->create([
-            'related_to'=> $related->id,
-            'type'      => 'legislation',
-            'status'    => $status,
-            'note'      => $note,
-        ]);
-
-        $parent->logs()->create([
-            'user_id'   => request()->user()->id,
-            'message'   => 'menambahkan peraturan terkait <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
-        ]);
-    }
-
-    private function storeDocRelationship($parent, $related, $note)
-    {
-        $parent->relations()->create([
-            'related_to'=> $related->id,
-            'type'      => 'document',
-            'note'      => $note,
-        ]);
-
-        $parent->logs()->create([
-            'user_id'   => request()->user()->id,
-            'message'   => 'menambahkan dokumen terkait <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
-        ]);
+        if ($type === 'status') {
+            // Insert related legislation with antonym status
+            $antonymStatus = $this->statusAntonym($status);
+            $related->relations()->create([
+                'related_to'  => $parent->id,
+                'type'        => 'status',
+                'status'      => $antonymStatus,
+            ]);
+    
+            $related->logs()->create([
+                'user_id'   => request()->user()->id,
+                'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',
+            ]);
+        }
     }
 
     /**
@@ -586,7 +565,7 @@ class LawController extends LegislationController
         $parent = null;
         if ($request->has('id')) {
             $parent = Legislation::find($request->id);
-            $this->storeStatusRelationship($parent, $law, $status, $note);
+            $this->storeRelationship($parent, $law, 'status', $status, $note);
         }
 
         return view('admin.legislation.law.tab.status-relationship-row', compact(
@@ -645,7 +624,7 @@ class LawController extends LegislationController
         $parent = null;
         if ($request->has('id')) {
             $parent = Legislation::find($request->id);
-            $this->storeLawRelationship($parent, $law, $request->lawRelationshipOptions, $note);
+            $this->storeRelationship($parent, $law, 'legislation', $request->lawRelationshipOptions, $note);
         }
 
         return view('admin.legislation.law.tab.law-relationship-row', compact(
@@ -689,7 +668,7 @@ class LawController extends LegislationController
         $parent = null;
         if ($request->has('id')) {
             $parent = Legislation::find($request->id);
-            $this->storeDocRelationship($parent, $doc, $note);
+            $this->storeRelationship($parent, $doc, 'document', null, $note);
         }
 
         return view('admin.legislation.law.tab.doc-relationship-row', compact(
