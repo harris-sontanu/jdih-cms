@@ -142,7 +142,7 @@
                                     </div>
                                     <div class="form-text text-muted">Jenis perkara dari pokok perkara. Contoh: Hukum Perdata.
                                         @cannot('isAuthor')
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">Tambah Bidang Hukum</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">+ Tambah Bidang Hukum</a>
                                         @endcannot
                                     </div>
                                     @error('field_id')

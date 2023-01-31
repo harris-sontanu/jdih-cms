@@ -86,7 +86,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor') 
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                             @endcannot
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'category') {{ 'sorting_' . $sort }} @endif">
@@ -116,16 +116,16 @@
                     <tbody>
                         @forelse ($judgments as $judgment)
                             <tr>
-                                @cannot('isAuthor') 
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $judgment->id }}"></td>
                                 @endcannot
-                                <td>{{ $judgment->category_name }}</td>
+                                <td>{{ $judgment->category->name }}</td>
                                 <td class="text-center">{{ $judgment->code_number }}</td>
                                 <td class="text-center">{{ $judgment->year; }}</td>
                                 <td><span class="fw-semibold">{{ $judgment->title; }}</span></td>
                                 <td class="text-center">{!! $judgment->statusBadge !!}</td>
                                 <td class="text-center">
-                                    <img src="{{ $judgment->userPictureUrl($judgment->user_picture, $judgment->user_name) }}" alt="{{ $judgment->user_name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $judgment->user_name }}">
+                                    <img src="{{ $judgment->userPictureUrl($judgment->user->picture, $judgment->user->name) }}" alt="{{ $judgment->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $judgment->user->name }}">
                                 </td>
                                 <td>
                                     <span class="d-block">{!! $judgment->publicationLabel() !!}</span>
@@ -135,7 +135,7 @@
                                     <div class="d-inline-flex">
                                         <a href="{{ route('admin.legislation.judgment.show', $judgment->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Lihat"><i class="ph-eye"></i></a>
                                         @if ($onlyTrashed)
-                                            @can('restore', $judgment)                                                
+                                            @can('restore', $judgment)
                                                 <form action="{{ route('admin.legislation.judgment.restore', $judgment->id) }}" method="POST">
                                                     @method('PUT')
                                                     @csrf
@@ -143,7 +143,7 @@
                                                 </form>
                                             @endcan
 
-                                            @can('forceDelete', $judgment)                                                
+                                            @can('forceDelete', $judgment)
                                                 <form class="delete-form" action="{{ route('admin.legislation.judgment.force-destroy', $judgment->id) }}" data-confirm="Apakah Anda yakin menghapus putusan {{ $judgment->title }}?" method="POST">
                                                     @method('DELETE')
                                                     @csrf
@@ -151,11 +151,11 @@
                                                 </form>
                                             @endcan
                                         @else
-                                            @can('update', $judgment)                                                
+                                            @can('update', $judgment)
                                                 <a href="{{ route('admin.legislation.judgment.edit', $judgment->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Ubah"><i class="ph-pen"></i></a>
                                             @endcan
 
-                                            @can('delete', $judgment)                                                
+                                            @can('delete', $judgment)
                                                 <form action="{{ route('admin.legislation.judgment.destroy', $judgment->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf

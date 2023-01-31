@@ -163,6 +163,10 @@
                             </tbody>
                         </table>
 
+                        <div class="card-footer d-flex justify-content-end align-items-center">
+                            <a href="{{ route('admin.legislation.judgment.edit', $legislation->id) }}" class="btn btn-indigo">Ubah</a>
+                        </div>
+
                     </div>
 
                     <div class="card">
@@ -174,13 +178,14 @@
                             @if ($attachment)
                                 <div class="d-flex align-items-start mb-3">
                                     <div class="me-2">
-                                        <i class="{{ $attachment->extClass; }} ph-2x"></i>
+                                        <i class="{{ $attachment->media->extClass; }} ph-2x"></i>
                                     </div>
 
                                     <div class="flex-fill overflow-hidden">
-                                        <a href="{{ $attachment->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->name; }}</a>
+                                        <a href="{{ $attachment->media->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->media->name; }}</a>
                                         <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                             <li class="list-inline-item me-1">{{ $attachment->typeTranslate }}</li>
+                                            <li class="list-inline-item ms-1">{{ $attachment->media->size() }}</li>
                                         </ul>
                                     </div>
                                 </div>

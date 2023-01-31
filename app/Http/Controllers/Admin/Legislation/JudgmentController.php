@@ -36,7 +36,7 @@ class JudgmentController extends LegislationController
             'Putusan Pengadilan' => TRUE
         ];
 
-        $judgments = Legislation::judgments();
+        $judgments = Legislation::ofType(4);
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -63,7 +63,7 @@ class JudgmentController extends LegislationController
 
         $tabFilters = $this->tabFilters($request);
 
-        $categories = Category::judgments()->pluck('name', 'id');
+        $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
@@ -95,26 +95,26 @@ class JudgmentController extends LegislationController
     private function tabFilters($request)
     {
         return [
-            'total'     => Legislation::judgments()
+            'total'     => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Legislation::judgments()
+            'draf'      => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Legislation::judgments()
+            'terbit'    => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => Legislation::judgments()
+            'terjadwal' => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'     => Legislation::judgments()
+            'sampah'     => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -153,7 +153,7 @@ class JudgmentController extends LegislationController
             'Tambah' => TRUE
         ];
 
-        $categories = Category::judgments()->pluck('name', 'id');
+        $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -202,17 +202,15 @@ class JudgmentController extends LegislationController
 
     private function documentUpload($legislation, $request)
     {
-        if ($request->hasFile('master')) {
+        if ($request->hasFile('master'))
+        {
             $file = $request->file('master');
 
-            $documentStorage = $this->documentStorage($legislation, 'master');
-            $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+            $mediaId = $this->storeDocument($file, $legislation, 'master');
 
             $legislation->documents()->create([
-                'type'  => 'master',
-                'path'  => $path,
-                'name'  => basename($path),
+                'media_id'  => $mediaId,
+                'type'      => 'master',
             ]);
 
             $legislation->logs()->create([
@@ -240,8 +238,7 @@ class JudgmentController extends LegislationController
         ];
 
         $attachment = $legislation->documents()
-            ->where('type', 'attachment')
-            ->latest()
+            ->ofType('master')
             ->first();
 
         $adobeKey = Config::get('services.adobe.key');
@@ -275,12 +272,11 @@ class JudgmentController extends LegislationController
             'Ubah' => TRUE
         ];
 
-        $categories = Category::judgments()->pluck('name', 'id');
+        $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
-        $attachment = $judgment->documents()
-            ->where('type', 'attachment')
-            ->latest()
+        $attachment = $legislation->documents()
+            ->ofType('master')
             ->first();
 
         $vendors = [
