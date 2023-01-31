@@ -38,7 +38,7 @@ class MonographController extends LegislationController
             'Monografi Hukum' => TRUE
         ];
 
-        $monographs = Legislation::monographs();
+        $monographs = Legislation::ofType(2);
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -65,7 +65,7 @@ class MonographController extends LegislationController
 
         $tabFilters = $this->tabFilters($request);
 
-        $categories = Category::monographs()->pluck('name', 'id');
+        $categories = Category::ofType(2)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
