@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Download;
+use App\Models\LegislationDownloadLog;
 use App\Models\LegislationLog;
 use App\Models\Media;
 use Illuminate\Support\Str;
@@ -172,7 +173,7 @@ class LegislationController extends AdminController
             'Statistik' => TRUE
         ];
 
-        $countDownloads = Download::countDaily()->get()->count();
+        $countDownloads = LegislationDownloadLog::countDaily()->get()->count();
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',

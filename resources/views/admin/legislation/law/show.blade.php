@@ -24,7 +24,7 @@
                                     <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid rounded">
                                 @else
                                     @if ($masterDoc->media->ext === 'pdf' )
-                                        <figure id="adobe-dc-view" data-file="{{ $masterDoc->media->mediaUrl }}" data-name="{{ $masterDoc->media->name }}" class="rounded" style="height: 720px; width: 100%;">
+                                        <figure id="adobe-dc-view" data-file="{{ $masterDoc->media->source }}" data-name="{{ $masterDoc->media->name }}" class="rounded" style="height: 720px; width: 100%;">
                                         </figure>
                                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                                         <script type="text/javascript">

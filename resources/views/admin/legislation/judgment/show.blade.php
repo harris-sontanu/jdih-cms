@@ -21,8 +21,8 @@
                                 @empty($attachment)
                                     <img src="{{ asset('assets/admin/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
                                 @else
-                                    @if ($attachment->ext === 'pdf' )
-                                        <figure id="adobe-dc-view" data-file="{{ $attachment->source }}" data-name="{{ $attachment->name }}" class="rounded" style="height: 720px; width: 100%;">
+                                    @if ($attachment->media->ext === 'pdf' )
+                                        <figure id="adobe-dc-view" data-file="{{ $attachment->media->source }}" data-name="{{ $attachment->media->name }}" class="rounded" style="height: 720px; width: 100%;">
                                         </figure>
                                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                                         <script type="text/javascript">
