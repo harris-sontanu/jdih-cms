@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use App\Models\Legislation;
+use App\Models\Post;
 use App\Models\Media;
 use App\Models\Link;
 
@@ -58,6 +59,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('judgment', function ($value) {
             return Legislation::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('news', function ($value) {
+            return Post::where('id', $value)->firstOrFail();
         });
 
         Route::bind('image', function ($value) {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Models\News;
+use App\Models\Post;
 use App\Models\Taxonomy;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class NewsController extends AdminController
 {
     public function __construct()
     {
-        $this->authorizeResource(News::class, 'news');
+        $this->authorizeResource(Post::class, 'news');
     }
 
     /**
@@ -31,7 +31,7 @@ class NewsController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $news = News::with('taxonomy', 'author', 'cover');
+        $news = Post::ofType('news')->with('author', 'cover');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -84,26 +84,26 @@ class NewsController extends AdminController
     private function tabFilters($request)
     {
         return [
-            'total'     => News::with('taxonomy', 'author', 'cover')
+            'total'     => Post::ofType('news')->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => News::with('taxonomy', 'author', 'cover')
+            'draf'      => Post::ofType('news')->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => News::with('taxonomy', 'author', 'cover')
+            'terbit'    => Post::ofType('news')->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => News::with('taxonomy', 'author', 'cover')
+            'terjadwal' => Post::ofType('news')->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'    => News::with('taxonomy', 'author', 'cover')
+            'sampah'    => Post::ofType('news')->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -234,10 +234,10 @@ class NewsController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(Post $news)
     {
         $pageHeader = 'Berita';
         $pageTitle = $pageHeader . $this->pageTitle;
@@ -263,10 +263,10 @@ class NewsController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Post $post)
     {
         $pageHeader = 'Ubah Berita';
         $pageTitle = $pageHeader . $this->pageTitle;
@@ -303,10 +303,10 @@ class NewsController extends AdminController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(NewsRequest $request, Post $post)
     {
         $validated = $request->validated();
 
@@ -337,7 +337,7 @@ class NewsController extends AdminController
         $message = 'data Berita telah berhasil diperbarui';
         foreach ($ids as $id)
         {
-            $news = News::withTrashed()->find($id);
+            $news = Post::withTrashed()->find($id);
             if ($request->action === 'taxonomy')
             {
                 $news->taxonomy_id = $request->val;
@@ -369,10 +369,10 @@ class NewsController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Post $news)
     {
         $action = route('admin.news.restore', $news->id);
         $news->delete();
@@ -380,14 +380,14 @@ class NewsController extends AdminController
         return redirect('/admin/news')->with('trash-message', ['<strong>Berhasil!</strong> Data Berita telah dibuang ke Sampah', $action]);
     }
 
-    public function restore(News $news)
+    public function restore(Post $news)
     {
         $news->restore();
 
         return redirect()->back()->with('message', 'Data Berita telah dikembalikan dari Sampah');
     }
 
-    public function forceDestroy(News $news)
+    public function forceDestroy(Post $news)
     {
         // Remove all news media
         foreach ($news->images as $media) {
