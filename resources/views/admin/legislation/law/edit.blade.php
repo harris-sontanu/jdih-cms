@@ -122,7 +122,7 @@
                                     @error('attachment.*')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <button type="button" class="btn btn-link p-0 mt-1 form-text new-attachment">Tambah Lampiran</button>
+                                    <button type="button" class="btn btn-link p-0 mt-1 form-text new-attachment">+ Tambah Lampiran</button>
                                 </div>
 
                             </div>

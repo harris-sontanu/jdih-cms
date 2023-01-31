@@ -11,7 +11,9 @@ use App\Models\Download;
 use App\Models\LegislationLog;
 use App\Models\Media;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class LegislationController extends AdminController
 {
@@ -78,6 +80,17 @@ class LegislationController extends AdminController
         $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
 
         $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+
+        // If document type is cover, create thumbnail
+        if ($documentType === 'cover') {
+            $extension = $file->getClientOriginalExtension();
+            $thumbnail = Str::replace(".{$extension}", "_md.{$extension}", $path);
+            if (Storage::disk('public')->exists($path)) {
+                Image::make(storage_path('app/public/' . $path))->resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(storage_path('app/public/' . $thumbnail));
+            }
+        }
 
         $new_media = Media::create([
             'name'      => $file_name,

@@ -10,9 +10,7 @@ use App\Models\User;
 use App\Http\Requests\MonographRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
-use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\MonographsExport;
 
@@ -97,26 +95,26 @@ class MonographController extends LegislationController
     private function tabFilters($request)
     {
         return [
-            'total'     => Legislation::monographs()
+            'total'     => Legislation::ofType(2)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Legislation::monographs()
+            'draf'      => Legislation::ofType(2)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Legislation::monographs()
+            'terbit'    => Legislation::ofType(2)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => Legislation::monographs()
+            'terjadwal' => Legislation::ofType(2)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'    => Legislation::monographs()
+            'sampah'    => Legislation::ofType(2)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -155,7 +153,7 @@ class MonographController extends LegislationController
             'Tambah' => TRUE
         ];
 
-        $categories = Category::monographs()->pluck('name', 'id');
+        $categories = Category::ofType(2)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -204,26 +202,15 @@ class MonographController extends LegislationController
 
     private function documentUpload($legislation, $request)
     {
-        if ($request->hasFile('cover')) {
+        if ($request->hasFile('cover')) 
+        {
             $image = $request->file('cover');
 
-            $documentStorage = $this->documentStorage($legislation, 'cover');
-            $file_name = $documentStorage['file_name'] . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs($documentStorage['path'], $file_name, 'public');
-
-            // Create thumbnail
-            $extension = $image->getClientOriginalExtension();
-            $thumbnail = Str::replace(".{$extension}", "_thumb.{$extension}", $path);
-            if (Storage::disk('public')->exists($path)) {
-                Image::make(storage_path('app/public/' . $path))->resize(400, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(storage_path('app/public/' . $thumbnail));
-            }
+            $mediaId = $this->storeDocument($image, $legislation, 'cover');
 
             $legislation->documents()->create([
-                'type'  => 'cover',
-                'path'  => $path,
-                'name'  => basename($path),
+                'media_id'  => $mediaId,
+                'type'      => 'cover',
             ]);
 
             $legislation->logs()->create([
@@ -232,17 +219,15 @@ class MonographController extends LegislationController
             ]);
         }
 
-        if ($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) 
+        {
             $file = $request->file('attachment');
-
-            $documentStorage = $this->documentStorage($legislation, 'attachment');
-            $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+            
+            $mediaId = $this->storeDocument($file, $legislation, 'attachment');
 
             $legislation->documents()->create([
-                'type'  => 'attachment',
-                'path'  => $path,
-                'name'  => basename($path),
+                'media_id'  => $mediaId,
+                'type'      => 'attachment',
             ]);
 
             $legislation->logs()->create([
@@ -270,13 +255,11 @@ class MonographController extends LegislationController
         ];
 
         $cover = $legislation->documents()
-            ->where('type', 'cover')
-            ->latest()
+            ->ofType('cover')
             ->first();
 
         $attachment = $legislation->documents()
-            ->where('type', 'attachment')
-            ->latest()
+            ->ofType('attachment')
             ->first();
 
         return view('admin.legislation.monograph.show', compact(
@@ -308,12 +291,15 @@ class MonographController extends LegislationController
             'Ubah' => TRUE
         ];
 
-        $categories = Category::monographs()->pluck('name', 'id');
+        $categories = Category::ofType(2)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
-        $attachment = $monograph->documents()
-            ->where('type', 'attachment')
-            ->latest()
+        $cover = $legislation->documents()
+            ->ofType('cover')
+            ->first();
+
+        $attachment = $legislation->documents()
+            ->ofType('attachment')
             ->first();
 
         $vendors = [
@@ -330,6 +316,7 @@ class MonographController extends LegislationController
             'monograph',
             'categories',
             'fields',
+            'cover',
             'attachment',
             'vendors',
         ));

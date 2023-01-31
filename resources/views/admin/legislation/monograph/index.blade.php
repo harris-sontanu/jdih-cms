@@ -119,7 +119,7 @@
                                 @cannot('isAuthor')                                    
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $monograph->id }}"></td>
                                 @endcannot
-                                <td>{{ $monograph->category_name }}</td>
+                                <td>{{ $monograph->category->name }}</td>
                                 <td><span class="fw-semibold">{{ $monograph->title; }}</span></td>
                                 <td class="text-center">{{ $monograph->year; }}</td>
                                 <td>
@@ -128,7 +128,7 @@
                                 </td>
                                 <td>{{ $monograph->author }}</td>
                                 <td class="text-center">
-                                    <img src="{{ $monograph->userPictureUrl($monograph->user_picture, $monograph->user_name) }}" alt="{{ $monograph->user_name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $monograph->user_name }}">
+                                    <img src="{{ $monograph->userPictureUrl($monograph->user->picture, $monograph->user->name) }}" alt="{{ $monograph->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $monograph->user->name }}">
                                 </td>
                                 <td>
                                     <span class="d-block">{!! $monograph->publicationLabel() !!}</span>
