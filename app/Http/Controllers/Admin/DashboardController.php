@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Legislation;
-use App\Models\Log;
 use App\Models\Post;
 use App\Models\Visitor;
 use App\Models\Vote;
 use App\Models\LegislationDownloadLog;
+use App\Models\LegislationLog;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends AdminController
@@ -26,7 +26,7 @@ class DashboardController extends AdminController
         $totalMonographs  = Legislation::ofType(2)->count();
         $totalArticles 	  = Legislation::ofType(3)->count();
         $totalJudgments	  = Legislation::ofType(4)->count();
-        $latestLogs       = Log::with('legislation', 'user')
+        $latestLogs       = LegislationLog::with('legislation', 'user')
             ->latest()
             ->take(10)
             ->get();

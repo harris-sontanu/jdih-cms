@@ -101,7 +101,7 @@ class Legislation extends Model
 
     public function logs()
     {
-        return $this->hasMany(Log::class)->latest();
+        return $this->hasMany(LegislationLog::class)->latest();
     }
 
     public function typeFlatButton(): Attribute

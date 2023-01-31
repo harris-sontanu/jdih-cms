@@ -6,10 +6,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Models\Legislation;
 use App\Models\Category;
 use App\Models\Setting;
-use App\Models\Log;
 use App\Models\User;
 use App\Models\Download;
-use App\Models\LegislationDocument;
+use App\Models\LegislationLog;
 use App\Models\Media;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -132,7 +131,7 @@ class LegislationController extends AdminController
             'Riwayat' => TRUE
         ];
 
-        $logs = Log::with('legislation', 'user')
+        $logs = LegislationLog::with('legislation', 'user')
             ->search($request->only(['search']))
             ->filter($request)
             ->latest()
