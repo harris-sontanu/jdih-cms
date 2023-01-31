@@ -38,7 +38,7 @@ class ArticleController extends LegislationController
             'Artikel Hukum' => TRUE
         ];
 
-        $articles = Legislation::articles();
+        $articles = Legislation::ofType(3);
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -65,7 +65,7 @@ class ArticleController extends LegislationController
 
         $tabFilters = $this->tabFilters($request);
 
-        $categories = Category::articles()->pluck('name', 'id');
+        $categories = Category::ofType(3)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
@@ -97,26 +97,26 @@ class ArticleController extends LegislationController
     private function tabFilters($request)
     {
         return [
-            'total'     => Legislation::articles()
+            'total'     => Legislation::ofType(3)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Legislation::articles()
+            'draf'      => Legislation::ofType(3)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Legislation::articles()
+            'terbit'    => Legislation::ofType(3)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => Legislation::articles()
+            'terjadwal' => Legislation::ofType(3)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'     => Legislation::articles()
+            'sampah'     => Legislation::ofType(3)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -155,7 +155,7 @@ class ArticleController extends LegislationController
             'Tambah' => TRUE
         ];
 
-        $categories = Category::articles()->pluck('name', 'id');
+        $categories = Category::ofType(3)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -204,26 +204,15 @@ class ArticleController extends LegislationController
 
     private function documentUpload($legislation, $request)
     {
-        if ($request->hasFile('cover')) {
+        if ($request->hasFile('cover'))
+        {
             $image = $request->file('cover');
 
-            $documentStorage = $this->documentStorage($legislation, 'cover');
-            $file_name = $documentStorage['file_name'] . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs($documentStorage['path'], $file_name, 'public');
-
-            // Create thumbnail
-            $extension = $image->getClientOriginalExtension();
-            $thumbnail = Str::replace(".{$extension}", "_thumb.{$extension}", $path);
-            if (Storage::disk('public')->exists($path)) {
-                Image::make(storage_path('app/public/' . $path))->resize(400, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(storage_path('app/public/' . $thumbnail));
-            }
+            $mediaId = $this->storeDocument($image, $legislation, 'cover');
 
             $legislation->documents()->create([
-                'type'  => 'cover',
-                'path'  => $path,
-                'name'  => basename($path),
+                'media_id'  => $mediaId,
+                'type'      => 'cover',
             ]);
 
             $legislation->logs()->create([
@@ -232,17 +221,15 @@ class ArticleController extends LegislationController
             ]);
         }
 
-        if ($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment'))
+        {
             $file = $request->file('attachment');
 
-            $documentStorage = $this->documentStorage($legislation, 'attachment');
-            $file_name = $documentStorage['file_name'] . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
+            $mediaId = $this->storeDocument($file, $legislation, 'attachment');
 
             $legislation->documents()->create([
-                'type'  => 'attachment',
-                'path'  => $path,
-                'name'  => basename($path),
+                'media_id'  => $mediaId,
+                'type'      => 'attachment',
             ]);
 
             $legislation->logs()->create([
@@ -270,13 +257,11 @@ class ArticleController extends LegislationController
         ];
 
         $cover = $legislation->documents()
-            ->where('type', 'cover')
-            ->latest()
+            ->ofType('cover')
             ->first();
 
         $attachment = $legislation->documents()
-            ->where('type', 'attachment')
-            ->latest()
+            ->ofType('attachment')
             ->first();
 
         return view('admin.legislation.article.show', compact(
@@ -308,12 +293,15 @@ class ArticleController extends LegislationController
             'Ubah' => TRUE
         ];
 
-        $categories = Category::articles()->pluck('name', 'id');
+        $categories = Category::ofType(3)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
 
-        $attachment = $article->documents()
-            ->where('type', 'attachment')
-            ->latest()
+        $cover = $legislation->documents()
+            ->ofType('cover')
+            ->first();
+
+        $attachment = $legislation->documents()
+            ->ofType('attachment')
             ->first();
 
         $vendors = [
@@ -330,6 +318,7 @@ class ArticleController extends LegislationController
             'article',
             'categories',
             'fields',
+            'cover',
             'attachment',
             'vendors',
         ));
@@ -377,32 +366,33 @@ class ArticleController extends LegislationController
         $message = 'data Artikel telah berhasil diperbarui';
         foreach ($ids as $id)
         {
-            $law = Legislation::withTrashed()->find($id);
+            $legislation = Legislation::withTrashed()->find($id);
             if ($request->action === 'category')
             {
-                $law->category_id = $request->val;
-                $law->save();
+                $legislation->category_id = $request->val;
+                $legislation->save();
 
                 $new_category = Category::find($request->val);
 
-                $law->logs()->create([
+                $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
                     'message'   => 'mengubah jenis artikel menjadi ' . Str::title($new_category->name),
                 ]);
             }
             else if ($request->action === 'trash')
             {
-                $law->delete();
+                $legislation->delete();
                 $message = 'data Artikel telah berhasil dibuang';
 
-                $law->logs()->create([
+                $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
                     'message'   => 'membuang artikel',
                 ]);
             }
             else if ($request->action === 'delete')
             {
-                $law->forceDelete();
+                $this->deleteDocuments($legislation);
+                $legislation->forceDelete();
                 $message = 'data Artikel telah berhasil dihapus';
             }
         }

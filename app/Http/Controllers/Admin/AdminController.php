@@ -60,11 +60,4 @@ class AdminController extends Controller
             }
         }
     }
-
-    protected function removeDocument($document)
-    {
-        if (Storage::disk('public')->exists($document)) {
-            Storage::disk('public')->delete($document);
-        }
-    }
 }

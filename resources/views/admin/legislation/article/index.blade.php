@@ -86,7 +86,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor') 
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                             @endcannot
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'category') {{ 'sorting_' . $sort }} @endif">
@@ -116,10 +116,10 @@
                     <tbody>
                         @forelse ($articles as $article)
                             <tr>
-                                @cannot('isAuthor') 
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $article->id }}"></td>
                                 @endcannot
-                                <td>{{ $article->category_name }}</td>
+                                <td>{{ $article->category->name }}</td>
                                 <td><span class="fw-semibold">{{ $article->title; }}</span></td>
                                 <td class="text-center">{{ $article->year; }}</td>
                                 <td>
@@ -128,7 +128,7 @@
                                 </td>
                                 <td>{{ $article->author }}</td>
                                 <td class="text-center">
-                                    <img src="{{ $article->userPictureUrl($article->user_picture, $article->user_name) }}" alt="{{ $article->user_name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $article->user_name }}">
+                                    <img src="{{ $article->userPictureUrl($article->user->picture, $article->user->name) }}" alt="{{ $article->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $article->user->name }}">
                                 </td>
                                 <td>
                                     <span class="d-block">{!! $article->publicationLabel() !!}</span>
@@ -157,7 +157,7 @@
                                             @can('update', $article)
                                                 <a href="{{ route('admin.legislation.article.edit', $article->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Ubah"><i class="ph-pen"></i></a>
                                             @endcan
-                                            
+
                                             @can('delete', $article)
                                                 <form action="{{ route('admin.legislation.article.destroy', $article->id) }}" method="POST">
                                                     @method('DELETE')

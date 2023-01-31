@@ -202,7 +202,7 @@ class MonographController extends LegislationController
 
     private function documentUpload($legislation, $request)
     {
-        if ($request->hasFile('cover')) 
+        if ($request->hasFile('cover'))
         {
             $image = $request->file('cover');
 
@@ -219,10 +219,10 @@ class MonographController extends LegislationController
             ]);
         }
 
-        if ($request->hasFile('attachment')) 
+        if ($request->hasFile('attachment'))
         {
             $file = $request->file('attachment');
-            
+
             $mediaId = $this->storeDocument($file, $legislation, 'attachment');
 
             $legislation->documents()->create([
@@ -364,32 +364,33 @@ class MonographController extends LegislationController
         $message = 'data Monografi telah berhasil diperbarui';
         foreach ($ids as $id)
         {
-            $law = Legislation::withTrashed()->find($id);
+            $legislation = Legislation::withTrashed()->find($id);
             if ($request->action === 'category')
             {
-                $law->category_id = $request->val;
-                $law->save();
+                $legislation->category_id = $request->val;
+                $legislation->save();
 
                 $new_category = Category::find($request->val);
 
-                $law->logs()->create([
+                $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
                     'message'   => 'mengubah jenis monografi menjadi ' . Str::title($new_category->name),
                 ]);
             }
             else if ($request->action === 'trash')
             {
-                $law->delete();
+                $legislation->delete();
                 $message = 'data Monografi telah berhasil dibuang';
 
-                $law->logs()->create([
+                $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
                     'message'   => 'membuang monografi',
                 ]);
             }
             else if ($request->action === 'delete')
             {
-                $law->forceDelete();
+                $this->deleteDocuments($legislation);
+                $legislation->forceDelete();
                 $message = 'data Monografi telah berhasil dihapus';
             }
         }

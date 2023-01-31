@@ -12,7 +12,7 @@ class DocumentController extends LegislationController
     {
         $media = Media::findOrFail($id);
 
-        $this->removeDocument($media->path);
+        $this->removeMedia($media->path);
 
         if ($media->legislationDocument->type === 'master') {
             $documentType = 'Batang Tubuh';
@@ -22,11 +22,6 @@ class DocumentController extends LegislationController
             $documentType = 'Lampiran';
         } else if ($media->legislationDocument->type === 'cover') {
             $documentType = 'Sampul';
-
-            // Remove thumbnail
-            $ext        = substr(strrchr($media->legislationDocument->path, '.'), 1);
-            $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $media->legislationDocument->path);
-            $this->removeDocument($thumbnail);
         }
 
         $media->legislationDocument->legislation->logs()->create([

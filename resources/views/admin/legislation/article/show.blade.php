@@ -18,7 +18,11 @@
 
                         <div class="row">
                             <div class="col text-center">
-                                <img src="{{ $legislation->coverUrl }}" class="img-fluid rounded">
+                                @empty($cover)
+                                    <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid rounded">
+                                @else
+                                    <img src="{{ $cover->media->source }}" class="img-fluid rounded">
+                                @endif
                             </div>
                             <div class="col">
                                 <div class="table-responsive">
@@ -126,6 +130,10 @@
                             </tbody>
                         </table>
 
+                        <div class="card-footer d-flex justify-content-end align-items-center">
+                            <a href="{{ route('admin.legislation.article.edit', $legislation->id) }}" class="btn btn-indigo">Ubah</a>
+                        </div>
+
                     </div>
 
                     <div class="card">
@@ -144,6 +152,7 @@
                                         <a href="{{ $attachment->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->name; }}</a>
                                         <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                             <li class="list-inline-item me-1">{{ $attachment->typeTranslate }}</li>
+                                            <li class="list-inline-item ms-1">{{ $attachment->media->size() }}</li>
                                         </ul>
                                     </div>
                                 </div>

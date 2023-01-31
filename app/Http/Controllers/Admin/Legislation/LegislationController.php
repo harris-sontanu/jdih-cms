@@ -111,13 +111,7 @@ class LegislationController extends AdminController
         $documents = $legislation->documents->all();
         foreach ($documents as $document) {
 
-            $this->removeDocument($document->media->path);
-
-            if ($document->type === 'cover') {
-                $ext        = substr(strrchr($document->media->path, '.'), 1);
-                $thumbnail  = str_replace(".{$ext}", "_thumb.{$ext}", $document->media->path);
-                $this->removeDocument($thumbnail);
-            }
+            $this->removeMedia($document->media->path);
 
             $document->media->delete();
         }

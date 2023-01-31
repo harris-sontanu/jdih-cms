@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="form-text text-muted">Contoh: Hukum Adat.
                                         @cannot('isAuthor')
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">Tambah Bidang Hukum</a></div>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#create-field-modal">+ Tambah Bidang Hukum</a></div>
                                         @endcannot
                                     @error('field_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -201,27 +201,29 @@
                                 <span class="fw-semibold"><i class="ph-image-square me-2"></i>Sampul</span>
                             </div>
 
-                            <div class="card-img-actions mx-1 mt-1">
-                                <img id="cover-img" class="card-img img-fluid" src="{{ $article->coverThumbUrl }}" alt="{{ $article->title }}">
-                            </div>
-
-                            @empty ($article->coverId)
+                            @empty ($cover)
+                                <div class="card-img-actions mx-1 mt-1">
+                                    <img id="cover-img" class="card-img img-fluid" src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}">
+                                </div>
                                 <div class="card-body">
                                     <input id="cover-input" type="file" class="form-control @error('cover') is-invalid @enderror" name="cover">
-                                    <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
+                                    <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
                                     @error('cover')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             @else
+                                <div class="card-img-actions mx-1 mt-1">
+                                    <img id="cover-img" class="card-img img-fluid" src="{{ $cover->media->thumbSource }}" alt="{{ $article->title }}">
+                                </div>
                                 <div class="card-body">
                                     <div class="d-flex align-items-start flex-nowrap">
                                         <div>
-                                            <div class="fw-semibold me-2">{{ $article->coverName }}</div>
+                                            <div class="fw-semibold me-2">{{ $cover->media->name }}</div>
                                         </div>
 
                                         <div class="d-inline-flex ms-auto">
-                                            <a role="button" class="text-body ms-2 delete-document" data-bs-popup="tooltip" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $article->coverId) }}"><i class="ph-trash"></i></a>
+                                            <a role="button" class="text-body ms-2 delete-document" data-bs-popup="tooltip" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $cover->media->id) }}"><i class="ph-trash"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +246,7 @@
                                             <a href="{{ $attachment->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->name; }}</a>
                                             <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
                                                 <li class="list-inline-item me-1">{{ $attachment->typeTranslate }}</li>
-                                                <li class="list-inline-item mx-1"><a role="button" class="dirdurdaeng" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $attachment->id }}">Ubah</a></li>
+                                                <li class="list-inline-item mx-1">{{ $attachment->media->size() }}</li>
                                                 <li class="list-inline-item ms-1"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $attachment->id) }}">Hapus</a></li>
                                             </ul>
                                         </div>
@@ -254,7 +256,7 @@
                                 <div class="sidebar-section-body pt-0">
                                     <label for="attachment" class="col-form-label">Lampiran</label>
                                     <input type="file" class="form-control @error('attachment') is-invalid @enderror" name="attachment">
-                                    <div class="form-text text-muted">Format: pdf. Ukuran maks: 2Mb.</div>
+                                    <div class="form-text text-muted">Format: pdf.</div>
                                     @error('attachment')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
