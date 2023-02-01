@@ -27,17 +27,16 @@ class PageRequest extends FormRequest
     {
         $rules = [
             'title'     => 'required|max:255',
-            'slug'      => 'unique:pages',
+            'slug'      => 'unique:posts',
             'body'      => 'required',
             'excerpt'   => 'nullable',
-            'author_id' => 'nullable',
             'cover'     => 'image|dimensions:min_width=400|max:2048'
         ];
 
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('pages')->ignore($this->route('page'))];
+                $rules['slug'] = Rule::unique('posts')->ignore($this->route('page'));
 
                 $rules['cover'] = 'image|dimensions:min_width=400|max:2048';
                 break;
@@ -70,7 +69,6 @@ class PageRequest extends FormRequest
             'slug'          => 'Judul',
             'body'          => 'Isi',
             'excerpt'       => 'Cuplikan',
-            'author_id'     => 'Penulis',
             'cover'         => 'Sampul',
         ];
     }

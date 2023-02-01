@@ -64,7 +64,6 @@ class PageController extends AdminController
             'assets/admin/js/vendor/forms/selects/select2.min.js',
             'assets/admin/js/vendor/ui/moment/moment.min.js',
             'assets/admin/js/vendor/pickers/daterangepicker.js',
-            'assets/admin/js/vendor/ui/sortable.min.js',
             'assets/admin/js/vendor/tables/finderSelect/jquery.finderSelect.min.js',
         ];
 
@@ -113,7 +112,30 @@ class PageController extends AdminController
      */
     public function create()
     {
-        //
+        $pageHeader = 'Tambah Halaman';
+        $pageTitle = $pageHeader . $this->pageTitle;
+        $breadCrumbs = [
+            route('admin.dashboard') => '<i class="ph-house me-2"></i>Dasbor',
+            route('admin.page.index') => 'Halaman',
+            'Detail' => TRUE
+        ];
+
+        $authors = Employee::sorted()->pluck('name', 'id');
+
+        $vendors = [
+            'assets/admin/js/vendor/forms/selects/select2.min.js',
+            'assets/admin/js/vendor/ui/moment/moment.min.js',
+            'assets/admin/js/vendor/pickers/daterangepicker.js',
+            'https://cdn.ckeditor.com/ckeditor5/35.3.0/super-build/ckeditor.js',
+        ];
+
+        return view('admin.page.create', compact(
+            'pageTitle',
+            'pageHeader',
+            'breadCrumbs',
+            'authors',
+            'vendors',
+        ));
     }
 
     /**
@@ -122,9 +144,58 @@ class PageController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $validated = $request->validated();
+        if ($request->has('publish')) {
+            $validated['published_at'] = now();
+        }
+
+        $new_pages = $request->user()->pages()->create($validated);
+
+        $this->imageUpload($new_pages, $request);
+
+        return redirect('/admin/page')->with('message', '<strong>Berhasil!</strong> Data Halaman baru telah berhasil disimpan');
+    }
+
+    private function imageUpload($page, $request)
+    {
+        if ($request->hasFile('cover'))
+        {
+            $file = $request->file('cover');
+            $name = $file->hashName();
+            $dir  = 'halaman';
+
+            $path = $file->storeAs($dir, $name, 'public');
+
+            // Create thumbnail
+            $this->createImageThumbnail($path, $file->getClientOriginalExtension());
+
+            $new_media = $page->images()->create([
+                'name'  => $name,
+                'file_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getClientMimeType(),
+                'path'  => $path,
+                'caption'   => $request->caption,
+                'is_image'  => 1,
+                'size'  => $file->getSize(),
+                'user_id'   => $request->user()->id,
+                'published_at'  => now()->format('Y-m-d H:i:s'),
+            ]);
+
+            // Check if it already has cover
+            if ($page->cover_id) {
+
+                // Delete old cover
+                $this->removeMedia($page->cover->path);
+
+                $page->cover()->delete();
+            }
+
+            $page->update([
+                'cover_id' => $new_media->id
+            ]);
+        }
     }
 
     /**
@@ -133,9 +204,27 @@ class PageController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $page)
     {
-        //
+        $pageHeader = 'Halaman';
+        $pageTitle = $pageHeader . $this->pageTitle;
+        $breadCrumbs = [
+            route('admin.dashboard') => '<i class="ph-house me-2"></i>Dasbor',
+            route('admin.page.index') => 'Halaman',
+            'Detail' => TRUE
+        ];
+
+        $vendors = [
+            'assets/admin/js/vendor/media/glightbox.min.js'
+        ];
+
+        return view('admin.page.show', compact(
+            'pageTitle',
+            'pageHeader',
+            'breadCrumbs',
+            'vendors',
+            'page',
+        ));
     }
 
     /**
@@ -144,9 +233,34 @@ class PageController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $page)
     {
-        //
+        $pageHeader = 'Ubah Halaman';
+        $pageTitle = $pageHeader . $this->pageTitle;
+        $breadCrumbs = [
+            route('admin.dashboard') => '<i class="ph-house me-2"></i>Dasbor',
+            route('admin.page.index') => 'Halaman',
+            'Ubah' => TRUE
+        ];
+
+        $authors = Employee::sorted()->pluck('name', 'id');
+
+        $vendors = [
+            'assets/admin/js/vendor/forms/selects/select2.min.js',
+            'assets/admin/js/vendor/ui/moment/moment.min.js',
+            'assets/admin/js/vendor/pickers/daterangepicker.js',
+            'https://cdn.ckeditor.com/ckeditor5/35.3.0/super-build/ckeditor.js',
+            'assets/admin/js/vendor/media/glightbox.min.js',
+        ];
+
+        return view('admin.page.edit', compact(
+            'pageTitle',
+            'pageHeader',
+            'breadCrumbs',
+            'authors',
+            'page',
+            'vendors',
+        ));
     }
 
     /**
@@ -156,9 +270,69 @@ class PageController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PageRequest $request, Post $page)
     {
-        //
+        $validated = $request->validated();
+
+        $validated['published_at'] = (empty($page->published_at)) ? now() : $page->published_at;
+        if ($request->has('draft')) {
+            $validated['published_at'] = null;
+        }
+
+        $page->update($validated);
+
+        $this->imageUpload($page, $request);
+
+        if ($page->wasChanged()) {
+            $typeMessage = 'message';
+            $message = '<strong>Berhasil!</strong> Data Halaman telah berhasil diperbarui';
+        } else {
+            $typeMessage = 'info-message';
+            $message = 'Data Halaman tidak ada perubahan';
+        }
+
+        return redirect('/admin/page/' . $page->id . '/edit')->with($typeMessage, $message);
+    }
+
+    public function trigger(Request $request)
+    {
+        $ids = $request->items;
+        $count = count($ids);
+
+        $message = 'data Halaman telah berhasil diperbarui';
+        foreach ($ids as $id)
+        {
+            $page = Post::withTrashed()->find($id);
+            if ($request->action === 'publication')
+            {
+                if ($request->val === 'draft') {
+                    $page->published_at = null;
+                } else if ($request->val === 'publish') {
+                    $page->published_at = now();
+                }
+                $page->save();
+            }
+            else if ($request->action === 'trash')
+            {
+                $page->delete();
+                $message = 'data Halaman telah berhasil dibuang';
+            }
+            else if ($request->action === 'delete')
+            {
+                // Remove all page media
+                foreach ($page->images as $media) {
+                    $this->removeMedia($media->path);
+                }
+
+                $page->images()->delete();
+
+                $page->forceDelete();
+
+                $message = 'data Halaman telah berhasil dihapus';
+            }
+        }
+
+        $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);
     }
 
     /**
@@ -167,8 +341,41 @@ class PageController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $page)
     {
-        //
+        $action = route('admin.page.restore', $page->id);
+        $page->delete();
+
+        return redirect('/admin/page')->with('trash-message', ['<strong>Berhasil!</strong> Data Halaman telah dibuang ke Sampah', $action]);
+    }
+
+    public function deleteCover(Post $page)
+    {
+        $this->removeMedia($page->cover->path);
+
+        $page->images()->delete();
+        $page->update(['cover_id' => null]);
+
+        return redirect('/admin/page/' . $page->id . '/edit')->with('message', '<strong>Berhasil!</strong> Data Sampul telah berhasil dihapus');
+    }
+
+    public function restore(Post $page)
+    {
+        $page->restore();
+
+        return redirect()->back()->with('message', 'Data Halaman telah dikembalikan dari Sampah');
+    }
+
+    public function forceDestroy(Post $page)
+    {
+        if ($page->cover) {
+            $this->removeMedia($page->cover->path);
+        }
+
+        $page->images()->delete();
+
+        $page->forceDelete();
+
+        return redirect('/admin/page?tab=trash')->with('message', '<strong>Berhasil!</strong> Data Halaman telah berhasil dihapus');
     }
 }

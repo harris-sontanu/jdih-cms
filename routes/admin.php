@@ -179,8 +179,6 @@ Route::name('admin.')->group(function () {
         Route::controller(PageController::class)->group(function () {
             Route::post('/page/trigger', 'trigger')->withTrashed()
                 ->name('page.trigger');
-            Route::post('/page/order-update', 'orderUpdate')
-                ->name('page.order-update');
             Route::put('/page/{page}/restore', 'restore')->withTrashed()
                 ->name('page.restore');
             Route::delete('/page/{page}/force-destroy', 'forceDestroy')->withTrashed()

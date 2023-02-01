@@ -75,7 +75,7 @@
                                         <td class="text-end"><span class="badge bg-warning bg-opacity-20 text-warning">Draf</span></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Operator:</td>
+                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Penulis:</td>
                                         <td class="text-end">{{ Auth::guard('admin')->user()->name }}</td>
                                     </tr>
                                 </tbody>
@@ -83,23 +83,6 @@
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <button type="submit" name="draft" class="btn btn-link px-0">Simpan ke Draf</button>
                                 <button type="submit" name="publish" class="btn btn-indigo">Terbit</button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="sidebar-section-header border-bottom">
-                                <span class="fw-semibold"><i class="ph-user me-2"></i>Penulis</span>
-                            </div>
-                            <div class="sidebar-section-body">
-                                <select id="author_id" name="author_id" class="select @error('author_id') is-invalid @enderror">
-                                    <option value="">Pilih Penulis</option>
-                                    @foreach ($authors as $key => $value)
-                                        <option value="{{ $key }}" @selected(old('author_id' == $key))>{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                                @error('author_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
 

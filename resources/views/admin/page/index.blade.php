@@ -88,7 +88,6 @@
 
                             @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
-                                <th width="1"><i class="ph-dots-six-vertical "></i></th>
                             @endcannot
                             <th width="1" class="text-center">Sampul</th>
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'title') {{ 'sorting_' . $sort }} @endif">
@@ -103,12 +102,11 @@
                             <th width="1" class="text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="sortable">
+                    <tbody>
                         @forelse ($pages as $post)
                             <tr id="{{ $post->id }}" class="item" data-id="{{ $post->id }}">
                                 @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $post->id }}"></td>
-                                    <td class="drag-handle"><i class="ph-dots-six-vertical  dragula-handle"></i></td>
                                 @endcannot
                                 <td class="safezone text-center">
                                     <img src="@if($post->cover){{ $post->cover->mediaThumbUrl }}@endif" class="img-preview rounded">
