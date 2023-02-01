@@ -160,7 +160,7 @@ class NewsController extends AdminController
             $validated['published_at'] = null;
         }
 
-        $new_news = $request->user()->news()->create($validated);
+        $new_news = $request->user()->posts()->create($validated);
 
         $this->imageUpload($new_news, $request);
 
@@ -266,7 +266,7 @@ class NewsController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $news)
     {
         $pageHeader = 'Ubah Berita';
         $pageTitle = $pageHeader . $this->pageTitle;
@@ -306,7 +306,7 @@ class NewsController extends AdminController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(NewsRequest $request, Post $post)
+    public function update(NewsRequest $request, Post $news)
     {
         $validated = $request->validated();
 

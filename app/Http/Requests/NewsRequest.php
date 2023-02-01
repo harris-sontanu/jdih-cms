@@ -27,7 +27,7 @@ class NewsRequest extends FormRequest
     {
         $rules = [
             'title'     => 'required|max:255',
-            'slug'      => 'unique:news',
+            'slug'      => 'unique:posts',
             'body'      => 'required',
             'excerpt'   => 'nullable',
             'source'    => 'nullable',
@@ -41,7 +41,7 @@ class NewsRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('news')->ignore($this->route('news'))];
+                $rules['slug'] = Rule::unique('posts')->ignore($this->route('news'));
 
                 $rules['cover'] = 'image|dimensions:min_width=440|max:2048';
                 break;

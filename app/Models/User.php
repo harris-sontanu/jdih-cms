@@ -71,9 +71,9 @@ class User extends Authenticatable
         return $this->hasMany(Legislation::class);
     }
 
-    public function news()
+    public function posts()
     {
-        return $this->hasMany(News::class, 'author_id');
+        return $this->hasMany(Post::class, 'author_id');
     }
 
     public function pages()
