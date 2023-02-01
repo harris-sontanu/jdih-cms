@@ -94,7 +94,6 @@
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'title') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.page.index', ['order' => 'title', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Judul</a>
                             </th>
-                            <th>Penulis</th>
                             <th class="text-center sorting @if (!empty($sort) AND Request::get('order') == 'user') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.page.index', ['order' => 'user', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Operator</a>
                             </th>
@@ -118,18 +117,8 @@
                                     <span class="fw-semibold d-block">{{ $post->title }}</span>
                                     <span class="text-muted fs-sm">{!! Str::limit(strip_tags($post->excerpt), 150) !!}</span>
                                 </td>
-                                <td>
-                                    @if ($post->author)
-                                        <div class="d-flex align-items-center">
-                                            <div class="me-2">
-                                                <img src="{{ $post->author->pictureThumbUrl }}" alt="{{ $post->author->name }}" class="rounded-circle" width="32" height="32">
-                                            </div>
-                                            {{ $post->author->name }}
-                                        </div>
-                                    @endif
-                                </td>
                                 <td class="text-center">
-                                    <img src="{{ $post->userPictureUrl($post->user->picture, $post->user->name) }}" alt="{{ $post->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $post->user->name }}">
+                                    <img src="{{ $post->userPictureUrl($post->author->picture, $post->author->name) }}" alt="{{ $post->author->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $post->author->name }}">
                                 </td>
                                 <td>
                                     <span class="d-block">{!! $post->publicationLabel() !!}</span>

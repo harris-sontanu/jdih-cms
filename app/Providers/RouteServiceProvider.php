@@ -65,6 +65,10 @@ class RouteServiceProvider extends ServiceProvider
             return Post::where('id', $value)->firstOrFail();
         });
 
+        Route::bind('page', function ($value) {
+            return Post::where('id', $value)->firstOrFail();
+        });
+
         Route::bind('image', function ($value) {
             return Media::where('id', $value)->firstOrFail();
         });
