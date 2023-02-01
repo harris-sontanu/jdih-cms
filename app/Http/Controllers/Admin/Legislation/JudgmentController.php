@@ -13,6 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JudgmentsExport;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class JudgmentController extends LegislationController
 {
@@ -114,7 +115,7 @@ class JudgmentController extends LegislationController
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'     => Legislation::ofType(4)
+            'sampah'    => Legislation::ofType(4)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -330,6 +331,48 @@ class JudgmentController extends LegislationController
         }
 
         return redirect('/admin/legislation/judgment/' . $legislation->id . '/edit')->with($typeMessage, $message);
+    }
+
+    public function trigger(Request $request)
+    {
+        $ids = $request->items;
+        $count = count($ids);
+
+        $message = 'data Putusan telah berhasil diperbarui';
+        foreach ($ids as $id)
+        {
+            $legislation = Legislation::withTrashed()->find($id);
+            if ($request->action === 'category')
+            {
+                $legislation->category_id = $request->val;
+                $legislation->save();
+
+                $new_category = Category::find($request->val);
+
+                $legislation->logs()->create([
+                    'user_id'   => $request->user()->id,
+                    'message'   => 'mengubah jenis putusan menjadi ' . Str::title($new_category->name),
+                ]);
+            }
+            else if ($request->action === 'trash')
+            {
+                $legislation->delete();
+                $message = 'data Putusan telah berhasil dibuang';
+
+                $legislation->logs()->create([
+                    'user_id'   => $request->user()->id,
+                    'message'   => 'membuang putusan',
+                ]);
+            }
+            else if ($request->action === 'delete')
+            {
+                $this->deleteDocuments($legislation);
+                $legislation->forceDelete();
+                $message = 'data Putusan telah berhasil dihapus';
+            }
+        }
+
+        $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);
     }
 
     /**
