@@ -29,9 +29,9 @@ class Taxonomy extends Model
         'sort',
     ];
 
-    public function news()
+    public function posts()
     {
-        return $this->hasMany(News::class);
+        return $this->hasMany(Post::class);
     }
 
     public function scopeType($query, $type)
@@ -45,6 +45,16 @@ class Taxonomy extends Model
             return $query->orderBy($request['order'], $request['sort']);
         } else {
             return $query->orderBy('name', 'asc');
+        }
+    }
+
+    public function scopeSearch($query, $request)
+    {
+        if (isset($request['search']) AND $search = $request['search']) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('desc', 'LIKE', '%' . $search . '%');
+            });
         }
     }
 }

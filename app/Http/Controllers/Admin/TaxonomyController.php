@@ -31,7 +31,7 @@ class TaxonomyController extends AdminController
 
         $taxonomies = Taxonomy::type($type)->sorted($request->only(['order', 'sort']));
 
-        // $taxonomies = $taxonomies->search($request->only(['search']));
+        $taxonomies = $taxonomies->search($request->only(['search']));
         $limit = !empty($request->limit) ? $request->limit : $this->limit;
         $taxonomies = $taxonomies->paginate($limit)
                     ->withQueryString();

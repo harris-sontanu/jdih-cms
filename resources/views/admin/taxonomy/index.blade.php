@@ -57,7 +57,7 @@
                                     <tr>
                                         <td><span class="fw-semibold d-block">{{$taxonomy->name }}</span></td>
                                         <td>{{$taxonomy->desc }}</td>
-                                        <td class="text-center"><span class="badge rounded-pill bg-indigo">{{$taxonomy->news->count() }}</span></td>
+                                        <td class="text-center"><span class="badge rounded-pill bg-indigo">{{$taxonomy->posts->count() }}</span></td>
                                         @cannot('isAuthor')   
                                             <td class="safezone">
                                                 <div class="d-inline-flex">
