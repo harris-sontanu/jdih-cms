@@ -82,8 +82,8 @@
                                         <td class="text-end"><span class="badge bg-warning bg-opacity-20 text-warning">{!! $page->publicationLabel() !!}</span></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Operator:</td>
-                                        <td class="text-end">{{ $page->user->name }}</td>
+                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Penulis:</td>
+                                        <td class="text-end">{{ $page->author->name }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-nowrap"><i class="ph-calendar-blank me-2"></i>Posting:</td>
@@ -107,28 +107,11 @@
 
                         <div class="card">
                             <div class="sidebar-section-header border-bottom">
-                                <span class="fw-semibold"><i class="ph-user me-2"></i>Penulis</span>
-                            </div>
-                            <div class="sidebar-section-body">
-                                <select id="author_id" name="author_id" class="select @error('author_id') is-invalid @enderror">
-                                    <option value="">Pilih Penulis</option>
-                                    @foreach ($authors as $key => $value)
-                                        <option value="{{ $key }}" @selected($page->author_id == $key)>{{ $value }}</option>
-                                    @endforeach
-                                </select>
-                                @error('author_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="sidebar-section-header border-bottom">
                                 <span class="fw-semibold"><i class="ph-image-square me-2"></i>Sampul</span>
                             </div>
-                                                           
+
                                 <div class="card-img-actions mx-1 mt-1">
-                                    @if ($page->cover) 
+                                    @if ($page->cover)
                                         <img id="cover-img" class="card-img img-fluid" src="{{ $page->cover->mediaThumbUrl }}" alt="Placeholder">
                                         <div class="card-img-actions-overlay card-img">
                                             <a href="{{ $page->cover->mediaUrl }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="cover">
@@ -147,7 +130,7 @@
                                 <textarea name="caption" rows="4" class="form-control mb-3" placeholder="Keterangan gambar">{{ $page->cover->caption ?? '' }}</textarea>
 
                                 <input id="cover-input" type="file" class="form-control @error('cover') is-invalid @enderror" name="cover">
-                                <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
+                                <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
                                 @error('cover')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

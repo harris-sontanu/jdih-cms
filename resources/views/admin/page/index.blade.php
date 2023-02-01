@@ -94,7 +94,7 @@
                                 <a href="{{ route('admin.page.index', ['order' => 'title', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Judul</a>
                             </th>
                             <th class="text-center sorting @if (!empty($sort) AND Request::get('order') == 'user') {{ 'sorting_' . $sort }} @endif">
-                                <a href="{{ route('admin.page.index', ['order' => 'user', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Operator</a>
+                                <a href="{{ route('admin.page.index', ['order' => 'user', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Penulis</a>
                             </th>
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'published_at') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.page.index', ['order' => 'published_at', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Publikasi</a>

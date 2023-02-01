@@ -54,11 +54,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-nowrap"><i class="ph-user me-2"></i>Penulis:</td>
-                                    <td class="text-end">{{ $page->author->name ?? '' }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-nowrap"><i class="ph-user me-2"></i>Operator:</td>
-                                    <td class="text-end">{{ $page->user->name }}</td>
+                                    <td class="text-end">{{ $page->author->name }}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-nowrap"><i class="ph-calendar-blank me-2"></i>Posting:</td>
