@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Employee;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Employee;
-use App\Models\Group;
+use App\Models\Taxonomy;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmployeeRequest;
 
@@ -30,14 +30,14 @@ class EmployeeController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $employees = Employee::with('groups')
+        $employees = Employee::with('taxonomies')
             ->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
             ->paginate((!empty($request->limit)) ? $request->limit : $this->limit)
             ->withQueryString();
 
-        $groups = Group::pluck('name', 'id');
+        $groups = Taxonomy::type('employee')->pluck('name', 'id');
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -222,7 +222,7 @@ class EmployeeController extends AdminController
 
         $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);
     }
-    
+
 
     public function deleteAvatar(Request $request, Employee $employee)
     {

@@ -118,8 +118,8 @@
                                 </td>
                                 <td>{{ $employee->position }}</td>
                                 <td>
-                                    @foreach ($employee->groups as $group)
-                                        <span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-{{ $group->class }}">{{ $group->name }}</span>
+                                    @foreach ($employee->taxonomies as $group)
+                                        <span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-indigo">{{ $group->name }}</span>
                                     @endforeach
                                 </td>
                                 <td>{{ $employee->rank }}</td>
