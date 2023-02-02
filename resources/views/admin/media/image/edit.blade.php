@@ -21,7 +21,7 @@
         <div class="mb-3">
             <label for="media" class="form-label">Unggah Gambar</label>
             <input id="media" type="file" class="form-control upload-img" name="image" data-id="{{ $image->id }}">
-            <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
+            <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
         </div>
 
         <div class="form-check form-check-inline form-check-reverse">

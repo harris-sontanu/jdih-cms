@@ -45,7 +45,7 @@ class MonographRequest extends FormRequest
             'published_at'  => 'nullable',
             'note'          => 'nullable|string',
             'cover'         => 'nullable|image|max:2048',
-            'attachment'    => 'nullable|file|mimes:pdf|max:2048',
+            'attachment'    => 'nullable|file|mimes:pdf|max:20480',
         ];
 
         switch ($this->method()) {

@@ -183,7 +183,7 @@
                                 <textarea name="caption" rows="4" class="form-control mb-3" placeholder="Keterangan gambar">{{ $news->cover->caption ?? '' }}</textarea>
 
                                 <input id="cover-input" type="file" class="form-control @error('cover') is-invalid @enderror" name="cover">
-                                <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
+                                <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
                                 @error('cover')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
