@@ -91,7 +91,7 @@
                                                     <option value="">Pilih Grup</option>
                                                         @foreach ($groups as $key => $value)
                                                             @php $selected = false; @endphp
-                                                            @foreach ($employee->groups as $group)
+                                                            @foreach ($employee->taxonomies as $group)
                                                                 @if ($group->id == $key)
                                                                     @php $selected = true; @endphp
                                                                 @endif

@@ -98,7 +98,7 @@ class EmployeeController extends AdminController
 
         $new_employee = Employee::create($validated);
 
-        $new_employee->groups()->attach($request->groups);
+        $new_employee->taxonomies()->attach($request->groups);
 
         return redirect('/admin/employee')->with('message', '<strong>Berhasil!</strong> Data Pegawai baru telah berhasil disimpan');
     }
@@ -149,7 +149,7 @@ class EmployeeController extends AdminController
             'Ubah' => TRUE
         ];
 
-        $groups = Group::pluck('name', 'id');
+        $groups = Taxonomy::type('employee')->pluck('name', 'id');
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
@@ -179,7 +179,7 @@ class EmployeeController extends AdminController
 
         $employee->update($validated);
 
-        $employee->groups()->sync($request->groups);
+        $employee->taxonomies()->sync($request->groups);
 
         if ($oldPicture !== $employee->picture) {
             $this->removeMedia($oldPicture);
@@ -207,7 +207,7 @@ class EmployeeController extends AdminController
             $employee = Employee::find($id);
             if ($request->action === 'group')
             {
-                $employee->groups()->toggle([$request->val]);
+                $employee->taxonomies()->toggle([$request->val]);
             }
             else if ($request->action === 'delete')
             {

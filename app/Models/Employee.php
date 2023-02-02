@@ -29,6 +29,20 @@ class Employee extends Model
         'picture',
         'nip',
         'rank',
+        'phone',
+        'email',
+        'address',
+        'city',
+        'district',
+        'regency',
+        'province',
+        'bio',
+        'facebook',
+        'twitter',
+        'instagram',
+        'tiktok',
+        'youtube',
+        'sort',
     ];
 
     public function taxonomies()
