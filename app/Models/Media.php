@@ -39,16 +39,11 @@ class Media extends Model
         return $this->morphTo();
     }
 
-    public function news()
+    public function post()
     {
-        return $this->hasOne(News::class, 'cover_id');
+        return $this->hasOne(Post::class, 'cover_id');
     }
-
-    public function page()
-    {
-        return $this->hasOne(Page::class, 'cover_id');
-    }
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);

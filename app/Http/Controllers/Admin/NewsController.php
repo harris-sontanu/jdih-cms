@@ -225,6 +225,7 @@ class NewsController extends AdminController
                     'path'  => $path,
                     'is_image'  => 1,
                     'size'  => $photo->getSize(),
+                    'user_id'   => $request->user()->id,
                     'published_at'  => now()->format('Y-m-d H:i:s'),
                 ]);
             }
