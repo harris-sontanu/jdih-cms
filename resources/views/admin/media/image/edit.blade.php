@@ -9,6 +9,11 @@
         <img id="image-src-{{ $image->id }}" class="rounded img-fluid mb-3 mx-auto d-block" src="{{ $image->mediaThumbUrl }}">
 
         <div class="mb-3">
+            <label for="caption" class="form-label">Judul</label>
+            <input type="text" id="name" name="name" class="form-control mb-3" value="{{ $image->name }}">
+        </div>
+
+        <div class="mb-3">
             <label for="caption" class="form-label">Keterangan Gambar</label>
             <textarea id="caption" name="caption" rows="4" class="form-control mb-3">{{ $image->caption }}</textarea>
         </div>
@@ -16,7 +21,7 @@
         <div class="mb-3">
             <label for="media" class="form-label">Unggah Gambar</label>
             <input id="media" type="file" class="form-control upload-img" name="image" data-id="{{ $image->id }}">
-            <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
+            <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
         </div>
 
         <div class="form-check form-check-inline form-check-reverse">

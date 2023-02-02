@@ -12,6 +12,11 @@
                     <img id="image-src-0" class="rounded img-fluid mb-3" src="{{ asset('assets/admin/images/placeholders/cover.jpg') }}" alt="Placeholder">
 
                     <div class="mb-3">
+                        <label for="caption" class="form-label">Judul</label>
+                        <input type="text" id="name" name="name" class="form-control mb-3">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="caption" class="form-label">Keterangan Gambar</label>
                         <textarea id="caption" name="caption" rows="4" class="form-control mb-3"></textarea>
                     </div>
@@ -19,7 +24,7 @@
                     <div class="mb-3">
                         <label for="media" class="form-label">Unggah Gambar</label>
                         <input id="media" type="file" class="form-control upload-img" name="image" data-id="0">
-                        <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
+                        <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp.</div>
                     </div>
 
                     <div class="form-check form-check-inline form-check-reverse">

@@ -126,12 +126,17 @@ class ImageController extends MediaController
                 'file_name' => $image->getClientOriginalName(),
                 'mime_type' => $image->getClientMimeType(),
                 'path'  => $path,
+                'cation'    => $request->caption ?? null,
                 'is_image'  => 1,
                 'size'  => $image->getSize(),
                 'published_at'  => ($request->publication) ? now()->format('Y-m-d H:i:s') : null,
             ];
         }
 
+        if ($request->name) {
+            $data['name'] = $request->name;
+        }
+        
         if ($request->caption) {
             $data['caption'] = $request->caption;
         }

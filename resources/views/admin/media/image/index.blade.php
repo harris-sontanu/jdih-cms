@@ -85,7 +85,7 @@
                             @endcannot
                             <th width="1" class="text-center">Gambar</th>
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'name') {{ 'sorting_' . $sort }} @endif">
-                                <a href="{{ route('admin.media.image.index', ['order' => 'name', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Nama Berkas</a>
+                                <a href="{{ route('admin.media.image.index', ['order' => 'name', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Judul</a>
                             </th>
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'size') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.media.image.index', ['order' => 'size', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Ukuran</a>
