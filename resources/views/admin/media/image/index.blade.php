@@ -79,8 +79,8 @@
                             @else
                                 @php $sortState = 'asc' @endphp
                             @endif
-                            
-                            @cannot('isAuthor')                                
+
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                             @endcannot
                             <th width="1" class="text-center">Gambar</th>
@@ -102,10 +102,10 @@
                     <tbody id="sortable">
                         @forelse ($images as $image)
                             <tr>
-                                @cannot('isAuthor')                                    
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $image->id }}"></td>
                                 @endcannot
-                                <td class="safezone text-center"><img src="{{ $image->mediaThumbUrl }}" class="img-preview rounded"></td>
+                                <td class="safezone text-center"><img src="{{ $image->thumbSource }}" class="img-preview rounded"></td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $image->name }}</span>
                                     @if (!empty($image->caption))
@@ -127,7 +127,7 @@
                                 </td>
                                 <td class="safezone">
                                     <div class="d-inline-flex">
-                                        <a href="{{ $image->mediaUrl }}" class="text-body mx-1" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
+                                        <a href="{{ $image->source }}" class="text-body mx-1" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
 
                                         @can('update', $image)
                                             <button type="button" class="btn btn-link text-body p-0 mx-1" data-bs-popup="tooltip" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $image->id }}" data-route="image"><i class="ph-pen"></i></button>

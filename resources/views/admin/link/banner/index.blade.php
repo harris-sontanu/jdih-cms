@@ -80,7 +80,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor')                                
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                                 <th width="1"><i class="ph-dots-six-vertical "></i></th>
                             @endcannot
@@ -95,7 +95,7 @@
                             <th class="sorting @if (!empty($sort) AND Request::get('order') == 'created_at') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.link.banner.index', ['order' => 'created_at', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Publikasi</a>
                             </th>
-                            @cannot('isAuthor')   
+                            @cannot('isAuthor')
                                 <th width="1" class="text-center">Aksi</th>
                             @endcannot
                         </tr>
@@ -103,11 +103,11 @@
                     <tbody id="sortable">
                         @forelse ($banners as $banner)
                             <tr id="{{ $banner->id }}" class="item" data-id="{{ $banner->id }}">
-                                @cannot('isAuthor')   
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $banner->id }}"></td>
                                     <td class="drag-handle"><i class="ph-dots-six-vertical dragula-handle"></i></td>
                                 @endcannot
-                                <td class="text-center"><img src="{{ $banner->image->mediaThumbUrl }}" class="img-preview rounded"></td>
+                                <td class="text-center"><img src="{{ $banner->image->thumbSource }}" class="img-preview rounded"></td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $banner->title }}</span>
                                     <span class="text-muted fs-sm">{{ $banner->url }}</span>
@@ -125,10 +125,10 @@
                                     <span class="d-block">{!! $banner->publicationLabel() !!}</span>
                                     <abbr class="fs-sm" data-bs-popup="tooltip" title="{{ $banner->dateFormatted($banner->published_at, true) }}">{{ $banner->dateFormatted($banner->published_at) }}</abbr>
                                 </td>
-                                @cannot('isAuthor')   
+                                @cannot('isAuthor')
                                     <td class="safezone">
                                         <div class="d-inline-flex">
-                                            <a href="{{ $banner->image->mediaUrl }}" class="text-body me-2" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
+                                            <a href="{{ $banner->image->source }}" class="text-body me-2" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
                                             <button type="button" class="btn btn-link text-body p-0" data-bs-popup="tooltip" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $banner->id }}" data-route="banner"><i class="ph-pen"></i></button>
                                             <form class="delete-form" action="{{ route('admin.link.banner.destroy', $banner->id) }}" data-confirm="Apakah Anda yakin ingin menghapus banner?" method="POST">
                                                 @method('DELETE')

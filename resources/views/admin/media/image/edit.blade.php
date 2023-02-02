@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
     <div class="modal-body">
-        <img id="image-src-{{ $image->id }}" class="rounded img-fluid mb-3 mx-auto d-block" src="{{ $image->mediaThumbUrl }}">
+        <img id="image-src-{{ $image->id }}" class="rounded img-fluid mb-3 mx-auto d-block" src="{{ $image->thumbSource }}">
 
         <div class="mb-3">
             <label for="caption" class="form-label">Judul</label>

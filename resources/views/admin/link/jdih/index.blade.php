@@ -80,7 +80,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor')                                
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                                 <th width="1"><i class="ph-dots-six-vertical "></i></th>
                             @endcannot
@@ -100,11 +100,11 @@
                     <tbody id="sortable">
                         @forelse ($jdih as $link)
                             <tr id="{{ $link->id }}" class="item" data-id="{{ $link->id }}">
-                                @cannot('isAuthor')                                    
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $link->id }}"></td>
                                     <td class="drag-handle"><i class="ph-dots-six-vertical dragula-handle"></i></td>
                                 @endcannot
-                                <td class="text-center"><img src="{{ $link->image->mediaThumbUrl }}" class="img-preview rounded"></td>
+                                <td class="text-center"><img src="{{ $link->image->thumbSource }}" class="img-preview rounded"></td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $link->title }}</span>
                                     <span class="text-muted fs-sm">{{ $link->url }}</span>
@@ -123,8 +123,8 @@
                                 </td>
                                 <td class="safezone">
                                     <div class="d-inline-flex">
-                                        <a href="{{ $link->image->mediaUrl }}" class="text-body mx-1" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
-                                        @can('update', $link)                                            
+                                        <a href="{{ $link->image->source }}" class="text-body mx-1" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
+                                        @can('update', $link)
                                             <button type="button" class="btn btn-link text-body p-0 mx-1" data-bs-popup="tooltip" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $link->id }}" data-route="jdih"><i class="ph-pen"></i></button>
                                         @endcan
 

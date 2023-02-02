@@ -43,7 +43,7 @@ class Media extends Model
     {
         return $this->hasOne(Post::class, 'cover_id');
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -57,32 +57,6 @@ class Media extends Model
     public function legislationDocument()
     {
         return $this->hasOne(LegislationDocument::class);
-    }
-
-    public function mediaUrl(): Attribute
-    {
-        $mediaUrl = asset('assets/admin/images/placeholders/placeholder.jpg');
-        if (!empty($this->path)) {
-            if (Storage::disk('public')->exists($this->path)) $mediaUrl = Storage::url($this->path);
-        }
-
-        return Attribute::make(
-            get: fn ($value) => $mediaUrl
-        );
-    }
-
-    public function mediaThumbUrl(): Attribute
-    {
-        $mediaThumbUrl = asset('assets/admin/images/placeholders/placeholder.jpg');
-        if (!empty($this->path)) {
-            $ext = substr(strchr($this->path, '.'), 1);
-            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $this->path);
-            if (Storage::disk('public')->exists($thumbnail)) $mediaThumbUrl = Storage::url($thumbnail);
-        }
-
-        return Attribute::make(
-            get: fn ($value) => $mediaThumbUrl
-        );
     }
 
     public function ext(): Attribute

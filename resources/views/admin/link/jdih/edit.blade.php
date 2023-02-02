@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
     <div class="modal-body">
-        <img id="image-src-{{ $jdih->image_id }}" class="rounded img-fluid mb-3 mx-auto d-block" src="{{ $jdih->image->mediaThumbUrl }}" alt="Placeholder">
+        <img id="image-src-{{ $jdih->image_id }}" class="rounded img-fluid mb-3 mx-auto d-block" src="{{ $jdih->image->thumbSource }}" alt="Placeholder">
 
         <div class="mb-3">
             <label for="media" class="form-label">Unggah Gambar:</label>
