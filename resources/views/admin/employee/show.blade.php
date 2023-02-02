@@ -82,8 +82,8 @@
         <div class="d-sm-flex flex-sm-wrap mb-3">
             <div class="fw-semibold">Grup:</div>
             <div class="ms-sm-auto mt-2 mt-sm-0">
-                @foreach ($employee->groups as $group)
-                    <span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-{{ $group->class }}">{{ $group->name }}</span>
+                @foreach ($employee->taxonomies as $group)
+                    <span class="badge bg-light border-start border-width-3 text-body rounded-start-0 border-indigo">{{ $group->name }}</span>
                 @endforeach
             </div>
         </div>

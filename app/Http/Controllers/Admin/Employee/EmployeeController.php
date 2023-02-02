@@ -71,7 +71,7 @@ class EmployeeController extends AdminController
             'Tambah' => TRUE
         ];
 
-        $groups = Group::pluck('name', 'id');
+        $groups = Taxonomy::type('employee')->pluck('name', 'id');
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
