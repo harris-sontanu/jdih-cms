@@ -77,6 +77,7 @@
 
                             <form action="{{ route('admin.employee.group.store') }}" method="post" novalidate>
                                 @csrf
+                                <input type="hidden" name="type" value="employee">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nama:</label>
                                     <input id="name" type="text" class="form-control @if ($errors->get('name')) is-invalid @endif" name="name" value="{{ old('name') }}" placeholder="Instansi">

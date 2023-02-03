@@ -34,6 +34,11 @@ class Taxonomy extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class);
+    }
+
     public function scopeType($query, $type)
     {
         return $query->where('type', $type);
