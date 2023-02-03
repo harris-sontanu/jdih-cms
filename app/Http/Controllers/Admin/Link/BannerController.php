@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Link\LinkController;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\LinkRequest;
 
 class BannerController extends LinkController
 {
@@ -76,7 +77,7 @@ class BannerController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'   => Link::banners()->with('user', 'image')
+            'tayang'    => Link::banners()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
@@ -95,15 +96,9 @@ class BannerController extends LinkController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LinkRequest $request)
     {
-        $validated = $request->validate([
-            'image' => 'required|image|max:2048',
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
-        $validated['type'] = 'banner';
+        $validated = $request->validated();
         $validated['display'] = $request->display;
         $validated['published_at'] = ($request->publication) ? now() : null;
 
@@ -166,14 +161,9 @@ class BannerController extends LinkController
      * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Link $link)
+    public function update(LinkRequest $request, Link $link)
     {
-        $validated = $request->validate([
-            'image' => 'image|max:2048',
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
+        $validated = $request->validated();
         $validated['display'] = $request->display;
         $validated['published_at'] = ($request->publication) ? now() : null;
 

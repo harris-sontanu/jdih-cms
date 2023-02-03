@@ -4,6 +4,7 @@
         <div class="modal-content">
             <form id="store-jdih-form" action="{{ route('admin.link.jdih.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="type" value="jdih">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Anggota JDIH</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

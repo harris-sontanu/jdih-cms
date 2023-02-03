@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Link\LinkController;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\LinkRequest;
 
 class JdihController extends LinkController
 {
@@ -76,7 +77,7 @@ class JdihController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'   => Link::jdih()->with('user', 'image')
+            'tayang'    => Link::jdih()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
@@ -105,15 +106,9 @@ class JdihController extends LinkController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LinkRequest $request)
     {
-        $validated = $request->validate([
-            'image' => 'required|image|max:2048',
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
-        $validated['type'] = 'jdih';
+        $validated = $request->validated();
         $validated['published_at'] = ($request->publication) ? now() : null;
 
         $new_jdih = $request->user()
@@ -186,14 +181,9 @@ class JdihController extends LinkController
      * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Link $link)
+    public function update(LinkRequest $request, Link $link)
     {
-        $validated = $request->validate([
-            'image' => 'image|max:2048',
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
+        $validated = $request->validated();
         $validated['published_at'] = ($request->publication) ? now() : null;
 
         $link->update($validated);

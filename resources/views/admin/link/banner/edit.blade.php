@@ -2,6 +2,7 @@
 <form class="update-banner-form" action="{{ route('admin.link.banner.update', $banner->id) }}" method="post" novalidate enctype="multipart/form-data">
     @method('PUT')
     @csrf
+    <input type="hidden" name="type" value="{{ $banner->type }}">
     <div class="modal-header">
         <h5 class="modal-title">Ubah Banner</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

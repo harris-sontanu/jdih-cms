@@ -4,6 +4,7 @@
         <div class="modal-content">
             <form id="store-banner-form" action="{{ route('admin.link.banner.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="type" value="banner">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Banner</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

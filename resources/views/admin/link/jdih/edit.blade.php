@@ -2,6 +2,7 @@
 <form class="update-jdih-form" action="{{ route('admin.link.jdih.update', $jdih->id) }}" method="post" novalidate enctype="multipart/form-data">
     @method('PUT')
     @csrf
+    <input type="hidden" name="type" value="{{ $jdih->type }}">
     <div class="modal-header">
         <h5 class="modal-title">Ubah Anggota JDIH</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
