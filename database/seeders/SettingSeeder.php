@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
         $settings = [
             'appName'       => 'JDIH CMS',
             'appDesc'       => 'Jaringan Dokumentasi dan Informasi Hukum',
-            'appLogo'       => null,
+            'appLogo'       => 'assets/admin/images/logo_icon.svg',
             'appUrl'        => url()->current(),
             'company'       => 'Balemedia',
             'companyUrl'    => 'https://balemedia.id',
@@ -41,6 +41,7 @@ class SettingSeeder extends Seeder
             'jdihnUrl'      => 'https://jdihn.go.id',
             'region_code'   => 0051,
             'maintenance'   => null,
+            'questionner'   => "{\"title\":\"Indeks Kepuasan Masyarakat\",\"desc\":\"Untuk mengetahui tingkat kepuasan masyarakat terhadap layanan JDIH\",\"active\":1}",
         ];
 
         foreach ($settings as $key => $value) {

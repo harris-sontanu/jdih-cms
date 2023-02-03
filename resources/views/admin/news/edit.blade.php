@@ -171,9 +171,9 @@
                             </div>
 
                             <div class="card-img-actions mx-1 mt-1">
-                                <img id="cover-img" class="card-img img-fluid" src="{{ $news->cover->mediaThumbUrl ?? asset('assets/admin/images/placeholders/placeholder.jpg') }}" alt="Placeholder">
+                                <img id="cover-img" class="card-img img-fluid" src="{{ $news->cover->thumbSource ?? asset('assets/admin/images/placeholders/placeholder.jpg') }}" alt="Placeholder">
                                 <div class="card-img-actions-overlay card-img">
-                                    <a href="{{ $news->cover->mediaUrl ?? '#' }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="cover">
+                                    <a href="{{ $news->cover->source ?? '#' }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="cover">
                                         <i class="ph-plus"></i>
                                     </a>
                                 </div>

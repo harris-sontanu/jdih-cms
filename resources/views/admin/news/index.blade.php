@@ -115,7 +115,7 @@
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $post->id }}"></td>
                                 @endcannot
                                 <td class="safezone text-center">
-                                    <img src="@if($post->cover){{ $post->cover->mediaThumbUrl }}@endif" class="img-preview rounded">
+                                    <img src="@if($post->cover){{ $post->cover->thumbSource }}@endif" class="img-preview rounded">
                                 </td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $post->title }}</span>
