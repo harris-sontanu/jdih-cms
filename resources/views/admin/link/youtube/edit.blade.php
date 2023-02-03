@@ -1,6 +1,7 @@
 <form class="update-youtube-form" action="{{ route('admin.link.youtube.update', $youtube->id) }}" method="post" novalidate enctype="multipart/form-data">
     @method('put')
     @csrf
+    <input type="hidden" name="type" value="{{ $youtube->type }}">
     <div class="modal-header">
         <h5 class="modal-title">Ubah Tautan YouTube</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

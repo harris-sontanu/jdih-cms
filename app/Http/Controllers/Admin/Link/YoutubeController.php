@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Link\LinkController;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\LinkRequest;
 
 class YoutubeController extends LinkController
 {
@@ -74,7 +75,7 @@ class YoutubeController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'   => Link::youtubes()->with('user', 'image')
+            'tayang'    => Link::youtubes()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
@@ -93,14 +94,9 @@ class YoutubeController extends LinkController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LinkRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
-        $validated['type']  = 'youtube';
+        $validated = $request->validated();
         $validated['published_at'] = ($request->publication) ? now() : null;
 
         $request->user()->links()->create($validated);
@@ -126,13 +122,9 @@ class YoutubeController extends LinkController
      * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Link $link)
+    public function update(LinkRequest $request, Link $link)
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'url'   => 'required|url',
-            'desc'  => 'nullable',
-        ]);
+        $validated = $request->validated();
         $validated['published_at'] = ($request->publication) ? now() : null;
 
         $link->update($validated);

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class LinkRequest extends FormRequest
 {
@@ -36,6 +37,10 @@ class LinkRequest extends FormRequest
             case 'PATCH':
                 $rules['image'] = 'image|max:2048';
                 break;
+        }
+
+        if (request()->type === 'youtube') {
+            $rules = Arr::except($rules, ['image']);
         }
 
         return $rules;

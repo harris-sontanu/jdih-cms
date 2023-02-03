@@ -4,6 +4,7 @@
         <div class="modal-content">
             <form id="store-youtube-form" action="{{ route('admin.link.youtube.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="type" value="youtube">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Tautan YouTube</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
