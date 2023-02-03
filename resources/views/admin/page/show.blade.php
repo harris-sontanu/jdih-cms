@@ -22,7 +22,7 @@
 
                         @if ($page->cover)
                             <div class="mb-3">
-                                <img src="{{ $page->cover->mediaUrl }}" class="img-fluid rounded mx-auto d-block">
+                                <img src="{{ $page->cover->source }}" class="img-fluid rounded mx-auto d-block">
                                 @if (!empty($page->cover->caption))<span class="mt-1 d-block text-muted text-center">{{ $page->cover->caption }}</span>@endif
                             </div>
                         @endif

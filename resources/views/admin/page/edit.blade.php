@@ -112,9 +112,9 @@
 
                                 <div class="card-img-actions mx-1 mt-1">
                                     @if ($page->cover)
-                                        <img id="cover-img" class="card-img img-fluid" src="{{ $page->cover->mediaThumbUrl }}" alt="Placeholder">
+                                        <img id="cover-img" class="card-img img-fluid" src="{{ $page->cover->thumbSource }}" alt="Placeholder">
                                         <div class="card-img-actions-overlay card-img">
-                                            <a href="{{ $page->cover->mediaUrl }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="cover">
+                                            <a href="{{ $page->cover->source }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="cover">
                                                 <i class="ph-plus"></i>
                                             </a>
                                             <button type="submit" class="btn btn-outline-white btn-icon rounded-pill ms-2" form="delete-cover-form">
