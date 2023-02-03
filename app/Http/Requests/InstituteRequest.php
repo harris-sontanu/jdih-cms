@@ -36,7 +36,7 @@ class InstituteRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('institutes')->ignore($this->route('institute'))];
+                $rules['slug'] = Rule::unique('institutes')->ignore($this->route('institute'));
 
                 $rules['abbrev'] = [
                     'nullable',

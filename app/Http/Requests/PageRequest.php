@@ -37,8 +37,6 @@ class PageRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 $rules['slug'] = Rule::unique('posts')->ignore($this->route('page'));
-
-                $rules['cover'] = 'image|dimensions:min_width=400|max:2048';
                 break;
         }
 

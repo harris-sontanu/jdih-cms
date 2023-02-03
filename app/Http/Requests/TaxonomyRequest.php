@@ -26,19 +26,19 @@ class TaxonomyRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'type'      => 'required',
             'name'      => 'required|max:255',
             'desc'      => 'nullable',
         ];
 
         switch ($this->method()) {
             case 'POST':
-                $rules['slug'] = [Rule::unique('taxonomies')->where(fn ($query) => $query->where('type', request()->type))];
+                $rules['slug'] = Rule::unique('taxonomies')->where(fn ($query) => $query->where('type', request()->type));
 
                 break;
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('taxonomies')->ignore($this->route('taxonomy'))];
-
+                $rules['slug'] = Rule::unique('taxonomies')->where(fn ($query) => $query->where('type', request()->type))->ignore($this->route('taxonomy'));
                 break;
         }
 

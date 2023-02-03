@@ -94,6 +94,7 @@
 
                                 <form action="{{ route('admin.taxonomy.store', ['type' => $type]) }}" method="post" novalidate>
                                     @csrf
+                                    <input type="hidden" name="type" value="{{ $type }}">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Nama:</label>
                                         <input id="name" type="text" class="form-control @if ($errors->get('name') OR $errors->get('slug')) is-invalid @endif" name="name" value="{{ old('name') }}" placeholder="Pembinaan">

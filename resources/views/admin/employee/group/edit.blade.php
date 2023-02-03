@@ -2,6 +2,7 @@
 <form id="update-group-form" action="{{ route('admin.employee.group.update', $group->id) }}" method="post">
     @method('PUT')
     @csrf
+    <input type="hidden" name="type" value="{{ $group->type }}">
     <div class="modal-header">
         <h5 class="modal-title">Ubah Grup Pegawai</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

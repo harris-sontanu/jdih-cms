@@ -49,7 +49,7 @@ class JudgmentRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('legislations')->ignore($this->route('judgment'))];
+                $rules['slug'] = Rule::unique('legislations')->ignore($this->route('judgment'));
 
                 break;
         }

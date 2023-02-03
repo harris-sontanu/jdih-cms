@@ -38,7 +38,7 @@ class CategoryRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('categories')->ignore($this->route('category'))];
+                $rules['slug'] = Rule::unique('categories')->ignore($this->route('category'));
 
                 $rules['abbrev'] = [
                     'nullable',

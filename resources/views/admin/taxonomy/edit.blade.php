@@ -2,6 +2,7 @@
 <form id="update-taxonomy-form" action="{{ route('admin.taxonomy.update', $taxonomy->id) }}" method="post">
     @method('PUT')
     @csrf
+    <input type="hidden" name="type" value="{{ $taxonomy->type }}">
     <div class="modal-header">
         <h5 class="modal-title">Ubah Kategori</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

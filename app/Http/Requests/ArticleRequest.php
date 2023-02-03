@@ -46,7 +46,7 @@ class ArticleRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('legislations')->ignore($this->route('article'))];
+                $rules['slug'] = Rule::unique('legislations')->ignore($this->route('article'));
 
                 break;
         }

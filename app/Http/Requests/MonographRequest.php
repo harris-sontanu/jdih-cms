@@ -51,7 +51,7 @@ class MonographRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('legislations')->ignore($this->route('monograph'))];
+                $rules['slug'] = Rule::unique('legislations')->ignore($this->route('monograph'));
 
                 break;
         }

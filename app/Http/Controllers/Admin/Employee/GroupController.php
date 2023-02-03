@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Employee;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Taxonomy;
+use App\Http\Requests\TaxonomyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -46,16 +47,10 @@ class GroupController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaxonomyRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:taxonomies|max:255',
-            'desc' => 'nullable',
-        ]);
-
-        $validated['slug'] = Str::slug($validated['name']);
-
-        Taxonomy::create(array_merge($validated, $request->all()));
+        $validated = $request->validated();
+        Taxonomy::create($validated);
 
         return redirect('/admin/employee/group')->with('message', '<strong>Berhasil!</strong> Data Grup Pegawai baru telah berhasil disimpan');
     }
@@ -78,16 +73,9 @@ class GroupController extends AdminController
      * @param  \App\Models\Taxonomy  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Taxonomy $group)
+    public function update(TaxonomyRequest $request, Taxonomy $group)
     {
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                Rule::unique('taxonomies')->ignore($group->id),
-                'max:255',
-            ],
-            'desc' => 'nullable',
-        ]);
+        $validated = $request->validated();
         $group->update($validated);
 
         $request->session()->flash('message', '<strong>Berhasil!</strong> Data Grup Pegawai telah berhasil diperbarui');

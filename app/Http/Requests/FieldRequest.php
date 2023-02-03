@@ -34,7 +34,7 @@ class FieldRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('fields')->ignore($this->route('field'))];
+                $rules['slug'] = Rule::unique('fields')->ignore($this->route('field'));
 
                 break;
         }

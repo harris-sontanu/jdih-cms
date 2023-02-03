@@ -34,7 +34,7 @@ class MatterRequest extends FormRequest
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                $rules['slug'] = [Rule::unique('matters')->ignore($this->route('matter'))];
+                $rules['slug'] = Rule::unique('matters')->ignore($this->route('matter'));
                 break;
         }
 

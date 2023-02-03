@@ -90,8 +90,9 @@
                 location.reload();
             }).fail(function(response) {
                 let errors = response.responseJSON.errors;
-                Object.entries(errors).forEach((entry) => {
-                    const [key, value] = entry;
+                Object.entries(errors).forEach((entry) => {                
+                    let [key, value] = entry;
+                    if (key == 'slug') { key = 'name'; }
                     form.find('#' + key).addClass('is-invalid');
                     form.find('#' + key).parent().append('<div class="invalid-feedback">' + value + '</div>');
                 })
