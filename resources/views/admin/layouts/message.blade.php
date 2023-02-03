@@ -1,18 +1,30 @@
 @if (session('message'))
-    <div class="alert alert-success border-0 alert-dismissible fade show">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        {!! session('message') !!}
-    </div>
+<script>
+    new Noty({
+        theme: 'limitless',
+        text: "{!! session('message') !!}",
+        type: 'success',
+        timeout: 2500
+    }).show();
+</script>
 @elseif (session('info-message'))
-    <div class="alert alert-info border-0 alert-dismissible fade show">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        {!! session('info-message') !!}
-    </div>
+<script>
+    new Noty({
+        theme: 'limitless',
+        text: "{!! session('info-message') !!}",
+        type: 'info',
+        timeout: 2500
+    }).show();
+</script>
 @elseif (session('error-message'))
-    <div class="alert alert-danger border-0 alert-dismissible fade show">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        {!! session('error-message') !!}
-    </div>
+<script>
+    new Noty({
+        theme: 'limitless',
+        text: "{!! session('error-message') !!}",
+        type: 'error',
+        timeout: 2500
+    }).show();
+</script>
 @elseif (session('trash-message'))
     <div class="alert alert-info border-0 alert-dismissible fade show">
         @php
