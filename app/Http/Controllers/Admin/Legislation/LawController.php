@@ -77,7 +77,6 @@ class LawController extends LegislationController
             'assets/admin/js/vendor/forms/selects/select2.min.js',
             'assets/admin/js/vendor/ui/moment/moment.min.js',
             'assets/admin/js/vendor/pickers/daterangepicker.js',
-            'assets/admin/js/vendor/notifications/noty.min.js',
         ];
 
         if (Gate::denies('isAuthor')) {
@@ -441,7 +440,6 @@ class LawController extends LegislationController
             'assets/admin/js/vendor/forms/selects/select2.min.js',
             'assets/admin/js/vendor/ui/moment/moment.min.js',
             'assets/admin/js/vendor/pickers/daterangepicker.js',
-            'assets/admin/js/vendor/notifications/noty.min.js',
         ];
 
         return view('admin.legislation.law.edit', compact(
