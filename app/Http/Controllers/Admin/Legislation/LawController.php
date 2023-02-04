@@ -314,7 +314,7 @@ class LawController extends LegislationController
         }
     }
 
-    private function storeRelationship($parent, $related, $type, $status, $note) 
+    private function storeRelationship($parent, $related, $type, $status, $note)
     {
         $logMessages = [
             'status'    => 'keterangan status',
@@ -343,7 +343,7 @@ class LawController extends LegislationController
                 'type'        => 'status',
                 'status'      => $antonymStatus,
             ]);
-    
+
             $related->logs()->create([
                 'user_id'   => request()->user()->id,
                 'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',
