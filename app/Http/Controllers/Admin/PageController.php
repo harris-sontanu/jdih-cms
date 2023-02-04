@@ -178,7 +178,6 @@ class PageController extends AdminController
                 'path'  => $path,
                 'caption'   => $request->caption,
                 'is_image'  => 1,
-                'size'  => $file->getSize(),
                 'user_id'   => $request->user()->id,
                 'published_at'  => now()->format('Y-m-d H:i:s'),
             ]);

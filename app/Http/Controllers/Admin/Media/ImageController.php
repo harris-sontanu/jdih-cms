@@ -128,7 +128,6 @@ class ImageController extends MediaController
                 'path'  => $path,
                 'cation'    => $request->caption ?? null,
                 'is_image'  => 1,
-                'size'  => $image->getSize(),
                 'published_at'  => ($request->publication) ? now()->format('Y-m-d H:i:s') : null,
             ];
         }
@@ -136,7 +135,7 @@ class ImageController extends MediaController
         if ($request->name) {
             $data['name'] = $request->name;
         }
-        
+
         if ($request->caption) {
             $data['caption'] = $request->caption;
         }

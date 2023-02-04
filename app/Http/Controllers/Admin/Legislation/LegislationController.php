@@ -99,7 +99,6 @@ class LegislationController extends AdminController
             'mime_type' => $file->getClientMimeType(),
             'path'      => $path,
             'is_image'  => 0,
-            'size'      => $file->getSize(),
             'user_id'   => request()->user()->id,
             'published_at'  => now()->format('Y-m-d H:i:s'),
         ]);
