@@ -2,7 +2,7 @@
     <script>
         new Noty({
             theme: 'limitless',
-            text: "{!! session('message') !!}",
+            text: '{!! session('message') !!}',
             type: 'success',
             timeout: 2500
         }).show();
@@ -15,7 +15,7 @@
     <script>
         new Noty({
             theme: 'limitless',
-            text: "{!! session('info-message') !!}",
+            text: '{!! session('info-message') !!}',
             type: 'info',
             timeout: 2500
         }).show();
@@ -28,7 +28,7 @@
     <script>
         new Noty({
             theme: 'limitless',
-            text: "{!! session('error-message') !!}",
+            text: '{!! session('error-message') !!}',
             type: 'error',
             timeout: 2500
         }).show();
@@ -44,7 +44,7 @@
     <script>
         new Noty({
             theme: 'limitless',
-            text: "{!! $message !!}",
+            text: '{!! $message !!}',
             type: 'info',
             timeout: 2500
         }).show();
