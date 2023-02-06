@@ -13,7 +13,7 @@
                 <div class="py-sm-3 mb-sm-0 mb-3">
                     <div class="form-control-feedback form-control-feedback-end">
                         <form action="{{ route('admin.media.image.index') }}" method="get">
-                            <input type="search" name="search" class="form-control rounded-pill" placeholder="Cari nama berkas, keterangan..." @if (Request::get('search')) value="{{ Request::get('search') }}" @endif autofocus>
+                            <input type="search" name="search" class="form-control rounded-pill" placeholder="Cari nama gambar, keterangan..." @if (Request::get('search')) value="{{ Request::get('search') }}" @endif autofocus>
                             <div class="form-control-feedback-icon">
                                 <i class="ph-magnifying-glass text-muted"></i>
                             </div>
