@@ -84,7 +84,7 @@ class FileController extends MediaController
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|max:2048',
+            'file' => 'required|file|max:20480',
         ]);
 
         $this->fileUpload($request);
@@ -113,7 +113,6 @@ class FileController extends MediaController
                 'file_name' => $file->getClientOriginalName(),
                 'mime_type' => $file->getClientMimeType(),
                 'path'  => $path,
-                'size'  => $file->getSize(),
                 'published_at'  => ($request->publication) ? now()->format('Y-m-d H:i:s') : null,
             ];
         }
@@ -155,7 +154,7 @@ class FileController extends MediaController
     public function update(Request $request, Media $media)
     {
         $request->validate([
-            'file' => 'file|max:2048',
+            'file' => 'file|max:20480',
         ]);
 
         $this->fileUpload($request, $media->id);
