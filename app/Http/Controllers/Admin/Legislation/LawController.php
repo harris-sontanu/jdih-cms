@@ -256,12 +256,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('master');
 
-            $mediaId = $this->storeDocument($file, $legislation, 'master');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'master',
-            ]);
+            $this->storeDocument($file, $legislation, 'master');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -273,12 +268,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('abstract');
 
-            $mediaId = $this->storeDocument($file, $legislation, 'abstract');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'abstract',
-            ]);
+            $this->storeDocument($file, $legislation, 'abstract');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -296,13 +286,7 @@ class LawController extends LegislationController
 
             foreach ($files as $attachment) {
 
-                $mediaId = $this->storeDocument($attachment, $legislation, 'attachment');
-
-                $legislation->documents()->create([
-                    'media_id'  => $mediaId,
-                    'type'      => 'attachment',
-                    'order'     => $i,
-                ]);
+                $this->storeDocument($attachment, $legislation, 'attachment', $i);
 
                 $legislation->logs()->create([
                     'user_id'   => $request->user()->id,

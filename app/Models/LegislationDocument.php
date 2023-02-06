@@ -32,7 +32,7 @@ class LegislationDocument extends Model
 
     public function media()
     {
-        return $this->belongsTo(Media::class);
+        return $this->morphOne(Media::class, 'mediaable');
     }
 
     public function legislation()

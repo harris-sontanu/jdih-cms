@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Download;
+use App\Models\LegislationDocument;
 use App\Models\LegislationDownloadLog;
 use App\Models\LegislationLog;
 use App\Models\Media;
@@ -93,7 +94,12 @@ class LegislationController extends AdminController
             }
         }
 
-        $new_media = Media::create([
+        $document = $legislation->documents()->create([
+            'type'  => $documentType,
+            'order' => $sequence,
+        ]);
+
+        $new_media = $document->media()->create([
             'name'      => $file_name,
             'file_name' => $file->getClientOriginalName(),
             'mime_type' => $file->getClientMimeType(),
@@ -457,7 +463,7 @@ class LegislationController extends AdminController
 
     public function mostDownloadChart()
     {
-        $downloads = Download::selectRaw('COUNT( document_id ) AS `count`, categories.abbrev')
+        $downloads = LegislationDownloadLog::selectRaw('COUNT( document_id ) AS `count`, categories.abbrev')
             ->join('documents', 'downloads.document_id', '=', 'documents.id')
             ->join('legislations', 'documents.legislation_id', '=', 'legislations.id')
             ->join('categories', 'legislations.category_id', '=', 'categories.id')

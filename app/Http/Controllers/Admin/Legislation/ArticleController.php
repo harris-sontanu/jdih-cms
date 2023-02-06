@@ -204,14 +204,7 @@ class ArticleController extends LegislationController
     {
         if ($request->hasFile('cover'))
         {
-            $image = $request->file('cover');
-
-            $mediaId = $this->storeDocument($image, $legislation, 'cover');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'cover',
-            ]);
+            $this->storeDocument($request->file('cover'), $legislation, 'cover');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -221,14 +214,7 @@ class ArticleController extends LegislationController
 
         if ($request->hasFile('attachment'))
         {
-            $file = $request->file('attachment');
-
-            $mediaId = $this->storeDocument($file, $legislation, 'attachment');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'attachment',
-            ]);
+            $this->storeDocument($request->file('attachment'), $legislation, 'attachment');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
