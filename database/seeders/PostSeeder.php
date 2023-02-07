@@ -15,6 +15,16 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory()->count(20)->create();
+        $posts = Post::factory()
+            ->count(20)
+            ->hasCover()
+            ->create();
+
+        $posts->each(function ($post, $key) {
+            $cover_id = $post->cover->id;
+            $post->update([
+                'cover_id'  => $cover_id
+            ]);
+        });
     }
 }

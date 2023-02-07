@@ -61,7 +61,7 @@ class LegislationDocumentSeeder extends Seeder
             'is_image'  => 0,
             'path'      => $storageDir . $fileName,
             'caption'   => fake()->sentence(rand(4, 7)),
-            'user_id'   => User::all()->random()
+            'user_id'   => User::all()->random()->value('id'),
         ]);
     }
 }

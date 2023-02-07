@@ -45,7 +45,7 @@ class Post extends Model
 
     public function cover()
     {
-        return $this->belongsTo(Media::class);
+        return $this->morphOne(Media::class, 'mediaable');
     }
 
     public function images()

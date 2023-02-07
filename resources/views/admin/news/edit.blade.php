@@ -70,9 +70,9 @@
                                                 <div class="col-sm-6 col-lg-4">
                                                     <div class="card">
                                                         <div class="card-img-actions m-0">
-                                                            <img class="card-img img-fluid" src="{{ $gallery->mediaThumbUrl }}">
+                                                            <img class="card-img img-fluid" src="{{ $gallery->thumbSource }}">
                                                             <div class="card-img-actions-overlay card-img">
-                                                                <a href="{{ $gallery->mediaUrl }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
+                                                                <a href="{{ $gallery->source }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
                                                                     <i class="ph-plus"></i>
                                                                 </a>
 

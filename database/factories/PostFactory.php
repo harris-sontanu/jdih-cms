@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Media;
 use App\Models\Taxonomy;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
@@ -41,7 +42,6 @@ class PostFactory extends Factory
             'excerpt'       => fake()->paragraph(),
             'body'          => $body,
             'source'        => fake()->words(rand(1, 3), true),
-            'cover_id'      => Media::factory()->create(),
             'view'          => fake()->randomDigitNotNull() * 10,
             'author_id'     => User::all()->random(),
             'created_at'    => $created_at->toDateTimeString(),

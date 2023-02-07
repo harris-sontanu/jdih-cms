@@ -180,7 +180,13 @@ class NewsController extends AdminController
             // Create thumbnail
             $this->createImageThumbnail($path, $file->getClientOriginalExtension());
 
-            $new_media = $news->images()->create([
+            if ($news->cover()->exists()) {
+                // Delete current cover
+                $this->removeMedia($news->cover->path);
+                $news->cover()->delete();
+            }
+
+            $new_media = $news->cover()->create([
                 'name'  => $name,
                 'file_name' => $file->getClientOriginalName(),
                 'mime_type' => $file->getClientMimeType(),
@@ -190,15 +196,6 @@ class NewsController extends AdminController
                 'user_id'   => $request->user()->id,
                 'published_at'  => now()->format('Y-m-d H:i:s'),
             ]);
-
-            // Check if it already has cover
-            if ($news->cover_id) {
-
-                // Delete old cover
-                $this->removeMedia($news->cover->path);
-
-                $news->cover()->delete();
-            }
 
             $news->update([
                 'cover_id' => $new_media->id
@@ -217,7 +214,7 @@ class NewsController extends AdminController
                 // Create thumbnail
                 $this->createImageThumbnail($path, $photo->getClientOriginalExtension());
 
-                $new_media = $news->images()->create([
+                $news->images()->create([
                     'name'  => $name,
                     'file_name' => $photo->getClientOriginalName(),
                     'mime_type' => $photo->getClientMimeType(),
