@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
         $settings = [
             'appName'       => 'JDIH CMS',
             'appDesc'       => 'Jaringan Dokumentasi dan Informasi Hukum',
-            'appLogo'       => 'assets/admin/images/logo_icon.svg',
+            'appLogo'       => asset('assets/admin/images/logo_icon.svg'),
             'appUrl'        => url()->current(),
             'company'       => 'Balemedia',
             'companyUrl'    => 'https://balemedia.id',
@@ -36,7 +36,7 @@ class SettingSeeder extends Seeder
             'instagram'     => null,
             'tiktok'        => null,
             'youtube'       => null,
-            'jdihnLogo'     => null,
+            'jdihnLogo'     => asset('assets/admin/images/jdihn-logo-web.png'),
             'jdihnTitle'    => 'Jaringan Dokumentasi dan Informasi Hukum Nasional',
             'jdihnUrl'      => 'https://jdihn.go.id',
             'region_code'   => 0051,
