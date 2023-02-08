@@ -7,7 +7,7 @@
             </a>
 
             <a href="{{ $appUrl }}" class="page-title me-3">
-                <img src="{{ $appLogo }}" alt="{{ $appName }}" width="61">
+                <img src="{{ $appLogoUrl }}" alt="{{ $appName }}" width="64">
             </a>
 
             <h1 class="page-title mb-0">
