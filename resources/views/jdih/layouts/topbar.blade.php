@@ -1,5 +1,5 @@
 <!-- Main navbar -->
-<div class="navbar navbar-dark navbar-expand-lg">
+<div class="navbar navbar-sm navbar-dark navbar-expand-lg">
     <div class="container jusitfy-content-start px-lg-3">
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="index.html" class="d-inline-flex align-items-center">
@@ -61,7 +61,7 @@
             </li>
         </ul>
 
-        <button type="button" class="btn btn-outline-yellow btn-icon order-3 ms-lg-2">
+        <button type="button" class="btn btn-sm btn-outline-yellow btn-icon order-3 ms-lg-2">
             <i class="ph-sign-in ms-lg-1"></i>
             <span class="d-none d-lg-inline-block ms-2 me-1">Masuk</span>
         </button>

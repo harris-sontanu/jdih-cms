@@ -13,19 +13,90 @@
                 </div>
                 <div class="col-12 col-md-9 text-light">
                     <h2 class="mb-3 text-handwriting">Sekapur Sirih</h2>
-                    <p class="fs-lg">Situs ini merupakan situs resmi Biro Hukum Setda Provinsi Bali. 
-Situs ini memuat data dan informasi-informasi produk hukum baik produk 
-hukum pusat maupun daerah. Disamping itu, situs ini memuat pula 
-informasi mengenai buku-buku referensi tentang hukum yang dimiliki oleh 
-Biro Hukum Provinsi Bali.<br></p>
+                    <p class="fs-lg">Situs ini merupakan situs resmi Biro Hukum Setda Provinsi Bali. Situs ini memuat data dan informasi-informasi produk hukum baik produk hukum pusat maupun daerah. Disamping itu, situs ini memuat pula informasi mengenai buku-buku referensi tentang hukum yang dimiliki oleh Biro Hukum Provinsi Bali.<br></p>
                     <div class="author mt-4">
-                        IDA BAGUS GEDE SUDARSANA, SH<br>
+                        <span class="fw-semibold">IDA BAGUS GEDE SUDARSANA, SH</span><br>
                         <span class="text-light fs-sm">Kepala Biro  Hukum </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="content py-5">
+                <div class="d-flex pb-4">
+                    <h2 class="fw-bold flex-grow-1 section-title">Statistik Produk Hukum</h2>
+                    <a href="#" class="btn bg-danger bg-opacity-20 text-danger py-2 px-3 lift fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
+                </div>
+                <div class="row gx-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card card-body shadow-lg lift">
+                            <a href="#" class="text-dark">
+                                <div class="d-flex align-items-center">
+                                    <i class="ph-scales ph-2x text-success me-3"></i>
+
+                                    <div class="flex-fill text-end">
+                                        <h4 class="mb-0">{{ $totalLaws }}</h4>
+                                        <span class="text-muted">total peraturan</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card card-body shadow-lg lift">
+                            <a href="#" class="text-dark">
+                                <div class="d-flex align-items-center">
+                                    <i class="ph-books ph-2x text-indigo me-3"></i>
+
+                                    <div class="flex-fill text-end">
+                                        <h4 class="mb-0">{{ $totalMonographs }}</h4>
+                                        <span class="text-muted">total monografi</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card card-body shadow-lg lift">
+                            <a href="#" class="text-dark">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-fill">
+                                        <h4 class="mb-0">{{ $totalArticles }}</h4>
+                                        <span class="text-muted">total artikel</span>
+                                    </div>
+
+                                    <i class="ph-newspaper ph-2x text-primary ms-3"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="card card-body shadow-lg lift">
+                            <a href="#" class="text-dark">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-fill">
+                                        <h4 class="mb-0">{{ $totalJudgments }}</h4>
+                                        <span class="text-muted">total putusan</span>
+                                    </div>
+
+                                    <i class="ph-stamp ph-2x text-danger ms-3"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <!-- Page content -->

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Field;
+use App\Models\Legislation;
 
 class HomepageController extends Controller
 {
@@ -25,10 +26,18 @@ class HomepageController extends Controller
             ->sorted()
             ->pluck('name', 'id');
 
-
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
+
+        $totalLaws        = Legislation::ofType(1)->published()->count();
+        $totalMonographs  = Legislation::ofType(2)->published()->count();
+        $totalArticles 	  = Legislation::ofType(3)->published()->count();
+        $totalJudgments	  = Legislation::ofType(4)->published()->count();
+
+        $styles = [
+            'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
+        ];
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -40,6 +49,11 @@ class HomepageController extends Controller
             'matters',
             'institutes',
             'fields',
+            'totalLaws',
+            'totalMonographs',
+            'totalArticles',
+            'totalJudgments',
+            'styles',
             'vendors',
         ));
     }

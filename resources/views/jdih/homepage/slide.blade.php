@@ -2,8 +2,8 @@
 
     <div id="carouselExampleFade" class="carousel slide carousel-fade overlay" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url({{ asset('assets/jdih/images/demo/slide1.jpg') }}); background-position:center; min-height: 480px"></div>
-            <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide2.jpg') }}); background-position:bottom; min-height: 480px"></div>
+            <div class="carousel-item active" style="background-image: url({{ asset('assets/jdih/images/demo/slide2.jpg') }}); background-position:bottom; min-height: 480px"></div>
+            <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide1.jpg') }}); background-position:center; min-height: 480px"></div>
             <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide3.jpg') }}); background-position:center; min-height: 480px"></div>
             <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide4.jpg') }}); background-position:center; min-height: 480px"></div>
         </div>
@@ -14,10 +14,10 @@
             <div class="content">
                 <div class="row gx-7">
                     <div class="col-xl-6">
-                        <h2 class="fw-bold mt-5 text-white" style="font-size: 2.5rem">
+                        <h2 class="fw-bold mt-5 text-white display-6">
                             Cari Produk Hukum <br />
-                            <span class="typer fw-bold text-nowrap text-danger" data-delay="100" data-words="peraturan,monografi hukum,artikel hukum,putusan pengadilan" style="font-size: 2.5rem">peraturan</span>
-                            <span class="cursor fw-bold text-danger" data-owner="typer" style="font-size: 2.5rem"></span>
+                            <span class="typer fw-bold text-nowrap text-danger display-6" data-delay="100" data-words="peraturan,monografi hukum,artikel hukum,putusan pengadilan">peraturan</span>
+                            <span class="cursor fw-bold text-danger display-6" data-owner="typer"></span>
                         </h2>
                         <h3 class="text-white">{{ $appDesc }}</h3>
                         <div class="navbar-search flex-fill position-relative mt-2 mt-lg-0 me-lg-3">
@@ -25,7 +25,7 @@
                                 <input id="search-dropdown" type="text" class="form-control form-control-lg border-0 py-3" placeholder="Cari produk hukum..." data-bs-toggle="dropdown">
                                 <div class="form-control-feedback-icon pt-3">
                                     <i class="ph-magnifying-glass"></i>
-                                </div>                                
+                                </div>
                                 <div id="search-dropdown-results" class="dropdown-menu w-100" data-color-theme="light"></div>
                             </div>
                             <div class="position-static">
@@ -115,7 +115,7 @@
                                 <img src="{{ asset('assets/jdih/images/backgrounds/gubwagub.png') }}" class="img-fluid" height="94">
                             </div>
                         </div>
-                        <img src="{{ asset('assets/jdih/images/backgrounds/nangunsatkerthi2.png') }}" class="img-fluid mt-3 mb-4">
+                        <img src="{{ asset('assets/jdih/images/backgrounds/nangunsatkerthi2.png') }}" class="img-fluid mt-3 mb-4 px-5">
                         <h3 class="fw-bold text-white"><?php echo $company;?></h3>
                     </div>
                 </div>
