@@ -87,7 +87,7 @@ const App = function () {
                     sidebarMainElement.classList.toggle(resizeClass);
                     sidebarMainElement.classList.remove(sidebarMobileTogglerClass);
                     !sidebarMainElement.classList.contains(resizeClass) && sidebarMainElement.classList.remove(resizeClass);
-                });                
+                });
             });
         }
 
@@ -131,7 +131,7 @@ const App = function () {
             toggler.addEventListener('click', function(e) {
                 e.preventDefault();
                 sidebarMainElement.classList.toggle(sidebarCollapsedClass);
-            });                
+            });
         });
 
         // On mobile
@@ -143,7 +143,7 @@ const App = function () {
                 sidebarMainRestElements.forEach(function(sidebars) {
                     sidebars.classList.remove(sidebarMobileExpandedClass);
                 });
-            });                
+            });
         });
     };
 
@@ -163,7 +163,7 @@ const App = function () {
             toggler.addEventListener('click', function(e) {
                 e.preventDefault();
                 sidebarSecondaryElement.classList.toggle(sidebarCollapsedClass);
-            });                
+            });
         });
 
         // On mobile
@@ -175,7 +175,7 @@ const App = function () {
                 sidebarSecondaryRestElements.forEach(function(sidebars) {
                     sidebars.classList.remove(sidebarMobileExpandedClass);
                 });
-            });                
+            });
         });
     };
 
@@ -195,7 +195,7 @@ const App = function () {
             toggler.addEventListener('click', function(e) {
                 e.preventDefault();
                 sidebarRightElement.classList.toggle(sidebarCollapsedClass);
-            });                
+            });
         });
 
         // On mobile
@@ -207,7 +207,7 @@ const App = function () {
                 sidebarRightRestElements.forEach(function(sidebars) {
                     sidebars.classList.remove(sidebarMobileExpandedClass);
                 });
-            });                
+            });
         });
     };
 
@@ -287,7 +287,7 @@ const App = function () {
         const toTopElement = document.createElement('button'),
               toTopElementIcon = document.createElement('i'),
               toTopButtonContainer = document.createElement('div'),
-              toTopButtonColorClass = 'btn-secondary',
+              toTopButtonColorClass = 'btn-danger',
               toTopButtonIconClass = 'ph-arrow-up',
               scrollableDistance = 250,
               footerContainer = document.querySelector('.navbar-footer');
@@ -308,7 +308,7 @@ const App = function () {
               add_class_on_scroll = () => to_top_button.classList.add('btn-to-top-visible'),
               remove_class_on_scroll = () => to_top_button.classList.remove('btn-to-top-visible');
 
-        window.addEventListener('scroll', function() { 
+        window.addEventListener('scroll', function() {
             const scrollpos = document.documentElement.scrollTop;
             scrollpos >= scrollableDistance ? add_class_on_scroll() : remove_class_on_scroll();
             if(footerContainer) {
