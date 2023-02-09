@@ -1,5 +1,5 @@
 <!-- Main navbar -->
-<div class="navbar navbar-dark navbar-expand-lg navbar-static">
+<div class="navbar navbar-dark navbar-expand-lg">
     <div class="container jusitfy-content-start px-lg-3">
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="index.html" class="d-inline-flex align-items-center">

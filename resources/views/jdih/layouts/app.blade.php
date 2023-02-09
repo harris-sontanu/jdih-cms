@@ -28,6 +28,7 @@
 	<!-- Core JS files -->
 	<script src="{{ asset('assets/jdih/demo/demo_configurator.js') }}"></script>
 	<script src="{{ asset('assets/jdih/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('assets/jdih/js/jquery/jquery.min.js') }}"></script>
 	<script src="{{ asset('assets/jdih/js/vendor/ui/fab.min.js') }}"></script>
 	<!-- /core JS files -->
 

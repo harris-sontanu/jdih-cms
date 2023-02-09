@@ -31,7 +31,7 @@ class HomepageController extends Controller
         $fields = Field::sorted()->pluck('name', 'id');
 
         $vendors = [
-            'assets/admin/js/vendor/forms/selects/select2.min.js',
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.homepage.index', compact(
