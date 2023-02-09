@@ -16,7 +16,7 @@
     <div class="container" style="margin-top: -480px; height: 480px; z-index: 2; position: relative;">
         <div class="content-wrapper">
             <div class="content">
-                <div class="row gx-5">
+                <div class="row gx-7">
                     <div class="col-xl-6">
                         <h2 class="fw-bold mt-5 text-white" style="font-size: 2.5rem">
                             Cari Produk Hukum <br />
@@ -224,12 +224,20 @@
                         </div>
                         <a href="#" class="link-white mt-3 d-block fw-bold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="col-xl-6">
-
+                    <div class="col-xl-6 text-center">
+                        <div class="row mt-5">
+                            <div class="col">
+                                <img src="{{ asset('assets/jdih/images/backgrounds/baliprov.png') }}" class="img-fluid" height="94">
+                            </div>
+                            <div class="col">
+                                <img src="{{ asset('assets/jdih/images/backgrounds/gubwagub.png') }}" class="img-fluid" height="94">
+                            </div>
+                        </div>
+                        <img src="{{ asset('assets/jdih/images/backgrounds/nangunsatkerthi2.png') }}" class="img-fluid mt-3 mb-4">
+                        <h3 class="fw-bold text-white"><?php echo $company;?></h3>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
