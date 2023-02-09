@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Jdih;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Type;
+use App\Models\Category;
+use App\Models\Matter;
+use App\Models\Institute;
+use App\Models\Field;
 
 class HomepageController extends Controller
 {
@@ -15,6 +20,27 @@ class HomepageController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('jdih.homepage');
+        $types = Type::pluck('name', 'id');
+        $categories = Category::ofType(1)
+            ->sorted()
+            ->pluck('name', 'id');
+
+        
+        $matters = Matter::sorted()->pluck('name', 'id');
+        $institutes = Institute::sorted()->pluck('name', 'id');
+        $fields = Field::sorted()->pluck('name', 'id');
+
+        $vendors = [
+            'assets/admin/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.homepage', compact(
+            'types', 
+            'categories',
+            'matters',
+            'institutes',
+            'fields',
+            'vendors',
+        ));
     }
 }

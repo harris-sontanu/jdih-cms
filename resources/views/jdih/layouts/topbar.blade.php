@@ -23,34 +23,45 @@
         </div>
 
         <ul class="navbar-nav ms-lg-2 order-1 order-lg-2 ">
+            <li class="nav-item">
+                <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded" title="Mode terang">
+                    <i class="ph-sun"></i>
+                    <span class="d-xl-none ms-2">Mode terang</span>
+                </a>
+            </li>
+
             <li class="nav-item dropdown">
-                <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="../../../assets/images/lang/es.svg" class="h-16px me-2" alt="">
-                    Indonesia
+                <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown" title="Pilih Bahasa">
+                    <img src="{{ asset('assets/jdih/images/lang/id.svg') }}" class="h-16px me-2" alt="Indonesian">
+                    Indonesian
                 </a>
 
                 <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item active">
+                        <img src="{{ asset('assets/jdih/images/lang/id.svg') }}" class="h-16px me-2" alt="Indonesian">
+                        Indonesian
+                    </a>
                     <a href="#" class="dropdown-item">
-                        <img src="../../../assets/images/lang/gb.svg" class="h-16px me-2" alt="">
+                        <img src="{{ asset('assets/jdih/images/lang/gb.svg') }}" class="h-16px me-2" alt="">
                         English
                     </a>
                     <a href="#" class="dropdown-item">
-                        <img src="../../../assets/images/lang/ua.svg" class="h-16px me-2" alt="">
-                        Українська
+                        <img src="{{ asset('assets/jdih/images/lang/cn.svg') }}" class="h-16px me-2" alt="">
+                        Mandarin
                     </a>
                     <a href="#" class="dropdown-item">
-                        <img src="../../../assets/images/lang/de.svg" class="h-16px me-2" alt="">
-                        Deutsch
+                        <img src="{{ asset('assets/jdih/images/lang/jp.svg') }}" class="h-16px me-2" alt="">
+                        Japanese
                     </a>
-                    <a href="#" class="dropdown-item active">
-                        <img src="../../../assets/images/lang/es.svg" class="h-16px me-2" alt="">
-                        España
+                    <a href="#" class="dropdown-item">
+                        <img src="{{ asset('assets/jdih/images/lang/sa.svg') }}" class="h-16px me-2" alt="">
+                        Arabic
                     </a>
                 </div>
             </li>
         </ul>
 
-        <button type="button" class="btn btn-outline-danger btn-icon order-3 ms-lg-2">
+        <button type="button" class="btn btn-outline-yellow btn-icon order-3 ms-lg-2">
             <i class="ph-sign-in ms-lg-1"></i>
             <span class="d-none d-lg-inline-block ms-2 me-1">Masuk</span>
         </button>

@@ -12,8 +12,8 @@
 
             <h1 class="page-title mb-0">
                 <a href="beranda" class="text-dark">
-                    <span class="fw-bold">{{ $appName }}</span>
-                    <small class="d-block fs-base fs-sm text-muted">{{ $appDesc }}</small>
+                    <span class="fw-bold">{!! $appName !!}</span>
+                    <small class="d-block fs-base fs-sm text-muted">{!! $appDesc !!}</small>
                 </a>
             </h1>
 

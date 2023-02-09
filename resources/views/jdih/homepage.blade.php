@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="profile-cover position-relative overlay">
-    <div class="profile-cover-img bg-dark" style="min-height: 480px">
+    <div class="profile-cover-img bg-dark" style="background-image: url({{ asset('assets/jdih/images/demo/cover3.jpg') }}); min-height: 480px">
         <div class="container">
             <div class="content-wrapper">
-                <div class="content">
+                <div class="content position-relative">
                     <div class="row">
                         <div class="col-lg-6">
                             <h2 class="fw-bold mt-5 text-white" style="font-size: 2.5rem">
@@ -142,66 +142,74 @@
                                         <i class="ph-faders-horizontal"></i>
                                     </a>
 
-                                    <div class="dropdown-menu w-100 p-3 dropdown-menu-end">
+                                    <div class="dropdown-menu w-100 p-3 dropdown-menu-end start-5">
                                         <div class="d-flex align-items-center mb-3">
-                                            <h6 class="mb-0">Search options</h6>
-                                            <a href="#" class="text-body rounded-pill ms-auto">
-                                                <i class="ph-clock-counter-clockwise"></i>
-                                            </a>
+                                            <h6 class="mb-0">Filter Pencarian Produk Hukum</h6>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="d-block form-label">Category</label>
-                                            <label class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" checked="">
-                                                <span class="form-check-label">Invoices</span>
-                                            </label>
-                                            <label class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input">
-                                                <span class="form-check-label">Files</span>
-                                            </label>
-                                            <label class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input">
-                                                <span class="form-check-label">Users</span>
-                                            </label>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label">Addition</label>
-                                            <div class="input-group">
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <label class="d-block form-label">Tipe</label>
                                                 <select class="form-select w-auto flex-grow-0">
-                                                    <option value="1" selected="">has</option>
-                                                    <option value="2">has not</option>
+                                                    @foreach ($types as $key => $value)
+                                                        <option value="{{ $key }}" @selected(Request::get('type') == $key)>{{ Str::title($value) }}</option>
+                                                    @endforeach
                                                 </select>
-                                                <input type="text" class="form-control" placeholder="Enter the word(s)">
+                                            </div>
+                                            <div class="col">
+                                                <label class="form-label">Jenis / Bentuk</label>
+                                                <select name="category" id="category" class="form-select select-search">
+                                                    <option value="">Pilih Jenis</option>
+                                                    @foreach ($categories as $key => $value)
+                                                        <option value="{{ $key }}" @selected(Request::get('category') == $key)>{{ $value }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
 
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <label class="form-label">Nomor</label>
+                                                <input type="text" name="code_number" id="code_number" class="form-control" placeholder="Contoh: 12">
+                                            </div>
+                                            <div class="col">
+                                                <label class="d-block form-label">Tahun</label>
+                                                <input type="number" name="year" id="year" class="form-control" placeholder="Contoh: 2022">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col">
+                                                <label for="matter" class="d-block form-label">Bidang Hukum</label>
+                                                <select name="matter" id="matter" class="form-select w-auto flex-grow-0">
+                                                    <option value="">Pilih Bidang Hukum</option>
+                                                    @foreach ($matters as $key => $value)
+                                                        <option value="{{ $key }}" @selected(Request::get('matter') == $key)>{{ Str::title($value) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="institute" class="form-label">Pemrakarsa</label>
+                                                <select name="institute" id="institute" class="form-select select-search">
+                                                    <option value="">Pilih Pemrakarsa</option>
+                                                    @foreach ($institutes as $key => $value)
+                                                        <option value="{{ $key }}" @selected(Request::get('institute') == $key)>{{ $value }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="mb-3">
-                                            <label class="form-label">Status</label>
-                                            <div class="input-group">
-                                                <select class="form-select w-auto flex-grow-0">
-                                                    <option value="1" selected="">is</option>
-                                                    <option value="2">is not</option>
-                                                </select>
-                                                <select class="form-select">
-                                                    <option value="1" selected="">Active</option>
-                                                    <option value="2">Inactive</option>
-                                                    <option value="3">New</option>
-                                                    <option value="4">Expired</option>
-                                                    <option value="5">Pending</option>
-                                                </select>
-                                            </div>
+                                            <label for="field" class="form-label">Urusan Pemerintahan</label>
+                                            <select name="field" id="field" class="form-select select-search">
+                                                <option value="">Pilih Urusan Pemerintahan</option>
+                                                @foreach ($fields as $key => $value)
+                                                    <option value="{{ $key }}" @selected(Request::get('field') == $key)>{{ $value }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
-                                        <div class="d-flex">
-                                            <button type="button" class="btn btn-light">Reset</button>
-
-                                            <div class="ms-auto">
-                                                <button type="button" class="btn btn-light">Cancel</button>
-                                                <button type="button" class="btn btn-primary ms-2">Apply</button>
-                                            </div>
-                                        </div>
+                                        <button type="button" class="btn btn-danger w-100">Cari</button>
                                     </div>
                                 </div>
                             </div>
