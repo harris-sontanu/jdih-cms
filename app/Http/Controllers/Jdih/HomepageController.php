@@ -25,7 +25,7 @@ class HomepageController extends Controller
             ->sorted()
             ->pluck('name', 'id');
 
-        
+
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
@@ -34,8 +34,8 @@ class HomepageController extends Controller
             'assets/admin/js/vendor/forms/selects/select2.min.js',
         ];
 
-        return view('jdih.homepage', compact(
-            'types', 
+        return view('jdih.homepage.index', compact(
+            'types',
             'categories',
             'matters',
             'institutes',
