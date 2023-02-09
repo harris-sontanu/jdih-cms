@@ -4,6 +4,30 @@
 
 @include('jdih.homepage.slide')
 
+<section class="bg-dark">
+    <div class="container pt-5 pb-0">
+        <div class="content-wrapper">
+            <div class="content row mb-5">
+                <div class="col-12 col-md-3">
+                    <img src="{{ asset('assets/admin/images/demo/users/face12.jpg') }}" class="rounded-circle d-block m-auto" height="160">
+                </div>
+                <div class="col-12 col-md-9 text-light">
+                    <h2 class="mb-3 text-handwriting">Sekapur Sirih</h2>
+                    <p class="fs-lg">Situs ini merupakan situs resmi Biro Hukum Setda Provinsi Bali. 
+Situs ini memuat data dan informasi-informasi produk hukum baik produk 
+hukum pusat maupun daerah. Disamping itu, situs ini memuat pula 
+informasi mengenai buku-buku referensi tentang hukum yang dimiliki oleh 
+Biro Hukum Provinsi Bali.<br></p>
+                    <div class="author mt-4">
+                        IDA BAGUS GEDE SUDARSANA, SH<br>
+                        <span class="text-light fs-sm">Kepala Biro  Hukum </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Page content -->
 <div class="page-content container">
 
