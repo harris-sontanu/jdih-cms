@@ -24,80 +24,78 @@
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div class="content-wrapper">
-            <div class="content py-5">
-                <div class="d-flex pb-4">
-                    <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Produk Hukum</h2>
-                    <a href="#" class="btn btn-dark lift fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
+<section class="container">
+    <div class="content-wrapper">
+        <div class="content py-5">
+            <div class="d-flex pb-4">
+                <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Produk Hukum</h2>
+                <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
+            </div>
+            <div class="row gx-4">
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body shadow-lg lift">
+                        <a href="#" class="text-dark">
+                            <div class="d-flex align-items-center">
+                                <i class="ph-scales ph-2x text-success me-3"></i>
+
+                                <div class="flex-fill text-end">
+                                    <h4 class="mb-0">{{ $totalLaws }}</h4>
+                                    <span class="text-muted">total peraturan</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="row gx-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card card-body shadow-lg lift">
-                            <a href="#" class="text-dark">
-                                <div class="d-flex align-items-center">
-                                    <i class="ph-scales ph-2x text-success me-3"></i>
 
-                                    <div class="flex-fill text-end">
-                                        <h4 class="mb-0">{{ $totalLaws }}</h4>
-                                        <span class="text-muted">total peraturan</span>
-                                    </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body shadow-lg lift">
+                        <a href="#" class="text-dark">
+                            <div class="d-flex align-items-center">
+                                <i class="ph-books ph-2x text-indigo me-3"></i>
+
+                                <div class="flex-fill text-end">
+                                    <h4 class="mb-0">{{ $totalMonographs }}</h4>
+                                    <span class="text-muted">total monografi</span>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
+                </div>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card card-body shadow-lg lift">
-                            <a href="#" class="text-dark">
-                                <div class="d-flex align-items-center">
-                                    <i class="ph-books ph-2x text-indigo me-3"></i>
-
-                                    <div class="flex-fill text-end">
-                                        <h4 class="mb-0">{{ $totalMonographs }}</h4>
-                                        <span class="text-muted">total monografi</span>
-                                    </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body shadow-lg lift">
+                        <a href="#" class="text-dark">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-fill">
+                                    <h4 class="mb-0">{{ $totalArticles }}</h4>
+                                    <span class="text-muted">total artikel</span>
                                 </div>
-                            </a>
-                        </div>
+
+                                <i class="ph-newspaper ph-2x text-primary ms-3"></i>
+                            </div>
+                        </a>
                     </div>
+                </div>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card card-body shadow-lg lift">
-                            <a href="#" class="text-dark">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <h4 class="mb-0">{{ $totalArticles }}</h4>
-                                        <span class="text-muted">total artikel</span>
-                                    </div>
-
-                                    <i class="ph-newspaper ph-2x text-primary ms-3"></i>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body shadow-lg lift">
+                        <a href="#" class="text-dark">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-fill">
+                                    <h4 class="mb-0">{{ $totalJudgments }}</h4>
+                                    <span class="text-muted">total putusan</span>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="card card-body shadow-lg lift">
-                            <a href="#" class="text-dark">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-fill">
-                                        <h4 class="mb-0">{{ $totalJudgments }}</h4>
-                                        <span class="text-muted">total putusan</span>
-                                    </div>
-
-                                    <i class="ph-stamp ph-2x text-danger ms-3"></i>
-                                </div>
-                            </a>
-                        </div>
+                                <i class="ph-stamp ph-2x text-danger ms-3"></i>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
+
 
 <!-- Page content -->
 <div class="page-content container">
@@ -214,12 +212,36 @@
                             </div>
                         </div>
                         <div class="d-flex mt-5">
-                            <a href="#" class="btn btn-outline-dark lift me-3 fw-semibold">Lihat Detail</a>
-                            <a href="#" class="btn btn-dark lift fw-semibold">Unduh<i class="ph-download ms-2"></i></a>
+                            <a href="#" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
+                            <a href="#" class="btn btn-dark lift px-3 fw-semibold">Unduh<i class="ph-download ms-2"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <section class="latest-legislation py-5">
+                <div class="d-flex pb-4">
+                    <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Terbaru</h2>
+                    <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
+                </div>
+                <div class="row gx-5">
+                    @foreach ($latestLaws as $law)                        
+                        <div class="col-xl-4 my-3">
+                            <div class="card lift shadow-lg h-100">
+                                <a href="#" class="text-body">
+                                    <div class="card-header border-0 pb-0">
+                                        <span class="badge bg-indigo rounded-pill mb-2">{{ $law->category->name }}</span>
+                                        <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>                                
+                                    </div>
+                                    <div class="card-body fs-lg">
+                                        <p class="mb-0 text-body">{{ $law->title }}</p>
+                                    </div>       
+                                </a>                         
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
 
             <!-- Basic card -->
             <div class="card">

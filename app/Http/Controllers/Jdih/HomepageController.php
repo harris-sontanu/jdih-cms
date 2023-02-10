@@ -42,6 +42,12 @@ class HomepageController extends Controller
             ->first();
         $adobeKey = Config::get('services.adobe.key');
 
+        $latestLaws = Legislation::ofType(1)
+            ->published()
+            ->latestApproved()
+            ->take(6)
+            ->get();
+
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
         ];
@@ -63,6 +69,7 @@ class HomepageController extends Controller
             'popularLaw',
             'popularLawDoc',
             'adobeKey',
+            'latestLaws',
             'styles',
             'vendors',
         ));
