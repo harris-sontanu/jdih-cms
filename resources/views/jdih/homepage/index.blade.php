@@ -29,8 +29,8 @@
         <div class="content-wrapper">
             <div class="content py-5">
                 <div class="d-flex pb-4">
-                    <h2 class="fw-bold flex-grow-1 section-title">Statistik Produk Hukum</h2>
-                    <a href="#" class="btn bg-danger bg-opacity-20 text-danger py-2 px-3 lift fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
+                    <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Produk Hukum</h2>
+                    <a href="#" class="btn bg-danger bg-opacity-20 text-danger lift fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
                 </div>
                 <div class="row gx-4">
                     <div class="col-sm-6 col-xl-3">
