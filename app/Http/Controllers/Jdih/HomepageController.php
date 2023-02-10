@@ -10,6 +10,7 @@ use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
+use Illuminate\Support\Facades\Config;
 
 class HomepageController extends Controller
 {
@@ -35,6 +36,12 @@ class HomepageController extends Controller
         $totalArticles 	  = Legislation::ofType(3)->published()->count();
         $totalJudgments	  = Legislation::ofType(4)->published()->count();
 
+        $popularLaw = Legislation::ofType(1)->popular(120)->first();
+        $popularLawDoc = $popularLaw->documents()
+            ->ofType('master')
+            ->first();
+        $adobeKey = Config::get('services.adobe.key');
+
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
         ];
@@ -53,6 +60,9 @@ class HomepageController extends Controller
             'totalMonographs',
             'totalArticles',
             'totalJudgments',
+            'popularLaw',
+            'popularLawDoc',
+            'adobeKey',
             'styles',
             'vendors',
         ));

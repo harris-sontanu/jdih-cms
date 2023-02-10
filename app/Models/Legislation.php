@@ -128,7 +128,7 @@ class Legislation extends Model
     public function shortTitle(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->category->desc . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
+            get: fn ($value) => $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
         );
     }
 
