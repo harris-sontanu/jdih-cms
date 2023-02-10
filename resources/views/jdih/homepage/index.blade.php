@@ -108,6 +108,34 @@
         <!-- Content area -->
         <div class="content">
 
+            <div class="row gx-6 pb-5">
+                <div class="col-xl-6">
+
+                </div>
+                <div class="col-xl-6 ps-3">
+                    <h3 class="fw-bold text-danger mb-0">Populer</h3>
+                    <a href="#" class="d-block display-6 fw-bold text-body mb-4">Peraturan Gubernur Bali Nomor 12 Tahun 2023</a>
+                    <div class="meta fs-lg">
+
+                        <div class="d-flex mb-6">
+                            <div>
+                                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span class="number fs-18"><i class="uil uil-check"></i></span></span>
+                            </div>
+                            <div class="row flex-grow-1">
+                                <div class="col-6">
+                                    <h4 class="mb-1">Jenis Dokumen</h4>
+                                    <p class="mb-0">Peraturan Daerah</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="mb-1">Nomor</h4>
+                                    <p class="mb-0">3</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Basic card -->
             <div class="card">
                 <div class="card-header">
