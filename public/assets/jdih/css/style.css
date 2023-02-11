@@ -2,6 +2,12 @@ h2.section-title {
     font-size: 1.8rem;
 }
 
+@media (min-width: 1200px) {
+    .display-7 {
+        font-size: 1.8rem;
+    }
+}
+
 .start-5 {
     left: 5px !important;
 }

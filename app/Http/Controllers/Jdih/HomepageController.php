@@ -54,6 +54,9 @@ class HomepageController extends Controller
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
+            'assets/admin/js/vendor/visualization/echarts/echarts.min.js',
+			'assets/admin/js/vendor/visualization/d3/d3.min.js',
+			'assets/admin/js/vendor/visualization/d3/d3_tooltip.js',
         ];
 
         return view('jdih.homepage.index', compact(
