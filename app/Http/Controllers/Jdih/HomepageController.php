@@ -10,6 +10,7 @@ use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
+use App\Models\Post;
 use Illuminate\Support\Facades\Config;
 
 class HomepageController extends Controller
@@ -48,6 +49,18 @@ class HomepageController extends Controller
             ->take(6)
             ->get();
 
+        $highlightNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
+            ->published()
+            ->latest()
+            ->first();
+
+        $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
+            ->published()
+            ->latest()
+            ->offset(1)
+            ->limit(2)
+            ->get();
+
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
         ];
@@ -73,6 +86,8 @@ class HomepageController extends Controller
             'popularLawDoc',
             'adobeKey',
             'latestLaws',
+            'highlightNews',
+            'latestNews',
             'styles',
             'vendors',
         ));
