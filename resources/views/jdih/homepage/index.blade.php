@@ -324,18 +324,82 @@
 
 <section class="bg-light">
     <div class="container py-5">
-        <div class="content-wrapper py-5">
-            <div class="content">
+        <div class="content-wrapper">
+            <div class="content py-5">
                 <div class="d-flex pb-4">
                     <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Peraturan</h2>
                     <a href="#" class="btn btn-dark lift px-3 fw-semibold">Filter<i class="ph-faders-horizontal ms-2"></i></a>
                 </div>
-                <div class="row">
-                    <div class="col-xl-8 offset-xl-2">
-                        <div class="card card-body shadow-lg rounded-lg">
-                            <div class="chart-container">
-                                <div class="chart" id="chart_yearly_column" style="min-height: 420px"></div>
+                <div class="card card-body shadow-lg rounded-lg">
+                    <div class="chart-container">
+                        <div class="chart" id="chart_yearly_column" style="min-height: 420px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content py-5">
+                <div class="d-flex pb-4">
+                    <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
+                    <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
+                </div>
+                <div class="row gx-5">
+                    <div class="post col-xl-8">
+                        <figure class="figure">
+                            <img src="{{ asset('assets/admin/images/demo/images/blog2.jpg') }}" class="figure-img img-fluid rounded shadow-lg" alt="...">
+                            <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
+                        <div class="post-title">
+                            <h3 class="fw-bold text-danger">Penyuluhan</h3>
+                            <a href="#" class="d-block display-7 fw-bold text-body mb-3">Menerima kunjungan Biro Hukum dan Pengaduan Masyarakat Sekretariat Jenderal DPR RI.</a>
+                        </div>
+                        <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                            <li class="list-inline-item"><abbr data-bs-popup="tooltip" data-bs-original-title="Minggu, 5 Feb 2023, 20:13"><i class="ph-calendar me-2"></i>5 Feb 2023</abbr></li>
+                            <li class="list-inline-item"><i class="ph-user me-2"></i>Repellat Agnum</li>
+                            <li class="list-inline-item"><i class="ph-eye me-2"></i>Dilihat 25 kali</li>
+                        </ul>
+                        <p class="fs-lg mb-3">Denpasar, 31/1 Biro Hukum Setda Provinsi Bali, menerima Kunjungan dari Biro Hukum dan Pengaduan Masyarakat Sekretariat Jenderal DPR RI.</p>
+                        <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="post">
+                            <figure class="figure">
+                                <img src="{{ asset('assets/admin/images/demo/images/blog3.jpg') }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
+                            </figure>
+                            <div class="post-title">
+                                <h5 class="fw-bold text-danger mb-0">Penyuluhan</h5>
+                                <h4><a href="#" class="d-block fw-bold text-body mb-3">Menerima kunjungan Biro Hukum dan Pengaduan Masyarakat Sekretariat Jenderal DPR RI.</a></h4>
                             </div>
+                            <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                <li class="list-inline-item"><abbr data-bs-popup="tooltip" data-bs-original-title="Minggu, 5 Feb 2023, 20:13"><i class="ph-calendar me-2"></i>5 Feb 2023</abbr></li>
+                                <li class="list-inline-item"><i class="ph-eye me-2"></i>Dilihat 25 kali</li>
+                            </ul>
+                        </div>
+
+                        <div class="post">
+                            <figure class="figure">
+                                <img src="{{ asset('assets/admin/images/demo/images/blog4.jpg') }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
+                            </figure>
+                            <div class="post-title">
+                                <h5 class="fw-bold text-danger mb-0">Penyuluhan</h5>
+                                <h4><a href="#" class="d-block fw-bold text-body mb-3">Menerima kunjungan Biro Hukum dan Pengaduan Masyarakat Sekretariat Jenderal DPR RI.</a></h4>
+                            </div>
+                            <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                <li class="list-inline-item"><abbr data-bs-popup="tooltip" data-bs-original-title="Minggu, 5 Feb 2023, 20:13"><i class="ph-calendar me-2"></i>5 Feb 2023</abbr></li>
+                                <li class="list-inline-item"><i class="ph-eye me-2"></i>Dilihat 25 kali</li>
+                            </ul>
+                        </div>
+
+                        <div class="post">
+                            <figure class="figure">
+                                <img src="{{ asset('assets/admin/images/demo/images/blog5.jpg') }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
+                            </figure>
+                            <div class="post-title">
+                                <h5 class="fw-bold text-danger mb-0">Penyuluhan</h5>
+                                <h4><a href="#" class="d-block fw-bold text-body mb-3">Menerima kunjungan Biro Hukum dan Pengaduan Masyarakat Sekretariat Jenderal DPR RI.</a></h4>
+                            </div>
+                            <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                <li class="list-inline-item"><abbr data-bs-popup="tooltip" data-bs-original-title="Minggu, 5 Feb 2023, 20:13"><i class="ph-calendar me-2"></i>5 Feb 2023</abbr></li>
+                                <li class="list-inline-item"><i class="ph-eye me-2"></i>Dilihat 25 kali</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
