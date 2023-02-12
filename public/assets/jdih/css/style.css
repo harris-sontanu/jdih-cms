@@ -42,3 +42,7 @@ h2.section-title {
 .bg-opacity-3 {
     --bg-opacity: 0.03;
 }
+
+.bg-opacity-85 {
+    --bg-opacity: 0.85;
+}

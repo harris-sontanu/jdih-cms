@@ -4,6 +4,7 @@
 
 @include('jdih.homepage.slide')
 
+<!-- Welcome -->
 <section class="bg-dark">
     <div class="container pt-5 pb-0">
         <div class="content-wrapper">
@@ -23,13 +24,15 @@
         </div>
     </div>
 </section>
+<!-- /welcome -->
 
+<!-- Legislation summaries -->
 <section class="container">
     <div class="content-wrapper">
         <div class="content py-5">
             <div class="d-flex mb-4 pb-2">
-                <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Produk Hukum</h2>
-                <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
+                <h2 class="fw-bold me-xl-auto section-title mb-0">Produk Hukum</h2>
+                <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
             </div>
             <div class="row gx-5">
                 <div class="col-sm-6 col-xl-3">
@@ -95,9 +98,9 @@
         </div>
     </div>
 </section>
+<!-- /legislation summaries -->
 
-
-<!-- Page content -->
+<!-- Latest laws -->
 <div class="page-content container">
 
     <!-- Main content -->
@@ -233,7 +236,7 @@
                                         <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
                                         <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
                                     </div>
-                                    <div class="card-body fs-lg">
+                                    <div class="card-body fs-lg pb-0">
                                         <p class="mb-0 text-body">{{ $law->title }}</p>
                                     </div>
                                 </a>
@@ -250,8 +253,9 @@
     <!-- /main content -->
 
 </div>
-<!-- /page content -->
+<!-- /latest laws -->
 
+<!-- Monograph -->
 <section class="bg-dark overlay position-relative">
     <div class="div" style="background-image: url({{ asset('assets/jdih/images/backgrounds/bg.jpg') }}); background-position:center; background-repeat:no-repeat">
         <div class="container py-5" style="z-index: 2; position: relative;">
@@ -321,15 +325,17 @@
         </div>
     </div>
 </section>
+<!-- /monograph -->
 
-<section class="bg-dark bg-opacity-3">
+<!-- Legislation statistic -->
+<section class="bg-light">
     <div class="container py-5">
         <div class="content-wrapper">
             <div class="content row py-4">
                 <div class="col-xl-10 offset-xl-1">
                     <div class="d-flex mb-4 pb-2">
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Peraturan</h2>
-                        <a href="#" class="btn btn-dark lift px-3 fw-semibold">Filter<i class="ph-faders-horizontal ms-2"></i></a>
+                        <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
                     </div>
                     <div class="card card-body shadow-lg rounded-lg">
                         <div class="chart-container">
@@ -341,7 +347,41 @@
         </div>
     </div>
 </section>
+<!-- /legislation statistic -->
 
+<!-- Latest member's laws -->
+<section class="bg-dark bg-opacity-3">
+    <div class="container py-5">
+        <div class="content-wrapper">
+            <div class="content py-4">
+                <h2 class="fw-bold section-title text-center mb-4 pb-2">Produk Hukum anggota JDIH Provinsi Bali</h2>
+                <div class="row gx-5">
+                    @foreach ($latestLaws as $law)
+                        <div class="col-xl-4 my-3">
+                            <div class="card lift shadow-lg h-100">
+                                <a href="#" class="text-body link-danger">
+                                    <div class="card-header border-0 pb-0">
+                                        <div class="d-flex mb-2">
+                                            <img src="{{ asset('assets/admin/images/demo/logos/1.svg') }}" alt="" srcset="" height="32" class="me-2">
+                                            <h5 class="fw-bold">JDIH Kota Denpasar</h5>
+                                        </div>
+                                        <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
+                                    </div>
+                                    <div class="card-body fs-lg pb-0">
+                                        <p class="mb-0 text-body">{{ $law->title }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /latest member's laws -->
+
+<!-- News -->
 <section class="bg-light">
     <div class="container py-5">
         <div class="content-wrapper">
@@ -391,7 +431,73 @@
         </div>
     </div>
 </section>
+<!-- /news -->
 
+<!-- FAQ -->
+<section class="bg-dark">
+    <div class="container py-5">
+        <div class="content-wrapper">
+            <div class="content py-4">
+                <div class="row gx-5">
+                    <div class="col-xl-5">
+                        <div class="card card-body bg-dark shadow-lg ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/Y5ZlcHiGthw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                            
+                        </div>
+                    </div>
+                    <div class="col-xl-7 text-light">
+                        <span class="d-block display-7 fw-bold mb-4">Pertanyaan yang sering diajukan</span>
+                        <div class="card shadow-lg">
+                            <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
+                                <h6 class="mb-0">
+                                    <a data-bs-toggle="collapse" class="link-light" href="#collapsible-card1"><i class="ph-question me-2"></i>Collapsible card #1</a>
+                                </h6>
+                            </div>
+
+                            <div id="collapsible-card1" class="collapse show">
+                                <div class="card-body bg-dark bg-opacity-85 pt-0">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow-lg">
+                            <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
+                                <h6 class="mb-0">
+                                    <a class="collapsed link-light" data-bs-toggle="collapse" href="#collapsible-card2"><i class="ph-question me-2"></i>Collapsible card #2</a>
+                                </h6>
+                            </div>
+
+                            <div id="collapsible-card2" class="collapse">
+                                <div class="card-body bg-dark bg-opacity-85 pt-0">
+                                    Тon cupidatat skateboard dolor brunch. Тesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow-lg">
+                            <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
+                                <h6 class="mb-0">
+                                    <a class="collapsed link-light" data-bs-toggle="collapse" href="#collapsible-card3"><i class="ph-question me-2"></i>Collapsible card #3</a>
+                                </h6>
+                            </div>
+
+                            <div id="collapsible-card3" class="collapse">
+                                <div class="card-body bg-dark bg-opacity-85 pt-0">
+                                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it.
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn btn-outline-danger lift px-3 me-3 mt-2 fw-semibold">Lihat Pertanyaan lainnya<i class="ph-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /faq -->
+
+<!-- Affiliate Apps -->
 <section class="bg-dark bg-opacity-3">
     <div class="container py-5">
         <div class="content-wrapper">
@@ -449,6 +555,41 @@
         </div>
     </div>
 </section>
+<!-- /affiliate apps -->
+
+<!-- Links -->
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="content-wrapper">
+            <div class="content py-4">
+                <h2 class="fw-bold section-title text-center mb-4 pb-2">Tautan</h2>
+                <div class="row gx-5">
+                    <div class="col-xl-3">
+                        <div class="card shadow-lg lift">
+                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="card shadow-lg lift">
+                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="card shadow-lg lift">
+                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="card shadow-lg lift">
+                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /links -->
 
 @endsection
 
