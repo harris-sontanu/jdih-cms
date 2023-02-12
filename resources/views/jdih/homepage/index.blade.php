@@ -265,7 +265,7 @@
                         <img src="{{ asset('assets/jdih/images/demo/book1.jpg') }}" class="img-fluid mx-auto d-block rounded">
                     </div>
                     <div class="col-xl-8 text-light">
-                        <h3 class="fw-bold text-danger">Monografi Hukum</h3>
+                        <h3 class="fw-bold text-danger"><a href="#" class="link-danger">Monografi Hukum</a></h3>
                         <a href="#" class="d-block display-7 fw-bold link-light mb-4">Salinan Peraturan Menteri Pendidikan, Kebudayaan, Riset, Dan Teknologi Nomor 50 Tahun 2022 tentang Pakaian Seragam Sekolah bagi Peserta Didik jenjang Pendidikan Dasar dan Pendidikan Menengah</a>
                         <div class="fs-lg">
 
@@ -359,7 +359,7 @@
                     @foreach ($latestLaws as $law)
                         <div class="col-xl-4 my-3">
                             <div class="card lift shadow-lg h-100">
-                                <a href="#" class="text-body link-danger">
+                                <a href="#" class="text-body">
                                     <div class="card-header border-0 pb-0">
                                         <div class="d-flex mb-2">
                                             <img src="{{ asset('assets/admin/images/demo/logos/1.svg') }}" alt="" srcset="" height="32" class="me-2">
@@ -397,7 +397,7 @@
                             <figcaption class="figure-caption">{{ $highlightNews->cover->caption }}</figcaption>
                         </figure>
                         <div class="post-title">
-                            <h3 class="fw-bold text-danger mb-2">{{ $highlightNews->taxonomy->name }}</h3>
+                            <h3 class="fw-bold mb-2"><a href="#" class="link-danger">{{ $highlightNews->taxonomy->name }}</a></h3>
                             <a href="#" class="d-block display-7 fw-bold text-body mb-3">{{ $highlightNews->title }}</a>
                         </div>
                         <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
@@ -409,13 +409,13 @@
                         <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
                     </div>
                     <div class="col-xl-4">
-                        @foreach ($latestNews as $news)                            
+                        @foreach ($latestNews as $news)
                             <div class="post">
                                 <figure class="figure">
                                     <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
                                 </figure>
                                 <div class="post-title">
-                                    <h5 class="fw-bold text-danger mb-0">{{ $news->taxonomy->name }}</h5>
+                                    <h5 class="fw-bold mb-1"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
                                     <h4><a href="#" class="d-block fw-bold text-body mb-3">{!! $news->title !!}</a></h4>
                                 </div>
                                 <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
@@ -441,7 +441,7 @@
                 <div class="row gx-5">
                     <div class="col-xl-5">
                         <div class="card card-body bg-dark shadow-lg ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/Y5ZlcHiGthw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                            
+                            <iframe src="https://www.youtube.com/embed/Y5ZlcHiGthw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-xl-7 text-light">
@@ -504,7 +504,7 @@
             <div class="content py-4">
                 <h2 class="fw-bold section-title text-center mb-4 pb-2">Aplikasi Terkait JDIH</h2>
                 <div class="row gx-5">
-                    
+
                     <div class="col-xl-4">
                         <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
                             <a href="https://sipekenseni.baliprov.go.id" class="text-body">
@@ -549,7 +549,7 @@
                             </a>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>

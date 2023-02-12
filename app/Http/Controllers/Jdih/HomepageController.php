@@ -58,7 +58,7 @@ class HomepageController extends Controller
             ->published()
             ->latest()
             ->offset(1)
-            ->limit(2)
+            ->limit(3)
             ->get();
 
         $styles = [
