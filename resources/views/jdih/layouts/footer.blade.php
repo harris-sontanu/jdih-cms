@@ -1,8 +1,8 @@
 <!-- Footer -->
 <section class="bg-dark text-light">
-    <div class="container" style="background-image: url({{ asset('assets/jdih/images/backgrounds/indonesia-map.png') }}); background-position:center; background-repeat: no-repeat">
+    <div class="container py-5" style="background-image: url({{ asset('assets/jdih/images/backgrounds/indonesia-map.png') }}); background-position:center; background-repeat: no-repeat">
         <div class="content-wrapper">
-            <div class="content py-5">
+            <div class="content py-4">
                 <div class="row gx-5">
                     <div class="col-lg-3">
                         <div class="d-flex">
@@ -93,8 +93,8 @@
             </div>
         </div>
 
-        <hr class="m-0">
     </div>
+    <hr class="m-0">
 </section>
 <div class="navbar navbar-sm navbar-dark navbar-expand-xl navbar-footer">
     <div class="container px-lg-3">

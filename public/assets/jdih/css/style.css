@@ -38,3 +38,7 @@ h2.section-title {
 .text-handwriting {
     font-family: 'Kaushan Script', cursive;
 }
+
+.bg-opacity-3 {
+    --bg-opacity: 0.03;
+}

@@ -27,7 +27,7 @@
 <section class="container">
     <div class="content-wrapper">
         <div class="content py-5">
-            <div class="d-flex pb-4">
+            <div class="d-flex mb-4 pb-2">
                 <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Produk Hukum</h2>
                 <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
             </div>
@@ -322,12 +322,12 @@
     </div>
 </section>
 
-<section class="bg-light">
+<section class="bg-dark bg-opacity-3">
     <div class="container py-5">
         <div class="content-wrapper">
-            <div class="content row py-5">
+            <div class="content row py-4">
                 <div class="col-xl-10 offset-xl-1">
-                    <div class="d-flex pb-4">
+                    <div class="d-flex mb-4 pb-2">
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Peraturan</h2>
                         <a href="#" class="btn btn-dark lift px-3 fw-semibold">Filter<i class="ph-faders-horizontal ms-2"></i></a>
                     </div>
@@ -338,8 +338,15 @@
                     </div>
                 </div>
             </div>
-            <div class="content py-5">
-                <div class="d-flex pb-4">
+        </div>
+    </div>
+</section>
+
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="content-wrapper">
+            <div class="content py-4">
+                <div class="d-flex mb-4 pb-2">
                     <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
                     <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                 </div>
@@ -379,6 +386,64 @@
                         @endforeach
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-dark bg-opacity-3">
+    <div class="container py-5">
+        <div class="content-wrapper">
+            <div class="content py-4">
+                <h2 class="fw-bold section-title text-center mb-4 pb-2">Aplikasi Terkait JDIH</h2>
+                <div class="row gx-5">
+                    
+                    <div class="col-xl-4">
+                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                            <a href="https://sipekenseni.baliprov.go.id" class="text-body">
+                                <div class="d-flex align-items-center">
+                                    <i class="ph-newspaper ph-3x text-danger me-3"></i>
+
+                                    <div class="flex-fill text-end">
+                                        <h3 class="mb-0 fw-bold">SI PEKEN SENI</h3>
+                                        <span class="d-block fs-lg">Sistem Penyusunan Keputusan Gubernur Secara Elektronik</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                            <a href="https://fasperkadabkum.com" class="text-body">
+                                <div class="d-flex align-items-center">
+                                    <i class="ph-paper-plane-tilt ph-3x text-indigo me-3"></i>
+
+                                    <div class="flex-fill text-end">
+                                        <h3 class="mb-0 fw-bold">SI PENYU DEWI GITA</h3>
+                                        <span class="d-block fs-lg">Sistem Penyusunan Produk Hukum Daerah Berbasis Wilayah Dengan Digitalisasi</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                            <a href="https://kliknphdbirohukum.website" class="text-body">
+                                <div class="d-flex align-items-center">
+                                    <i class="ph-hand-pointing ph-3x text-success me-3"></i>
+
+                                    <div class="flex-fill text-end">
+                                        <h3 class="mb-0 fw-bold">KLIK NPHD</h3>
+                                        <span class="d-block fs-lg">Sistem Penyusunan Naskah Perjanjian Hibah Daerah</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                
                 </div>
             </div>
         </div>
