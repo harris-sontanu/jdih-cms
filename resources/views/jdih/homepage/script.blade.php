@@ -31,6 +31,28 @@
 			$('#search-dropdown').dropdown('hide');
 		})
 
+        var slider = tns({
+            "container": "#slider",
+            "loop": false,
+            "responsive": {
+                "350": {
+                "items": 3
+                },
+                "500": {
+                "items": 4
+                }
+            },
+            "controls": false,
+            "autoplay": true,
+            "autoplayTimeout": 3500,
+            "autoplayHoverPause": true,
+            "mouseDrag": true,
+            "swipeAngle": false,
+            "speed": 400,
+            "nav": false,
+            "autoplayButtonOutput": false
+        });
+
     })
 
     function chartLawYearlyColumn(elementId) {

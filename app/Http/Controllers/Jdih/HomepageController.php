@@ -63,6 +63,7 @@ class HomepageController extends Controller
 
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
+            'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css',
         ];
 
         $vendors = [
@@ -70,6 +71,7 @@ class HomepageController extends Controller
             'assets/admin/js/vendor/visualization/echarts/echarts.min.js',
 			'assets/admin/js/vendor/visualization/d3/d3.min.js',
 			'assets/admin/js/vendor/visualization/d3/d3_tooltip.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js',
         ];
 
         return view('jdih.homepage.index', compact(
