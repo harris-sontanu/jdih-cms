@@ -3,17 +3,34 @@
 namespace App\Http\Controllers\Jdih\Legislation;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Legislation;
 use App\Models\Category;
 
 class LegislationController extends Controller
 {
+    use VisitorTrait;
+    protected $limit = 10;
     protected $selectedCategories;
 
     function __construct()
     {
         $this->selectedCategories = Category::ofType(1)->inRandomOrder()->take(4)->pluck('id');
+    }
+
+    public function index()
+    {
+        $legislations = Legislation::with(['category', 'category.type', 'user'])
+            ->published()
+            ->latestPublished()
+            ->paginate($this->limit)
+            ->withQueryString();
+
+        // Record visitor
+        $this->recordVisitor(request());
+
+        return view('jdih.legislation.index')->with('legislations', $legislations);
     }
 
     public function lawYearlyColumnChart(Request $request)
@@ -38,7 +55,9 @@ class LegislationController extends Controller
 
             $data = [];
             foreach ($years as $year) {
-                $data[] = Legislation::ofType(1)->where('legislations.year', $year)
+                $data[] = Legislation::ofType(1)
+                    ->published()
+                    ->where('legislations.year', $year)
                     ->where('legislations.category_id', $key)
                     ->count();
             }

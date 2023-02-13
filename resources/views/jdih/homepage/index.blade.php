@@ -32,7 +32,7 @@
         <div class="content py-5">
             <div class="d-flex mb-4 pb-2">
                 <h2 class="fw-bold me-xl-auto section-title mb-0">Produk Hukum</h2>
-                <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
+                <a href="{{ route('legislation.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
             </div>
             <div class="row gx-5">
                 <div class="col-sm-6 col-xl-3">

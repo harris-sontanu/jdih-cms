@@ -19,3 +19,18 @@ Route::get('/', HomepageController::class)
     ->name('homepage');
 
 Route::post('/legislation/law-yearly-column-chart', [LegislationController::class, 'lawYearlyColumnChart']);
+
+Route::name('legislation.')->group(function () {
+
+    Route::controller(LegislationController::class)->group(function () {
+        Route::post('/legislation/category-options', 'categoryOptions')
+            ->name('categoryOptions');
+        Route::get('/produk-hukum/cari', 'search')
+            ->name('search');
+        Route::put('/legislation/download/{id}', 'download')
+            ->name('download');
+        Route::get('/produk-hukum', 'index')
+            ->name('index');
+    });
+
+});

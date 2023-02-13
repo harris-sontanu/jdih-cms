@@ -1,16 +1,16 @@
 <!-- Navigation -->
-<div class="navbar">
+<div class="navbar shadow">
     <div class="container position-relative px-lg-3">
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
             <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">
                 <li class="nav-item">
-                    <a href="index.html" class="navbar-nav-link rounded active fw-bold">
+                    <a href="/" class="navbar-nav-link rounded active fw-bold">
                         Beranda
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
+                    <a href="{{ route('legislation.index') }}" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
                         Produk Hukum
                     </a>
 
