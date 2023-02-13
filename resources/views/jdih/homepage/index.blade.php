@@ -262,11 +262,15 @@
             <div class="content-wrapper">
                 <div class="content row py-5 gx-5">
                     <div class="col-xl-4 px-5">
-                        <img src="{{ asset('assets/jdih/images/demo/book1.jpg') }}" class="img-fluid mx-auto d-block rounded">
+                        @isset($cover)
+                            <img src="{{ $cover->media->source }}" class="img-fluid mx-auto d-block rounded">
+                        @else
+                            <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid rounded">
+                        @endisset
                     </div>
                     <div class="col-xl-8 text-light">
                         <h3 class="fw-bold text-danger"><a href="#" class="link-danger">Monografi Hukum</a></h3>
-                        <a href="#" class="d-block display-7 fw-bold link-light mb-4">Salinan Peraturan Menteri Pendidikan, Kebudayaan, Riset, Dan Teknologi Nomor 50 Tahun 2022 tentang Pakaian Seragam Sekolah bagi Peserta Didik jenjang Pendidikan Dasar dan Pendidikan Menengah</a>
+                        <a href="#" class="d-block display-7 fw-bold link-light mb-4">{{ $monograph->title }}</a>
                         <div class="fs-lg">
 
                             <div class="d-flex mb-3">
@@ -277,7 +281,7 @@
                                 </div>
                                 <div class="flex-fill">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan/Pengarang</h4>
-                                    <p class="mb-0">Indonesia. Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi</p>
+                                    <p class="mb-0">{{ $monograph->author }}</p>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
@@ -289,11 +293,11 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Subjek</h4>
-                                        <p class="mb-0">Porro omnis enim repellat consequatur est dicta illo.</p>
+                                        <p class="mb-0">{{ $monograph->subject }}</p>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Penerbit</h4>
-                                        <p class="mb-0">Kementerian Pendidikan, Kebudayaan, Riset, Dan Teknologi</p>
+                                        <p class="mb-0">{{ $monograph->publisher }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -306,11 +310,11 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Tempat Terbit</h4>
-                                        <p class="mb-0">Jakarta</p>
+                                        <p class="mb-0">{{ $monograph->place }}</p>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Tahun Terbit</h4>
-                                        <p class="mb-0">2022</p>
+                                        <p class="mb-0">{{ $monograph->year }}</p>
                                     </div>
                                 </div>
                             </div>

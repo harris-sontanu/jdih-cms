@@ -50,6 +50,15 @@ class HomepageController extends Controller
             ->take(6)
             ->get();
 
+        $monograph = Legislation::ofType(2)
+            ->published()
+            ->latest()
+            ->first();
+
+        $cover = $monograph->documents()
+            ->ofType('cover')
+            ->first();
+
         $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->published()
             ->latest()
@@ -85,6 +94,8 @@ class HomepageController extends Controller
             'popularLawDoc',
             'adobeKey',
             'latestLaws',
+            'monograph',
+            'cover',
             'latestNews',
             'banners',
             'styles',
