@@ -63,7 +63,7 @@
             }
         });
         $.ajax({
-            url: '/admin/legislation/law-yearly-column-chart',
+            url: '/legislation/law-yearly-column-chart',
             type: 'POST',
             dataType: 'JSON',
         }).done(function(response) {

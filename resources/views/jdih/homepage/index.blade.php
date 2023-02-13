@@ -381,57 +381,72 @@
 </section>
 <!-- /latest member's laws -->
 
-<!-- News -->
-<section class="bg-light">
-    <div class="container py-5">
-        <div class="content-wrapper">
-            <div class="content py-4">
-                <div class="d-flex mb-4 pb-2">
-                    <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
-                    <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
-                </div>
-                <div class="row gx-5">
-                    <div class="post col-xl-8">
-                        <figure class="figure">
-                            <img src="{{ $highlightNews->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="...">
-                            <figcaption class="figure-caption">{{ $highlightNews->cover->caption }}</figcaption>
-                        </figure>
-                        <div class="post-title">
-                            <h3 class="fw-bold mb-2"><a href="#" class="link-danger">{{ $highlightNews->taxonomy->name }}</a></h3>
-                            <a href="#" class="d-block display-7 fw-bold text-body mb-3">{{ $highlightNews->title }}</a>
-                        </div>
-                        <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
-                            <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $highlightNews->dateFormatted($highlightNews->published_at) }}</li>
-                            <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $highlightNews->author->name }}</li>
-                            <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $highlightNews->view }}</li>
-                        </ul>
-                        <p class="fs-lg mb-3">{!! $highlightNews->excerpt !!}</p>
-                        <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
+@isset($latestNews)
+    <!-- News -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="content-wrapper">
+                <div class="content py-4">
+                    <div class="d-flex mb-4 pb-2">
+                        <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
+                        <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="col-xl-4">
+                    <div class="row gx-5">
+                        @php
+                            $i = 0;
+                        @endphp
                         @foreach ($latestNews as $news)
-                            <div class="post">
-                                <figure class="figure">
-                                    <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
-                                </figure>
-                                <div class="post-title">
-                                    <h5 class="fw-bold mb-1"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
-                                    <h4><a href="#" class="d-block fw-bold text-body mb-3">{!! $news->title !!}</a></h4>
+                            @if ($i === 0)
+                                <!-- Highlight news -->
+                                <div class="post col-xl-8">
+                                    <figure class="figure">
+                                        <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="...">
+                                        <figcaption class="figure-caption">{{ $news->cover->caption }}</figcaption>
+                                    </figure>
+                                    <div class="post-title">
+                                        <h3 class="fw-bold mb-2"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h3>
+                                        <a href="#" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
+                                    </div>
+                                    <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
+                                        <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
+                                        <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
+                                    </ul>
+                                    <p class="fs-lg mb-3">{!! $news->excerpt !!}</p>
+                                    <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
                                 </div>
-                                <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
-                                    <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                    <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
-                                </ul>
-                            </div>
-                        @endforeach
+                                <!-- /highlight news -->
 
+                                <!-- Latest news -->
+                                <div class="col-xl-4">
+                            @else
+                                    <div class="post">
+                                        <figure class="figure">
+                                            <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
+                                        </figure>
+                                        <div class="post-title">
+                                            <h5 class="fw-bold mb-1"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
+                                            <h4><a href="#" class="d-block fw-bold text-body mb-3">{!! $news->title !!}</a></h4>
+                                        </div>
+                                        <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                            <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
+                                            <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
+                                        </ul>
+                                    </div>
+                            @endif
+                            @php
+                                $i++;
+                            @endphp
+                        @endforeach
+                        </div>
+                        <!-- /latest news -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- /news -->
+    </section>
+    <!-- /news -->
+@endisset
 
 <!-- FAQ -->
 <section class="bg-dark">
@@ -557,26 +572,28 @@
 </section>
 <!-- /affiliate apps -->
 
-<!-- Links -->
-<section class="bg-light">
-    <div class="container py-5">
-        <div class="content-wrapper">
-            <div class="content py-4">
-                <h2 class="fw-bold section-title text-center mb-4 pb-2">Tautan</h2>
-                <div id="slider" class="row gx-5">
-                    @foreach ($banners as $banner)                        
-                        <div class="col-xl-3">
-                            <div class="card">
-                                <a href="{{ $banner->url }}"><img class="rounded img-fluid" src="{{ $banner->image->source }}" alt="" srcset=""></a>
+@isset($banner)
+    <!-- Links -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="content-wrapper">
+                <div class="content py-4">
+                    <h2 class="fw-bold section-title text-center mb-4 pb-2">Tautan</h2>
+                    <div id="slider" class="row gx-5">
+                        @foreach ($banners as $banner)
+                            <div class="col-xl-3">
+                                <div class="card">
+                                    <a href="{{ $banner->url }}"><img class="rounded img-fluid" src="{{ $banner->image->source }}" alt="" srcset=""></a>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach                    
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- /links -->
+    </section>
+    <!-- /links -->
+@endisset
 
 @endsection
 

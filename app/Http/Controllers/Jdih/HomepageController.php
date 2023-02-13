@@ -50,16 +50,10 @@ class HomepageController extends Controller
             ->take(6)
             ->get();
 
-        $highlightNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
-            ->published()
-            ->latest()
-            ->first();
-
         $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->published()
             ->latest()
-            ->offset(1)
-            ->limit(3)
+            ->limit(4)
             ->get();
 
         $banners = Link::banners()->published()->get();
@@ -91,7 +85,6 @@ class HomepageController extends Controller
             'popularLawDoc',
             'adobeKey',
             'latestLaws',
-            'highlightNews',
             'latestNews',
             'banners',
             'styles',
