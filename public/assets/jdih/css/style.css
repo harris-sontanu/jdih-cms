@@ -11,6 +11,11 @@ a.text-body:hover {
     background-color: #f3f4f6;
 }
 
+.main-nav .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }
+
 @media (min-width: 1200px) {
     .display-7 {
         font-size: 1.8rem;

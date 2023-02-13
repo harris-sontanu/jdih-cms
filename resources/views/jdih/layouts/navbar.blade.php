@@ -2,7 +2,7 @@
 <div class="navbar">
     <div class="container position-relative px-lg-3">
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
-            <ul class="nav gap-1 flex-nowrap flex-lg-wrap">
+            <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">
                 <li class="nav-item">
                     <a href="index.html" class="navbar-nav-link rounded active fw-bold">
                         Beranda

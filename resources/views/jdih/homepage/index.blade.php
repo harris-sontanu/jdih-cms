@@ -576,7 +576,7 @@
 </section>
 <!-- /affiliate apps -->
 
-@isset($banner)
+@isset($banners)
     <!-- Links -->
     <section class="bg-light">
         <div class="container py-5">
