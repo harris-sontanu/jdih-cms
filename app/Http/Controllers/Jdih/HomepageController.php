@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Jdih;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Traits\VisitorTrait;
 use App\Models\Type;
 use App\Models\Category;
 use App\Models\Matter;
@@ -12,10 +12,13 @@ use App\Models\Field;
 use App\Models\Legislation;
 use App\Models\Post;
 use App\Models\Link;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 class HomepageController extends Controller
 {
+    use VisitorTrait;
+
     /**
      * Handle the incoming request.
      *
@@ -42,6 +45,7 @@ class HomepageController extends Controller
         $popularLawDoc = $popularLaw->documents()
             ->ofType('master')
             ->first();
+
         $adobeKey = Config::get('services.adobe.key');
 
         $latestLaws = Legislation::ofType(1)
@@ -66,6 +70,9 @@ class HomepageController extends Controller
             ->get();
 
         $banners = Link::banners()->published()->get();
+        
+        // Record visitor
+        $this->recordVisitor($request);
 
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
