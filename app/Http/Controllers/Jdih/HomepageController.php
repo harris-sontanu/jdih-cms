@@ -11,6 +11,7 @@ use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
 use App\Models\Post;
+use App\Models\Link;
 use Illuminate\Support\Facades\Config;
 
 class HomepageController extends Controller
@@ -61,6 +62,8 @@ class HomepageController extends Controller
             ->limit(3)
             ->get();
 
+        $banners = Link::banners()->published()->get();
+
         $styles = [
             'https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap',
             'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css',
@@ -90,6 +93,7 @@ class HomepageController extends Controller
             'latestLaws',
             'highlightNews',
             'latestNews',
+            'banners',
             'styles',
             'vendors',
         ));

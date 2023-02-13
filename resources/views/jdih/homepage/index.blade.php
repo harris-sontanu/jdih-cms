@@ -564,36 +564,13 @@
             <div class="content py-4">
                 <h2 class="fw-bold section-title text-center mb-4 pb-2">Tautan</h2>
                 <div id="slider" class="row gx-5">
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
+                    @foreach ($banners as $banner)                        
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <a href="{{ $banner->url }}"><img class="rounded img-fluid" src="{{ $banner->image->source }}" alt="" srcset=""></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="card">
-                            <a href="#"><img class="rounded img-fluid" src="{{ asset('assets/admin/images/placeholders/banner.jpg') }}" alt="" srcset=""></a>
-                        </div>
-                    </div>
+                    @endforeach                    
                 </div>
             </div>
         </div>
