@@ -33,7 +33,7 @@
 
         var slider = tns({
             "container": "#slider",
-            "loop": false,
+            "loop": true,
             "responsive": {
                 "350": {
                 "items": 3

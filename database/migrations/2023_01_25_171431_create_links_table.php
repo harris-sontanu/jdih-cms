@@ -17,12 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('desc')->nullable();
-            $table->unsignedBigInteger('image_id')
-                ->nullable();
-            $table->foreign('image_id')
-                ->references('id')
-                ->on('media')
-                ->nullOnDelete();
             $table->string('url');
             $table->integer('sort')->default(0);
             $table->enum('type', ['banner', 'jdih', 'youtube']);

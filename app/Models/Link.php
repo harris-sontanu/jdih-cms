@@ -40,12 +40,7 @@ class Link extends Model
 
     public function image()
     {
-        return $this->belongsTo(Media::class);
-    }
-
-    public function images()
-    {
-        return $this->morphMany(Media::class, 'mediaable');
+        return $this->morphOne(Media::class, 'mediaable');
     }
 
     public function youtubeId(): Attribute

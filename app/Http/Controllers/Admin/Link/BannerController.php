@@ -123,23 +123,21 @@ class BannerController extends LinkController
             // Create thumbnail
             $this->createImageThumbnail($path, $image->getClientOriginalExtension());
 
-            $new_media = $banner->images()
+            if ($banner->image()->exists()) {
+                // Delete current cover
+                $this->removeMedia($banner->image->path);
+                $banner->image()->delete();
+            }
+
+            $banner->image()
                 ->create([
                     'name'  => $name,
                     'file_name' => $image->getClientOriginalName(),
                     'mime_type' => $image->getClientMimeType(),
                     'path'  => $path,
-                    'size'  => $image->getSize(),
                     'user_id'   => $request->user()->id,
                     'published_at'  => now(),
                 ]);
-
-            if ($banner->image_id) {
-                $banner->image->delete();
-                $this->removeMedia($banner->image->path);
-            }
-
-            $banner->update(['image_id' => $new_media->id]);
         }
     }
 
