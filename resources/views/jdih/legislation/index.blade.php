@@ -7,7 +7,7 @@
     <div class="content-wrapper">
         <div class="d-flex content">
             <div class="breadcrumb">
-                <a href="index.html" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
+                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
                 <span class="breadcrumb-item active">Produk Hukum</span>
             </div>
 
@@ -29,8 +29,16 @@
         <!-- Content area -->
         <main class="content ms-lg-3">
 
-            <section class="d-flex align-items-center mb-4">
-                <span>Menampilkan 1 - 10 dari 1.277 produk hukum</span>
+            <section class="d-flex align-items-center mb-3">
+                <p class="mb-0">
+                    Menampilkan
+                    <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
+                    sampai
+                    <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
+                    dari
+                    <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
+                    produk hukum
+                </p>
                 <div class="ms-auto my-auto">
                     <span class="d-inline-block me-2">Urutkan</span>
                     <div class="btn-group">
@@ -46,15 +54,15 @@
                 </div>
             </section>
 
-            @foreach ($legislations as $legislation)                        
+            @foreach ($legislations as $legislation)
                 <div class="card card-body shadow-lg mb-4">
                     <div class="d-sm-flex align-items-sm-start">
-                        
+
                         <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
                             <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid w-lg-120px">
                         </a>
 
-                        <div class="flex-fill">                                
+                        <div class="flex-fill">
                             <a href="#" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
                             <h4 class="mb-1">
                                 <a href="#" class="text-body">{{ $legislation->shortTitle }}</a>
@@ -69,7 +77,7 @@
                             <span class="fs-lg">{{ $legislation->title }}</span>
                         </div>
 
-                        @isset($legislation->status)                                    
+                        @isset($legislation->status)
                             <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0">
                                 {!! $legislation->statusBadge !!}
                             </div>
@@ -78,19 +86,7 @@
                 </div>
             @endforeach
 
-            <!-- Pagination -->
-            <div class="d-flex justify-content-center pt-3 mb-3">
-                <ul class="pagination pagination-flat">
-                    <li class="page-item"><a href="#" class="page-link rounded-pill"><i class="ph-arrow-left"></i></a></li>
-                    <li class="page-item active"><a href="#" class="page-link rounded-pill">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link rounded-pill">2</a></li>
-                    <li class="page-item align-self-center"><span class="mx-2">...</span></li>
-                    <li class="page-item"><a href="#" class="page-link rounded-pill">58</a></li>
-                    <li class="page-item"><a href="#" class="page-link rounded-pill">59</a></li>
-                    <li class="page-item"><a href="#" class="page-link rounded-pill"><i class="ph-arrow-right"></i></a></li>
-                </ul>
-            </div>
-            <!-- /pagination -->
+            {{ $legislations->links('jdih.layouts.pagination') }}
 
         </main>
         <!-- /content area -->
