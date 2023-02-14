@@ -40,8 +40,8 @@
 
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <label class="d-block form-label">Tipe</label>
-                                            <select class="form-select w-auto flex-grow-0 select">
+                                            <label for="type" class="d-block form-label">Tipe</label>
+                                            <select id="type" name="type" class="form-select select">
                                                 @foreach ($types as $key => $value)
                                                     <option value="{{ $key }}" @selected(Request::get('type') == $key)>{{ Str::title($value) }}</option>
                                                 @endforeach
@@ -60,11 +60,11 @@
 
                                     <div class="row mb-3">
                                         <div class="col">
-                                            <label class="form-label">Nomor</label>
+                                            <label for="code_number" class="form-label">Nomor</label>
                                             <input type="text" name="code_number" id="code_number" class="form-control" placeholder="Contoh: 12">
                                         </div>
                                         <div class="col">
-                                            <label class="d-block form-label">Tahun</label>
+                                            <label for="year" class="d-block form-label">Tahun</label>
                                             <input type="number" name="year" id="year" class="form-control" placeholder="Contoh: 2022">
                                         </div>
                                     </div>
@@ -74,8 +74,8 @@
                                             <label for="field" class="d-block form-label">Bidang Hukum</label>
                                             <select name="field" id="field" class="form-select select-search">
                                                 <option value="">Pilih Bidang Hukum</option>
-                                                @foreach ($matters as $key => $value)
-                                                    <option value="{{ $key }}" @selected(Request::get('matter') == $key)>{{ Str::title($value) }}</option>
+                                                @foreach ($fields as $key => $value)
+                                                    <option value="{{ $key }}" @selected(Request::get('field') == $key)>{{ Str::title($value) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -91,11 +91,11 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="matter" class="form-label">Urusan Pemerintahan</label>
-                                        <select id="matter" name="matter[]" multiple="multiple" class="form-select select">
+                                        <label for="matters" class="form-label">Urusan Pemerintahan</label>
+                                        <select id="matters" name="matters[]" multiple="multiple" class="form-select select">
                                             <option value="">Pilih Urusan Pemerintahan</option>
-                                            @foreach ($fields as $key => $value)
-                                                <option value="{{ $key }}" @selected(Request::get('field') == $key)>{{ $value }}</option>
+                                            @foreach ($matters as $key => $value)
+                                                <option value="{{ $key }}" @selected(Request::get('matters') == $key)>{{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
