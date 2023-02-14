@@ -30,7 +30,14 @@ class LegislationController extends Controller
         // Record visitor
         $this->recordVisitor(request());
 
-        return view('jdih.legislation.index')->with('legislations', $legislations);
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.legislation.index', compact(
+            'legislations',
+            'vendors',
+        ));
     }
 
     public function lawYearlyColumnChart(Request $request)

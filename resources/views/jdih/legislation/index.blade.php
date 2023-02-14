@@ -3,11 +3,11 @@
 @section('title', 'Produk Hukum | ' . $appName)
 @section('content')
 
-<section class="bg-dark bg-opacity-3">
+<section class="bg-light">
     <div class="container">
         <div class="content-wrapper">
-            <div class="d-flex">
-                <div class="breadcrumb py-2">
+            <div class="d-flex px-2">
+                <div class="breadcrumb py-3">
                     <a href="index.html" class="breadcrumb-item"><i class="ph-house"></i></a>
                     <span class="breadcrumb-item active">Produk Hukum</span>
                 </div>
@@ -20,4 +20,28 @@
     </div>
 </section>
 
+<!-- Page container -->
+<div class="page-content container">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+        <!-- Content area -->
+        <div class="content">
+
+            @include('jdih.legislation.aside')   
+
+        </div>
+        <!-- /content area -->
+
+    </div>
+    <!-- /main content -->
+
+</div>
+<!-- /page container -->
+
+@endsection
+
+@section('script')
+    @include('jdih.legislation.script')
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use App\View\Composers\AsideComposer;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -49,5 +50,7 @@ class ViewServiceProvider extends ServiceProvider
         ]);
 
         View::share($settings);
+
+        View::composer('jdih.legislation.aside', AsideComposer::class);
     }
 }
