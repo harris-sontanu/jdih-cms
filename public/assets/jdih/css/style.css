@@ -22,6 +22,12 @@ a.text-body:hover {
     }
 }
 
+@media (min-width: 992px) {
+    .w-lg-120px {
+        width: 120px !important;
+    }
+}
+
 .start-5 {
     left: 5px !important;
 }
@@ -59,4 +65,9 @@ a.text-body:hover {
 
 .bg-opacity-85 {
     --bg-opacity: 0.85;
+}
+
+.active > .page-link, .page-link.active {
+    background-color: #ef4444;
+    border-color: #ef4444;
 }

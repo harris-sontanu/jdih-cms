@@ -1,6 +1,13 @@
 <!-- Main navbar -->
 <div class="navbar navbar-sm navbar-dark navbar-expand-lg">
     <div class="container jusitfy-content-start px-lg-3">
+        
+        <div class="d-flex d-lg-none me-2">
+            <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
+                <i class="ph-list"></i>
+            </button>
+        </div>
+
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="index.html" class="d-inline-flex align-items-center">
                 <img src="{{ $appLogoUrl }}" alt="{{ $appName }}">

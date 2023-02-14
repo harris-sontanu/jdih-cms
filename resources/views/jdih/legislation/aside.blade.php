@@ -1,5 +1,5 @@
 <!-- Filter -->
-<aside class="sidebar sidebar-component sidebar-expand-lg align-self-start shadow-lg ms-0 me-lg-3">
+<aside class="sidebar sidebar-main sidebar-expand-lg align-self-start shadow-lg me-lg-3">
 
     <div class="sidebar-section sidebar-section-body d-flex align-items-center">
         <h5 class="mb-0">Filter</h5>
