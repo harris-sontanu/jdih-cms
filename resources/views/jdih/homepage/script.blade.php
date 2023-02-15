@@ -11,6 +11,11 @@
             minimumResultsForSearch: Infinity
         });
 
+        $(".filter-form").submit(function() {
+            $(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
+            return true;
+        });
+
 		$('#search-dropdown').on('keyup change', function() {
 			let search 	= $(this).val(),
 				dom		= $('#search-dropdown-results');
