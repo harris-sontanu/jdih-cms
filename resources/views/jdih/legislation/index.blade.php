@@ -59,11 +59,7 @@
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
-                            @if ($legislation->category->type_id === 1 OR $legislation->category->type_id === 4)
-                                <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px border">
-                            @else
-                                <img src="{{ asset('assets/jdih/images/placeholders/placeholder.jpg') }}" class="img-fluid w-lg-120px">
-                            @endif
+                            <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px border">
                         </a>
 
                         <div class="flex-fill">
@@ -77,8 +73,8 @@
                                 <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
                                 <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
                             </ul>
-
-                            <span class="fs-lg">{{ $legislation->title }}</span>
+                            
+                            <p class="fs-lg mb-0">{!! $legislation->excerpt !!}</p>
                         </div>
 
                         @isset($legislation->status)

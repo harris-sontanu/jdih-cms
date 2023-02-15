@@ -126,9 +126,26 @@ class Legislation extends Model
     }
 
     public function shortTitle(): Attribute
-    {
+    {   
+        $shortTitle = $this->category->type_id === 1 
+            ? $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year 
+            : $this->title; 
+        
         return Attribute::make(
-            get: fn ($value) => $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
+            get: fn ($value) => $shortTitle
+        );
+    }
+
+    public function excerpt(): Attribute
+    {   
+        $excerpt = match ($this->category->type_id) {
+            2 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Penerbit:</span> ' . $this->publisher,
+            3 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Sumber:</span> ' . $this->source,
+            default => $this->title,
+        };
+
+        return Attribute::make(
+            get: fn ($value) => $excerpt
         );
     }
 
@@ -281,11 +298,14 @@ class Legislation extends Model
 
     public function coverThumbSource(): Attribute
     {
-        $cover = $this->documents()->where('type', 'cover')->first();
-        $coverThumbUrl = asset('assets/admin/images/placeholders/placeholder.jpg');
+        $cover = $this->documents()
+            ->ofType('cover')
+            ->first();
+            
+        $coverThumbUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
         if (!empty($cover)) {
-            $ext = substr(strchr($cover->path, '.'), 1);
-            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $cover->path);
+            $ext = substr(strchr($cover->media->path, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $cover->media->path);
             if (Storage::disk('public')->exists($thumbnail)) $coverThumbUrl = Storage::url($thumbnail);
         }
 
