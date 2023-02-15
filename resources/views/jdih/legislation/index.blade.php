@@ -59,7 +59,11 @@
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
-                            <img src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" class="img-fluid w-lg-120px">
+                            @if ($legislation->category->type_id === 1 OR $legislation->category->type_id === 4)
+                                <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px border">
+                            @else
+                                <img src="{{ asset('assets/jdih/images/placeholders/placeholder.jpg') }}" class="img-fluid w-lg-120px">
+                            @endif
                         </a>
 
                         <div class="flex-fill">

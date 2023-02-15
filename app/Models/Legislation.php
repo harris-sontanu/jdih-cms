@@ -268,6 +268,32 @@ class Legislation extends Model
             ->take(7);
     }
 
+    public function masterDocumentSource(): Attribute
+    {
+        $master = $this->documents()
+            ->ofType('master')
+            ->first();
+
+        return Attribute::make(
+            get: fn ($value) => empty($master) ? null : Storage::url($master->media->path)
+        );
+    }
+
+    public function coverThumbSource(): Attribute
+    {
+        $cover = $this->documents()->where('type', 'cover')->first();
+        $coverThumbUrl = asset('assets/admin/images/placeholders/placeholder.jpg');
+        if (!empty($cover)) {
+            $ext = substr(strchr($cover->path, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $cover->path);
+            if (Storage::disk('public')->exists($thumbnail)) $coverThumbUrl = Storage::url($thumbnail);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $coverThumbUrl
+        );
+    }
+
     public function scopeSearch($query, $request)
     {
         if (isset($request['search']) AND $search = $request['search']) {
