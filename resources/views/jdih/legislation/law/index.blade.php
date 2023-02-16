@@ -45,11 +45,11 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Terbaru</button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="{{ route('legislation.law.index', ['order' => 'latest']) }}" class="dropdown-item active">Terbaru</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'popular']) }}" class="dropdown-item">Terpopuler</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'number-asc']) }}" class="dropdown-item">Nomor kecil ke besar</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'most-viewed']) }}" class="dropdown-item">Dilihat paling banyak</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'rare-viewed']) }}" class="dropdown-item">Dilihat paling sedikit</a>
+                            <a href="{{ route('legislation.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item active">Terbaru</a>
+                            <a href="{{ route('legislation.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item">Terpopuler</a>
+                            <a href="{{ route('legislation.index', ['order' => 'number-asc'] + Request::query()) }}" class="dropdown-item">Nomor kecil ke besar</a>
+                            <a href="{{ route('legislation.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling banyak</a>
+                            <a href="{{ route('legislation.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling sedikit</a>
                         </div>
                     </div>
                 </div>

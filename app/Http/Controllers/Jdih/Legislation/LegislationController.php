@@ -23,7 +23,7 @@ class LegislationController extends Controller
     {
         $legislations = Legislation::with(['category', 'category.type', 'user'])
             ->published()
-            ->latestPublished()
+            ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 
@@ -45,7 +45,7 @@ class LegislationController extends Controller
         $legislations = Legislation::with(['category', 'category.type', 'user'])
             ->filter($request)
             ->published()
-            ->latestPublished()
+            ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 

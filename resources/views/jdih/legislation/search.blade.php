@@ -40,9 +40,9 @@
                         <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
                         dari
                         <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
-                        produk hukum 
-                        @if (Request::get('title'))                            
-                            untuk 
+                        produk hukum
+                        @if (Request::get('title'))
+                            untuk
                             <span class="fw-semibold">"{{ Request::get('title') }}"</span>
                         @endif
                     </p>
@@ -51,11 +51,10 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Terbaru</button>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item active">Terbaru</a>
-                                <a href="#" class="dropdown-item">Terpopuler</a>
-                                <a href="#" class="dropdown-item">Nomor kecil ke besar</a>
-                                <a href="#" class="dropdown-item">Dilihat paling banyak</a>
-                                <a href="#" class="dropdown-item">Dilihat paling sedikit</a>
+                                <a href="{{ route('legislation.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item active">Terbaru</a>
+                                <a href="{{ route('legislation.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item">Terpopuler</a>
+                                <a href="{{ route('legislation.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling banyak</a>
+                                <a href="{{ route('legislation.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling sedikit</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                                     <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
                                     <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
                                 </ul>
-                                
+
                                 <p class="fs-lg mb-0">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
                             </div>
 
@@ -96,7 +95,7 @@
                 {{ $legislations->links('jdih.layouts.pagination') }}
 
             @else
-                
+
                 <article class="card card-body shadow-lg">
                     <div class="d-flex justify-content-start">
                         <i class="ph-smiley-x-eyes ph-4x me-2"></i>
