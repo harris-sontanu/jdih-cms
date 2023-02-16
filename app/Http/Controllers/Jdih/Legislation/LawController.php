@@ -24,11 +24,11 @@ class LawController extends LegislationController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $legislations = Legislation::ofType(1)
             ->published()
-            ->latestApproved()
+            ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 

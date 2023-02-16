@@ -19,7 +19,7 @@ class LegislationController extends Controller
         $this->selectedCategories = Category::ofType(1)->inRandomOrder()->take(4)->pluck('id');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $legislations = Legislation::with(['category', 'category.type', 'user'])
             ->published()

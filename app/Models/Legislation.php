@@ -126,18 +126,18 @@ class Legislation extends Model
     }
 
     public function shortTitle(): Attribute
-    {   
-        $shortTitle = $this->category->type_id === 1 
-            ? $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year 
-            : $this->title; 
-        
+    {
+        $shortTitle = $this->category->type_id === 1
+            ? $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
+            : $this->title;
+
         return Attribute::make(
             get: fn ($value) => $shortTitle
         );
     }
 
     public function excerpt(): Attribute
-    {   
+    {
         $excerpt = match ($this->category->type_id) {
             2 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Penerbit:</span> ' . $this->publisher,
             3 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Sumber:</span> ' . $this->source,
@@ -281,8 +281,7 @@ class Legislation extends Model
     public function scopePopular($query, $days = 7)
     {
         return $query->where('published_at', '>', Carbon::now()->subDays($days))
-            ->orderBy('view', 'desc')
-            ->take(7);
+            ->orderBy('view', 'desc');
     }
 
     public function masterDocumentSource(): Attribute
@@ -301,7 +300,7 @@ class Legislation extends Model
         $cover = $this->documents()
             ->ofType('cover')
             ->first();
-            
+
         $coverThumbUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
         if (!empty($cover)) {
             $ext = substr(strchr($cover->media->path, '.'), 1);
@@ -459,6 +458,16 @@ class Legislation extends Model
                 $query->orderBy('category_name', $request['sort']);
             } else if ($request['order'] === 'user') {
                 $query->orderBy('user_name', $request['sort']);
+            } else if ($request['order'] === 'latest') {
+                $query->orderBy('published', 'desc');
+            } else if ($request['order'] === 'popular') {
+                $query->orderBy('view', 'desc');
+            } else if ($request['order'] === 'number-asc') {
+                $query->orderBy('number', 'asc');
+            } else if ($request['order'] === 'most-viewed') {
+                $query->orderBy('view', 'desc');
+            } else if ($request['order'] === 'rare-viewed') {
+                $query->orderBy('view', 'asc');
             } else {
                 $query->orderBy($request['order'], $request['sort']);
             }
