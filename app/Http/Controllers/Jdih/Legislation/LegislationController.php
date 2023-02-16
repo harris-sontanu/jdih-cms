@@ -32,7 +32,6 @@ class LegislationController extends Controller
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js',
         ];
 
         return view('jdih.legislation.index', compact(
