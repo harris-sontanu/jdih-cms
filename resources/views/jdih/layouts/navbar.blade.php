@@ -4,13 +4,13 @@
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
             <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">
                 <li class="nav-item">
-                    <a href="/" class="navbar-nav-link rounded active fw-bold">
+                    <a href="/" class="navbar-nav-link rounded {{ request()->is('/') ? 'active fw-bold' : null }}">
                         Beranda
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="{{ route('legislation.index') }}" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
+                    <a href="{{ route('legislation.index') }}" class="navbar-nav-link dropdown-toggle rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
                         Produk Hukum
                     </a>
 
