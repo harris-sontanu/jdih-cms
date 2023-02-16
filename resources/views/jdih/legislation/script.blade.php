@@ -12,5 +12,20 @@
             return true;
         });
 
+        var monographSlider = tns({
+            "container": "#monograph-slider",
+            "mode": "gallery",
+            "items": 1,
+            "controls": false,
+            "autoplay": true,
+            "autoplayTimeout": 3500,
+            "autoplayHoverPause": true,
+            "mouseDrag": true,
+            "swipeAngle": false,
+            "speed": 400,
+            "nav": false,
+            "autoplayButtonOutput": false
+        });
+
     });
 </script>

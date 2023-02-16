@@ -40,8 +40,11 @@
                         <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
                         dari
                         <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
-                        produk hukum untuk 
-                        <span class="fw-semibold">"{{ Request::get('title') }}"</span>
+                        produk hukum 
+                        @if (Request::get('title'))                            
+                            untuk 
+                            <span class="fw-semibold">"{{ Request::get('title') }}"</span>
+                        @endif
                     </p>
                     <div class="ms-auto my-auto">
                         <span class="d-inline-block me-2">Urutkan</span>
@@ -99,7 +102,7 @@
                         <i class="ph-smiley-x-eyes ph-4x me-2"></i>
                         <div>
                             <h4 class="fw-bold mt-1 mb-2">Maaf! Data yang Anda cari tidak ditemukan</h4>
-                            <p>Coba ganti kata kunci atau kembali ke <a href="{{ route('homepage') }}" class="text-body fw-semibold">halaman utama</a></p>
+                            <p>Coba ganti kata kunci atau kembali ke <a href="{{ route('homepage') }}" class="text-body fw-semibold">halaman beranda</a></p>
                         </div>
                     </div>
                 </article>
