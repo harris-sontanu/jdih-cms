@@ -8,7 +8,7 @@
         <div class="d-flex content">
             <div class="breadcrumb">
                 <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
-                <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
+                <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
                 <span class="breadcrumb-item active">Peraturan Perundang-undangan</span>
             </div>
 
@@ -29,7 +29,7 @@
 
         <!-- Content area -->
         <main class="content ms-lg-3">
-
+            
             <section class="d-flex align-items-center mb-3">
                 <p class="mb-0">
                     Menampilkan
