@@ -15,7 +15,7 @@
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item rounded">Peraturan Perundang-undangan</a>
+                        <a href="{{ route('legislation.law.index') }}" class="dropdown-item rounded">Peraturan Perundang-undangan</a>
                         <a href="#" class="dropdown-item rounded">Monografi Hukum</a>
                         <a href="#" class="dropdown-item rounded">Artikel Hukum</a>
                         <a href="#" class="dropdown-item rounded">Putusan Pengadilan</a>

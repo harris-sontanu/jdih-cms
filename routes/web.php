@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Jdih\HomepageController;
 use App\Http\Controllers\Jdih\Legislation\LegislationController;
+use App\Http\Controllers\Jdih\Legislation\LawController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,15 @@ Route::name('legislation.')->group(function () {
             ->name('download');
         Route::get('/produk-hukum', 'index')
             ->name('index');
+    });
+
+    Route::controller(LawController::class)->group(function () {
+        Route::get('/produk-hukum/peraturan-perundang-undangan', 'index')
+            ->name('law.index');
+        Route::get('/produk-hukum/peraturan-perundang-undangan/{category:slug}', 'category')
+            ->name('law.category');
+        Route::get('/produk-hukum/peraturan-perundang-undangan/{category:slug}/{legislation:slug}', 'show')
+            ->name('law.show');
     });
 
 });
