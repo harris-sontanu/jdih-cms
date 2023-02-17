@@ -21,7 +21,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.legislation.aside')
+    @include('jdih.legislation.aside', ['view' => 'law'])
 
     <!-- Main content -->
     <div class="content-wrapper">
