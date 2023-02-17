@@ -10,15 +10,15 @@
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="{{ route('legislation.index') }}" class="navbar-nav-link dropdown-toggle rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
                         Produk Hukum
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="{{ route('legislation.law.index') }}" class="dropdown-item rounded">Peraturan Perundang-undangan</a>
-                        <a href="#" class="dropdown-item rounded">Monografi Hukum</a>
-                        <a href="#" class="dropdown-item rounded">Artikel Hukum</a>
-                        <a href="#" class="dropdown-item rounded">Putusan Pengadilan</a>
+                        <a href="{{ route('legislation.law.index') }}" class="dropdown-item {{ request()->is('produk-hukum/peraturan-perundang-undangan*') ? 'active' : null }}">Peraturan Perundang-undangan</a>
+                        <a href="#" class="dropdown-item">Monografi Hukum</a>
+                        <a href="#" class="dropdown-item">Artikel Hukum</a>
+                        <a href="#" class="dropdown-item">Putusan Pengadilan</a>
                     </div>
                 </li>
 

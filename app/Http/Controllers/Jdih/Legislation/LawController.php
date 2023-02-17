@@ -27,10 +27,21 @@ class LawController extends LegislationController
     public function index(Request $request)
     {
         $legislations = Legislation::ofType(1)
+            ->with(['category', 'category.type'])
+            ->filter($request)
             ->published()
             ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
+
+        $orderState = match ($request->order) {
+            'latest'        => 'Terbaru',
+            'popular'       => 'Terpopular',
+            'number-asc'    => 'Nomor kecil ke besar',
+            'most-viewed'   => 'Dilihat paling banyak',
+            'rare-viewed'   => 'Dilihat paling sedikit',
+            default         => 'Terbaru',
+        };
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -38,6 +49,7 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'orderState',
             'vendors',
         ));
     }

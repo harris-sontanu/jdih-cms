@@ -4,21 +4,10 @@
         <h5 class="mb-0">Filter</h5>
     </div>
     <div class="sidebar-section-body pt-0">
-        <form class="filter-form" action="{{ route('legislation.search') }}" method="get">
+        <form class="filter-form" action="{{ route('legislation.law.index') }}" method="get">
             <div class="mb-3">
                 <label for="title" class="d-block form-label fw-semibold">Judul</label>
-                <input name="title" id="title" class="form-control" placeholder="Contoh: covid-19"
-                    value="{{ Request::get('title') }}" />
-            </div>
-
-            <div class="mb-3">
-                <label for="type" class="d-block form-label fw-semibold">Tipe</label>
-                <select id="type" name="type" class="form-select select">
-                    @foreach ($types as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('type') == $key)>
-                            {{ Str::title($value) }}</option>
-                    @endforeach
-                </select>
+                <textarea name="title" id="title" rows="3" cols="20" class="form-control" placeholder="Contoh: covid-19">{{ Request::get('title') }}</textarea>
             </div>
 
             <div class="mb-3">

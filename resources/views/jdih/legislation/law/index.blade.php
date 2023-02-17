@@ -8,7 +8,7 @@
         <div class="d-flex content">
             <div class="breadcrumb">
                 <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
-                <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
+                <span class="breadcrumb-item">Produk Hukum</span>
                 <span class="breadcrumb-item active">Peraturan Perundang-undangan</span>
             </div>
 
@@ -39,17 +39,21 @@
                     dari
                     <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
                     produk hukum
+                    @if (Request::get('title'))
+                        untuk
+                        <span class="fw-semibold">"{{ Request::get('title') }}"</span>
+                    @endif
                 </p>
                 <div class="ms-auto my-auto">
                     <span class="d-inline-block me-2">Urutkan</span>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">Terbaru</button>
+                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">{{ $orderState }}</button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="{{ route('legislation.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item active">Terbaru</a>
-                            <a href="{{ route('legislation.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item">Terpopuler</a>
-                            <a href="{{ route('legislation.index', ['order' => 'number-asc'] + Request::query()) }}" class="dropdown-item">Nomor kecil ke besar</a>
-                            <a href="{{ route('legislation.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling banyak</a>
-                            <a href="{{ route('legislation.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item">Dilihat paling sedikit</a>
+                            <a href="{{ route('legislation.law.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'latest' OR empty(Request::get('order'))) active @endif">Terbaru</a>
+                            <a href="{{ route('legislation.law.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'popular') active @endif">Terpopuler</a>
+                            <a href="{{ route('legislation.law.index', ['order' => 'number-asc'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'number-asc') active @endif">Nomor kecil ke besar</a>
+                            <a href="{{ route('legislation.law.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'most-viewed') active @endif">Dilihat paling banyak</a>
+                            <a href="{{ route('legislation.law.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'rare-viewed') active @endif">Dilihat paling sedikit</a>
                         </div>
                     </div>
                 </div>
@@ -66,7 +70,7 @@
                         <div class="flex-fill">
                             <a href="#" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
                             <h4 class="mb-1">
-                                <a href="#" class="text-body">{{ $legislation->shortTitle }}</a>
+                                <a href="#" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
                             </h4>
 
                             <ul class="list-inline list-inline-bullet text-muted mb-3">
@@ -75,7 +79,7 @@
                                 <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
                             </ul>
 
-                            <p class="fs-lg mb-0">{!! $legislation->excerpt !!}</p>
+                            <p class="fs-lg mb-0">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
                         </div>
 
                         @isset($legislation->status)
