@@ -28,6 +28,8 @@ Route::name('legislation.')->group(function () {
             ->name('categoryOptions');
         Route::put('/legislation/download/{id}', 'download')
             ->name('download');
+        Route::get('/produk-hukum', 'index')
+            ->name('index');
     });
 
     Route::controller(LawController::class)->group(function () {

@@ -19,6 +19,38 @@ class LegislationController extends Controller
         $this->selectedCategories = Category::ofType(1)->inRandomOrder()->take(4)->pluck('id');
     }
 
+    public function index(Request $request)
+    {
+        $legislations = Legislation::with(['category', 'category.type'])
+            ->filter($request)
+            ->published()
+            ->sorted($request)
+            ->paginate($this->limit)
+            ->withQueryString();
+
+        $categories = Category::sorted()
+            ->pluck('name', 'id');
+
+        $orderState = match ($request->order) {
+            'latest'        => 'Terbaru',
+            'popular'       => 'Terpopular',
+            'most-viewed'   => 'Dilihat paling banyak',
+            'rare-viewed'   => 'Dilihat paling sedikit',
+            default         => 'Terbaru',
+        };
+
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.legislation.index', compact(
+            'legislations',
+            'categories',
+            'orderState',
+            'vendors',
+        ));
+    }
+
     public function lawYearlyColumnChart(Request $request)
     {
         if ($request->has('years')) {

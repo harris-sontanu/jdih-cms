@@ -459,6 +459,8 @@ class Legislation extends Model
             } else if ($request['order'] === 'user') {
                 $query->orderBy('user_name', $request['sort']);
             } else if ($request['order'] === 'latest') {
+                $query->latest();
+            } else if ($request['order'] === 'latest-approved') {
                 $query->orderBy('published', 'desc');
             } else if ($request['order'] === 'popular') {
                 $query->orderBy('view', 'desc');

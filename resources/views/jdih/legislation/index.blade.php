@@ -8,8 +8,7 @@
         <div class="d-flex content">
             <div class="breadcrumb">
                 <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
-                <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
-                <span class="breadcrumb-item active">Peraturan Perundang-undangan</span>
+                <span class="breadcrumb-item active">Produk Hukum</span>
             </div>
 
             <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
@@ -22,7 +21,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.legislation.aside', ['view' => 'law'])
+    @include('jdih.legislation.aside')
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -38,7 +37,7 @@
                     <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
                     dari
                     <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
-                    peraturan
+                    produk hukum
                     @if (Request::get('title'))
                         untuk
                         <span class="fw-semibold">"{{ Request::get('title') }}"</span>
@@ -49,11 +48,10 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">{{ $orderState }}</button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="{{ route('legislation.law.index', ['order' => 'latest-approved'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'latest-approved' OR empty(Request::get('order'))) active @endif">Terbaru</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'popular') active @endif">Terpopuler</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'number-asc'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'number-asc') active @endif">Nomor kecil ke besar</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'most-viewed') active @endif">Dilihat paling banyak</a>
-                            <a href="{{ route('legislation.law.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'rare-viewed') active @endif">Dilihat paling sedikit</a>
+                            <a href="{{ route('legislation.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'latest' OR empty(Request::get('order'))) active @endif">Terbaru</a>
+                            <a href="{{ route('legislation.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'popular') active @endif">Terpopuler</a>
+                            <a href="{{ route('legislation.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'most-viewed') active @endif">Dilihat paling banyak</a>
+                            <a href="{{ route('legislation.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'rare-viewed') active @endif">Dilihat paling sedikit</a>
                         </div>
                     </div>
                 </div>

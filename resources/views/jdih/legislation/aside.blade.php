@@ -2,7 +2,11 @@
 
     <div class="sidebar-content">
 
-        @include('jdih.legislation.'.$view.'.filter')
+        @isset($view)            
+            @include('jdih.legislation.'.$view.'.filter')
+        @else
+            @include('jdih.legislation.filter')
+        @endisset
 
         <div class="my-4">
             <h5 class="fw-bold">Monografi Hukum</h5>

@@ -4,9 +4,6 @@ namespace App\View\Composers;
 
 use App\Models\Legislation;
 use App\Models\Type;
-use App\Models\Category;
-use App\Models\Matter;
-use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Post;
 use App\Models\Link;
@@ -23,12 +20,7 @@ class AsideComposer
     public function compose(View $view)
     {
         $types = Type::pluck('name', 'id');
-        $categories = Category::ofType(1)
-            ->sorted()
-            ->pluck('name', 'id');
 
-        $matters = Matter::sorted()->pluck('name', 'id');
-        $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
             
         $popularNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
@@ -45,9 +37,6 @@ class AsideComposer
         $banners = Link::banners()->published()->get();
 
         $view->with('types', $types)
-            ->with('categories', $categories)
-            ->with('matters', $matters)
-            ->with('institutes', $institutes)
             ->with('fields', $fields)
             ->with('popularNews', $popularNews)
             ->with('popularMonographs', $popularMonographs)

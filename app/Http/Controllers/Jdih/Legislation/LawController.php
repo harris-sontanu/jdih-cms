@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Jdih\Legislation;
 
 use App\Http\Controllers\Jdih\Legislation\LegislationController;
 use App\Models\Category;
+use App\Models\Matter;
+use App\Models\Institute;
 use App\Models\Legislation;
 use Illuminate\Support\Facades\Config;
 use App\Http\Traits\VisitorTrait;
@@ -34,8 +36,15 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $categories = Category::ofType(1)
+            ->sorted()
+            ->pluck('name', 'id');
+
+        $matters = Matter::sorted()->pluck('name', 'id');
+        $institutes = Institute::sorted()->pluck('name', 'id');
+
         $orderState = match ($request->order) {
-            'latest'        => 'Terbaru',
+            'latest-approved' => 'Terbaru',
             'popular'       => 'Terpopular',
             'number-asc'    => 'Nomor kecil ke besar',
             'most-viewed'   => 'Dilihat paling banyak',
@@ -49,6 +58,9 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'categories',
+            'matters',
+            'institutes',
             'orderState',
             'vendors',
         ));

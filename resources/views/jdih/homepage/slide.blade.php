@@ -20,7 +20,7 @@
                             <span class="cursor fw-bold text-danger display-6" data-owner="typer"></span>
                         </h2>
                         <h3 class="text-white">{{ $appDesc }}</h3>
-                        <form class="filter-form" action="{{ route('legislation.search') }}" method="get">
+                        <form class="filter-form" action="{{ route('legislation.index') }}" method="get">
                             <div class="navbar-search flex-fill position-relative mt-2 mt-lg-0 me-lg-3">
                                 <div class="form-control-feedback form-control-lg form-control-feedback-start flex-grow-1">
                                     <input id="search-dropdown" name="title" type="text" class="form-control form-control-lg border-0 py-3" placeholder="Cari produk hukum..." data-bs-toggle="dropdown" value="{{ Request::get('title') }}">
