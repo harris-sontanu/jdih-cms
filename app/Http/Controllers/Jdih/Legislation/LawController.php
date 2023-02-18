@@ -15,10 +15,28 @@ class LawController extends LegislationController
 {
     use VisitorTrait;
 
+    private $categories;
+    private $matters;
+    private $institutes;
+    private $orderOptions = [
+        'latest-approved'   => 'Terbaru',
+        'popular'           => 'Terpopular',
+        'number-asc'        => 'Nomor kecil ke besar',
+        'most-viewed'       => 'Dilihat paling banyak',
+        'rare-viewed'       => 'Dilihat paling sedikit',
+    ];
+
     public function __construct(Request $request)
     {
         // Record visitor
         $this->recordVisitor($request);
+        
+        $this->categories = Category::ofType(1)
+            ->sorted()
+            ->pluck('name', 'id');
+
+        $this->matters = Matter::sorted()->pluck('name', 'id');
+        $this->institutes = Institute::sorted()->pluck('name', 'id');
     }
 
     /**
@@ -36,6 +54,28 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.legislation.law.index', compact(
+            'legislations',
+            'vendors',
+        ))->with('categories', $this->categories)
+            ->with('matters', $this->matters)
+            ->with('institutes', $this->institutes)
+            ->with('orderOptions', $this->orderOptions);
+    }
+
+    public function category(Category $category, Request $request)
+    {
+        $legislations = Legislation::ofType(1)
+            ->where('category_id', $category->id)
+            ->published()
+            ->latestApproved()
+            ->paginate($this->limit)
+            ->withQueryString();
+        
         $categories = Category::ofType(1)
             ->sorted()
             ->pluck('name', 'id');
@@ -43,42 +83,29 @@ class LawController extends LegislationController
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
 
-        $orderState = match ($request->order) {
-            'latest-approved' => 'Terbaru',
-            'popular'       => 'Terpopular',
-            'number-asc'    => 'Nomor kecil ke besar',
-            'most-viewed'   => 'Dilihat paling banyak',
-            'rare-viewed'   => 'Dilihat paling sedikit',
-            default         => 'Terbaru',
-        };
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
-            'categories',
-            'matters',
-            'institutes',
-            'orderState',
+            'category',
             'vendors',
-        ));
+        ))->with('categories', $this->categories)
+            ->with('matters', $this->matters)
+            ->with('institutes', $this->institutes)
+            ->with('orderOptions', $this->orderOptions);
     }
 
-    public function category(Category $category)
-    {
-        $laws = Legislation::laws()
-            ->where('category_id', $category->id)
-            ->published()
-            ->latestApproved()
-            ->paginate($this->limit)
-            ->withQueryString();
-
-        return view('jembrana.legislation.law.index', compact(
-            'laws',
-            'category'
-        ));
+    private function orderOptions()
+    {   
+        return [
+            'latest-approved'   => 'Terbaru',
+            'popular'           => 'Terpopular',
+            'number-asc'        => 'Nomor kecil ke besar',
+            'most-viewed'       => 'Dilihat paling banyak',
+            'rare-viewed'       => 'Dilihat paling sedikit',
+        ];
     }
 
     /**
