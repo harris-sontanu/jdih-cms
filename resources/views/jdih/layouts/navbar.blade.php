@@ -16,9 +16,9 @@
 
                     <div class="dropdown-menu">
                         <a href="{{ route('legislation.law.index') }}" class="dropdown-item {{ request()->is('produk-hukum/peraturan-perundang-undangan*') ? 'active' : null }}">Peraturan Perundang-undangan</a>
-                        <a href="#" class="dropdown-item">Monografi Hukum</a>
-                        <a href="#" class="dropdown-item">Artikel Hukum</a>
-                        <a href="#" class="dropdown-item">Putusan Pengadilan</a>
+                        <a href="{{ route('legislation.monograph.index') }}" class="dropdown-item {{ request()->is('produk-hukum/monografi-hukum*') ? 'active' : null }}">Monografi Hukum</a>
+                        <a href="{{ route('legislation.article.index') }}" class="dropdown-item {{ request()->is('produk-hukum/artikel-hukum*') ? 'active' : null }}">Artikel Hukum</a>
+                        <a href="{{ route('legislation.judgment.index') }}" class="dropdown-item {{ request()->is('produk-hukum/putusan-pengadilan*') ? 'active' : null }}">Putusan Pengadilan</a>
                     </div>
                 </li>
 

@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Jdih\HomepageController;
 use App\Http\Controllers\Jdih\Legislation\LegislationController;
 use App\Http\Controllers\Jdih\Legislation\LawController;
+use App\Http\Controllers\Jdih\Legislation\MonographController;
+use App\Http\Controllers\Jdih\Legislation\ArticleController;
+use App\Http\Controllers\Jdih\Legislation\JudgmentController;
 
 /*
 |--------------------------------------------------------------------------

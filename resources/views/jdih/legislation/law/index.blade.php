@@ -90,7 +90,7 @@
                         </a>
 
                         <div class="flex-fill">
-                            <a href="{{ route('legislation.law.category', $legislation->category->slug) }}" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
+                            <a href="{{ route('legislation.'.$legislation->category->type->route.'.category', $legislation->category->slug) }}" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
                             <h4 class="mb-1">
                                 <a href="#" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
                             </h4>

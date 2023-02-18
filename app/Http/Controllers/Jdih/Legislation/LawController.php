@@ -18,7 +18,7 @@ class LawController extends LegislationController
     private $categories;
     private $matters;
     private $institutes;
-    private $orderOptions = [
+    protected $orderOptions = [
         'latest-approved'   => 'Terbaru',
         'popular'           => 'Terpopular',
         'number-asc'        => 'Nomor kecil ke besar',
@@ -30,7 +30,7 @@ class LawController extends LegislationController
     {
         // Record visitor
         $this->recordVisitor($request);
-        
+
         $this->categories = Category::ofType(1)
             ->sorted()
             ->pluck('name', 'id');
@@ -75,7 +75,7 @@ class LawController extends LegislationController
             ->latestApproved()
             ->paginate($this->limit)
             ->withQueryString();
-        
+
         $categories = Category::ofType(1)
             ->sorted()
             ->pluck('name', 'id');
@@ -98,7 +98,7 @@ class LawController extends LegislationController
     }
 
     private function orderOptions()
-    {   
+    {
         return [
             'latest-approved'   => 'Terbaru',
             'popular'           => 'Terpopular',

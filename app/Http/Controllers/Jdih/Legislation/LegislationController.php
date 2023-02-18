@@ -13,7 +13,7 @@ class LegislationController extends Controller
     use VisitorTrait;
     protected $limit = 10;
     protected $selectedCategories;
-    private $orderOptions = [
+    protected $orderOptions = [
         'latest'        => 'Terbaru',
         'popular'       => 'Terpopular',
         'most-viewed'   => 'Dilihat paling banyak',
