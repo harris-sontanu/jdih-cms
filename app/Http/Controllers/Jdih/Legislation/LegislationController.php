@@ -13,6 +13,12 @@ class LegislationController extends Controller
     use VisitorTrait;
     protected $limit = 10;
     protected $selectedCategories;
+    private $orderOptions = [
+        'latest'        => 'Terbaru',
+        'popular'       => 'Terpopular',
+        'most-viewed'   => 'Dilihat paling banyak',
+        'rare-viewed'   => 'Dilihat paling sedikit',
+    ];
 
     function __construct()
     {
@@ -31,14 +37,6 @@ class LegislationController extends Controller
         $categories = Category::sorted()
             ->pluck('name', 'id');
 
-        $orderState = match ($request->order) {
-            'latest'        => 'Terbaru',
-            'popular'       => 'Terpopular',
-            'most-viewed'   => 'Dilihat paling banyak',
-            'rare-viewed'   => 'Dilihat paling sedikit',
-            default         => 'Terbaru',
-        };
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
@@ -46,9 +44,8 @@ class LegislationController extends Controller
         return view('jdih.legislation.index', compact(
             'legislations',
             'categories',
-            'orderState',
             'vendors',
-        ));
+        ))->with('orderOptions', $this->orderOptions);
     }
 
     public function lawYearlyColumnChart(Request $request)

@@ -12,8 +12,8 @@
                 @isset($category)
                     <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
                     <span class="breadcrumb-item active">{{ $category->name }}</span>
-                @else            
-                    <span class="breadcrumb-item active">Peraturan Perundang-undangan</span>    
+                @else
+                    <span class="breadcrumb-item active">Peraturan Perundang-undangan</span>
                 @endisset
             </div>
 
@@ -66,19 +66,21 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             @foreach ($orderOptions as $key => $value)
-                                <a 
+                                <a
                                 @isset ($category)
                                     href="{{ route('legislation.law.category', ['category' => $category->slug, 'order' => $key] + Request::query()) }}"
                                 @else
                                     href="{{ route('legislation.law.index', ['order' => $key] + Request::query()) }}"
                                 @endisset
-                                 class="dropdown-item @if(Request::get('order') === $key OR (empty(Request::get('order')) AND $loop->first)) active @endif">{{ $value }}</a>
+                                    class="dropdown-item @if(Request::get('order') === $key OR (empty(Request::get('order')) AND $loop->first)) active @endif">
+                                    {{ $value }}
+                                </a>
                             @endforeach
                         </div>
                     </div>
                 </div>
             </section>
-            
+
             @foreach ($legislations as $legislation)
                 <article class="card card-body shadow-lg mb-4">
                     <div class="d-sm-flex align-items-sm-start">

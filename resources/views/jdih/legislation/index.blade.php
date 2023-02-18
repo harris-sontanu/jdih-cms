@@ -1,6 +1,6 @@
 @extends('jdih.layouts.app')
 
-@section('title', 'Peraturan Perundang-undangan | ' . $appName)
+@section('title', 'Produk Hukum | ' . strip_tags($appName))
 @section('content')
 
 <div class="page-content container pb-0">
@@ -46,12 +46,20 @@
                 <div class="ms-auto my-auto">
                     <span class="d-inline-block me-2">Urutkan</span>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">{{ $orderState }}</button>
+                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown">
+                            @if(Request::get('order'))
+                                {{ $orderOptions[Request::get('order')] }}
+                            @else
+                                {{ head($orderOptions) }}
+                            @endif
+                        </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="{{ route('legislation.index', ['order' => 'latest'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'latest' OR empty(Request::get('order'))) active @endif">Terbaru</a>
-                            <a href="{{ route('legislation.index', ['order' => 'popular'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'popular') active @endif">Terpopuler</a>
-                            <a href="{{ route('legislation.index', ['order' => 'most-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'most-viewed') active @endif">Dilihat paling banyak</a>
-                            <a href="{{ route('legislation.index', ['order' => 'rare-viewed'] + Request::query()) }}" class="dropdown-item @if(Request::get('order') === 'rare-viewed') active @endif">Dilihat paling sedikit</a>
+                            @foreach ($orderOptions as $key => $value)
+                                <a href="{{ route('legislation.index', ['order' => $key] + Request::query()) }}"
+                                    class="dropdown-item @if(Request::get('order') === $key OR (empty(Request::get('order')) AND $loop->first)) active @endif">
+                                    {{ $value }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -66,7 +74,10 @@
                         </a>
 
                         <div class="flex-fill">
-                            <a href="#" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
+                            <a href="{{ route('legislation.'.$legislation->category->type->route.'.category', $legislation->category->slug) }}"
+                                class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">
+                                {{ $legislation->category->name }}
+                            </a>
                             <h4 class="mb-1">
                                 <a href="#" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
                             </h4>

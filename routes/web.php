@@ -41,4 +41,31 @@ Route::name('legislation.')->group(function () {
             ->name('law.show');
     });
 
+    Route::controller(MonographController::class)->group(function () {
+        Route::get('/produk-hukum/monografi-hukum', 'index')
+            ->name('monograph.index');
+        Route::get('/produk-hukum/monografi-hukum/{category:slug}', 'category')
+            ->name('monograph.category');
+        Route::get('/produk-hukum/monografi-hukum/{category:slug}/{legislation:slug}', 'show')
+            ->name('monograph.show');
+    });
+
+    Route::controller(ArticleController::class)->group(function () {
+        Route::get('/produk-hukum/artikel-hukum', 'index')
+            ->name('article.index');
+        Route::get('/produk-hukum/artikel-hukum/{category:slug}', 'category')
+            ->name('article.category');
+        Route::get('/produk-hukum/artikel-hukum/{category:slug}/{legislation:slug}', 'show')
+            ->name('article.show');
+    });
+
+    Route::controller(JudgmentController::class)->group(function () {
+        Route::get('/produk-hukum/putusan-pengadilan', 'index')
+            ->name('judgment.index');
+        Route::get('/produk-hukum/putusan-pengadilan/{category:slug}', 'category')
+            ->name('judgment.category');
+        Route::get('/produk-hukum/putusan-pengadilan/{category:slug}/{legislation:slug}', 'show')
+            ->name('judgment.show');
+    });
+
 });
