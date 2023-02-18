@@ -48,6 +48,17 @@ class LegislationController extends Controller
         ))->with('orderOptions', $this->orderOptions);
     }
 
+    public function search(Request $request)
+    {
+        $term       = $request->search;
+        $laws       = Legislation::ofType(1)->search($request->only(['search']))->latestApproved()->take(3)->get();
+        $monographs = Legislation::ofType(2)->search($request->only(['search']))->latest()->take(3)->get();
+        $articles   = Legislation::ofType(3)->search($request->only(['search']))->latest()->take(3)->get();
+        $judgments  = Legislation::ofType(4)->search($request->only(['search']))->latest()->take(3)->get();
+
+        return view('jdih.legislation.search', compact('term', 'laws', 'monographs', 'articles', 'judgments'));
+    }
+
     public function lawYearlyColumnChart(Request $request)
     {
         if ($request->has('years')) {

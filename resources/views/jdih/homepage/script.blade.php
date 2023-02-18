@@ -25,7 +25,7 @@
 			if (search.length > 0) {
 				$(this).dropdown('show');
 
-				$.get('/admin/legislation/search', {search: search})
+				$.get('/legislation/search', {search: search})
 				.done(function(html){
 					dom.html(html);
 				});

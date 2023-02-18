@@ -27,6 +27,7 @@ Route::post('/legislation/law-yearly-column-chart', [LegislationController::clas
 Route::name('legislation.')->group(function () {
 
     Route::controller(LegislationController::class)->group(function () {
+        Route::get('/legislation/search', 'search')->name('search');
         Route::post('/legislation/category-options', 'categoryOptions')
             ->name('categoryOptions');
         Route::put('/legislation/download/{id}', 'download')
