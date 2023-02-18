@@ -84,6 +84,13 @@ class Legislation extends Model
         return $this->hasMany(LegislationDocument::class);
     }
 
+    public function masterDocument()
+    {
+        return $this->documents()
+            ->ofType('master')
+            ->first();
+    }
+
     public function matters()
     {
         return $this->belongsToMany(Matter::class);
@@ -286,9 +293,7 @@ class Legislation extends Model
 
     public function masterDocumentSource(): Attribute
     {
-        $master = $this->documents()
-            ->ofType('master')
-            ->first();
+        $master = $this->masterDocument();
 
         return Attribute::make(
             get: fn ($value) => empty($master) ? null : Storage::url($master->media->path)

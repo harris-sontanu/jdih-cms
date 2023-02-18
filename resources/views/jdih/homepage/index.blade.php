@@ -37,7 +37,7 @@
             <div class="row gx-5">
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body shadow-lg lift">
-                        <a href="#" class="text-dark">
+                        <a href="{{ route('legislation.law.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <i class="ph-scales ph-2x text-success me-3"></i>
 
@@ -52,7 +52,7 @@
 
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body shadow-lg lift">
-                        <a href="#" class="text-dark">
+                        <a href="{{ route('legislation.monograph.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <i class="ph-books ph-2x text-indigo me-3"></i>
 
@@ -67,7 +67,7 @@
 
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body shadow-lg lift">
-                        <a href="#" class="text-dark">
+                        <a href="{{ route('legislation.article.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
                                     <h4 class="mb-0">{{ $totalArticles }}</h4>
@@ -82,7 +82,7 @@
 
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body shadow-lg lift">
-                        <a href="#" class="text-dark">
+                        <a href="{{ route('legislation.judgment.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
                                     <h4 class="mb-0">{{ $totalJudgments }}</h4>
@@ -113,7 +113,7 @@
                 <!-- Popular law -->
                 <div class="row gx-5 pb-5">
                     <div class="col-xl-6 m-auto">
-                        <figure id="adobe-dc-view" data-file="{{ $popularLawDoc->media->source }}" data-name="{{ $popularLawDoc->media->name }}" class="rounded shadow-lg" style="height: 700px;">
+                        <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 700px;">
                         </figure>
                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                         <script type="text/javascript">
@@ -135,7 +135,7 @@
                     </div>
                     <div class="col-xl-6 ps-3">
                         <h3 class="fw-bold text-danger mb-0">Populer</h3>
-                        <a href="#" class="d-block display-6 fw-bold text-body mb-4">Peraturan Gubernur Bali Nomor 1 Tahun 2023</a>
+                        <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $popularLaw->shortTitle }}</a>
                         <div class="fs-lg">
                             <div class="d-flex mb-3">
                                 <div class="me-4">
@@ -217,7 +217,7 @@
                                 </div>
                             </div>
                             <div class="d-flex mt-5">
-                                <a href="#" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
+                                <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
                                 <a href="#" class="btn btn-dark lift px-3 fw-semibold">Unduh<i class="ph-download ms-2"></i></a>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                         @foreach ($latestLaws as $law)
                             <div class="col-xl-4 my-3">
                                 <div class="card lift shadow-lg h-100">
-                                    <a href="#" class="text-body link-danger">
+                                    <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
                                         <div class="card-header border-0 pb-0">
                                             <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
                                             <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
@@ -278,8 +278,8 @@
                             @endisset
                         </div>
                         <div class="col-xl-8 text-light">
-                            <h3 class="fw-bold text-danger"><a href="#" class="link-danger">Monografi Hukum</a></h3>
-                            <a href="#" class="d-block display-7 fw-bold link-light mb-4">{{ $monograph->title }}</a>
+                            <h3 class="fw-bold text-danger"><a href="{{ route('legislation.monograph.index') }}" class="link-danger">Monografi Hukum</a></h3>
+                            <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug]) }}" class="d-block display-7 fw-bold link-light mb-4">{{ $monograph->title }}</a>
                             <div class="fs-lg">
 
                                 <div class="d-flex mb-3">
@@ -328,7 +328,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mt-5">
-                                    <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Lihat Detail<i class="ph-arrow-right ms-2"></i></a>
+                                    <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug]) }}" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Lihat Detail<i class="ph-arrow-right ms-2"></i></a>
                                 </div>
 
                             </div>

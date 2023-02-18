@@ -38,7 +38,7 @@
                                         <div class="d-flex align-items-center mb-3">
                                             <h6 class="mb-0">Filter Pencarian Produk Hukum</h6>
                                         </div>
-                                        
+
                                         <div class="row mb-3">
                                             <div class="col">
                                                 <label for="type" class="d-block form-label">Tipe</label>
@@ -105,8 +105,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </form> 
-                        <a href="#" class="link-white mt-3 d-block fw-bold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
+                        </form>
+                        <a href="{{ route('legislation.index') }}" class="link-white mt-3 d-block fw-bold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
                     </div>
                     <div class="col-xl-6 text-center">
                         <div class="row mt-5">

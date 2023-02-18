@@ -70,7 +70,7 @@ class HomepageController extends Controller
             ->get();
 
         $banners = Link::banners()->published()->get();
-        
+
         // Record visitor
         $this->recordVisitor($request);
 
