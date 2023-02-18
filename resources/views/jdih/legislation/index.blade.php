@@ -69,7 +69,7 @@
                 <article class="card card-body shadow-lg mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
-                        <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
+                        <a href="{{ route('legislation.'.$legislation->category->type->route.'.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block me-sm-3 mb-3 mb-sm-0">
                             <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px border">
                         </a>
 
@@ -79,7 +79,7 @@
                                 {{ $legislation->category->name }}
                             </a>
                             <h4 class="mb-1">
-                                <a href="#" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
+                                <a href="{{ route('legislation.'.$legislation->category->type->route.'.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
                             </h4>
 
                             <ul class="list-inline list-inline-bullet text-muted mb-3">

@@ -15,7 +15,7 @@
                 <select id="category" name="category" class="form-select select-search">
                     <option value="">Pilih Jenis</option>
                     @foreach ($categories as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('category') === $key OR (isset($category) AND $category->id === $key))>
+                        <option value="{{ $key }}" @selected(Request::get('category') == $key OR (isset($category) AND $category->id == $key))>
                             {{ Str::title($value) }}</option>
                     @endforeach
                 </select>
@@ -44,7 +44,7 @@
                 <select id="field" name="field" class="form-select select-search">
                     <option value="">Pilih Bidang Hukum</option>
                     @foreach ($fields as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('field') === $key)>
+                        <option value="{{ $key }}" @selected(Request::get('field') == $key)>
                             {{ Str::title($value) }}</option>
                     @endforeach
                 </select>
@@ -55,7 +55,7 @@
                 <select id="institute" name="institute" class="form-select select-search">
                     <option value="">Pilih Pemrakarsa</option>
                     @foreach ($institutes as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('institute') === $key)>
+                        <option value="{{ $key }}" @selected(Request::get('institute') == $key)>
                             {{ Str::title($value) }}</option>
                     @endforeach
                 </select>
@@ -65,7 +65,7 @@
                 <label for="matter" class="d-block form-label fw-semibold">Urusan Pemerintahan</label>
                 <select id="matter" name="matter[]" multiple="multiple" class="form-select select">
                     @foreach ($matters as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('matter') === $key)>{{ $value }}
+                        <option value="{{ $key }}" @selected(Request::get('matter') == $key)>{{ $value }}
                         </option>
                     @endforeach
                 </select>

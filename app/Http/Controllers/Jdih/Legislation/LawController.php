@@ -20,7 +20,7 @@ class LawController extends LegislationController
     private $institutes;
     protected $orderOptions = [
         'latest-approved'   => 'Terbaru',
-        'popular'           => 'Terpopular',
+        'popular'           => 'Terpopuler',
         'number-asc'        => 'Nomor kecil ke besar',
         'most-viewed'       => 'Dilihat paling banyak',
         'rare-viewed'       => 'Dilihat paling sedikit',

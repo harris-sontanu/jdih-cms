@@ -50,4 +50,29 @@ class MonographController extends LegislationController
             ->with('orderOptions', $this->orderOptions);
     }
 
+    public function category(Category $category, Request $request)
+    {
+        $legislations = Legislation::ofType(2)
+            ->where('category_id', $category->id)
+            ->published()
+            ->latestApproved()
+            ->paginate($this->limit)
+            ->withQueryString();
+
+        $categories = Category::ofType(1)
+            ->sorted()
+            ->pluck('name', 'id');
+
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.legislation.monograph.index', compact(
+            'legislations',
+            'category',
+            'vendors',
+        ))->with('categories', $this->categories)
+            ->with('orderOptions', $this->orderOptions);
+    }
+
 }

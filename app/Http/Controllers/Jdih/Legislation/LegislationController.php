@@ -15,7 +15,7 @@ class LegislationController extends Controller
     protected $selectedCategories;
     protected $orderOptions = [
         'latest'        => 'Terbaru',
-        'popular'       => 'Terpopular',
+        'popular'       => 'Terpopuler',
         'most-viewed'   => 'Dilihat paling banyak',
         'rare-viewed'   => 'Dilihat paling sedikit',
     ];
