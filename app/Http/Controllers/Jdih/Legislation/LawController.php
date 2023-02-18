@@ -72,7 +72,7 @@ class LawController extends LegislationController
         $legislations = Legislation::ofType(1)
             ->where('category_id', $category->id)
             ->published()
-            ->latestApproved()
+            ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 

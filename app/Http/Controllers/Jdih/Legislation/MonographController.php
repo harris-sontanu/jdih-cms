@@ -55,11 +55,11 @@ class MonographController extends LegislationController
         $legislations = Legislation::ofType(2)
             ->where('category_id', $category->id)
             ->published()
-            ->latestApproved()
+            ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 
-        $categories = Category::ofType(1)
+        $categories = Category::ofType(2)
             ->sorted()
             ->pluck('name', 'id');
 
