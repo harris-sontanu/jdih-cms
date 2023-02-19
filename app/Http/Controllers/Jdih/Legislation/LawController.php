@@ -124,7 +124,7 @@ class LawController extends LegislationController
 
         $adobeKey = Config::get('services.adobe.key');
 
-        $otherLegislations = Legislation::laws()
+        $otherLegislations = Legislation::ofType(1)
             ->where('category_id', $legislation->category_id)
             ->whereNot('legislations.id', $legislation->id)
             ->published()
@@ -132,7 +132,7 @@ class LawController extends LegislationController
             ->take(3)
             ->get();
 
-        return view('jembrana.legislation.law.show', compact(
+        return view('jdih.legislation.law.show', compact(
             'legislation',
             'statusRelationships',
             'lawRelationships',
