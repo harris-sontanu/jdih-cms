@@ -134,9 +134,11 @@ class Legislation extends Model
 
     public function shortTitle(): Attribute
     {
-        $shortTitle = $this->category->type_id === 1
-            ? $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
-            : $this->title;
+        $shortTitle = match ($this->category->type_id) {
+            1   => $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year,
+            4   => 'Putusan ' . Str::title($this->justice) . ' Nomor ' . $this->code_number,
+            default => $this->title,
+        };
 
         return Attribute::make(
             get: fn ($value) => $shortTitle

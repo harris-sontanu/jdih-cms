@@ -92,7 +92,7 @@
                         <div class="flex-fill">
                             <a href="{{ route('legislation.judgment.category', $legislation->category->slug) }}" class="badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-1">{{ $legislation->category->name }}</a>
                             <h4 class="mb-1">
-                                <a href="{{ route('legislation.judgment.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="text-body">{!! Str::highlightPhrase($legislation->title, Request::get('title')) !!}</a>
+                                <a href="{{ route('legislation.judgment.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="text-body">{!! Str::highlightPhrase($legislation->shortTitle, Request::get('title')) !!}</a>
                             </h4>
 
                             <ul class="list-inline list-inline-bullet text-muted mb-3">
