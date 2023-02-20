@@ -3,7 +3,7 @@
 @section('title', $legislation->shortTitle . ' | ' . strip_tags($appName))
 @section('content')
 
-<div class="page-content container pb-0">
+<div class="page-content container pb-0 mb-4">
     <div class="content-wrapper">
         <div class="d-flex content">
             <div class="breadcrumb">
@@ -50,10 +50,24 @@
                         });
                         });
                     </script>
+
+                    <div class="d-flex mt-4">
+                        <div class="flex-grow-1">
+                            <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold">Unduh<i class="ph-download ms-2"></i></button>
+                        </div>
+                        <div class="ms-3">
+                            <button class="btn w-100 btn-pink btn-icon btn-lg lift"><i class="ph-heart"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xl-6 ps-3">
-                    <h3 class="fw-bold text-danger mb-0">Populer</h3>
-                    <a href="{{ route('legislation.law.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $legislation->shortTitle }}</a>
+                    <h2 class="d-block display-6 fw-bold mb-3">{{ $legislation->shortTitle }}</h2>
+                    <ul class="post-meta list-inline list-inline-bullet text-muted mb-4 fs-lg">
+                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>
+                        <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $legislation->user->name }}</li>
+                        <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
+                        <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
+                    </ul>
                     <div class="fs-lg">
                         <div class="d-flex mb-3">
                             <div class="me-4">
@@ -108,12 +122,63 @@
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
+                                    <p class="mb-0">{{ $legislation->category->abbrev }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
+                                    <p class="mb-0">{{ $legislation->author }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <i class="ph-check"></i>
+                                </div>
+                            </div>
+                            <div class="row flex-fill">
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Sumber</h4>
+                                    <p class="mb-0">{{ $legislation->source }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Tempat Terbit</h4>
+                                    <p class="mb-0">{{ $legislation->place }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <i class="ph-check"></i>
+                                </div>
+                            </div>
+                            <div class="row flex-fill">
+                                <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Subjek</h4>
                                     <p class="mb-0">{{ $legislation->subject }}</p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Status</h4>
                                     <p class="mb-0">{!! $legislation->statusBadge !!}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <i class="ph-check"></i>
+                                </div>
+                            </div>
+                            <div class="row flex-fill">
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
+                                    <p class="mb-0">{{ $legislation->field->name }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Bahasa</h4>
+                                    <p class="mb-0">{{ $legislation->language }}</p>
                                 </div>
                             </div>
                         </div>
@@ -134,9 +199,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex mt-5">
-                            <a href="{{ route('legislation.law.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
-                            <a href="#" class="btn btn-dark lift px-3 fw-semibold">Unduh<i class="ph-download ms-2"></i></a>
+                        <div class="d-flex mb-3">
+                            <div class="me-4">
+                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <i class="ph-check"></i>
+                                </div>
+                            </div>
+                            <div class="row flex-fill">
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Lokasi</h4>
+                                    <p class="mb-0">{{ $legislation->place }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h4 class="mb-1 fw-bold">Penandatangan</h4>
+                                    <p class="mb-0">{{ $legislation->signer }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

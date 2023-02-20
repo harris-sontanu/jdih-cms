@@ -3,7 +3,7 @@
 @section('title', 'Putusan Pengadilan | ' . strip_tags($appName))
 @section('content')
 
-<div class="page-content container pb-0">
+<div class="page-content container pb-0 mb-4">
     <div class="content-wrapper">
         <div class="d-flex content">
             <div class="breadcrumb">
