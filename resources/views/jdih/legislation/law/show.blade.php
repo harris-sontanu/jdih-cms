@@ -64,13 +64,13 @@
                         <ul class="list-inline mb-0 ms-3">
                             @foreach ($shares as $share)
                                 <li class="list-inline-item me-1">
-                                    <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}">
+                                    <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
                                         <i class="{{ $share['icon'] }} m-1"></i>
                                     </a>
                                 </li>
                             @endforeach
                             <li class="list-inline-item">
-                                <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift">
+                                <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift" title="Salin URL" data-bs-popup="tooltip">
                                     <i class="ph-link m-1"></i>
                                 </button>
                             </li>
