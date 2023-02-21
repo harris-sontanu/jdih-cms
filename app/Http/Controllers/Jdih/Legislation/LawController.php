@@ -10,6 +10,7 @@ use App\Models\Legislation;
 use Illuminate\Support\Facades\Config;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
+use Jorenvh\Share\ShareFacade;
 
 class LawController extends LegislationController
 {
@@ -132,6 +133,13 @@ class LawController extends LegislationController
             ->take(3)
             ->get();
 
+        $shares = $this->shares();
+
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+            'assets/jdih/js/vendor/share/share.js',
+        ];
+
         return view('jdih.legislation.law.show', compact(
             'legislation',
             'statusRelationships',
@@ -139,6 +147,8 @@ class LawController extends LegislationController
             'documentRelationships',
             'adobeKey',
             'otherLegislations',
+            'shares',
+            'vendors',
         ));
     }
 }

@@ -53,14 +53,31 @@
 
                     <div class="d-flex mt-4">
                         <div class="flex-grow-1">
-                            <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold">Unduh<i class="ph-download ms-2"></i></button>
+                            <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3">Unduh<i class="ph-download ms-2"></i></button>
                         </div>
                         <div class="ms-3">
-                            <button class="btn w-100 btn-pink btn-icon btn-lg lift"><i class="ph-heart"></i></button>
+                            <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
                         </div>
                     </div>
+                    <div class="d-flex align-items-center mt-4">
+                        <span class="d-block fw-bold">Bagikan:</span>
+                        <ul class="list-inline mb-0 ms-3">
+                            @foreach ($shares as $share)
+                                <li class="list-inline-item me-1">
+                                    <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}">
+                                        <i class="{{ $share['icon'] }} m-1"></i>
+                                    </a>
+                                </li>
+                            @endforeach
+                            <li class="list-inline-item">
+                                <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift">
+                                    <i class="ph-link m-1"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-xl-6 ps-3">
+                <div class="col-xl-6">
                     <h2 class="d-block display-6 fw-bold mb-3">{{ $legislation->shortTitle }}</h2>
                     <ul class="post-meta list-inline list-inline-bullet text-muted mb-4 fs-lg">
                         <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>

@@ -12,5 +12,12 @@
             return true;
         });
 
+        $(document).on('click', '.copy-link', function(){
+            let url = $(this).data('url');
+            navigator.clipboard.writeText(url);
+
+            confirm('URL telah berhasil disalin');
+        })
+
     });
 </script>
