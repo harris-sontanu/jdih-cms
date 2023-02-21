@@ -32,7 +32,7 @@
 
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
-                    <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 700px;">
+                    <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 780px;">
                     </figure>
                     <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                     <script type="text/javascript">
@@ -141,7 +141,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
-                                    <p class="mb-0">{{ $legislation->category->abbrev }}</p>
+                                    <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->abbrev }}</a></p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -236,6 +236,66 @@
                                     <h4 class="mb-1 fw-bold">Penandatangan</h4>
                                     <p class="mb-0">{{ $legislation->signer }}</p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-lg mt-5">
+                        <div class="card-header p-0">
+                            <div class="navbar navbar-expand-lg rounded-top">
+                                <div class="container-fluid">
+                                    <ul class="nav navbar-nav flex-row flex-fill" role="tablist">
+                                        <li class="nav-item me-1" role="presentation">
+                                            <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active">
+                                                <div class="d-flex align-items-center mx-lg-1">
+                                                    <span class="d-none d-lg-inline-block ms-2 fw-semibold">Keterangan Status</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item me-1" role="presentation">
+                                            <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded">
+                                                <div class="d-flex align-items-center mx-lg-1">
+                                                    <span class="d-none d-lg-inline-block ms-2">Peraturan Terkait</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item me-1" role="presentation">
+                                            <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded">
+                                                <div class="d-flex align-items-center mx-lg-1">
+                                                    <span class="d-none d-lg-inline-block ms-2">Dokumen Terkait</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body tab-content">
+                            <div class="tab-pane fade active show" id="status" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @forelse ($statusRelationships as $relation)
+                                        <li><span class="fw-bold">{{ Str::title($relation->status) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
+                                    @empty
+                                        <li>Tidak ada data</li>
+                                    @endforelse
+                                </ol>
+                            </div>
+
+                            <div class="tab-pane fade" id="legislation" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @foreach ($lawRelationships as $relation)
+                                        <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @endforeach
+                                </ol>
+                            </div>
+
+                            <div class="tab-pane fade" id="document" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @foreach ($documentRelationships as $relation)
+                                        <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @endforeach
+                                </ol>
                             </div>
                         </div>
                     </div>
