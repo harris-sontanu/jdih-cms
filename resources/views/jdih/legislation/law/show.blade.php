@@ -10,6 +10,7 @@
                 <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
                 <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
                 <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
+                <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
                 <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
             </div>
 
@@ -78,7 +79,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6">
-                    <h2 class="d-block display-6 fw-bold mb-3">{{ $legislation->shortTitle }}</h2>
+                    <h2 class="d-block display-6 fw-bold mb-2">{{ $legislation->shortTitle }}</h2>
                     <ul class="post-meta list-inline list-inline-bullet text-muted mb-4 fs-lg">
                         <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>
                         <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $legislation->user->name }}</li>
@@ -95,7 +96,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Jenis Dokumen</h4>
-                                    <p class="mb-0">{{ $legislation->category->name }}</p>
+                                    <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Nomor</h4>
@@ -212,7 +213,11 @@
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
-                                    <p class="mb-0">{!! $legislation->matterList !!}</p>
+                                    <ul class="list-inline mb-0">
+                                        @foreach ($legislation->matters()->pluck('name') as $matter)
+                                            <li class="list-inline-item"><a href="#" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter }}</a></li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>
