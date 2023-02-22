@@ -307,7 +307,7 @@
                                     @forelse ($statusRelationships as $relation)
                                         <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
                                     @empty
-                                        <span class="text-muted">Tidak ada data</span>
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
                                 </ol>
                             </div>
@@ -317,7 +317,7 @@
                                     @forelse ($lawRelationships as $relation)
                                         <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                     @empty
-                                        <span class="text-muted">Tidak ada data</span>
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
                                 </ol>
                             </div>
@@ -327,7 +327,7 @@
                                     @forelse ($documentRelationships as $relation)
                                         <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                     @empty
-                                        <span class="text-muted">Tidak ada data</span>
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
                                 </ol>
                             </div>
