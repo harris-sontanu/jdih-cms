@@ -32,7 +32,7 @@
 
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
-                    <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 780px;">
+                    <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
                     </figure>
                     <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                     <script type="text/javascript">
@@ -54,28 +54,36 @@
 
                     <div class="d-flex mt-4">
                         <div class="flex-grow-1">
-                            <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3">Unduh<i class="ph-download ms-2"></i></button>
+                            <div class="row">
+                                <div class="col"><button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3">Dokumen<i class="ph-download ms-2"></i></button></div>
+                                <div class="col"><button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3">Abstrak<i class="ph-download ms-2"></i></button></div>
+                            </div>
                         </div>
                         <div class="ms-3">
                             <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center mt-4">
-                        <span class="d-block fw-bold">Bagikan:</span>
-                        <ul class="list-inline mb-0 ms-3">
-                            @foreach ($shares as $share)
-                                <li class="list-inline-item me-1">
-                                    <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
-                                        <i class="{{ $share['icon'] }} m-1"></i>
-                                    </a>
+                    <div class="row gx-4 mt-4">
+                        <div class="col">
+                            <img src="{{ asset('assets/jdih/images/demo/qrcode.png') }}" alt="qrcode" class="img-fluid p-4">
+                        </div>
+                        <div class="col">
+                            <h6 class="d-block fw-bold">Bagikan:</h6>
+                            <ul class="list-inline mb-0">
+                                @foreach ($shares as $share)
+                                    <li class="list-inline-item me-1 mb-2">
+                                        <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
+                                            <i class="{{ $share['icon'] }} m-1"></i>
+                                        </a>
+                                    </li>
+                                @endforeach
+                                <li class="list-inline-item">
+                                    <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift" title="Salin URL" data-bs-popup="tooltip">
+                                        <i class="ph-link m-1"></i>
+                                    </button>
                                 </li>
-                            @endforeach
-                            <li class="list-inline-item">
-                                <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift" title="Salin URL" data-bs-popup="tooltip">
-                                    <i class="ph-link m-1"></i>
-                                </button>
-                            </li>
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-6">
@@ -246,21 +254,21 @@
                                 <div class="container-fluid">
                                     <ul class="nav navbar-nav flex-row flex-fill" role="tablist">
                                         <li class="nav-item me-1" role="presentation">
-                                            <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active">
+                                            <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active @if ($statusRelationships->count() === 0) disabled @endif">
                                                 <div class="d-flex align-items-center mx-lg-1">
                                                     <span class="d-none d-lg-inline-block ms-2 fw-semibold">Keterangan Status</span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="nav-item me-1" role="presentation">
-                                            <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded">
+                                            <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link @if ($lawRelationships->count() === 0) disabled @endif rounded">
                                                 <div class="d-flex align-items-center mx-lg-1">
                                                     <span class="d-none d-lg-inline-block ms-2">Peraturan Terkait</span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="nav-item me-1" role="presentation">
-                                            <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded">
+                                            <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded @if ($documentRelationships->count() === 0) disabled @endif">
                                                 <div class="d-flex align-items-center mx-lg-1">
                                                     <span class="d-none d-lg-inline-block ms-2">Dokumen Terkait</span>
                                                 </div>
@@ -275,31 +283,64 @@
                             <div class="tab-pane fade active show" id="status" role="tabpanel">
                                 <ol class="list mb-0">
                                     @forelse ($statusRelationships as $relation)
-                                        <li><span class="fw-bold">{{ Str::title($relation->status) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
+                                        <li><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
                                     @empty
-                                        <li>Tidak ada data</li>
+                                        <span class="text-muted">Tidak ada data</span>
                                     @endforelse
                                 </ol>
                             </div>
 
                             <div class="tab-pane fade" id="legislation" role="tabpanel">
                                 <ol class="list mb-0">
-                                    @foreach ($lawRelationships as $relation)
-                                        <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
-                                    @endforeach
+                                    @forelse ($lawRelationships as $relation)
+                                        <li><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @empty
+                                        <span class="text-muted">Tidak ada data</span>
+                                    @endforelse
                                 </ol>
                             </div>
 
                             <div class="tab-pane fade" id="document" role="tabpanel">
                                 <ol class="list mb-0">
-                                    @foreach ($documentRelationships as $relation)
-                                        <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
-                                    @endforeach
+                                    @forelse ($documentRelationships as $relation)
+                                        <li><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @empty
+                                        <span class="text-muted">Tidak ada data</span>
+                                    @endforelse
                                 </ol>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                @if (isset($otherLegislations) AND $otherLegislations->count() > 0)
+                    <!-- Latest laws -->
+                    <section class="latest-legislation py-5">
+                        <div class="d-flex pb-4">
+                            <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Lainnya</h2>
+                            <a href="{{ route('legislation.law.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
+                        </div>
+                        <div class="row gx-5">
+                            @foreach ($otherLegislations as $law)
+                                <div class="col-xl-4 my-3">
+                                    <div class="card lift shadow-lg h-100">
+                                        <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
+                                            <div class="card-header border-0 pb-0">
+                                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
+                                                <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
+                                            </div>
+                                            <div class="card-body fs-lg pb-0">
+                                                <p class="mb-0 text-body">{{ $law->title }}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </section>
+                    <!-- /latest laws -->
+                @endif
+
             </div>
 
         </main>

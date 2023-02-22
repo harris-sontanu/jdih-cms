@@ -127,10 +127,10 @@ class LawController extends LegislationController
 
         $otherLegislations = Legislation::ofType(1)
             ->where('category_id', $legislation->category_id)
-            ->whereNot('legislations.id', $legislation->id)
+            ->whereNot('id', $legislation->id)
             ->published()
             ->latestApproved()
-            ->take(3)
+            ->take(6)
             ->get();
 
         $shares = $this->shares();
