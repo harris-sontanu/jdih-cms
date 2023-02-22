@@ -62,12 +62,23 @@
             </div>
 
             <div class="mb-3">
-                <label for="matter" class="d-block form-label fw-semibold">Urusan Pemerintahan</label>
-                <select id="matter" name="matter[]" multiple="multiple" class="form-select select">
-                    @foreach ($matters as $key => $value)
-                        <option value="{{ $key }}" @selected(Request::get('matter') == $key)>{{ $value }}
-                        </option>
-                    @endforeach
+                <label for="matters" class="d-block form-label fw-semibold">Urusan Pemerintahan</label>
+                <select id="matters" name="matters[]" multiple="multiple" class="form-select select">
+                    @if (Request::get('matters'))
+                        @foreach ($matters as $key => $value)
+                            @php $selected = false; @endphp
+                            @foreach (Request::get('matters') as $matter)
+                                @if ($matter == $key)
+                                    @php $selected = true; @endphp
+                                @endif
+                            @endforeach
+                            <option value="{{ $key }}" @selected($selected)>{{ $value }}</option>
+                        @endforeach
+                    @else
+                        @foreach ($matters as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
 

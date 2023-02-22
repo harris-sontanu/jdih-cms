@@ -59,6 +59,8 @@ class LawController extends LegislationController
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
+        // dd($request->get('matters'));
+
         return view('jdih.legislation.law.index', compact(
             'legislations',
             'vendors',

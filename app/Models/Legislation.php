@@ -429,6 +429,12 @@ class Legislation extends Model
             $query->whereRelation('matters', 'id', $matter);
         }
 
+        if ($matters = $request->matters AND $matters = $request->matters) {
+            $query->whereHas('matters', function (Builder $q) use ($matters) {
+                $q->whereIn('id', $matters);
+            });
+        }
+
         if ($created_at = $request->created_at AND $created_at = $request->created_at) {
             $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
         }

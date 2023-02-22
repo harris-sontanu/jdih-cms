@@ -2,7 +2,8 @@ h2.section-title {
     font-size: 1.8rem;
 }
 
-a.text-body:hover {
+a.text-body:hover,
+a.text-body:focus {
     color: dimgray !important;
 }
 
