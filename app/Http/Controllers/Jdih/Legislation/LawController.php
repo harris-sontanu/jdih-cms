@@ -10,7 +10,6 @@ use App\Models\Legislation;
 use Illuminate\Support\Facades\Config;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
-use Jorenvh\Share\ShareFacade;
 
 class LawController extends LegislationController
 {

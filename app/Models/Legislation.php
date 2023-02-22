@@ -98,6 +98,13 @@ class Legislation extends Model
             ->first();
     }
 
+    public function coverDocument()
+    {
+        return $this->documents()
+            ->ofType('cover')
+            ->first();
+    }
+
     public function matters()
     {
         return $this->belongsToMany(Matter::class);
@@ -315,6 +322,20 @@ class Legislation extends Model
 
         return Attribute::make(
             get: fn ($value) => empty($abstract) ? null : Storage::url($abstract->media->path)
+        );
+    }
+
+    public function coverSource(): Attribute
+    {
+        $cover = $this->coverDocument();
+
+        $coverUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
+        if (!empty($cover)) {
+            if (Storage::disk('public')->exists($cover->media->path)) $coverUrl = Storage::url($cover->media->path);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $coverUrl
         );
     }
 
