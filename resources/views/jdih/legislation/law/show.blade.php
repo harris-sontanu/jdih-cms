@@ -159,7 +159,9 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
-                                    <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->abbrev }}</a></p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body">{{ $legislation->category->abbrev }}</a>
+                                    </p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -193,11 +195,15 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Subjek</h4>
-                                    <p class="mb-0">{{ $legislation->subject }}</p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.law.index', ['subject' => $legislation->subject]) }}" class="text-body">{{ $legislation->subject }}</a>
+                                    </p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Status</h4>
-                                    <p class="mb-0">{!! $legislation->statusBadge !!}</p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.law.index', ['status' => $legislation->status]) }}" class="text-body">{!! $legislation->statusBadge !!}</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +216,9 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
-                                    <p class="mb-0">{{ $legislation->field->name }}</p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.law.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
+                                    </p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bahasa</h4>
@@ -227,13 +235,15 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
-                                    <p class="mb-0">{{ $legislation->institute->name }}</p>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.law.index', ['institute' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
+                                    </p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
                                     <ul class="list-inline mb-0">
-                                        @foreach ($legislation->matters()->pluck('name') as $matter)
-                                            <li class="list-inline-item"><a href="#" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter }}</a></li>
+                                        @foreach ($legislation->matters as $matter)
+                                            <li class="list-inline-item"><a href="{{ route('legislation.law.index', ['matter' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -328,7 +338,7 @@
                     <section class="latest-legislation py-5">
                         <div class="d-flex pb-4">
                             <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Lainnya</h2>
-                            <a href="{{ route('legislation.law.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
+                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
                         </div>
                         <div class="row gx-5">
                             @foreach ($otherLegislations as $law)
