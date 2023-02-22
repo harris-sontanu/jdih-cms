@@ -58,9 +58,10 @@ class LegislationController extends Controller
             ->linkedin()
             ->whatsapp()
             ->telegram()
+            ->pinterest()
             ->getRawLinks();
 
-        $colors = ['primary', 'info', 'indigo', 'success', 'teal'];
+        $colors = ['primary', 'info', 'indigo', 'success', 'teal', 'danger'];
 
         $i = 0;
         foreach ($links as $key => $value) {

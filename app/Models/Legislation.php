@@ -91,6 +91,13 @@ class Legislation extends Model
             ->first();
     }
 
+    public function abstractDocument()
+    {
+        return $this->documents()
+            ->ofType('abstract')
+            ->first();
+    }
+
     public function matters()
     {
         return $this->belongsToMany(Matter::class);
@@ -299,6 +306,15 @@ class Legislation extends Model
 
         return Attribute::make(
             get: fn ($value) => empty($master) ? null : Storage::url($master->media->path)
+        );
+    }
+
+    public function abstractDocumentSource(): Attribute
+    {
+        $abstract = $this->abstractDocument();
+
+        return Attribute::make(
+            get: fn ($value) => empty($abstract) ? null : Storage::url($abstract->media->path)
         );
     }
 

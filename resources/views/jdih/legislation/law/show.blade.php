@@ -32,31 +32,41 @@
 
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
-                    <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
-                    </figure>
-                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                    <script type="text/javascript">
-                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                        var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "adobe-dc-view"});
-                        const article = document.querySelector("#adobe-dc-view");
-                        adobeDCView.previewFile({
-                            content:{ location:
-                            { url: article.dataset.file }},
-                            metaData:{fileName: article.dataset.name}
-                        },
-                        {
-                            embedMode: "SIZED_CONTAINER",
-                            showDownloadPDF: false,
-                            showPrintPDF: false
-                        });
-                        });
-                    </script>
+                    @isset($legislation->masterDocumentSource)
+                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
+                        </figure>
+                        <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
+                        <script type="text/javascript">
+                            document.addEventListener("adobe_dc_view_sdk.ready", function(){
+                                var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "adobe-dc-view"});
+                                const article = document.querySelector("#adobe-dc-view");
+                                adobeDCView.previewFile({
+                                    content:{ location:
+                                    { url: article.dataset.file }},
+                                    metaData:{fileName: article.dataset.name}
+                                },
+                                {
+                                    embedMode: "SIZED_CONTAINER",
+                                    showDownloadPDF: false,
+                                    showPrintPDF: false
+                                });
+                            });
+                        </script>
+                    @else
+                        <figure class="rounded shadow-lg">
+                            <img src="{{ asset('assets/jdih/images/placeholders/cover.jpg') }}" class="img-fluid">
+                        </figure>
+                    @endisset
 
                     <div class="d-flex mt-4">
                         <div class="flex-grow-1">
                             <div class="row">
-                                <div class="col"><button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3">Dokumen<i class="ph-download ms-2"></i></button></div>
-                                <div class="col"><button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3">Abstrak<i class="ph-download ms-2"></i></button></div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->abstractDocumentSource) disabled @endempty">Abstrak<i class="ph-download ms-2"></i></button>
+                                </div>
                             </div>
                         </div>
                         <div class="ms-3">
