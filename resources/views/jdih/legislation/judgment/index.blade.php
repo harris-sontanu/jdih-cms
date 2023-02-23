@@ -7,7 +7,7 @@
     <div class="content-wrapper">
         <div class="d-flex content">
             <div class="breadcrumb">
-                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
+                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
                 <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
                 @isset($category)
                     <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Putusan Pengadilan</a>

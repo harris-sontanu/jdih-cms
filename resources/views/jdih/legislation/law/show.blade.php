@@ -7,7 +7,7 @@
     <div class="content-wrapper">
         <div class="d-flex content">
             <div class="breadcrumb">
-                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
+                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
                 <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
                 <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
                 <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
