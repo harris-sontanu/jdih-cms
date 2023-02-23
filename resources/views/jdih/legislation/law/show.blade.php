@@ -75,10 +75,10 @@
                     </div>
 
                     <div class="row gx-4 mt-4">
-                        <div class="col">
-                            <img src="{{ asset('assets/jdih/images/demo/qrcode.png') }}" alt="qrcode" class="img-fluid p-4">
+                        <div class="col-xl-6 p-4 text-center">
+                            {!! QrCode::size(230)->margin(2)->generate(url()->current()); !!}
                         </div>
-                        <div class="col">
+                        <div class="col-xl-6">
                             <h6 class="d-block fw-bold">Bagikan:</h6>
                             <ul class="list-inline mb-0">
                                 @foreach ($shares as $share)
