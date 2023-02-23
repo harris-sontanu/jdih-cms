@@ -33,7 +33,7 @@
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
                     @isset($legislation->masterDocumentSource)
-                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
+                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg mx-4" style="height: 720px;">
                         </figure>
                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                         <script type="text/javascript">
@@ -53,26 +53,22 @@
                             });
                         </script>
                     @else
-                        <figure class="rounded shadow-lg">
-                            <img src="{{ $legislation->coverSource }}" class="img-fluid">
+                        <figure class="rounded shadow-lg mx-4">
+                            <img src="{{ $legislation->coverSource }}" class="img-fluid rounded">
                         </figure>
                     @endisset
-
-                    {{-- <div class="d-flex mt-4">
-                        <div class="flex-grow-1">
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->abstractDocumentSource) disabled @endempty">Abstrak<i class="ph-download ms-2"></i></button>
-                                </div>
+                    
+                    @isset($legislation->masterDocumentSource)
+                        <div class="d-flex mt-4">
+                            <div class="flex-grow-1">
+                                <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
+                            </div>
+                            <div class="ms-3">
+                                <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
                             </div>
                         </div>
-                        <div class="ms-3">
-                            <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
-                        </div>
-                    </div> --}}
+                    @endisset
+
                     <div class="row gx-4 mt-4">
                         <div class="col">
                             <img src="{{ asset('assets/jdih/images/demo/qrcode.png') }}" alt="qrcode" class="img-fluid p-4">
@@ -246,11 +242,11 @@
                             @foreach ($otherLegislations as $monograph)
                                 <div class="col-xl-4 my-3">
                                     <div class="card lift shadow-lg h-100">
-                                        <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug])}}" class="text-body link-danger">
-                                            <div class="card-header border-0 pb-0">
-                                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $monograph->category->name }}</span>
-                                                <h4 class="fw-bold mb-0">{{ $monograph->shortTitle }}</h4>
+                                        <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug])}}" class="text-body">
+                                            <div class="card-img-actions mx-1 mt-1">
+                                                <img class="card-img img-fluid" src="{{ $monograph->coverSource }}" alt="">
                                             </div>
+
                                             <div class="card-body fs-lg pb-0">
                                                 <p class="mb-0 text-body">{{ $monograph->title }}</p>
                                             </div>

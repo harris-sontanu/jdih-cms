@@ -33,7 +33,7 @@
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
                     @isset($legislation->masterDocumentSource)
-                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
+                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg mx-4" style="height: 720px;">
                         </figure>
                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                         <script type="text/javascript">
@@ -54,7 +54,7 @@
                         </script>
                     @else
                         <figure class="rounded shadow-lg">
-                            <img src="{{ asset('assets/jdih/images/placeholders/cover.jpg') }}" class="img-fluid">
+                            <img src="{{ asset('assets/jdih/images/placeholders/cover.jpg') }}" class="img-fluid rounded">
                         </figure>
                     @endisset
 
