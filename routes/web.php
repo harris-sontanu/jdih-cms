@@ -73,3 +73,15 @@ Route::name('legislation.')->group(function () {
     });
 
 });
+
+Route::name('news.')->group(function () {
+
+    Route::controller(NewsController::class)->group(function () {
+        Route::get('/berita', 'index')
+            ->name('index');
+        Route::get('/berita/{taxonomy:slug}', 'taxonomy')
+            ->name('taxonomy');
+        Route::get('/berita/{taxonomy:slug}/{news:slug}', 'show')
+            ->name('show');
+    });
+});

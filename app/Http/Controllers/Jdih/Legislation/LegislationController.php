@@ -9,6 +9,7 @@ use App\Models\Legislation;
 use App\Models\Category;
 use Jorenvh\Share\ShareFacade;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Config;
 
 class LegislationController extends Controller
 {
@@ -26,6 +27,10 @@ class LegislationController extends Controller
     {
         $this->selectedCategories = Category::ofType(1)->inRandomOrder()->take(4)->pluck('id');
     }
+
+    protected static function adobeKey() {
+        return Config::get('services.adobe.key');
+    } 
 
     public function index(Request $request)
     {
