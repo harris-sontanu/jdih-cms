@@ -33,7 +33,7 @@
             <div class="row gx-5 pb-5">
                 <div class="col-xl-6 m-auto">
                     @isset($legislation->masterDocumentSource)
-                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg mx-4" style="height: 720px;">
+                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
                         </figure>
                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                         <script type="text/javascript">
@@ -73,6 +73,7 @@
                             <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
                         </div>
                     </div>
+
                     <div class="row gx-4 mt-4">
                         <div class="col">
                             <img src="{{ asset('assets/jdih/images/demo/qrcode.png') }}" alt="qrcode" class="img-fluid p-4">
@@ -95,6 +96,7 @@
                             </ul>
                         </div>
                     </div>
+
                 </div>
                 <div class="col-xl-6">
                     <h2 class="d-block display-6 fw-bold mb-2">{{ $legislation->shortTitle }}</h2>
@@ -337,7 +339,7 @@
 
                 @if (isset($otherLegislations) AND $otherLegislations->count() > 0)
                     <!-- Latest laws -->
-                    <section class="latest-legislation py-5">
+                    <section class="latest-legislation pt-5">
                         <div class="d-flex pb-4">
                             <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Lainnya</h2>
                             <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
