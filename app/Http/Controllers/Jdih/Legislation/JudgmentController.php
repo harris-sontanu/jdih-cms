@@ -7,6 +7,7 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
+use Illuminate\Support\Facades\Config;
 
 class JudgmentController extends LegislationController
 {
@@ -74,5 +75,41 @@ class JudgmentController extends LegislationController
             'vendors',
         ))->with('categories', $this->categories)
             ->with('orderOptions', $this->orderOptions);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Legislation  $legislation
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category, Legislation $legislation)
+    {
+        $legislation->incrementViewCount();
+
+        $adobeKey = Config::get('services.adobe.key');
+
+        $otherLegislations = Legislation::ofType(4)
+            ->where('category_id', $legislation->category_id)
+            ->whereNot('id', $legislation->id)
+            ->published()
+            ->sorted()
+            ->take(6)
+            ->get();
+
+        $shares = $this->shares();
+
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+            'assets/jdih/js/vendor/share/share.js',
+        ];
+
+        return view('jdih.legislation.judgment.show', compact(
+            'legislation',
+            'adobeKey',
+            'otherLegislations',
+            'shares',
+            'vendors',
+        ));
     }
 }

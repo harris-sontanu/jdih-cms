@@ -9,8 +9,8 @@
             <div class="breadcrumb">
                 <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
                 <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
-                <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
-                <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
+                <a href="{{ route('legislation.judgment.index') }}" class="breadcrumb-item text-body">Putusan Pengadilan</a>
+                <a href="{{ route('legislation.judgment.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
                 <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
             </div>
 
@@ -54,25 +54,27 @@
                         </script>
                     @else
                         <figure class="rounded shadow-lg">
-                            <img src="{{ asset('assets/jdih/images/placeholders/cover.jpg') }}" class="img-fluid rounded">
+                            <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
                         </figure>
                     @endisset
 
-                    <div class="d-flex mt-4">
-                        <div class="flex-grow-1">
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->abstractDocumentSource) disabled @endempty">Abstrak<i class="ph-download ms-2"></i></button>
+                    @isset($legislation->masterDocumentSource)
+                        <div class="d-flex mt-4">
+                            <div class="flex-grow-1">
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->abstractDocumentSource) disabled @endempty">Abstrak<i class="ph-download ms-2"></i></button>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="ms-3">
+                                <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
+                            </div>
                         </div>
-                        <div class="ms-3">
-                            <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
-                        </div>
-                    </div>
+                    @endisset
 
                     <div class="row gx-4 mt-4">
                         <div class="col">
@@ -118,11 +120,11 @@
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Jenis Dokumen</h4>
-                                    <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
+                                    <h4 class="mb-1 fw-bold">Jenis Putusan</h4>
+                                    <p class="mb-0"><a href="{{ route('legislation.judgment.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
                                 </div>
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Nomor</h4>
+                                    <h4 class="mb-1 fw-bold">Nomor Putusan</h4>
                                     <p class="mb-0">{{ $legislation->code_number }}</p>
                                 </div>
                             </div>
@@ -146,12 +148,14 @@
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Tgl. Penetapan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->approved) }}</p>
+                                    <h4 class="mb-1 fw-bold">Jenis Peradilan</h4>
+                                    <p class="mb-0">{{ $legislation->justice }}</p>
                                 </div>
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Tgl. Pengundangan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->approved) }}</p>
+                                    <h4 class="mb-1 fw-bold">Singkatan Jenis Peradilan</h4>
+                                    <p class="mb-0">
+                                        <a href="{{ route('legislation.judgment.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->abbrev }}</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -163,10 +167,8 @@
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
-                                    <p class="mb-0">
-                                        <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body">{{ $legislation->category->abbrev }}</a>
-                                    </p>
+                                    <h4 class="mb-1 fw-bold">Tgl. Dibacakan</h4>
+                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->published) }}</p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -186,7 +188,7 @@
                                     <p class="mb-0">{{ $legislation->source }}</p>
                                 </div>
                                 <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Tempat Terbit</h4>
+                                    <h4 class="mb-1 fw-bold">Tempat Peradilan</h4>
                                     <p class="mb-0">{{ $legislation->place }}</p>
                                 </div>
                             </div>
@@ -229,126 +231,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex mb-3">
-                            <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
-                                    <i class="ph-check"></i>
-                                </div>
-                            </div>
-                            <div class="row flex-fill">
-                                <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
-                                    <p class="mb-0">
-                                        <a href="{{ route('legislation.law.index', ['institute' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
-                                    @if($legislation->matters->count() > 0)
-                                        <ul class="list-inline mb-0">
-                                            @foreach ($legislation->matters as $matter)
-                                                <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matter' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        -
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
-                                    <i class="ph-check"></i>
-                                </div>
-                            </div>
-                            <div class="row flex-fill">
-                                <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Lokasi</h4>
-                                    <p class="mb-0">{{ $legislation->location }}</p>
-                                </div>
-                                <div class="col-6">
-                                    <h4 class="mb-1 fw-bold">Penandatangan</h4>
-                                    <p class="mb-0">{{ $legislation->signer }}</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- /meta data -->
 
-                    <!-- Legislation relationships -->
-                    <div class="card shadow-lg mt-5">
-                        <div class="card-header p-0 border-bottom-0">
-                            <div class="navbar navbar-expand-lg rounded-top">
-                                <div class="container-fluid">
-                                    <ul class="nav navbar-nav flex-row flex-fill" role="tablist">
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active @if ($statusRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2 fw-semibold">Keterangan Status</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link @if ($lawRelationships->count() === 0) disabled @endif rounded">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2">Peraturan Terkait</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded @if ($documentRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2">Dokumen Terkait</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /legislation relationships -->
-
-                        <div class="card-body tab-content pb-0">
-                            <div class="tab-pane fade active show" id="status" role="tabpanel">
-                                <ol class="list mb-0">
-                                    @forelse ($statusRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
-                                    @empty
-                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
-                                    @endforelse
-                                </ol>
-                            </div>
-
-                            <div class="tab-pane fade" id="legislation" role="tabpanel">
-                                <ol class="list mb-0">
-                                    @forelse ($lawRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
-                                    @empty
-                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
-                                    @endforelse
-                                </ol>
-                            </div>
-
-                            <div class="tab-pane fade" id="document" role="tabpanel">
-                                <ol class="list mb-0">
-                                    @forelse ($documentRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
-                                    @empty
-                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
-                                    @endforelse
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 @if (isset($otherLegislations) AND $otherLegislations->count() > 0)
                     <!-- Latest laws -->
                     <section class="latest-legislation pt-5">
                         <div class="d-flex pb-4">
-                            <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Lainnya</h2>
-                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
+                            <h2 class="fw-bold me-xl-auto section-title mb-0">Putusan Lainnya</h2>
+                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Putusan<i class="ph-arrow-right ms-2"></i></a>
                         </div>
                         <div class="row gx-5">
                             @foreach ($otherLegislations as $law)
