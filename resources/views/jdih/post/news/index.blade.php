@@ -38,22 +38,27 @@
                                     <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded m-0" alt="{{ $news->cover->name }}">
                                 </figure>
 
-                                <h6 class="fw-bold mb-2"><a href="#" class="link-danger">Neque</a></h6>
-                                <h5 class="card-title pt-1 mb-1">
+                                <span class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</span>
+                                <h4 class="card-title pt-1 mb-1">
                                     <a href="#" class="text-body">{{ $news->title }}</a>
-                                </h5>
+                                </h4>
 
                                 <ul class="list-inline list-inline-bullet text-muted mb-3">
-                                    <li class="list-inline-item">Oleh <a href="#">Eugene</a></li>
-                                    <li class="list-inline-item">July 20th, 2022</li>
+                                    <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
+                                    <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
+                                    <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                 </ul>
 
-                                {!! $news->excerpt !!}
+                                <div class="fs-lg">
+                                    {!! $news->excerpt !!}
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
+            {{ $posts->links('jdih.layouts.pagination') }}
 
         </main>
         <!-- /content area -->

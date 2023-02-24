@@ -23,7 +23,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('news.index') }}" class="navbar-nav-link rounded {{ request()->is('berita*') ? 'active' : null }}">
+                    <a href="{{ route('news.index') }}" class="navbar-nav-link rounded {{ request()->is('berita*') ? 'active fw-bold' : null }}">
                         Berita
                     </a>
                 </li>
