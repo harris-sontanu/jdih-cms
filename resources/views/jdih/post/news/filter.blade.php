@@ -21,7 +21,7 @@
         @foreach ($taxonomies as $taxonomy)            
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="ph-file-text me-2"></i>
+                    <i class="ph-folder me-2"></i>
                     {{ $taxonomy->name }}
                     <span class="badge bg-teal bg-opacity-10 text-teal rounded-pill ms-auto">{{ $taxonomy->posts->count() }}</span>
                 </a>
