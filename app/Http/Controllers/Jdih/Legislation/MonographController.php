@@ -109,7 +109,7 @@ class MonographController extends LegislationController
             'otherLegislations',
             'shares',
             'vendors',
-        ));
+        ))->with('adobeKey', $this->adobeKey());
     }
 
 }

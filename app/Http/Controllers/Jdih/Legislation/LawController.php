@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Legislation;
-use Illuminate\Support\Facades\Config;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 
@@ -57,8 +56,6 @@ class LawController extends LegislationController
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
-
-        // dd($request->get('matters'));
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
@@ -124,8 +121,6 @@ class LawController extends LegislationController
         $lawRelationships = $legislation->relations()->where('type', 'legislation')->get();
         $documentRelationships = $legislation->relations()->where('type', 'document')->get();
 
-        $adobeKey = Config::get('services.adobe.key');
-
         $otherLegislations = Legislation::ofType(1)
             ->where('category_id', $legislation->category_id)
             ->whereNot('id', $legislation->id)
@@ -146,10 +141,9 @@ class LawController extends LegislationController
             'statusRelationships',
             'lawRelationships',
             'documentRelationships',
-            'adobeKey',
             'otherLegislations',
             'shares',
             'vendors',
-        ));
+        ))->with('adobeKey', $this->adobeKey());
     }
 }
