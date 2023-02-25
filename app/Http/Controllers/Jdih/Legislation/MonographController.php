@@ -7,6 +7,7 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
+use App\Models\Link;
 use Illuminate\Support\Facades\Config;
 
 class MonographController extends LegislationController
@@ -40,12 +41,15 @@ class MonographController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $banners = Link::banners()->published()->take(6)->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('orderOptions', $this->orderOptions);
@@ -60,9 +64,7 @@ class MonographController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $categories = Category::ofType(2)
-            ->sorted()
-            ->pluck('name', 'id');
+        $banners = Link::banners()->published()->take(6)->get();
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -71,6 +73,7 @@ class MonographController extends LegislationController
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
             'category',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('orderOptions', $this->orderOptions);

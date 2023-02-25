@@ -54,7 +54,7 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->get();
+        $banners = Link::banners()->published()->take(6)->get();
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -79,12 +79,10 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $categories = Category::ofType(1)
-            ->sorted()
-            ->pluck('name', 'id');
-
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
+
+        $banners = Link::banners()->published()->take(6)->get();
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -93,6 +91,7 @@ class LawController extends LegislationController
         return view('jdih.legislation.law.index', compact(
             'legislations',
             'category',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('matters', $this->matters)
