@@ -19,6 +19,7 @@
 
     <div class="nav nav-sidebar">
         @foreach ($taxonomies as $taxonomy)
+            @if($taxonomy->posts->count() === 0) @continue @endif
             <li class="nav-item">
                 <a href="{{ route('news.taxonomy', ['taxonomy' => $taxonomy->slug]) }}" class="nav-link">
                     <i class="ph-folder me-2"></i>

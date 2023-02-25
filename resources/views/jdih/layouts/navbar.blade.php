@@ -4,13 +4,13 @@
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
             <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">
                 <li class="nav-item">
-                    <a href="/" class="navbar-nav-link fw-semibold rounded {{ request()->is('/') ? 'active fw-bold' : null }}">
+                    <a href="/" class="navbar-nav-link rounded {{ request()->is('/') ? 'active fw-bold' : 'fw-semibold' }}">
                         Beranda
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : 'fw-semibold' }}" data-bs-toggle="dropdown">
                         Produk Hukum
                     </a>
 
@@ -23,13 +23,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('news.index') }}" class="navbar-nav-link fw-semibold rounded {{ request()->is('berita*') ? 'active fw-bold' : null }}">
+                    <a href="{{ route('news.index') }}" class="navbar-nav-link fw-semibold rounded {{ request()->is('berita*') ? 'active fw-bold' : 'fw-semibold' }}">
                         Berita
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold fw-semibold rounded" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded" data-bs-toggle="dropdown">
                         Profil
                     </a>
 

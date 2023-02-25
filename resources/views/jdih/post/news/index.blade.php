@@ -34,7 +34,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.post.aside', ['view' => 'news'])
+    @include('jdih.layouts.aside', ['view' => 'jdih.post.news.filter'])
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -58,7 +58,6 @@
 
                                 <ul class="list-inline list-inline-bullet text-muted mb-3">
                                     <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                    <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
                                     <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                 </ul>
 

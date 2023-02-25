@@ -3,25 +3,33 @@
 @section('title', 'Produk Hukum | ' . strip_tags($appName))
 @section('content')
 
-<div class="page-content container pb-0">
-    <div class="content-wrapper">
-        <div class="d-flex content">
-            <div class="breadcrumb">
-                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house me-2"></i>Beranda</a>
-                <span class="breadcrumb-item active">Produk Hukum</span>
-            </div>
+<!-- Page title -->
+<section class="bg-dark bg-opacity-3 mb-4">
+    <div class="page-content container py-3 px-0">
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="page-header page-header-content d-lg-flex">
+                    <div class="page-title">
+                        <h2 class="fw-bold mb-0">Produk Hukum</h2>
+                    </div>
 
-            <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
-                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
-            </a>
+                    <div class="mb-3 my-lg-auto ms-lg-auto">
+                        <div class="breadcrumb">
+                            <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
+                            <span class="breadcrumb-item active">Produk Hukum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+<!-- /page title -->
 
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.legislation.aside')
+    @include('jdih.layouts.aside')
 
     <!-- Main content -->
     <div class="content-wrapper">
