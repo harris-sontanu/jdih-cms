@@ -10,7 +10,17 @@
             <div class="content">
                 <div class="page-header page-header-content d-lg-flex">
                     <div class="page-title">
-                        <h2 class="fw-bold mb-0">@isset($taxonomy) {{ $taxonomy->name }} @else Berita @endif</h2>
+                        <h2 class="fw-bold mb-0">
+                            @isset($taxonomy)
+                                {{ $taxonomy->name }}
+                            @else
+                                @if (Request::get('title'))
+                                    Cari Berita tentang "{{ Request::get('title') }}"
+                                @else
+                                    Berita
+                                @endif
+                            @endif
+                        </h2>
                     </div>
 
                     <div class="mb-3 my-lg-auto ms-lg-auto">

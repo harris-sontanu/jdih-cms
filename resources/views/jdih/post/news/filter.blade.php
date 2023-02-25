@@ -5,12 +5,14 @@
     </div>
 
     <div class="sidebar-section-body">
-        <div class="form-control-feedback form-control-feedback-end">
-            <input type="search" class="form-control" placeholder="Cari...">
-            <div class="form-control-feedback-icon">
-                <i class="ph-magnifying-glass"></i>
+        <form class="filter-form" action="{{ route('news.index') }}" method="get">
+            <div class="form-control-feedback form-control-feedback-end">
+                <input type="search" name="title" class="form-control" placeholder="Cari...">
+                <div class="form-control-feedback-icon">
+                    <i class="ph-magnifying-glass"></i>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="sidebar-section-header">
