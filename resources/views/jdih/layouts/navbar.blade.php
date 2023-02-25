@@ -4,13 +4,13 @@
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
             <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">
                 <li class="nav-item">
-                    <a href="/" class="navbar-nav-link rounded {{ request()->is('/') ? 'active fw-bold' : null }}">
+                    <a href="/" class="navbar-nav-link fw-semibold rounded {{ request()->is('/') ? 'active fw-bold' : null }}">
                         Beranda
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded {{ request()->is('produk-hukum*') ? 'active fw-bold' : null }}" data-bs-toggle="dropdown">
                         Produk Hukum
                     </a>
 
@@ -23,36 +23,36 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('news.index') }}" class="navbar-nav-link rounded {{ request()->is('berita*') ? 'active fw-bold' : null }}">
+                    <a href="{{ route('news.index') }}" class="navbar-nav-link fw-semibold rounded {{ request()->is('berita*') ? 'active fw-bold' : null }}">
                         Berita
                     </a>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold fw-semibold rounded" data-bs-toggle="dropdown">
                         Profil
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item rounded">Visi & Misi</a>
-                        <a href="#" class="dropdown-item rounded">Tugas Pokok & Fungsi</a>
-                        <a href="#" class="dropdown-item rounded">Struktur Organisasi</a>
+                        <a href="#" class="dropdown-item">Visi & Misi</a>
+                        <a href="#" class="dropdown-item">Tugas Pokok & Fungsi</a>
+                        <a href="#" class="dropdown-item">Struktur Organisasi</a>
                     </div>
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded" data-bs-toggle="dropdown">
                         Galeri
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item rounded">Foto</a>
-                        <a href="#" class="dropdown-item rounded">Video</a>
+                        <a href="#" class="dropdown-item">Foto</a>
+                        <a href="#" class="dropdown-item">Video</a>
                     </div>
                 </li>
 
                 <li class="nav-item ms-lg-auto">
-                    <a href="index.html" class="navbar-nav-link rounded">
+                    <a href="index.html" class="navbar-nav-link fw-semibold rounded">
                         Kontak
                     </a>
                 </li>

@@ -3,23 +3,28 @@
 @section('title', $legislation->shortTitle . ' | ' . strip_tags($appName))
 @section('content')
 
-<div class="page-content container pb-0 mb-4">
-    <div class="content-wrapper">
-        <div class="d-flex content">
-            <div class="breadcrumb">
-                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
-                <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
-                <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
-                <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
-                <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
-            </div>
+<section class="bg-dark bg-opacity-3 mb-4">
+    <div class="page-content container py-3 px-0">
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="page-header page-header-content d-lg-flex">
+                    {{-- <div class="page-title">
+                        <h2 class="fw-bold mb-0">Peraturan Perundang-undangan</h2>
+                        <div class="text-muted">Basic breadcrumb inside page header</div>
+                    </div> --}}
 
-            <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
-                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
-            </a>
+                        <div class="breadcrumb">
+                            <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
+                            <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
+                            <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
+                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
+                            <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Page container -->
 <div class="page-content container">
@@ -284,22 +289,22 @@
                                     <ul class="nav navbar-nav flex-row flex-fill" role="tablist">
                                         <li class="nav-item me-1" role="presentation">
                                             <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active @if ($statusRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2 fw-semibold">Keterangan Status</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="d-none d-lg-inline-block">Keterangan Status</span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="nav-item me-1" role="presentation">
                                             <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link @if ($lawRelationships->count() === 0) disabled @endif rounded">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2">Peraturan Terkait</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="d-none d-lg-inline-block">Peraturan Terkait</span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li class="nav-item me-1" role="presentation">
                                             <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded @if ($documentRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center mx-lg-1">
-                                                    <span class="d-none d-lg-inline-block ms-2">Dokumen Terkait</span>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="d-none d-lg-inline-block">Dokumen Terkait</span>
                                                 </div>
                                             </a>
                                         </li>
