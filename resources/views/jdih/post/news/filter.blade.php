@@ -21,7 +21,7 @@
 
     <div class="nav nav-sidebar">
         @foreach ($taxonomies as $taxonomy)
-            @if($taxonomy->posts->count() === 0) @continue @endif
+            @continue($taxonomy->posts->count() === 0)
             <li class="nav-item">
                 <a href="{{ route('news.taxonomy', ['taxonomy' => $taxonomy->slug]) }}" class="nav-link">
                     <i class="ph-folder me-2"></i>
@@ -34,23 +34,3 @@
 
 </div>
 <!-- filter -->
-
-<div class="mt-4">
-    <h5 class="fw-bold">Berita Populer</h5>
-
-    <div class="sidebar-section-body px-0 pb-0">
-        @foreach ($popularNews as $news)
-            <div class="d-flex mb-3">
-                <a href="#" class="me-3">
-                    <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
-                </a>
-                <div class="flex-fill">
-                    <h6><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'news' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
-                    <ul class="list-inline list-inline-bullet text-muted fs-sm">
-                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                    </ul>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>

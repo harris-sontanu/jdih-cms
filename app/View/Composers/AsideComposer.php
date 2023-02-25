@@ -22,7 +22,7 @@ class AsideComposer
         $types = Type::pluck('name', 'id');
 
         $fields = Field::sorted()->pluck('name', 'id');
-            
+
         $popularNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->popular()
             ->take(5)
@@ -34,12 +34,9 @@ class AsideComposer
             ->take(3)
             ->get();
 
-        $banners = Link::banners()->published()->get();
-
         $view->with('types', $types)
             ->with('fields', $fields)
             ->with('popularNews', $popularNews)
-            ->with('popularMonographs', $popularMonographs)
-            ->with('banners', $banners);
+            ->with('popularMonographs', $popularMonographs);
     }
 }

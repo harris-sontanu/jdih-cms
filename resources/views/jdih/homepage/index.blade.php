@@ -426,7 +426,7 @@
                                         <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
                                         <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                     </ul>
-                                    <p class="fs-lg mb-3">{!! $news->excerpt !!}</p>
+                                    <p class="fs-lg mb-3">{!! strip_tags($news->excerpt) !!}</p>
                                     <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
                                 </div>
                                 <!-- /highlight news -->

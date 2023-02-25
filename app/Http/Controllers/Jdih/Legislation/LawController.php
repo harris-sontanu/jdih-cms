@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Legislation;
+use App\Models\Link;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 
@@ -53,12 +54,15 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $banners = Link::banners()->published()->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('matters', $this->matters)
