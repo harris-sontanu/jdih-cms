@@ -3,28 +3,25 @@
 @section('title', $legislation->shortTitle . ' | ' . strip_tags($appName))
 @section('content')
 
+<!-- Page title -->
 <section class="bg-dark bg-opacity-3 mb-4">
     <div class="page-content container py-3 px-0">
         <div class="content-wrapper">
             <div class="content">
                 <div class="page-header page-header-content d-lg-flex">
-                    {{-- <div class="page-title">
-                        <h2 class="fw-bold mb-0">Peraturan Perundang-undangan</h2>
-                        <div class="text-muted">Basic breadcrumb inside page header</div>
-                    </div> --}}
-
-                        <div class="breadcrumb">
-                            <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
-                            <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
-                            <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
-                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
-                            <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
-                        </div>
+                    <div class="breadcrumb">
+                        <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
+                        <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
+                        <a href="{{ route('legislation.law.index') }}" class="breadcrumb-item text-body">Peraturan Perundang-undangan</a>
+                        <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
+                        <span class="breadcrumb-item active text-truncate d-inline-block w-25" title="{{ $legislation->shortTitle }}">{{ $legislation->shortTitle }}</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!-- /page title -->
 
 <!-- Page container -->
 <div class="page-content container">

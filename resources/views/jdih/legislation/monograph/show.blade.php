@@ -3,23 +3,25 @@
 @section('title', $legislation->shortTitle . ' | ' . strip_tags($appName))
 @section('content')
 
-<div class="page-content container pb-0 mb-4">
-    <div class="content-wrapper">
-        <div class="d-flex content">
-            <div class="breadcrumb">
-                <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
-                <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
-                <a href="{{ route('legislation.monograph.index') }}" class="breadcrumb-item text-body">Monografi Hukum</a>
-                <a href="{{ route('legislation.monograph.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
-                <span class="breadcrumb-item active">{{ $legislation->shortTitle }}</span>
+<!-- Page title -->
+<section class="bg-dark bg-opacity-3 mb-4">
+    <div class="page-content container py-3 px-0">
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="page-header page-header-content d-lg-flex">
+                    <div class="breadcrumb">
+                        <a href="{{ route('homepage') }}" class="breadcrumb-item text-body"><i class="ph-house"></i></a>
+                        <a href="{{ route('legislation.index') }}" class="breadcrumb-item text-body">Produk Hukum</a>
+                        <a href="{{ route('legislation.monograph.index') }}" class="breadcrumb-item text-body">Monografi Hukum</a>
+                        <a href="{{ route('legislation.monograph.category', ['category' => $legislation->category->slug]) }}" class="breadcrumb-item text-body">{{ $legislation->category->name }}</a>
+                        <span class="breadcrumb-item active text-truncate d-inline-block w-25" title="{{ $legislation->shortTitle }}">{{ $legislation->shortTitle }}</span>
+                    </div>
+                </div>
             </div>
-
-            <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
-                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
-            </a>
         </div>
     </div>
-</div>
+</section>
+<!-- /page title -->
 
 <!-- Page container -->
 <div class="page-content container">

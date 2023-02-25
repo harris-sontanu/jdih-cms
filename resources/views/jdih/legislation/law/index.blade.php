@@ -3,14 +3,14 @@
 @section('title', 'Peraturan Perundang-undangan | ' . strip_tags($appName))
 @section('content')
 
+<!-- Page title -->
 <section class="bg-dark bg-opacity-3 mb-4">
     <div class="page-content container py-3 px-0">
         <div class="content-wrapper">
             <div class="content">
                 <div class="page-header page-header-content d-lg-flex">
                     <div class="page-title">
-                        <h2 class="fw-bold mb-0">Peraturan Perundang-undangan</h2>
-                        <div class="text-muted">Basic breadcrumb inside page header</div>
+                        <h2 class="fw-bold mb-0">@isset($category) {{ $category->name }} @else Peraturan Perundang-undangan @endif</h2>
                     </div>
 
                     <div class="mb-3 my-lg-auto ms-lg-auto">
@@ -30,6 +30,7 @@
         </div>
     </div>
 </section>
+<!-- /page title -->
 
 <!-- Page container -->
 <div class="page-content container">
