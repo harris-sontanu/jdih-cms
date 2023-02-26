@@ -82,7 +82,7 @@ Route::name('news.')->group(function () {
             ->name('index');
         Route::get('/berita/{taxonomy:slug}', 'taxonomy')
             ->name('taxonomy');
-        Route::get('/berita/{taxonomy:slug}/{news:slug}', 'show')
+        Route::get('/berita/{taxonomy:slug}/{post:slug}', 'show')
             ->name('show');
     });
 });

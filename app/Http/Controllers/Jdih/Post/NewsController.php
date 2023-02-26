@@ -7,6 +7,7 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
+use App\Models\Link;
 
 class NewsController extends PostController
 {
@@ -38,8 +39,11 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $banners = Link::banners()->published()->take(6)->get();
+
         return view('jdih.post.news.index', compact(
             'posts',
+            'banners',
         ))->with('taxonomies', $this->taxonomies);
     }
 
@@ -51,9 +55,43 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $banners = Link::banners()->published()->take(6)->get();
+
         return view('jdih.post.news.index', compact(
             'posts',
             'taxonomy',
+            'banners',
         ))->with('taxonomies', $this->taxonomies);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Legislation  $legislation
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Taxonomy $taxonomy, Post $post)
+    {
+        $post->incrementViewCount();
+
+        $otherNews = Post::ofType('news')
+            ->where('taxonomy_id', $post->taxonomy_id)
+            ->whereNot('id', $post->id)
+            ->published()
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $shares = $this->shares();
+
+        $vendors = [
+            'assets/jdih/js/vendor/share/share.js',
+        ];
+
+        return view('jdih.post.news.show', compact(
+            'otherNews',
+            'shares',
+            'vendors',
+        ))->with('news', $post);
     }
 }

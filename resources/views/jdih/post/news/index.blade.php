@@ -54,11 +54,13 @@
 
             <div class="row gx-4">
                 @foreach ($posts as $news)
-                    <div class="col-xl-6">
+                    <article class="col-xl-6 mb-4">
                         <div class="card shadow-lg">
                             <div class="card-body">
                                 <figure class="figure">
-                                    <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded m-0" alt="{{ $news->cover->name }}">
+                                    <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}">
+                                        <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded m-0" alt="{{ $news->cover->name }}">
+                                    </a>
                                 </figure>
 
                                 <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</a>
@@ -76,7 +78,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
+
+                    @if (isset($banners) AND $banners->count() > 0)
+                        @if ($loop->last)
+                            <div class="row gx-4 mb-4">
+                                @foreach ($banners as $banner)
+                                    @break($loop->iteration > 3)
+                                    <div class="col-xl-4">
+                                        <div class="card shadow-lg bg-white border-0 lift mb-0">
+                                            <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    @endif
+
                 @endforeach
             </div>
 
@@ -91,8 +109,4 @@
 </div>
 <!-- /page container -->
 
-@endsection
-
-@section('script')
-    @include('jdih.post.news.script')
 @endsection
