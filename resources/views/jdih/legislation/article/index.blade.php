@@ -119,6 +119,9 @@
                         @endisset
                     </div>
                 </article>
+
+                @include('jdih.legislation.banner')
+
             @endforeach
 
             {{ $legislations->links('jdih.layouts.pagination') }}

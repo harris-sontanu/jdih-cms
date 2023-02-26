@@ -7,6 +7,7 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
+use App\Models\Link;
 use Illuminate\Support\Facades\Config;
 
 class JudgmentController extends LegislationController
@@ -40,12 +41,15 @@ class JudgmentController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $banners = Link::banners()->published()->take(6)->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.judgment.index', compact(
             'legislations',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('orderOptions', $this->orderOptions);
@@ -61,9 +65,7 @@ class JudgmentController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $categories = Category::ofType(4)
-            ->sorted()
-            ->pluck('name', 'id');
+        $banners = Link::banners()->published()->take(6)->get();
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
@@ -72,6 +74,7 @@ class JudgmentController extends LegislationController
         return view('jdih.legislation.judgment.index', compact(
             'legislations',
             'category',
+            'banners',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('orderOptions', $this->orderOptions);
