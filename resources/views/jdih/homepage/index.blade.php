@@ -434,13 +434,13 @@
                                 <!-- Latest news -->
                                 <div class="col-xl-4">
                             @else
-                                    <div class="post">
+                                    <div class="post mb-4">
                                         <figure class="figure">
                                             <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
                                         </figure>
                                         <div class="post-title">
                                             <h5 class="fw-bold mb-1"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
-                                            <h4><a href="#" class="d-block fw-bold text-body mb-3">{!! $news->title !!}</a></h4>
+                                            <h4 class="mb-1"><a href="#" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
                                         </div>
                                         <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
                                             <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>

@@ -82,6 +82,12 @@ class NewsController extends PostController
             ->take(4)
             ->get();
 
+        $popularNews = Post::ofType('news')
+            ->with('taxonomy', 'author', 'cover')
+            ->popular()
+            ->take(5)
+            ->get();
+
         $shares = $this->shares();
 
         $vendors = [
@@ -90,6 +96,7 @@ class NewsController extends PostController
 
         return view('jdih.post.news.show', compact(
             'otherNews',
+            'popularNews',
             'shares',
             'vendors',
         ))->with('news', $post);

@@ -62,7 +62,7 @@
                         <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
                     </a>
                     <div class="flex-fill">
-                        <h6><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'news' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
+                        <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
                         <ul class="list-inline list-inline-bullet text-muted fs-sm">
                             <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
                         </ul>
@@ -72,17 +72,5 @@
         </div>
     </div>
     <!-- /popular news -->
-
-    {{-- @if (isset($banners) AND $banners->count() > 0)
-        <div class="my-4">
-            <h5 class="fw-bold">Tautan</h5>
-
-            @foreach ($banners as $banner)
-                <div class="card shadow-lg border-0">
-                    <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
-                </div>
-            @endforeach
-        </div>
-    @endif --}}
 
 </aside>
