@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
 use App\Models\Link;
+use App\Models\Media;
 
 class NewsController extends PostController
 {
@@ -79,7 +80,7 @@ class NewsController extends PostController
             ->whereNot('id', $post->id)
             ->published()
             ->latest()
-            ->take(4)
+            ->take(3)
             ->get();
 
         $popularNews = Post::ofType('news')
@@ -90,6 +91,11 @@ class NewsController extends PostController
 
         $shares = $this->shares();
 
+        $banners = Link::banners()->published()->get();
+        $youtubes = Link::youtubes()->with('user', 'image')->take(3)->get();
+
+        $photos = Media::images()->published()->take(9)->get();
+
         $vendors = [
             'assets/jdih/js/vendor/share/share.js',
             'assets/admin/js/vendor/media/glightbox.min.js',
@@ -99,6 +105,9 @@ class NewsController extends PostController
             'otherNews',
             'popularNews',
             'shares',
+            'banners',
+            'youtubes',
+            'photos',
             'vendors',
         ))->with('news', $post);
     }

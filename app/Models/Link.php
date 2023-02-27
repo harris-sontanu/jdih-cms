@@ -56,6 +56,19 @@ class Link extends Model
         );
     }
 
+    public function youtubeEmbedSource(): Attribute
+    {
+        $components = parse_url($this->url);
+        $v = $components['path'];
+        if ( ! empty($components['query'])) {
+            $v = '/' . substr($components['query'], 2);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => 'https://www.youtube.com/embed'.$v
+        );
+    }
+
     public function youtubeThumbUrl(): Attribute
     {
         $components = parse_url($this->url);
