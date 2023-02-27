@@ -94,7 +94,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
+
+                <div class="col-xl-5 offset-xl-1">
                     <h2 class="d-block display-6 fw-bold mb-2">{{ $legislation->shortTitle }}</h2>
                     <ul class="post-meta list-inline list-inline-bullet text-muted mb-4 fs-lg">
                         <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>

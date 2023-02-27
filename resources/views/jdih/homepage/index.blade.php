@@ -133,7 +133,7 @@
                             });
                         </script>
                     </div>
-                    <div class="col-xl-6 ps-3">
+                    <div class="col-xl-5 offset-xl-1">
                         <h3 class="fw-bold text-danger mb-0">Populer</h3>
                         <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $popularLaw->shortTitle }}</a>
                         <div class="fs-lg">
@@ -403,23 +403,22 @@
                 <div class="content py-4">
                     <div class="d-flex mb-4 pb-2">
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
-                        <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
+                        <a href="{{ route('news.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
                     <div class="row gx-5">
-                        @php
-                            $i = 0;
-                        @endphp
                         @foreach ($latestNews as $news)
-                            @if ($i === 0)
+                            @if ($loop->first)
                                 <!-- Highlight news -->
-                                <div class="post col-xl-8">
+                                <div class="post col-xl-7">
                                     <figure class="figure">
-                                        <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="...">
+                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
+                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="{{ $news->cover->name }}">
+                                        </a>
                                         <figcaption class="figure-caption">{{ $news->cover->caption }}</figcaption>
                                     </figure>
                                     <div class="post-title">
-                                        <h3 class="fw-bold mb-2"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h3>
-                                        <a href="#" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
+                                        <h3 class="fw-bold mb-2"><a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="link-danger">{{ $news->taxonomy->name }}</a></h3>
+                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
                                     </div>
                                     <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
                                         <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
@@ -427,20 +426,22 @@
                                         <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                     </ul>
                                     <p class="fs-lg mb-3">{!! strip_tags($news->excerpt) !!}</p>
-                                    <a href="#" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
+                                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news-> slug]) }}" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
                                 </div>
                                 <!-- /highlight news -->
 
                                 <!-- Latest news -->
-                                <div class="col-xl-4">
+                                <div class="col-xl-4 offset-xl-1">
                             @else
                                     <div class="post mb-4">
                                         <figure class="figure">
-                                            <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="...">
+                                            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
+                                                <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="{{ $news->cover->name }}">
+                                            </a>
                                         </figure>
                                         <div class="post-title">
-                                            <h5 class="fw-bold mb-1"><a href="#" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
-                                            <h4 class="mb-1"><a href="#" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
+                                            <h5 class="fw-bold mb-1"><a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
+                                            <h4 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
                                         </div>
                                         <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
                                             <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
@@ -448,9 +449,6 @@
                                         </ul>
                                     </div>
                             @endif
-                            @php
-                                $i++;
-                            @endphp
                         @endforeach
                         </div>
                         <!-- /latest news -->
