@@ -92,6 +92,7 @@ class NewsController extends PostController
 
         $vendors = [
             'assets/jdih/js/vendor/share/share.js',
+            'assets/admin/js/vendor/media/glightbox.min.js',
         ];
 
         return view('jdih.post.news.show', compact(
