@@ -414,7 +414,7 @@
                                         <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
                                             <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="{{ $news->cover->name }}">
                                         </a>
-                                        <figcaption class="figure-caption">{{ $news->cover->caption }}</figcaption>
+                                        <figcaption class="figure-caption fs-6">{{ $news->cover->caption }}</figcaption>
                                     </figure>
                                     <div class="post-title">
                                         <h3 class="fw-bold mb-2"><a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="link-danger">{{ $news->taxonomy->name }}</a></h3>
@@ -425,7 +425,7 @@
                                         <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
                                         <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                     </ul>
-                                    <p class="fs-lg mb-3">{!! strip_tags($news->excerpt) !!}</p>
+                                    <p class="fs-5 mb-3">{!! strip_tags($news->excerpt) !!}</p>
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news-> slug]) }}" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
                                 </div>
                                 <!-- /highlight news -->

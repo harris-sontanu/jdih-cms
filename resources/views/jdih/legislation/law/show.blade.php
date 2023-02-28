@@ -32,7 +32,7 @@
         <!-- Content area -->
         <main class="content">
 
-            <div class="row gx-5 pb-5">
+            <div class="row pb-5">
                 <div class="col-xl-6 m-auto">
                     @isset($legislation->masterDocumentSource)
                         <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">

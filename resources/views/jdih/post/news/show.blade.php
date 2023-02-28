@@ -30,7 +30,7 @@
 
         <!-- Content area -->
         <main class="content ms-lg-3">
-            <div class="row gx-5">
+            <div class="row">
                 <div class="col-xl-7 mb-4">
 
                     <article class="post-entry">
