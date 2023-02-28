@@ -65,7 +65,7 @@ class HomepageController extends Controller
 
         $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->published()
-            ->latest()
+            ->latestPublished()
             ->limit(4)
             ->get();
 

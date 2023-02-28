@@ -36,7 +36,7 @@ class NewsController extends PostController
             ->with('author', 'cover')
             ->filter($request)
             ->published()
-            ->latest()
+            ->latestPublished()
             ->paginate($this->limit)
             ->withQueryString();
 
@@ -79,7 +79,7 @@ class NewsController extends PostController
             ->where('taxonomy_id', $post->taxonomy_id)
             ->whereNot('id', $post->id)
             ->published()
-            ->latest()
+            ->latestPublished()
             ->take(3)
             ->get();
 

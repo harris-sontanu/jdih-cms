@@ -34,7 +34,7 @@
                 <h2 class="fw-bold me-xl-auto section-title mb-0">Produk Hukum</h2>
                 <a href="{{ route('legislation.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
             </div>
-            <div class="row gx-5">
+            <div class="row gx-5 fs-lg">
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body shadow-lg lift">
                         <a href="{{ route('legislation.law.index') }}" class="text-dark">
@@ -111,7 +111,7 @@
 
             @isset ($popularLaw)
                 <!-- Popular law -->
-                <div class="row gx-5 pb-5">
+                <div class="row pb-5">
                     <div class="col-xl-6 m-auto">
                         <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 700px;">
                         </figure>
@@ -405,7 +405,7 @@
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
                         <a href="{{ route('news.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="row gx-5">
+                    <div class="row">
                         @foreach ($latestNews as $news)
                             @if ($loop->first)
                                 <!-- Highlight news -->
