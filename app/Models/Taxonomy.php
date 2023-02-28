@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Taxonomy extends Model
 {
@@ -32,6 +33,11 @@ class Taxonomy extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function publishedPosts()
+    {
+        return $this->hasMany(Post::class)->where('published_at', '<=', Carbon::now());
     }
 
     public function employees()

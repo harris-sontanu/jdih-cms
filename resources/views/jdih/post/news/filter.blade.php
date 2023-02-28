@@ -21,12 +21,12 @@
 
     <div class="nav nav-sidebar">
         @foreach ($taxonomies as $taxonomy)
-            @continue($taxonomy->posts->count() === 0)
+            @continue($taxonomy->publishedPosts->count() === 0)
             <li class="nav-item">
                 <a href="{{ route('news.taxonomy', ['taxonomy' => $taxonomy->slug]) }}" class="nav-link">
                     <i class="ph-folder me-2"></i>
                     {{ $taxonomy->name }}
-                    <span class="badge bg-teal bg-opacity-10 text-teal rounded-pill ms-auto">{{ $taxonomy->posts->count() }}</span>
+                    <span class="badge bg-teal bg-opacity-10 text-teal rounded-pill ms-auto">{{ $taxonomy->publishedPosts->count() }}</span>
                 </a>
             </li>
         @endforeach

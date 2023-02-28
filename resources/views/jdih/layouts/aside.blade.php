@@ -14,15 +14,11 @@
 
                 <div id="carouselExampleIndicators" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @php
-                            $i = 0;
-                        @endphp
                         @foreach ($popularMonographs as $monograph)
-                            <div class="carousel-item {{ $i === 0 ? 'active' : null }}">
+                            <div class="carousel-item @if ($loop->first) active @endif">
                                 <div class="card shadow-none m-0">
-                                    <a href="#">
-                                        <img class="card-img-top img-fluid" src="{{ $monograph->coverThumbSource }}"
-                                            alt="">
+                                    <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug]) }}">
+                                        <img class="card-img-top img-fluid" src="{{ $monograph->coverThumbSource }}">
                                     </a>
 
                                     <div class="card-body">
@@ -30,9 +26,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @php
-                                $i++;
-                            @endphp
                         @endforeach
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -58,7 +51,7 @@
         <div class="sidebar-section-body px-0 pb-0">
             @foreach ($popularNews as $news)
                 <div class="d-flex mb-3">
-                    <a href="#" class="me-3">
+                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
                         <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
                     </a>
                     <div class="flex-fill">

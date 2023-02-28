@@ -341,9 +341,7 @@ class Legislation extends Model
 
     public function coverThumbSource(): Attribute
     {
-        $cover = $this->documents()
-            ->ofType('cover')
-            ->first();
+        $cover = $this->coverDocument();
 
         $coverThumbUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
         if (!empty($cover)) {
