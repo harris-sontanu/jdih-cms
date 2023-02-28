@@ -171,6 +171,12 @@ class PageController extends AdminController
             // Create thumbnail
             $this->createImageThumbnail($path, $file->getClientOriginalExtension());
 
+            if ($page->cover()->exists()) {
+                // Delete current cover
+                $this->removeMedia($page->cover->path);
+                $page->cover()->delete();
+            }
+
             $new_media = $page->images()->create([
                 'name'  => $name,
                 'file_name' => $file->getClientOriginalName(),
@@ -178,19 +184,9 @@ class PageController extends AdminController
                 'path'  => $path,
                 'caption'   => $request->caption,
                 'is_image'  => 1,
-                'size'  => $file->getSize(),
                 'user_id'   => $request->user()->id,
                 'published_at'  => now()->format('Y-m-d H:i:s'),
             ]);
-
-            // Check if it already has cover
-            if ($page->cover_id) {
-
-                // Delete old cover
-                $this->removeMedia($page->cover->path);
-
-                $page->cover()->delete();
-            }
 
             $page->update([
                 'cover_id' => $new_media->id

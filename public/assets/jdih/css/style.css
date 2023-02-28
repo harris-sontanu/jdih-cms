@@ -1,0 +1,75 @@
+h2.section-title {
+    font-size: 1.8rem;
+}
+
+a.text-body:hover,
+a.text-body:focus {
+    color: dimgray !important;
+}
+
+.navbar-nav-link.active, .navbar-nav-link.show, .navbar-nav-link[aria-expanded="true"] {
+    color: #252b36;
+    background-color: #f3f4f6;
+    font-weight: 600;
+}
+
+.main-nav .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }
+
+@media (min-width: 1200px) {
+    .display-7 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .w-lg-120px {
+        width: 120px !important;
+    }
+}
+
+.start-5 {
+    left: 5px !important;
+}
+
+.overlay::before {
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(37,43,54,0.7);
+    z-index: 2;
+}
+
+.lift {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    transform: translateY(0);
+    transition: all .3s ease;
+}
+
+.lift:hover {
+    transform: translateY(-.4rem);
+    box-shadow: 0 .25rem 1.25rem rgba(52,63,82,.1);
+}
+
+.text-handwriting {
+    font-family: 'Kaushan Script', cursive;
+}
+
+.bg-opacity-3 {
+    --bg-opacity: 0.03;
+}
+
+.bg-opacity-85 {
+    --bg-opacity: 0.85;
+}
+
+.active > .page-link, .page-link.active {
+    background-color: #ef4444;
+    border-color: #ef4444;
+}

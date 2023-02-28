@@ -40,12 +40,7 @@ class Link extends Model
 
     public function image()
     {
-        return $this->belongsTo(Media::class);
-    }
-
-    public function images()
-    {
-        return $this->morphMany(Media::class, 'mediaable');
+        return $this->morphOne(Media::class, 'mediaable');
     }
 
     public function youtubeId(): Attribute
@@ -58,6 +53,19 @@ class Link extends Model
 
         return Attribute::make(
             get: fn ($value) => $v
+        );
+    }
+
+    public function youtubeEmbedSource(): Attribute
+    {
+        $components = parse_url($this->url);
+        $v = $components['path'];
+        if ( ! empty($components['query'])) {
+            $v = '/' . substr($components['query'], 2);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => 'https://www.youtube.com/embed'.$v
         );
     }
 

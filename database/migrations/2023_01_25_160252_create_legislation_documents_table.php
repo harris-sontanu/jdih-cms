@@ -18,9 +18,6 @@ return new class extends Migration
             $table->foreignId('legislation_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignId('media_id')
-                ->constrained()
-                ->cascadeOnDelete();
             $table->enum('type', ['master', 'abstract', 'attachment', 'cover']);
             $table->tinyInteger('order')->default(1);
             $table->integer('download')

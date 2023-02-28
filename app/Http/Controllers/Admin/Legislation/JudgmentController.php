@@ -205,14 +205,7 @@ class JudgmentController extends LegislationController
     {
         if ($request->hasFile('master'))
         {
-            $file = $request->file('master');
-
-            $mediaId = $this->storeDocument($file, $legislation, 'master');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'master',
-            ]);
+            $this->storeDocument($request->file('master'), $legislation, 'master');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,

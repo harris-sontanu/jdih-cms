@@ -132,23 +132,21 @@ class JdihController extends LinkController
             // Create thumbnail
             $this->createImageThumbnail($path, $image->getClientOriginalExtension());
 
-            $new_media = $jdih->images()
+            if ($jdih->image()->exists()) {
+                // Delete current cover
+                $this->removeMedia($jdih->image->path);
+                $jdih->image()->delete();
+            }
+
+            $jdih->image()
                 ->create([
                     'name'  => $name,
                     'file_name' => $image->getClientOriginalName(),
                     'mime_type' => $image->getClientMimeType(),
                     'path'  => $path,
-                    'size'  => $image->getSize(),
                     'user_id'   => $request->user()->id,
                     'published_at'  => now(),
                 ]);
-
-            if ($jdih->image_id) {
-                $jdih->image->delete();
-                $this->removeMedia($jdih->image->path);
-            }
-
-            $jdih->update(['image_id' => $new_media->id]);
         }
     }
 

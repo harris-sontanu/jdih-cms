@@ -84,6 +84,27 @@ class Legislation extends Model
         return $this->hasMany(LegislationDocument::class);
     }
 
+    public function masterDocument()
+    {
+        return $this->documents()
+            ->ofType('master')
+            ->first();
+    }
+
+    public function abstractDocument()
+    {
+        return $this->documents()
+            ->ofType('abstract')
+            ->first();
+    }
+
+    public function coverDocument()
+    {
+        return $this->documents()
+            ->ofType('cover')
+            ->first();
+    }
+
     public function matters()
     {
         return $this->belongsToMany(Matter::class);
@@ -127,8 +148,27 @@ class Legislation extends Model
 
     public function shortTitle(): Attribute
     {
+        $shortTitle = match ($this->category->type_id) {
+            1   => $this->category->name . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year,
+            4   => 'Putusan ' . Str::title($this->justice) . ' Nomor ' . $this->code_number,
+            default => $this->title,
+        };
+
         return Attribute::make(
-            get: fn ($value) => $this->category->desc . ' Nomor ' . $this->code_number . ' Tahun ' . $this->year
+            get: fn ($value) => $shortTitle
+        );
+    }
+
+    public function excerpt(): Attribute
+    {
+        $excerpt = match ($this->category->type_id) {
+            2 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Penerbit:</span> ' . $this->publisher,
+            3 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Sumber:</span> ' . $this->source,
+            default => $this->title,
+        };
+
+        return Attribute::make(
+            get: fn ($value) => $excerpt
         );
     }
 
@@ -264,8 +304,55 @@ class Legislation extends Model
     public function scopePopular($query, $days = 7)
     {
         return $query->where('published_at', '>', Carbon::now()->subDays($days))
-            ->orderBy('view', 'desc')
-            ->take(7);
+            ->orderBy('view', 'desc');
+    }
+
+    public function masterDocumentSource(): Attribute
+    {
+        $master = $this->masterDocument();
+
+        return Attribute::make(
+            get: fn ($value) => empty($master) ? null : Storage::url($master->media->path)
+        );
+    }
+
+    public function abstractDocumentSource(): Attribute
+    {
+        $abstract = $this->abstractDocument();
+
+        return Attribute::make(
+            get: fn ($value) => empty($abstract) ? null : Storage::url($abstract->media->path)
+        );
+    }
+
+    public function coverSource(): Attribute
+    {
+        $cover = $this->coverDocument();
+
+        $coverUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
+        if (!empty($cover)) {
+            if (Storage::disk('public')->exists($cover->media->path)) $coverUrl = Storage::url($cover->media->path);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $coverUrl
+        );
+    }
+
+    public function coverThumbSource(): Attribute
+    {
+        $cover = $this->coverDocument();
+
+        $coverThumbUrl = asset('assets/jdih/images/placeholders/placeholder.jpg');
+        if (!empty($cover)) {
+            $ext = substr(strchr($cover->media->path, '.'), 1);
+            $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $cover->media->path);
+            if (Storage::disk('public')->exists($thumbnail)) $coverThumbUrl = Storage::url($thumbnail);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $coverThumbUrl
+        );
     }
 
     public function scopeSearch($query, $request)
@@ -361,6 +448,12 @@ class Legislation extends Model
             $query->whereRelation('matters', 'id', $matter);
         }
 
+        if ($matters = $request->matters AND $matters = $request->matters) {
+            $query->whereHas('matters', function (Builder $q) use ($matters) {
+                $q->whereIn('id', $matters);
+            });
+        }
+
         if ($created_at = $request->created_at AND $created_at = $request->created_at) {
             $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
         }
@@ -413,6 +506,18 @@ class Legislation extends Model
                 $query->orderBy('category_name', $request['sort']);
             } else if ($request['order'] === 'user') {
                 $query->orderBy('user_name', $request['sort']);
+            } else if ($request['order'] === 'latest') {
+                $query->latest();
+            } else if ($request['order'] === 'latest-approved') {
+                $query->orderBy('published', 'desc');
+            } else if ($request['order'] === 'popular') {
+                $query->orderBy('view', 'desc');
+            } else if ($request['order'] === 'number-asc') {
+                $query->orderBy('number', 'asc');
+            } else if ($request['order'] === 'most-viewed') {
+                $query->orderBy('view', 'desc');
+            } else if ($request['order'] === 'rare-viewed') {
+                $query->orderBy('view', 'asc');
             } else {
                 $query->orderBy($request['order'], $request['sort']);
             }

@@ -247,9 +247,11 @@
                             </tbody>
                         </table>
 
-                        <div class="card-footer d-flex justify-content-end align-items-center">
-                            <a href="{{ route('admin.legislation.law.edit', $legislation->id) }}" class="btn btn-indigo">Ubah</a>
-                        </div>
+                        @can('update', $legislation)
+                            <div class="card-footer d-flex justify-content-end align-items-center">
+                                <a href="{{ route('admin.legislation.law.edit', $legislation->id) }}" class="btn btn-indigo">Ubah</a>
+                            </div>
+                        @endcan
 
                     </div>
 

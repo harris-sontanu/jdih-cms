@@ -29,6 +29,7 @@
 	<script src="{{ asset('assets/admin/demo/demo_configurator.js') }}"></script>
 	<script src="{{ asset('assets/admin/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('assets/admin/js/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/vendor/notifications/noty.min.js') }}"></script>
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->

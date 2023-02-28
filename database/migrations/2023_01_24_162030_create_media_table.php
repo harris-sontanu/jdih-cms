@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('path');
             $table->text('caption')->nullable();
             $table->boolean('is_image')->default(0);
-            $table->float('size', 8, 2)->nullable();
             $table->unsignedBigInteger('mediaable_id')
                 ->nullable();
             $table->string('mediaable_type')

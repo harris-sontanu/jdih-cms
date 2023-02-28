@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Legislation;
 use App\Models\LegislationDocument;
-use App\Models\Media;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -24,29 +24,27 @@ class LegislationDocumentSeeder extends Seeder
         {
             if ($legislation->category->type_id === 1) {
 
-                $media = $this->createMedia();
-
-                LegislationDocument::factory()->create([
+                $master = LegislationDocument::create([
                     'legislation_id'    => $legislation->id,
-                    'media_id'  => $media->id,
                     'type'  => 'master'
                 ]);
 
+                $this->createMedia($master);
+
                 if (rand(0, 1)) {
 
-                    $media = $this->createMedia();
-
-                    LegislationDocument::factory()->create([
+                    $abstract = LegislationDocument::create([
                         'legislation_id'    => $legislation->id,
-                        'media_id'  => $media->id,
                         'type'  => 'abstract'
                     ]);
+
+                    $this->createMedia($abstract);
                 }
             }
         }
     }
 
-    protected function createMedia()
+    protected function createMedia($media)
     {
         $fileName = rand(1, 10) . '.pdf';
         $publicPath = public_path('assets/admin/demo/document/' . $fileName);
@@ -56,13 +54,14 @@ class LegislationDocumentSeeder extends Seeder
 
         File::copy($publicPath, $storagePath);
 
-        $media = Media::factory()->create([
+        $media->media()->create([
+            'name'      => fake()->words(rand(1, 3), true),
             'file_name' => $fileName,
             'mime_type' => 'application/pdf',
             'is_image'  => 0,
             'path'      => $storageDir . $fileName,
+            'caption'   => fake()->sentence(rand(4, 7)),
+            'user_id'   => User::all()->random()->value('id'),
         ]);
-
-        return $media;
     }
 }

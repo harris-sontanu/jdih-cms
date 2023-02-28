@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->pageTitle = ' - ' . Setting::where('key', 'appName')->first()->value;
+        $this->pageTitle = ' - ' . strip_tags(Setting::where('key', 'appName')->first()->value);
     }
 
     protected function createImageThumbnail($path, $extension, $width = 440)

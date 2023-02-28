@@ -99,7 +99,7 @@
                     <ul class="nav-group-sub {{ (request()->is('admin/media*') OR request()->is('admin/link/youtube')) ? 'show' : 'collapse' }}">
                         {{-- <li class="nav-item"><a href="#" class="nav-link">Slide</a></li> --}}
                         <li class="nav-item"><a href="{{ route('admin.media.image.index') }}" class="nav-link {{ (request()->is('admin/media/image')) ? 'active' : '' }}">Gambar</a></li>
-                        {{-- <li class="nav-item"><a href="{{ route('admin.media.file.index') }}" class="nav-link {{ (request()->is('admin/media/file')) ? 'active' : '' }}">Berkas</a></li> --}}
+                        <li class="nav-item"><a href="{{ route('admin.media.file.index') }}" class="nav-link {{ (request()->is('admin/media/file')) ? 'active' : '' }}">Berkas</a></li>
                         <li class="nav-item"><a href="{{ route('admin.link.youtube.index') }}" class="nav-link {{ (request()->is('admin/link/youtube')) ? 'active' : '' }}">YouTube</a></li>
                     </ul>
                 </li>
@@ -133,7 +133,7 @@
                         </span>
                     </a>
                 </li>
-                
+
 
                 <li class="nav-item nav-item-submenu {{ (request()->is('admin/questionner*') OR request()->is('admin/statistic/questionner*')) ? 'nav-item-expanded nav-item-open' : '' }}">
                     <a href="#" class="nav-link"><i class="ph-pencil-line"></i> <span>IKM</span></a>

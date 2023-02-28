@@ -256,12 +256,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('master');
 
-            $mediaId = $this->storeDocument($file, $legislation, 'master');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'master',
-            ]);
+            $this->storeDocument($file, $legislation, 'master');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -273,12 +268,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('abstract');
 
-            $mediaId = $this->storeDocument($file, $legislation, 'abstract');
-
-            $legislation->documents()->create([
-                'media_id'  => $mediaId,
-                'type'      => 'abstract',
-            ]);
+            $this->storeDocument($file, $legislation, 'abstract');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -296,13 +286,7 @@ class LawController extends LegislationController
 
             foreach ($files as $attachment) {
 
-                $mediaId = $this->storeDocument($attachment, $legislation, 'attachment');
-
-                $legislation->documents()->create([
-                    'media_id'  => $mediaId,
-                    'type'      => 'attachment',
-                    'order'     => $i,
-                ]);
+                $this->storeDocument($attachment, $legislation, 'attachment', $i);
 
                 $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
@@ -314,7 +298,7 @@ class LawController extends LegislationController
         }
     }
 
-    private function storeRelationship($parent, $related, $type, $status, $note) 
+    private function storeRelationship($parent, $related, $type, $status, $note)
     {
         $logMessages = [
             'status'    => 'keterangan status',
@@ -343,7 +327,7 @@ class LawController extends LegislationController
                 'type'        => 'status',
                 'status'      => $antonymStatus,
             ]);
-    
+
             $related->logs()->create([
                 'user_id'   => request()->user()->id,
                 'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',

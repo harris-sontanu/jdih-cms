@@ -9,7 +9,6 @@
         <div class="mb-3">
             <label for="media" class="form-label">Unggah Berkas</label>
             <input id="media" type="file" class="form-control" name="file">
-            <div class="form-text text-muted">Ukuran maks: 2Mb.</div>
         </div>
 
         <div class="mb-3">
