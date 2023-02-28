@@ -85,6 +85,7 @@ class HomepageController extends Controller
 			'assets/admin/js/vendor/visualization/d3/d3.min.js',
 			'assets/admin/js/vendor/visualization/d3/d3_tooltip.js',
             'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js',
+            'https://unpkg.com/counterup2@2.0.2/dist/index.js',
         ];
 
         return view('jdih.homepage.index', compact(

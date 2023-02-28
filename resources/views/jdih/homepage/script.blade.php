@@ -1,5 +1,18 @@
 <script>
+    const counterUp = window.counterUp.default
+
     $(function() {
+
+        let el = document.querySelectorAll( '.counter' );
+
+        // Start counting, typically you need to call this when the 
+        // element becomes visible, or whenever you like.
+        for (var i = 0; i < el.length; i++) {
+            counterUp( el[i], {
+                duration: 1000,
+                delay: 16,
+            } )
+        }
 
         new chartLawYearlyColumn('chart_yearly_column');
 
