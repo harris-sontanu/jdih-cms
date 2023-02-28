@@ -25,6 +25,7 @@ class AsideComposer
 
         $popularNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->popular()
+            ->published()
             ->take(5)
             ->get();
 

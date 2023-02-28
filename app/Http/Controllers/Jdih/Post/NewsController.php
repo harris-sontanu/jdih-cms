@@ -86,6 +86,7 @@ class NewsController extends PostController
         $popularNews = Post::ofType('news')
             ->with('taxonomy', 'author', 'cover')
             ->popular()
+            ->published()
             ->take(5)
             ->get();
 
