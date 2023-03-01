@@ -76,11 +76,6 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'author_id');
     }
 
-    public function pages()
-    {
-        return $this->hasMany(Page::class);
-    }
-
     public function media()
     {
         return $this->hasMany(Media::class);

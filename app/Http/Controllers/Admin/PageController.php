@@ -151,7 +151,7 @@ class PageController extends AdminController
             $validated['published_at'] = now();
         }
 
-        $new_pages = $request->user()->pages()->create($validated);
+        $new_pages = $request->user()->posts()->create($validated);
 
         $this->imageUpload($new_pages, $request);
 
