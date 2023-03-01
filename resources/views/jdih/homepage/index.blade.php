@@ -42,7 +42,7 @@
                                 <i class="ph-scales ph-2x text-success me-3"></i>
 
                                 <div class="flex-fill text-end">
-                                    <h2 class="counter">{{ $totalLaws }}</h2>
+                                    <h2 class="counter display-7 mb-0">{{ $totalLaws }}</h2>
                                     <span class="text-muted">total peraturan</span>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                 <i class="ph-books ph-2x text-indigo me-3"></i>
 
                                 <div class="flex-fill text-end">
-                                    <h2 class="counter">{{ $totalMonographs }}</h2>
+                                    <h2 class="counter display-7 mb-0">{{ $totalMonographs }}</h2>
                                     <span class="text-muted">total monografi</span>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                         <a href="{{ route('legislation.article.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
-                                    <h2 class="counter">{{ $totalArticles }}</h2>
+                                    <h2 class="counter display-7 mb-0">{{ $totalArticles }}</h2>
                                     <span class="text-muted">total artikel</span>
                                 </div>
 
@@ -85,7 +85,7 @@
                         <a href="{{ route('legislation.judgment.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
-                                    <h2 class="counter">{{ $totalJudgments }}</h2>
+                                    <h2 class="counter display-7 mb-0">{{ $totalJudgments }}</h2>
                                     <span class="text-muted">total putusan</span>
                                 </div>
 
