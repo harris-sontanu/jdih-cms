@@ -40,12 +40,10 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         return view('jdih.post.news.index', compact(
             'posts',
-            'banners',
-        ))->with('taxonomies', $this->taxonomies);
+        ))->with('taxonomies', $this->taxonomies)
+            ->with('banners', $this->banners);
     }
 
     public function taxonomy(Taxonomy $taxonomy, Request $request)
@@ -56,13 +54,11 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         return view('jdih.post.news.index', compact(
             'posts',
             'taxonomy',
-            'banners',
-        ))->with('taxonomies', $this->taxonomies);
+        ))->with('taxonomies', $this->taxonomies)
+            ->with('banners', $this->banners);
     }
 
     /**
@@ -90,9 +86,6 @@ class NewsController extends PostController
             ->take(5)
             ->get();
 
-        $shares = $this->shares();
-
-        $banners = Link::banners()->published()->get();
         $youtubes = Link::youtubes()->with('user', 'image')->take(3)->get();
 
         $photos = Media::images()->published()->take(9)->get();
@@ -105,11 +98,11 @@ class NewsController extends PostController
         return view('jdih.post.news.show', compact(
             'otherNews',
             'popularNews',
-            'shares',
-            'banners',
             'youtubes',
             'photos',
             'vendors',
-        ))->with('news', $post);
+        ))->with('news', $post)
+            ->with('shares', $this->shares())
+            ->with('banners', $this->banners);
     }
 }

@@ -41,17 +41,15 @@ class MonographController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
-            'banners',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('banners', $this->banners)
             ->with('orderOptions', $this->orderOptions);
     }
 
@@ -64,8 +62,6 @@ class MonographController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
@@ -73,9 +69,9 @@ class MonographController extends LegislationController
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
             'category',
-            'banners',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('banners', $this->banners)
             ->with('orderOptions', $this->orderOptions);
     }
 
@@ -99,8 +95,6 @@ class MonographController extends LegislationController
             ->take(6)
             ->get();
 
-        $shares = $this->shares();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/share/share.js',
@@ -110,9 +104,9 @@ class MonographController extends LegislationController
             'legislation',
             'adobeKey',
             'otherLegislations',
-            'shares',
             'vendors',
-        ))->with('adobeKey', $this->adobeKey());
+        ))->with('adobeKey', $this->adobeKey())
+            ->with('shares', $this->shares());
     }
 
 }

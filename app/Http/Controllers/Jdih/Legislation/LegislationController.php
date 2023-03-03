@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Jdih\Legislation;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Jdih\JdihController;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Legislation;
 use App\Models\Category;
-use Jorenvh\Share\ShareFacade;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 
-class LegislationController extends Controller
+class LegislationController extends JdihController
 {
     use VisitorTrait;
     protected $limit = 10;
@@ -53,33 +51,6 @@ class LegislationController extends Controller
             'categories',
             'vendors',
         ))->with('orderOptions', $this->orderOptions);
-    }
-
-    protected function shares()
-    {
-        $links = ShareFacade::currentPage()
-            ->facebook()
-            ->twitter()
-            ->linkedin()
-            ->whatsapp()
-            ->telegram()
-            ->pinterest()
-            ->getRawLinks();
-
-        $colors = ['primary', 'info', 'indigo', 'success', 'teal', 'danger'];
-
-        $i = 0;
-        foreach ($links as $key => $value) {
-            $shares[] = [
-                'title' => Str::title($key),
-                'url'   => $value,
-                'icon'  => 'ph-' . $key . '-logo',
-                'color' => $colors[$i],
-            ];
-            $i++;
-        }
-
-        return $shares;
     }
 
     public function search(Request $request)

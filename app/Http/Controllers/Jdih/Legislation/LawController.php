@@ -54,17 +54,15 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
-            'banners',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('banners', $this->banners)
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
             ->with('orderOptions', $this->orderOptions);
@@ -82,8 +80,6 @@ class LawController extends LegislationController
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
 
-        $banners = Link::banners()->published()->take(6)->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
@@ -91,9 +87,9 @@ class LawController extends LegislationController
         return view('jdih.legislation.law.index', compact(
             'legislations',
             'category',
-            'banners',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('banners', $this->banners)
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
             ->with('orderOptions', $this->orderOptions);
@@ -132,8 +128,6 @@ class LawController extends LegislationController
             ->take(6)
             ->get();
 
-        $shares = $this->shares();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/share/share.js',
@@ -145,8 +139,8 @@ class LawController extends LegislationController
             'lawRelationships',
             'documentRelationships',
             'otherLegislations',
-            'shares',
             'vendors',
-        ))->with('adobeKey', $this->adobeKey());
+        ))->with('adobeKey', $this->adobeKey())
+            ->with('shares', $this->shares());
     }
 }

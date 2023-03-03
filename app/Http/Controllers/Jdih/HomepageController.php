@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Jdih;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Jdih\JdihController;
 use App\Http\Traits\VisitorTrait;
 use App\Models\Type;
 use App\Models\Category;
@@ -11,11 +11,10 @@ use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
 use App\Models\Post;
-use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
-class HomepageController extends Controller
+class HomepageController extends JdihController
 {
     use VisitorTrait;
 
@@ -69,8 +68,6 @@ class HomepageController extends Controller
             ->limit(3)
             ->get();
 
-        $banners = Link::banners()->published()->get();
-
         // Record visitor
         $this->recordVisitor($request);
 
@@ -105,9 +102,8 @@ class HomepageController extends Controller
             'monograph',
             'cover',
             'latestNews',
-            'banners',
             'styles',
             'vendors',
-        ));
+        ))->with('banners', $this->banners);
     }
 }
