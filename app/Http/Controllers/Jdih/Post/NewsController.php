@@ -39,11 +39,11 @@ class NewsController extends PostController
             ->latestPublished()
             ->paginate($this->limit)
             ->withQueryString();
-
+        
         return view('jdih.post.news.index', compact(
             'posts',
         ))->with('taxonomies', $this->taxonomies)
-            ->with('banners', $this->banners);
+            ->with('banners', $this->banners());
     }
 
     public function taxonomy(Taxonomy $taxonomy, Request $request)
@@ -58,7 +58,7 @@ class NewsController extends PostController
             'posts',
             'taxonomy',
         ))->with('taxonomies', $this->taxonomies)
-            ->with('banners', $this->banners);
+            ->with('banners', $this->banners());
     }
 
     /**
@@ -103,6 +103,6 @@ class NewsController extends PostController
             'vendors',
         ))->with('news', $post)
             ->with('shares', $this->shares())
-            ->with('banners', $this->banners);
+            ->with('banners', $this->banners());
     }
 }

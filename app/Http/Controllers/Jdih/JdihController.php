@@ -9,11 +9,9 @@ use Illuminate\Support\Str;
 
 class JdihController extends Controller
 {
-    protected $banners;
-
-    function __construct()
+    protected static function banners()
     {
-        $this->banners = Link::banners()->published()->sorted()->get();
+        return Link::banners()->published()->sorted()->get();
     }
 
     protected function shares()

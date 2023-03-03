@@ -20,7 +20,7 @@
                             <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                         </div>
                     </div>
-                    @break($loop->iteration > 6)
+                    @break($loop->iteration > 5)
                 @endforeach
             </div>
         @endif

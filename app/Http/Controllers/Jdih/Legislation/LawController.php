@@ -62,7 +62,7 @@ class LawController extends LegislationController
             'legislations',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('banners', $this->banners)
+            ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
             ->with('orderOptions', $this->orderOptions);
@@ -89,7 +89,7 @@ class LawController extends LegislationController
             'category',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('banners', $this->banners)
+            ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
             ->with('orderOptions', $this->orderOptions);
