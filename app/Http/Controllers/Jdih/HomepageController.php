@@ -66,7 +66,7 @@ class HomepageController extends Controller
         $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->published()
             ->latestPublished()
-            ->limit(4)
+            ->limit(3)
             ->get();
 
         $banners = Link::banners()->published()->get();
