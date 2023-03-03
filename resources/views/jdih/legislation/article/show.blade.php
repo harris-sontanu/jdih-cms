@@ -55,8 +55,8 @@
                             });
                         </script>
                     @else
-                        <figure class="rounded shadow-lg mx-4">
-                            <img src="{{ $legislation->coverSource }}" class="img-fluid rounded">
+                        <figure class="rounded mx-4">
+                            <img src="{{ $legislation->coverSource }}" class="img-fluid shadow-lg rounded">
                         </figure>
                     @endisset
 

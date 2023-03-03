@@ -104,6 +104,6 @@ class HomepageController extends JdihController
             'latestNews',
             'styles',
             'vendors',
-        ))->with('banners', $this->banners);
+        ))->with('banners', $this->banners());
     }
 }
