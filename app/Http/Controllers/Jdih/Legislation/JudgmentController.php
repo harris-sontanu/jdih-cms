@@ -48,7 +48,7 @@ class JudgmentController extends LegislationController
             'legislations',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('banners', $this->banners())
+            ->with('banners', $this->banners)
             ->with('orderOptions', $this->orderOptions);
     }
 
@@ -71,7 +71,7 @@ class JudgmentController extends LegislationController
             'category',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('banners', $this->banners())
+            ->with('banners', $this->banners)
             ->with('orderOptions', $this->orderOptions);
     }
 
