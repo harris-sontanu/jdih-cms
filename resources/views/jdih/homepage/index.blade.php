@@ -218,7 +218,15 @@
                             </div>
                             <div class="d-flex mt-5">
                                 <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
-                                <a href="#" class="btn btn-dark lift px-3 fw-semibold">Unduh<i class="ph-download ms-2"></i></a>
+                                @isset($popularLaw->masterDocumentSource)
+                                    <form action="{{ route('legislation.download', $popularLaw->masterDocument()->id) }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-dark lift px-3 fw-semibold">
+                                            Unduh<i class="ph-download ms-2"></i>
+                                        </button>
+                                    </form>
+                                @endisset
                             </div>
                         </div>
                     </div>

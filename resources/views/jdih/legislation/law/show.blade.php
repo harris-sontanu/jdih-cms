@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Tgl. Pengundangan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->approved) }}</p>
+                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->published) }}</p>
                                 </div>
                             </div>
                         </div>

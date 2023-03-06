@@ -63,6 +63,24 @@ class LegislationController extends JdihController
 
         return view('jdih.legislation.search', compact('term', 'laws', 'monographs', 'articles', 'judgments'));
     }
+    
+    public function download(Request $request)
+    {
+        // $media = Document::find($request->id);
+
+        // if (Storage::disk('public')->exists($media->path)) {
+        //     $media->incrementDownloadCount();
+
+        //     Download::create([
+        //         'ipv4'      => DB::raw('INET_ATON("'.$request->ip().'")'),
+        //         'document_id'   => $request->id,
+        //     ]);
+
+        //     return Storage::disk('public')->download($media->path, $media->name, ['Content-Type' => 'application/pdf']);
+        // } else {
+        //     abort(404);
+        // }
+    }
 
     public function lawYearlyColumnChart(Request $request)
     {
