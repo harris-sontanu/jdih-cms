@@ -37,7 +37,31 @@
                         <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="img-fluid rounded shadow-lg mt-3">
 
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold @empty($legislation->masterDocumentSource) disabled @endempty">Unduh<i class="ph-download ms-2"></i></button>
+                            {{-- <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold @empty($legislation->masterDocumentSource) disabled @endempty">Unduh<i class="ph-download ms-2"></i></button> --}}
+
+                            <div class="btn-group w-100 lift">
+                                <button type="button" @empty($legislation->masterDocumentSource) disabled @endempty class="btn btn-danger btn-lg btn-labeled btn-labeled-start dropdown-toggle fw-bold" data-bs-toggle="dropdown">
+                                    <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                        <i class="ph-download"></i>
+                                    </span>
+                                    Unduh
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="ph-file-pdf me-2"></i>Batang Tubuh
+                                        </button>
+                                    </form>
+                                    <a href="#" class="dropdown-item">Action</a>
+                                    <a href="#" class="dropdown-item">Another action</a>
+                                    <a href="#" class="dropdown-item">One more action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item">Separated line</a>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="mt-4 text-center">
@@ -64,7 +88,7 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Jenis Dokumen</h4>
-                                        <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
+                                        <u><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Nomor</h4>
@@ -109,9 +133,9 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
-                                        <p class="mb-0">
+                                        <u>
                                             <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body">{{ $legislation->category->abbrev }}</a>
-                                        </p>
+                                        </u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -164,9 +188,9 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
-                                        <p class="mb-0">
+                                        <u>
                                             <a href="{{ route('legislation.law.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
-                                        </p>
+                                        </u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Bahasa</h4>
@@ -183,9 +207,9 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
-                                        <p class="mb-0">
+                                        <u>
                                             <a href="{{ route('legislation.law.index', ['institute' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
-                                        </p>
+                                        </u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
@@ -221,19 +245,65 @@
                         </div>
                         <!-- /meta data -->
 
+                        <!-- Legislation relationships -->
+                        <ul class="nav nav-tabs nav-tabs-underline border-top" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <h6 class="fw-bold mb-0"><a class="nav-link active py-3" data-bs-toggle="tab" role="tab" aria-current="page" href="#status">Keterangan Status</a></h6>
+                            </li>
+                            <li class="nav-item ms-3" role="presentation">
+                                <h6 class="fw-bold mb-0"><a class="nav-link disabled py-3" data-bs-toggle="tab" role="tab" href="#legislation">Peraturan Terkait</a></h6>
+                            </li>
+                            <li class="nav-item ms-3" role="presentation">
+                                <h6 class="fw-bold mb-0"><a class="nav-link disabled py-3" data-bs-toggle="tab" role="tab" href="#document">Dokumen Terkait</a></h6>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content pt-4 pb-1 fs-lg">
+                            <div class="tab-pane fade active show" id="status" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @forelse ($statusRelationships as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <u><a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a></u> {{ $relation->note }}</li>
+                                    @empty
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
+                                    @endforelse
+                                </ol>
+                            </div>
+
+                            <div class="tab-pane fade" id="legislation" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @forelse ($lawRelationships as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @empty
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
+                                    @endforelse
+                                </ol>
+                            </div>
+
+                            <div class="tab-pane fade" id="document" role="tabpanel">
+                                <ol class="list mb-0">
+                                    @forelse ($documentRelationships as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @empty
+                                        <span class="d-block mb-3 text-muted">Tidak ada data</span>
+                                    @endforelse
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- /legislation relationships -->
+
                         <div class="post-share fs-lg d-flex align-items-center mb-4 border-top border-bottom py-3">
-                            <p class="fs-lg mb-0"><span class="fw-bold">Berbagi:</span></p>
+                            <p class="fs-lg mb-0"><span class="fw-bold">Bagikan:</span></p>
                             <div class="ms-auto">
                                 <ul class="list-inline mb-0 ms-3">
                                     @foreach ($shares as $share)
                                         <li class="list-inline-item me-1">
-                                            <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
+                                            <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-1 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
                                                 <i class="{{ $share['icon'] }} m-1"></i>
                                             </a>
                                         </li>
                                     @endforeach
                                     <li class="list-inline-item">
-                                        <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift" title="Salin URL" data-bs-popup="tooltip">
+                                        <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-1 lift" title="Salin URL" data-bs-popup="tooltip">
                                             <i class="ph-link m-1"></i>
                                         </button>
                                     </li>
