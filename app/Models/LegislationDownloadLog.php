@@ -31,12 +31,12 @@ class LegislationDownloadLog extends Model
      */
     protected $fillable = [
         'ipv4',
-        'document_id',
+        'legislation_document_id',
     ];
 
     public function document()
     {
-        return $this->belongsTo(Document::class);
+        return $this->belongsTo(LegislationDocument::class);
     }
 
     public function scopeCountDaily($query, $subDays = 0)

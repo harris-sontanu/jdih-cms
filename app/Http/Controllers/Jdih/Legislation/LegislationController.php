@@ -7,7 +7,10 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Legislation;
 use App\Models\Category;
+use App\Models\LegislationDocument;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class LegislationController extends JdihController
 {
@@ -28,7 +31,7 @@ class LegislationController extends JdihController
 
     protected static function adobeKey() {
         return Config::get('services.adobe.key');
-    } 
+    }
 
     public function index(Request $request)
     {
@@ -63,23 +66,22 @@ class LegislationController extends JdihController
 
         return view('jdih.legislation.search', compact('term', 'laws', 'monographs', 'articles', 'judgments'));
     }
-    
-    public function download(Request $request)
+
+    public function download($id)
     {
-        // $media = Document::find($request->id);
+        $document = LegislationDocument::findOrFail($id);
 
-        // if (Storage::disk('public')->exists($media->path)) {
-        //     $media->incrementDownloadCount();
+        if (Storage::disk('public')->exists($document->media->path)) {
+            $document->incrementDownloadCount();
 
-        //     Download::create([
-        //         'ipv4'      => DB::raw('INET_ATON("'.$request->ip().'")'),
-        //         'document_id'   => $request->id,
-        //     ]);
+            $document->downloads()->create([
+                'ipv4'      => DB::raw('INET_ATON("'.request()->ip().'")'),
+            ]);
 
-        //     return Storage::disk('public')->download($media->path, $media->name, ['Content-Type' => 'application/pdf']);
-        // } else {
-        //     abort(404);
-        // }
+            return Storage::disk('public')->download($document->media->path, $document->media->name, ['Content-Type' => 'application/pdf']);
+        } else {
+            abort(404);
+        }
     }
 
     public function lawYearlyColumnChart(Request $request)

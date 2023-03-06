@@ -40,6 +40,11 @@ class LegislationDocument extends Model
         return $this->belongsTo(Legislation::class);
     }
 
+    public function downloads()
+    {
+        return $this->hasMany(LegislationDownloadLog::class);
+    }
+
     public function typeTranslate(): Attribute
     {
         if ($this->type === 'master') {
@@ -60,5 +65,14 @@ class LegislationDocument extends Model
     public function scopeOfType($query, $type)
     {
         return $query->where('type', $type);
+    }
+
+    public function incrementDownloadCount()
+    {
+        $count = $this->download;
+        $count = $this->download++;
+        $this->save();
+
+        return $count;
     }
 }
