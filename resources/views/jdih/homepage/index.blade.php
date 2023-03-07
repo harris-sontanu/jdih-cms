@@ -134,7 +134,7 @@
                         </script>
                     </div>
                     <div class="col-xl-5 offset-xl-1">
-                        <h3 class="fw-bold text-danger mb-0">Populer</h3>
+                        <span class="fw-bold badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-2 fs-lg px-3 py-2">Populer</span>
                         <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $popularLaw->shortTitle }}</a>
                         <div class="fs-lg">
                             <div class="d-flex mb-3">
@@ -247,7 +247,7 @@
                                 <div class="card lift shadow h-100">
                                     <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
                                         <div class="card-header border-0 pb-0">
-                                            <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
+                                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill mb-2">{{ $law->category->name }}</span>
                                             <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
                                         </div>
                                         <div class="card-body fs-lg pb-0">
@@ -377,7 +377,7 @@
         <div class="content-wrapper">
             <div class="content py-4">
                 <h2 class="fw-bold section-title text-center mb-4 pb-2">Produk Hukum anggota JDIH Provinsi Bali</h2>
-                <div class="row gx-5">
+                <div class="row gx-4">
                     @foreach ($latestLaws as $law)
                         <div class="col-xl-4 my-3">
                             <div class="card lift shadow h-100">
@@ -425,7 +425,7 @@
                                         <figcaption class="figure-caption fs-6">{{ $news->cover->caption }}</figcaption>
                                     </figure>
                                     <div class="post-title">
-                                        <h3 class="fw-bold mb-2"><a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="link-danger">{{ $news->taxonomy->name }}</a></h3>
+                                        <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2">{{ $news->taxonomy->name }}</a>
                                         <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
                                     </div>
                                     <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
@@ -447,8 +447,8 @@
                                                 <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow" alt="{{ $news->cover->name }}">
                                             </a>
                                         </figure>
-                                        <div class="post-title">
-                                            <h5 class="fw-bold mb-1"><a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="link-danger">{{ $news->taxonomy->name }}</a></h5>
+                                        <div class="post-title">                                            
+                                            <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-1">{{ $news->taxonomy->name }}</a>
                                             <h4 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
                                         </div>
                                         <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
@@ -598,7 +598,62 @@
         <div class="container py-5">
             <div class="content-wrapper">
                 <div class="content py-4">
-                    <h2 class="fw-bold section-title text-center mb-4 pb-2">Tautan</h2>
+                    <div class="row gx-5 mb-5">
+                        <div class="col-xl-7">
+                            <figure class="mb-0">
+                                <img src="{{ asset('assets/jdih/images/backgrounds/i8.png') }}" class="img-fluid">
+                            </figure>
+                        </div>
+                        <div class="col-xl-5">
+                            <h3 class="display-6 fw-bold">Ayo Bergabung!</h3>
+                            <p class="fs-lg mb-3">
+                                Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                            </p>
+                            <ul class="list list-unstyled mb-4 ms-3 fs-lg">
+                                <li class="d-flex align-items-center mb-3">
+                                    <div class="me-3">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-1">
+                                            <i class="ph-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill">Unduh <span class="fw-bold">Dokumen Produk Hukum</span></div>
+                                </li>
+                                <li class="d-flex align-items-center mb-3">
+                                    <div class="me-3">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-1">
+                                            <i class="ph-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Konsultasi Hukum</span></div>
+                                </li>
+                                <li class="d-flex align-items-center mb-3">
+                                    <div class="me-3">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-1">
+                                            <i class="ph-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Pengaduan Hukum</span></div>
+                                </li>
+                                <li class="d-flex align-items-center mb-3">
+                                    <div class="me-3">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-1">
+                                            <i class="ph-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Bantuan Hukum</span></div>
+                                </li>
+                            </ul>
+                            <div class="d-flex fs-lg">
+                                <button type="button" class="btn btn-lg btn-danger lift px-3 fw-semibold">
+                                    Gabung Sekarang<i class="ph-sign-in ms-2"></i>
+                                </button>
+                                <button type="button" class="btn btn-lg btn-outline-danger lift px-3 ms-3 fw-semibold">
+                                    Daftar<i class="ph-pencil-line ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="slider" class="row gx-5">
                         @foreach ($banners as $banner)
                             <div class="col-xl-3">
