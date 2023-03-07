@@ -33,6 +33,8 @@ Route::name('legislation.')->group(function () {
             ->name('categoryOptions');
         Route::put('/legislation/download/{id}', 'download')
             ->name('download');
+        Route::put('/legislation/download-zip/{id}', 'downloadZip')
+                ->name('downloadZip');
         Route::get('/produk-hukum', 'index')
             ->name('index');
     });

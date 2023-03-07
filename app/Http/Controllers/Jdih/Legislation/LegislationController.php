@@ -84,6 +84,11 @@ class LegislationController extends JdihController
         }
     }
 
+    public function downloadZip($id)
+    {
+        //
+    }
+
     public function lawYearlyColumnChart(Request $request)
     {
         if ($request->has('years')) {

@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Legislation;
-use App\Models\Link;
+use App\Models\Post;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 
@@ -128,6 +128,12 @@ class LawController extends LegislationController
             ->take(6)
             ->get();
 
+        $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
+            ->published()
+            ->latestPublished()
+            ->take(5)
+            ->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/share/share.js',
@@ -139,6 +145,7 @@ class LawController extends LegislationController
             'lawRelationships',
             'documentRelationships',
             'otherLegislations',
+            'latestNews',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
             ->with('banners', $this->banners())

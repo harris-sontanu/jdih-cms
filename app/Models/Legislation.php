@@ -98,6 +98,13 @@ class Legislation extends Model
             ->first();
     }
 
+    public function attachments()
+    {
+        return $this->documents()
+            ->ofType('attachment')
+            ->get();
+    }
+
     public function coverDocument()
     {
         return $this->documents()

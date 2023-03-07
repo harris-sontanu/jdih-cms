@@ -370,40 +370,95 @@
                     <!-- /banners -->
                 @endif
             </main>
+
             <aside class="col-xl-3">
-                <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="img-fluid rounded shadow-sm">
 
-                <div class="mt-4">
-                    {{-- <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold @empty($legislation->masterDocumentSource) disabled @endempty">Unduh<i class="ph-download ms-2"></i></button> --}}
+                <!-- Download -->
+                <div class="card card-body shadow">
+                    <div class="text-center">
+                        {!! QrCode::size(180)->margin(2)->generate(url()->current()); !!}
+                        <p class="mb-0">Pindai kode QR</p>
+                    </div>
 
-                    <div class="btn-group w-100 shadow">
-                        <button type="button" @empty($legislation->masterDocumentSource) disabled @endempty class="btn btn-danger btn-lg btn-labeled btn-labeled-start dropdown-toggle fw-bold py-3" data-bs-toggle="dropdown">
-                            <span class="btn-labeled-icon bg-black bg-opacity-20">
-                                <i class="ph-download"></i>
-                            </span>
-                            UNDUH
-                        </button>
+                    <div class="mt-4">
+                        <div class="btn-group w-100 shadow mb-2">
+                            <button type="button" @empty($legislation->masterDocumentSource) disabled @endempty class="btn btn-danger btn-lg btn-labeled btn-labeled-start dropdown-toggle fw-bold" data-bs-toggle="dropdown">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph-download"></i>
+                                </span>
+                                Unduh
+                            </button>
 
-                        <div class="dropdown-menu">
-                            <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
-                                @method('PUT')
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="ph-file-pdf me-2"></i>Batang Tubuh
-                                </button>
-                            </form>
-                            <a href="#" class="dropdown-item">Action</a>
-                            <a href="#" class="dropdown-item">Another action</a>
-                            <a href="#" class="dropdown-item">One more action</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Separated line</a>
+                            <div class="dropdown-menu">
+                                <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="ph-file-pdf me-2"></i>Batang Tubuh
+                                    </button>
+                                </form>
+
+                                @foreach ($legislation->attachments() as $attachment)
+                                    <form action="{{ route('legislation.download', $attachment->id) }}" method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="ph-file-pdf me-2"></i>{{ $attachment->name }}
+                                        </button>
+                                    </form>
+                                @endforeach
+                                <div class="dropdown-divider"></div>
+                                <form action="{{ route('legislation.downloadZip', $legislation->id) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="ph-file-zip me-2"></i>Semua Dokumen
+                                    </button>
+                                </form>
+                            </div>
                         </div>
+
+                        <form action="{{ route('legislation.download', $legislation->abstractDocument()->id) }}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-lg btn-outline-danger px-3 me-3 fw-bold w-100">
+                                Abstrak
+                            </button>
+                        </form>
                     </div>
                 </div>
+                <!-- /download -->
 
-                <div class="mt-5 text-center">
-                    .{!! QrCode::size(180)->margin(2)->generate(url()->current()); !!}
+                <!-- Latest News -->
+                <div class="mt-4">
+                    <h5 class="fw-bold mb-3">Berita Terbaru</h5>
+
+                    <div class="sidebar-section-body px-0 pb-0">
+                        @foreach ($latestNews as $news)
+                            <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
+                                <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
+                                    <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
+                                </a>
+                                <div class="flex-fill">
+                                    <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
+                                    <ul class="list-inline list-inline-bullet text-muted fs-sm">
+                                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+                <!-- /latest news -->
+
+                <!-- Infographs -->
+                <div class="mt-4">
+                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2023-02-20_at_11_30_59.jpeg') }}" class="img-fluid shadow rounded">
+                    <img src="{{ asset('assets/jdih/images/demo/akhlak_biro_hukum.jpg') }}" class="img-fluid shadow rounded mt-3">
+                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2022-12-05_at_13_35_10.jpeg') }}" class="img-fluid shadow rounded mt-3">
+                </div>
+                <!-- /infographs -->
+
             </aside>
         </div>
         <!-- /content area -->
