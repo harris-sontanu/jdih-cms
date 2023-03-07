@@ -141,6 +141,7 @@ class LawController extends LegislationController
             'otherLegislations',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
+            ->with('banners', $this->banners())
             ->with('shares', $this->shares());
     }
 }
