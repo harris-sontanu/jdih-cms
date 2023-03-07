@@ -5,7 +5,7 @@
 @include('jdih.homepage.slide')
 
 <!-- Welcome -->
-<section class="bg-dark">
+<section class="bg-dark">`
     <div class="container pt-5 pb-0">
         <div class="content-wrapper">
             <div class="content row mb-5">
@@ -34,9 +34,9 @@
                 <h2 class="fw-bold me-xl-auto section-title mb-0">Produk Hukum</h2>
                 <a href="{{ route('legislation.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Produk Hukum<i class="ph-arrow-right ms-2"></i></a>
             </div>
-            <div class="row gx-5 fs-lg">
+            <div class="row gx-4 fs-lg">
                 <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body shadow-lg lift">
+                    <div class="card card-body shadow lift">
                         <a href="{{ route('legislation.law.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <i class="ph-scales ph-2x text-success me-3"></i>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body shadow-lg lift">
+                    <div class="card card-body shadow lift">
                         <a href="{{ route('legislation.monograph.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <i class="ph-books ph-2x text-indigo me-3"></i>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body shadow-lg lift">
+                    <div class="card card-body shadow lift">
                         <a href="{{ route('legislation.article.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body shadow-lg lift">
+                    <div class="card card-body shadow lift">
                         <a href="{{ route('legislation.judgment.index') }}" class="text-dark">
                             <div class="d-flex align-items-center">
                                 <div class="flex-fill">
@@ -113,7 +113,7 @@
                 <!-- Popular law -->
                 <div class="row pb-5">
                     <div class="col-xl-6 m-auto">
-                        <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 700px;">
+                        <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->name }}" class="rounded shadow" style="height: 700px;">
                         </figure>
                         <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
                         <script type="text/javascript">
@@ -139,7 +139,7 @@
                         <div class="fs-lg">
                             <div class="d-flex mb-3">
                                 <div class="me-4">
-                                    <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                         <i class="ph-check"></i>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                             </div>
                             <div class="d-flex mb-3">
                                 <div class="me-4">
-                                    <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                         <i class="ph-check"></i>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="d-flex mb-3">
                                 <div class="me-4">
-                                    <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                         <i class="ph-check"></i>
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="d-flex mb-3">
                                 <div class="me-4">
-                                    <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                         <i class="ph-check"></i>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                             </div>
                             <div class="d-flex mb-3">
                                 <div class="me-4">
-                                    <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                    <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                         <i class="ph-check"></i>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                 </div>
                             </div>
                             <div class="d-flex mt-5">
-                                <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail</a>
+                                <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="btn btn-outline-dark lift px-3 me-3 fw-semibold">Lihat Detail<i class="ph-arrow-right ms-2"></i></a>
                                 @isset($popularLaw->masterDocumentSource)
                                     <form action="{{ route('legislation.download', $popularLaw->masterDocument()->id) }}" method="post">
                                         @method('PUT')
@@ -241,10 +241,10 @@
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Terbaru</h2>
                         <a href="{{ route('legislation.law.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="row gx-5">
+                    <div class="row gx-4">
                         @foreach ($latestLaws as $law)
                             <div class="col-xl-4 my-3">
-                                <div class="card lift shadow-lg h-100">
+                                <div class="card lift shadow h-100">
                                     <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
                                         <div class="card-header border-0 pb-0">
                                             <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
@@ -292,7 +292,7 @@
 
                                 <div class="d-flex mb-3">
                                     <div class="me-4">
-                                        <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                             <i class="ph-check"></i>
                                         </div>
                                     </div>
@@ -303,7 +303,7 @@
                                 </div>
                                 <div class="d-flex mb-3">
                                     <div class="me-4">
-                                        <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                             <i class="ph-check"></i>
                                         </div>
                                     </div>
@@ -320,7 +320,7 @@
                                 </div>
                                 <div class="d-flex mb-3">
                                     <div class="me-4">
-                                        <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                             <i class="ph-check"></i>
                                         </div>
                                     </div>
@@ -359,7 +359,7 @@
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Statistik Peraturan</h2>
                         <a href="#" class="btn btn-dark lift px-3 fw-semibold">Lihat Statistik lainnya<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="card card-body shadow-lg rounded-lg">
+                    <div class="card card-body shadow rounded-lg">
                         <div class="chart-container">
                             <div class="chart" id="chart_yearly_column" style="min-height: 420px"></div>
                         </div>
@@ -380,7 +380,7 @@
                 <div class="row gx-5">
                     @foreach ($latestLaws as $law)
                         <div class="col-xl-4 my-3">
-                            <div class="card lift shadow-lg h-100">
+                            <div class="card lift shadow h-100">
                                 <a href="#" class="text-body">
                                     <div class="card-header border-0 pb-0">
                                         <div class="d-flex mb-2">
@@ -420,7 +420,7 @@
                                 <div class="post col-xl-7">
                                     <figure class="figure">
                                         <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow-lg" alt="{{ $news->cover->name }}">
+                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow" alt="{{ $news->cover->name }}">
                                         </a>
                                         <figcaption class="figure-caption fs-6">{{ $news->cover->caption }}</figcaption>
                                     </figure>
@@ -444,7 +444,7 @@
                                     <div class="post mb-4">
                                         <figure class="figure">
                                             <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                                <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow-lg" alt="{{ $news->cover->name }}">
+                                                <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow" alt="{{ $news->cover->name }}">
                                             </a>
                                         </figure>
                                         <div class="post-title">
@@ -475,13 +475,13 @@
             <div class="content py-4">
                 <div class="row gx-5">
                     <div class="col-xl-5">
-                        <div class="card card-body bg-dark shadow-lg ratio ratio-16x9">
+                        <div class="card card-body bg-dark shadow ratio ratio-16x9">
                             <iframe src="https://www.youtube.com/embed/Y5ZlcHiGthw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-xl-7 text-light">
                         <span class="d-block display-7 fw-bold mb-4">Pertanyaan yang sering diajukan</span>
-                        <div class="card shadow-lg">
+                        <div class="card shadow">
                             <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
                                 <h6 class="mb-0">
                                     <a data-bs-toggle="collapse" class="link-light" href="#collapsible-card1"><i class="ph-question me-2"></i>Collapsible card #1</a>
@@ -495,7 +495,7 @@
                             </div>
                         </div>
 
-                        <div class="card shadow-lg">
+                        <div class="card shadow">
                             <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
                                 <h6 class="mb-0">
                                     <a class="collapsed link-light" data-bs-toggle="collapse" href="#collapsible-card2"><i class="ph-question me-2"></i>Collapsible card #2</a>
@@ -509,7 +509,7 @@
                             </div>
                         </div>
 
-                        <div class="card shadow-lg">
+                        <div class="card shadow">
                             <div class="card-header border-bottom-0 bg-dark bg-opacity-85">
                                 <h6 class="mb-0">
                                     <a class="collapsed link-light" data-bs-toggle="collapse" href="#collapsible-card3"><i class="ph-question me-2"></i>Collapsible card #3</a>
@@ -541,7 +541,7 @@
                 <div class="row gx-5">
 
                     <div class="col-xl-4">
-                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                        <div class="card h-100 card-body shadow lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
                             <a href="https://sipekenseni.baliprov.go.id" class="text-body">
                                 <div class="d-flex align-items-center">
                                     <i class="ph-newspaper ph-3x text-danger me-3"></i>
@@ -556,7 +556,7 @@
                     </div>
 
                     <div class="col-xl-4">
-                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                        <div class="card h-100 card-body shadow lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
                             <a href="https://fasperkadabkum.com" class="text-body">
                                 <div class="d-flex align-items-center">
                                     <i class="ph-paper-plane-tilt ph-3x text-indigo me-3"></i>
@@ -571,7 +571,7 @@
                     </div>
 
                     <div class="col-xl-4">
-                        <div class="card h-100 card-body shadow-lg lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
+                        <div class="card h-100 card-body shadow lift pb-0" style="min-height: 135px; background-image: url({{ asset('assets/jdih/images/backgrounds/panel_bg.png') }})">
                             <a href="https://kliknphdbirohukum.website" class="text-body">
                                 <div class="d-flex align-items-center">
                                     <i class="ph-hand-pointing ph-3x text-success me-3"></i>

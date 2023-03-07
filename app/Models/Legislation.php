@@ -128,16 +128,16 @@ class Legislation extends Model
     public function typeFlatButton(): Attribute
     {
         if ($this->category->type_id === 1) {
-            $button = '<button type="button" class="btn btn-flat-success rounded-pill p-1" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            $button = '<button type="button" class="btn btn-flat-success rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
             <i class="ph-scales m-1"></i></button>';
         } else if ($this->category->type_id === 2) {
-            $button = '<button type="button" class="btn btn-flat-indigo rounded-pill p-1" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            $button = '<button type="button" class="btn btn-flat-indigo rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
             <i class="ph-books m-1"></i></button>';
         } else if ($this->category->type_id === 3) {
-            $button = '<button type="button" class="btn btn-flat-primary rounded-pill p-1" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            $button = '<button type="button" class="btn btn-flat-primary rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
             <i class="ph-newspaper m-1"></i></button>';
         } else if ($this->category->type_id === 4) {
-            $button = '<button type="button" class="btn btn-flat-danger rounded-pill p-1" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            $button = '<button type="button" class="btn btn-flat-danger rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
             <i class="ph-stamp m-1"></i></button>';
         }
 
