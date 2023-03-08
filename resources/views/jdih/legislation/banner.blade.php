@@ -5,7 +5,7 @@
                 @foreach ($banners as $banner)
                     @break($loop->iteration > 3)
                     <div class="col-xl-4">
-                        <div class="card shadow-lg bg-white border-0 lift mb-0">
+                        <div class="card shadow bg-white border-0 lift mb-0">
                             <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                 @foreach ($banners as $banner)
                     @continue($loop->iteration <= 3)
                     <div class="col-xl-4">
-                        <div class="card shadow-lg bg-white border-0 lift mb-0">
+                        <div class="card shadow bg-white border-0 lift mb-0">
                             <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                 @foreach ($banners as $banner)
                     @break($loop->iteration > 3)
                     <div class="col-xl-4">
-                        <div class="card shadow-lg bg-white border-0 lift mb-0">
+                        <div class="card shadow bg-white border-0 lift mb-0">
                             <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                         </div>
                     </div>

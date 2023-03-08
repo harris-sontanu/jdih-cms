@@ -90,7 +90,7 @@
             </section>
 
             @foreach ($legislations as $legislation)
-                <article class="card card-body shadow-lg mb-4">
+                <article class="card card-body shadow mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="{{ route('legislation.law.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block me-sm-3 mb-3 mb-sm-0">

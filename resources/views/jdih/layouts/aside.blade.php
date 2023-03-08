@@ -12,7 +12,7 @@
             <div class="my-4">
                 <h5 class="fw-bold">Monografi Hukum</h5>
 
-                <div id="carouselExampleIndicators" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide shadow rounded" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($popularMonographs as $monograph)
                             <div class="carousel-item @if ($loop->first) active @endif">
@@ -46,11 +46,11 @@
 
     <!-- Popular News -->
     <div class="mt-4">
-        <h5 class="fw-bold">Berita Populer</h5>
+        <h5 class="fw-bold mb-3">Berita Populer</h5>
 
-        <div class="sidebar-section-body px-0 pb-0">
+        <div class="sidebar-section-body p-0">
             @foreach ($popularNews as $news)
-                <div class="d-flex mb-3">
+                <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
                         <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
                     </a>
