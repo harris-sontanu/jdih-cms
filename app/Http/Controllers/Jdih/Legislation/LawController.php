@@ -139,7 +139,7 @@ class LawController extends LegislationController
             'assets/jdih/js/vendor/share/share.js',
         ];
 
-        return view('jdih.legislation.law.show2', compact(
+        return view('jdih.legislation.law.show', compact(
             'legislation',
             'statusRelationships',
             'lawRelationships',

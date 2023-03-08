@@ -37,7 +37,7 @@
                 </a>
             </li>
 
-            {{-- <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown" title="Pilih Bahasa">
                     <img src="{{ asset('assets/jdih/images/lang/id.svg') }}" class="h-16px me-2" alt="Indonesian">
                     Indonesian
@@ -65,13 +65,13 @@
                         Arabic
                     </a>
                 </div>
-            </li> --}}
+            </li>
         </ul>
 
-        {{-- <button type="button" class="btn btn-sm btn-outline-yellow btn-icon order-3 ms-lg-2">
+        <button type="button" class="btn btn-sm btn-outline-yellow btn-icon order-3 ms-lg-2">
             <i class="ph-sign-in ms-lg-1"></i>
             <span class="d-none d-lg-inline-block ms-2 me-1">Masuk</span>
-        </button> --}}
+        </button>
     </div>
 </div>
 <!-- /main navbar -->

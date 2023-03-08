@@ -323,6 +323,11 @@ class Legislation extends Model
         );
     }
 
+    public function documentSource($path)
+    {
+        return Storage::url($path);
+    }
+
     public function abstractDocumentSource(): Attribute
     {
         $abstract = $this->abstractDocument();

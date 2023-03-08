@@ -30,98 +30,68 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <main class="content">
-
-            <div class="row pb-5">
-                <div class="col-xl-6 m-auto">
-                    @isset($legislation->masterDocumentSource)
-                        <figure id="adobe-dc-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded shadow-lg" style="height: 720px;">
-                        </figure>
-                        <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                        <script type="text/javascript">
-                            document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                                var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "adobe-dc-view"});
-                                const article = document.querySelector("#adobe-dc-view");
-                                adobeDCView.previewFile({
-                                    content:{ location:
-                                    { url: article.dataset.file }},
-                                    metaData:{fileName: article.dataset.name}
-                                },
-                                {
-                                    embedMode: "SIZED_CONTAINER",
-                                    showDownloadPDF: false,
-                                    showPrintPDF: false
-                                });
-                            });
-                        </script>
-                    @else
-                        <figure class="rounded shadow-lg">
-                            <img src="{{ asset('assets/jdih/images/placeholders/cover.jpg') }}" class="img-fluid rounded">
-                        </figure>
-                    @endisset
-
-                    <div class="d-flex mt-4">
-                        <div class="flex-grow-1">
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->masterDocumentSource) disabled @endempty">Dokumen<i class="ph-download ms-2"></i></button>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-outline-danger btn-lg lift w-100 fw-bold p-3 @empty($legislation->abstractDocumentSource) disabled @endempty">Abstrak<i class="ph-download ms-2"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ms-3">
-                            <button class="btn w-100 btn-pink btn-icon btn-lg lift p-3"><i class="ph-heart"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="row gx-4 mt-4">
-                        <div class="col-xl-6 p-4 text-center">
-                            {!! QrCode::size(230)->margin(2)->generate(url()->current()); !!}
-                        </div>
-                        <div class="col-xl-6">
-                            <h6 class="d-block fw-bold">Bagikan:</h6>
-                            <ul class="list-inline mb-0">
-                                @foreach ($shares as $share)
-                                    <li class="list-inline-item me-1 mb-2">
-                                        <a href="{{ $share['url'] }}" target="_blank" class="btn btn-{{ $share['color'] }} rounded-pill p-2 lift" title="Bagikan ke {{ $share['title'] }}" data-bs-popup="tooltip">
-                                            <i class="{{ $share['icon'] }} m-1"></i>
-                                        </a>
-                                    </li>
-                                @endforeach
-                                <li class="list-inline-item">
-                                    <button type="button" data-url="{{ url()->current() }}" class="copy-link btn btn-light rounded-pill p-2 lift" title="Salin URL" data-bs-popup="tooltip">
-                                        <i class="ph-link m-1"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+        <div class="content row gx-5">
+            <aside class="col-xl-1 text-center pe-0 my-5">
+                <div class="post-like my-4">
+                    <button type="button" class="btn btn-flat-pink rounded-pill p-2 border-0 mb-1">
+                        <i class="ph-heart"></i>
+                    </button>
+                    <p>12</p>
                 </div>
+                <div class="post-view my-4">
+                    <div class="bg-dark bg-opacity-10 text-dark lh-1 rounded-pill p-2 d-inline-block mb-1">
+                        <i class="ph-eye"></i>
+                    </div>
+                    <p>{{ $legislation->view }}</p>
+                </div>
+                <div class="post-download my-4">
+                    <div class="bg-dark bg-opacity-10 text-dark lh-1 rounded-pill p-2 d-inline-block mb-1">
+                        <i class="ph-download"></i>
+                    </div>
+                    <p>{{ $legislation->documents->sum('download') }}</p>
+                </div>
+                <div class="post-share my-4">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-flat-dark btn-icon rounded-pill border-0" data-bs-toggle="dropdown">
+                            <i class="ph-share-network "></i>
+                        </button>
 
-                <div class="col-xl-5 offset-xl-1">
-                    <h2 class="d-block display-6 fw-bold mb-2">{{ $legislation->shortTitle }}</h2>
-                    <ul class="post-meta list-inline list-inline-bullet text-muted mb-4 fs-lg">
-                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>
-                        <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $legislation->user->name }}</li>
-                        <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
-                        <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
-                    </ul>
+                        <div class="dropdown-menu">
+                            @foreach ($shares as $share)
+                                <a href="{{ $share['url'] }}" target="_blank" class="dropdown-item">
+                                    <i class="{{ $share['icon'] }} me-2"></i>Bagikan ke {{ $share['title'] }}
+                                </a>
+                            @endforeach
+                            <button type="button" data-url="{{ url()->current() }}" class="dropdown-item">
+                                <i class="ph-link me-2"></i>Salin Tautan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <main class="col-xl-8">
+                <article class="card shadow-sm mb-4">
+                    <div class="card-header px-4 pb-0 pt-4 border-bottom-0">
+                        <h2 class="d-block display-6 fw-bold mb-2">{{ $legislation->shortTitle }}</h2>
+                        <ul class="post-meta list-inline list-inline-bullet text-muted">
+                            <li class="list-inline-item"><i class="ph-clock me-2"></i>{{ $legislation->timeFormatted($legislation->published_at, "G:i") }} WITA</li>
+                            <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->timeFormatted($legislation->published_at, "l, j F Y") }}</li>
+                            <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $legislation->user->name }}</li>
+                        </ul>
+                    </div>
 
                     <!-- Meta data -->
-                    <div class="fs-lg">
+                    <section class="card-body fs-lg p-4">
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Jenis Dokumen</h4>
-                                    <p class="mb-0"><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
+                                    <u><a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Nomor</h4>
@@ -131,7 +101,7 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
@@ -142,33 +112,33 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Tgl. Penetapan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->approved) }}</p>
+                                    <p class="mb-0">{{ $legislation->timeformatted($legislation->approved, "l, j F Y") }}</p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Tgl. Pengundangan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->published) }}</p>
+                                    <p class="mb-0">{{ $legislation->timeformatted($legislation->published, "l, j F Y") }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Singkatan Jenis</h4>
-                                    <p class="mb-0">
+                                    <u>
                                         <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="text-body">{{ $legislation->category->abbrev }}</a>
-                                    </p>
+                                    </u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -178,7 +148,7 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
@@ -195,7 +165,7 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
@@ -214,16 +184,16 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
-                                    <p class="mb-0">
+                                    <u>
                                         <a href="{{ route('legislation.law.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
-                                    </p>
+                                    </u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bahasa</h4>
@@ -233,16 +203,16 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
-                                    <p class="mb-0">
+                                    <u>
                                         <a href="{{ route('legislation.law.index', ['institute' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
-                                    </p>
+                                    </u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
@@ -260,7 +230,7 @@
                         </div>
                         <div class="d-flex mb-3">
                             <div class="me-4">
-                                <div class="bg-pink bg-opacity-10 text-pink lh-1 rounded-pill p-2">
+                                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
                                     <i class="ph-check"></i>
                                 </div>
                             </div>
@@ -275,47 +245,35 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <!-- /meta data -->
 
-                    <!-- Legislation relationships -->
-                    <div class="card shadow-lg mt-5">
-                        <div class="card-header p-0 border-bottom-0">
-                            <div class="navbar navbar-expand-lg rounded-top">
-                                <div class="container-fluid">
-                                    <ul class="nav navbar-nav flex-row flex-fill" role="tablist">
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#status" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded active @if ($statusRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="d-none d-lg-inline-block">Keterangan Status</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#legislation" data-bs-toggle="tab" role="tab" class="navbar-nav-link @if ($lawRelationships->count() === 0) disabled @endif rounded">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="d-none d-lg-inline-block">Peraturan Terkait</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item me-1" role="presentation">
-                                            <a href="#document" data-bs-toggle="tab" role="tab" class="navbar-nav-link rounded @if ($documentRelationships->count() === 0) disabled @endif">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="d-none d-lg-inline-block">Dokumen Terkait</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /legislation relationships -->
+                </article>
 
-                        <div class="card-body tab-content pb-0">
+                <!-- Legislation relationships -->
+                <section class="card shadow-sm fs-lg mb-4">
+                    <div class="card-header border-bottom-0 pb-0 px-4">
+                        <h4 class="fw-bold mb-0">Produk Hukum Terkait</h4>
+                    </div>
+
+                    <div class="card-body fs-lg p-0">
+                        <ul class="nav nav-tabs nav-tabs-underline" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <h6 class="mb-0"><a class="nav-link active py-3 px-4" data-bs-toggle="tab" role="tab" aria-current="page" href="#status">Keterangan Status</a></h6>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <h6 class="mb-0"><a class="nav-link disabled py-3 px-4" data-bs-toggle="tab" role="tab" href="#legislation">Peraturan</a></h6>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <h6 class="mb-0"><a class="nav-link disabled py-3 px-4" data-bs-toggle="tab" role="tab" href="#document">Dokumen</a></h6>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content p-4 fs-lg">
                             <div class="tab-pane fade active show" id="status" role="tabpanel">
                                 <ol class="list mb-0">
                                     @forelse ($statusRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
+                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <u><a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a></u> {{ $relation->note }}</li>
                                     @empty
                                         <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
@@ -343,39 +301,206 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- /legislation relationships -->
 
-                @if (isset($otherLegislations) AND $otherLegislations->count() > 0)
-                    <!-- Latest laws -->
-                    <section class="latest-legislation pt-5">
-                        <div class="d-flex pb-4">
-                            <h2 class="fw-bold me-xl-auto section-title mb-0">Peraturan Lainnya</h2>
-                            <a href="{{ route('legislation.law.category', ['category' => $legislation->category->slug]) }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Peraturan<i class="ph-arrow-right ms-2"></i></a>
+                <!-- Documents preview -->
+                <section class="card shadow-sm fs-lg mb-4">
+                    <div class="card-header border-bottom-0 pb-0 px-4">
+                        <h4 class="fw-bold mb-0">Pratinjau Dokumen</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="nav nav-tabs nav-tabs-underline" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <h6 class="mb-0"><a class="nav-link active py-3 px-4" data-bs-toggle="tab" role="tab" aria-current="page" href="#master">Peraturan</a></h6>
+                            </li>
+                            @if ($legislation->attachments()->count() > 0)
+                                <li class="nav-item dropdown" role="presentation">
+                                    <a href="#" class="nav-link py-3 px-4 fw-semibold" data-bs-toggle="dropdown">Lampiran</a>
+                                    <div class="dropdown-menu">
+                                        @foreach ($legislation->attachments() as $attachment)                                        
+                                            <a href="#lampiran-{{ $attachment->media->id}}" class="dropdown-item" data-bs-toggle="tab" role="tab">{{ $attachment->media->name}}</a>
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endif                                
+                            <li class="nav-item" role="presentation">
+                                <h6 class="mb-0"><a class="nav-link py-3 px-4" data-bs-toggle="tab" role="tab" href="#abstract">Abstrak</a></h6>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content p-4 fs-lg">
+                            <div class="tab-pane fade active show" id="master" role="tabpanel">
+                                @isset($legislation->masterDocumentSource)
+                                    <figure id="master-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded mb-0" style="height: 720px;">
+                                    </figure>
+                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
+                                    <script type="text/javascript">
+                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
+                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "master-view"});
+                                            const article = document.querySelector("#master-view");
+                                            adobeDCView.previewFile({
+                                                content:{ location:
+                                                { url: article.dataset.file }},
+                                                metaData:{fileName: article.dataset.name}
+                                            },
+                                            {
+                                                embedMode: "SIZED_CONTAINER",
+                                                showDownloadPDF: false,
+                                                showPrintPDF: false
+                                            });
+                                        });
+                                    </script>
+                                @else
+                                    <figure class="rounded mb-0">
+                                        <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
+                                    </figure>
+                                @endisset
+                            </div>
+                            @foreach ($legislation->attachments() as $attachment) 
+                                <div class="tab-pane fade" id="lampiran-{{ $attachment->media->id }}" role="tabpanel">
+                                    <figure id="attachment-{{ $attachment->media->id }}-view" data-file="{{ $legislation->documentSource($attachment->media->path) }}" data-name="{{ $attachment->media->name }}" class="rounded mb-0" style="height: 720px;">
+                                    </figure>
+                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
+                                    <script type="text/javascript">
+                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
+                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "attachment-{{ $attachment->media->id }}-view"});
+                                            const article = document.querySelector("#attachment-{{ $attachment->media->id }}-view");
+                                            adobeDCView.previewFile({
+                                                content:{ location:
+                                                { url: article.dataset.file }},
+                                                metaData:{fileName: article.dataset.name}
+                                            },
+                                            {
+                                                embedMode: "SIZED_CONTAINER",
+                                                showDownloadPDF: false,
+                                                showPrintPDF: false
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            @endforeach
+                            <div class="tab-pane fade" id="abstract" role="tabpanel">
+                                @isset($legislation->abstractDocumentSource)
+                                    <figure id="abstract-view" data-file="{{ $legislation->abstractDocumentSource }}" data-name="{{ $legislation->abstractDocument()->media->name }}" class="rounded mb-0" style="height: 720px;">
+                                    </figure>
+                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
+                                    <script type="text/javascript">
+                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
+                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "abstract-view"});
+                                            const article = document.querySelector("#abstract-view");
+                                            adobeDCView.previewFile({
+                                                content:{ location:
+                                                { url: article.dataset.file }},
+                                                metaData:{fileName: article.dataset.name}
+                                            },
+                                            {
+                                                embedMode: "SIZED_CONTAINER",
+                                                showDownloadPDF: false,
+                                                showPrintPDF: false
+                                            });
+                                        });
+                                    </script>
+                                @else
+                                    <figure class="rounded mb-0">
+                                        <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
+                                    </figure>
+                                @endisset
+                            </div>
                         </div>
-                        <div class="row gx-5">
-                            @foreach ($otherLegislations as $law)
-                                <div class="col-xl-4 my-3">
-                                    <div class="card lift shadow-lg h-100">
-                                        <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
-                                            <div class="card-header border-0 pb-0">
-                                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
-                                                <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
-                                            </div>
-                                            <div class="card-body fs-lg pb-0">
-                                                <p class="mb-0 text-body">{{ $law->title }}</p>
-                                            </div>
-                                        </a>
+                    </div>
+                </section>
+                <!-- /documents preview -->
+
+                @if (isset($banners) AND $banners->count() > 3)
+                    <!-- Banners -->
+                    <section class="mb-4">
+                        <div class="row gx-4">
+                            @foreach ($banners as $banner)
+                                @break($loop->iteration > 3)
+                                <div class="col-xl-4">
+                                    <div class="card bg-white border-0 lift mb-0">
+                                        <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </section>
-                    <!-- /latest laws -->
+                    <!-- /banners -->
                 @endif
+            </main>
 
-            </div>
+            <aside class="col-xl-3">
 
-        </main>
+                <!-- Download -->
+                <div class="card card-body shadow">
+                    <div class="text-center pt-2">
+                        {!! QrCode::size(180)->margin(2)->generate(url()->current()); !!}
+                        <p class="mb-0">Pindai kode QR</p>
+                    </div>
+
+                    <div class="mt-4">
+                        @isset($legislation->masterDocumentSource)                            
+                            <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-lg btn-labeled btn-labeled-start fw-bold rounded w-100 mb-2">
+                                    <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                        <i class="ph-download"></i>
+                                    </span>
+                                    Dokumen
+                                </button>
+                            </form>
+                        @endisset
+
+                        @isset($legislation->abstractDocument()->id)
+                            <form action="{{ route('legislation.download', $legislation->abstractDocument()->id) }}" method="post">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger btn-lg btn-labeled btn-labeled-start fw-bold w-100 rounded">
+                                    <span class="btn-labeled-icon bg-danger text-white">
+                                        <i class="ph-download"></i>
+                                    </span>
+                                    Abstrak
+                                </button>
+                            </form>
+                        @endisset
+                    </div>
+                </div>
+                <!-- /download -->
+
+                <!-- Latest News -->
+                <div class="mt-4">
+                    <h5 class="fw-bold mb-3">Berita Terbaru</h5>
+
+                    <div class="sidebar-section-body px-0 pb-0">
+                        @foreach ($latestNews as $news)
+                            <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
+                                <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
+                                    <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
+                                </a>
+                                <div class="flex-fill">
+                                    <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
+                                    <ul class="list-inline list-inline-bullet text-muted fs-sm">
+                                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- /latest news -->
+
+                <!-- Infographs -->
+                <div class="mt-4">
+                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2023-02-20_at_11_30_59.jpeg') }}" class="img-fluid shadow rounded">
+                    <img src="{{ asset('assets/jdih/images/demo/akhlak_biro_hukum.jpg') }}" class="img-fluid shadow rounded mt-3">
+                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2022-12-05_at_13_35_10.jpeg') }}" class="img-fluid shadow rounded mt-3">
+                </div>
+                <!-- /infographs -->
+
+            </aside>
+        </div>
         <!-- /content area -->
 
     </div>
@@ -383,6 +508,37 @@
 
 </div>
 <!-- /page container -->
+
+@if(isset($otherLegislations) AND $otherLegislations->count() > 0)
+    <!-- Other legislations -->
+    <section class="bg-dark bg-opacity-3">
+        <div class="container py-5">
+            <div class="content-wrapper">
+                <div class="content py-4">
+                    <h2 class="fw-bold section-title text-center mb-4 pb-2">Lihat {{ $legislation->category->name }} Lainnya</h2>
+                    <div class="row gx-4">
+                        @foreach ($otherLegislations as $law)
+                            <div class="col-xl-4 my-3">
+                                <div class="card lift shadow h-100">
+                                    <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug])}}" class="text-body link-danger">
+                                        <div class="card-header border-0 pb-0">
+                                            <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2">{{ $law->category->name }}</span>
+                                            <h4 class="fw-bold mb-0">{{ $law->shortTitle }}</h4>
+                                        </div>
+                                        <div class="card-body fs-lg pb-0">
+                                            <p class="mb-0 text-body">{{ $law->title }}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /other legislations -->
+@endif
 
 @endsection
 
