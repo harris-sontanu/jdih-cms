@@ -56,6 +56,8 @@ class LawController extends LegislationController
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
+            'assets/jdih/js/vendor/ui/moment/moment.min.js',
+            'assets/jdih/js/vendor/pickers/daterangepicker.js',
         ];
 
         return view('jdih.legislation.law.index', compact(

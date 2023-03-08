@@ -169,9 +169,9 @@ class Legislation extends Model
     public function excerpt(): Attribute
     {
         $excerpt = match ($this->category->type_id) {
-            2 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Penerbit:</span> ' . $this->publisher,
-            3 => '<span class="text-muted">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="text-muted">Sumber:</span> ' . $this->source,
-            default => $this->title,
+            2 => '<span class="fw-semibold">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="fw-semibold">Penerbit:</span> ' . $this->publisher,
+            3 => '<span class="fw-semibold">T.E.U. Orang/Badan:</span> ' . $this->author . '<br /><span class="fw-semibold">Sumber:</span> ' . $this->source,
+            default => strip_tags($this->title),
         };
 
         return Attribute::make(

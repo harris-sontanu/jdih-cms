@@ -107,16 +107,17 @@
                                 <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>
                                 <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
                                 <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
+                                <li class="list-inline-item"><i class="ph-heart text-pink me-2"></i>12</li>
                             </ul>
 
-                            <p class="fs-lg mb-0">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
-                        </div>
+                            <p class="fs-lg">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
 
-                        @isset($legislation->status)
-                            <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0">
-                                {!! $legislation->statusBadge !!}
-                            </div>
-                        @endisset
+                            <ul class="list-inline list-inline-bullet mb-0">
+                                <li class="list-inline-item"><span class="fw-semibold">Status: </span>{!! $legislation->statusBadge !!}</li>
+                                <li class="list-inline-item"><span class="fw-semibold">Ditetapkan: </span>{{ $legislation->dateFormatted($legislation->approved) }}</li>
+                                <li class="list-inline-item"><span class="fw-semibold">Diundangkan: </span>{{ $legislation->dateFormatted($legislation->published) }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </article>
 
