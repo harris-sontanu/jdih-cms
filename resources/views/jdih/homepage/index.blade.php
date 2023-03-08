@@ -443,7 +443,7 @@
                                                 <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow" alt="{{ $news->cover->name }}">
                                             </a>
                                         </figure>
-                                        <div class="post-title">                                            
+                                        <div class="post-title">
                                             <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-1">{{ $news->taxonomy->name }}</a>
                                             <h4 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
                                         </div>
@@ -596,11 +596,11 @@
                 <div class="content py-4">
                     <div class="row gx-5 mb-5">
                         <div class="col-xl-7">
-                            <figure class="mb-0">
+                            <figure>
                                 <img src="{{ asset('assets/jdih/images/backgrounds/i8.png') }}" class="img-fluid">
                             </figure>
                         </div>
-                        <div class="col-xl-5">
+                        <div class="col-xl-5 m-auto">
                             <h3 class="display-6 fw-bold">Ayo Bergabung!</h3>
                             <p class="fs-lg mb-3">
                                 Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
@@ -620,7 +620,7 @@
                                             <i class="ph-arrow-right"></i>
                                         </div>
                                     </div>
-                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Konsultasi Hukum</span></div>
+                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Konsultasi Hukum</span>, <span class="fw-bold">Pengaduan Hukum</span>, dan <span class="fw-bold">Bantuan Hukum</span></div>
                                 </li>
                                 <li class="d-flex align-items-center mb-3">
                                     <div class="me-3">
@@ -628,15 +628,7 @@
                                             <i class="ph-arrow-right"></i>
                                         </div>
                                     </div>
-                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Pengaduan Hukum</span></div>
-                                </li>
-                                <li class="d-flex align-items-center mb-3">
-                                    <div class="me-3">
-                                        <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-1">
-                                            <i class="ph-arrow-right"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-fill">Menggunakan layanan <span class="fw-bold">Bantuan Hukum</span></div>
+                                    <div class="flex-fill">Ikut berpartisipasi dalam memberikan masukan atau saran dalam rancangan peraturan pada <span class="fw-bold">Forum Diskusi</span></div>
                                 </li>
                             </ul>
                             <div class="d-flex fs-lg">
