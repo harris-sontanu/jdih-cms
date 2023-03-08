@@ -3,6 +3,7 @@
     <div class="sidebar-section-header pb-0">
         <h5 class="mb-0">Filter</h5>
     </div>
+
     <form class="filter-form" action="{{ route('legislation.law.index') }}" method="get">
 
         <!-- Sidebar search -->
@@ -61,7 +62,7 @@
         </div>
         <!-- /categories options -->
 
-        <!-- Status filter -->
+        <!-- Status options -->
         <div class="sidebar-section">
             <div class="sidebar-section-header border-bottom">
                 <span class="fw-semibold">Status</span>
@@ -85,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <!-- /fields options -->
+        <!-- /status options -->
 
         <!-- Number and Year search -->
         <div class="sidebar-section">
@@ -127,14 +128,14 @@
                     <div class="mb-3">
                         <label class="form-label">Ditetapkan:</label>
                         <div class="input-group">
-                            <input type="text" name="approved" class="form-control daterange-datemenu">
+                            <input type="text" name="approved" class="form-control daterange-datemenu" placeholder="08/03/2023">
                             <span class="input-group-text"><i class="ph-calendar"></i></span>
                         </div>
                     </div>
 
                     <label class="form-label">Diundangkan:</label>
                     <div class="input-group">
-                        <input type="text" name="published" class="form-control daterange-datemenu">
+                        <input type="text" name="published" class="form-control daterange-datemenu" placeholder="08/03/2023">
                         <span class="input-group-text"><i class="ph-calendar"></i></span>
                     </div>
                 </div>
@@ -261,8 +262,7 @@
                 </div>
             </div>
         </div>
-        <!-- /other options -->
-
+        <!-- /other filter -->
     </form>
 
 </div>

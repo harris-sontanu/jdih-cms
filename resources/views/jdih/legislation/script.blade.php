@@ -41,6 +41,7 @@
         $('.daterange-datemenu').daterangepicker({
             showDropdowns: true,
             applyButtonClasses: "btn-danger",
+            autoUpdateInput: false,
             locale: {
                 format: 'DD/MM/YYYY',
                 applyLabel: "Ok",
@@ -71,6 +72,14 @@
                     "Desember"
                 ],
             }
+        });
+
+        $('.daterange-datemenu').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        });
+
+        $('.daterange-datemenu').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
         });
     });
 </script>
