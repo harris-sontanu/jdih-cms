@@ -17,7 +17,7 @@
                     <p class="fs-lg">Situs ini merupakan situs resmi Biro Hukum Setda Provinsi Bali. Situs ini memuat data dan informasi-informasi produk hukum baik produk hukum pusat maupun daerah. Disamping itu, situs ini memuat pula informasi mengenai buku-buku referensi tentang hukum yang dimiliki oleh Biro Hukum Provinsi Bali.<br></p>
                     <div class="author mt-4">
                         <span class="fw-semibold">IDA BAGUS GEDE SUDARSANA, SH</span><br>
-                        <span class="text-light fs-sm">Kepala Biro  Hukum </span>
+                        <span class="text-light fs-sm">Kepala Biro  Hukum</span>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                         </script>
                     </div>
                     <div class="col-xl-5 offset-xl-1">
-                        <span class="fw-bold badge bg-indigo bg-opacity-10 text-indigo rounded-pill mb-2 fs-lg px-3 py-2">Populer</span>
+                        <span class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2"><i class="ph-fire me-2"></i>Terhangat</span>
                         <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $popularLaw->shortTitle }}</a>
                         <div class="fs-lg">
                             <div class="d-flex mb-3">
@@ -146,7 +146,7 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Jenis Dokumen</h4>
-                                        <p class="mb-0">{{ $popularLaw->category->name }}</p>
+                                        <u><a href="{{ route('legislation.law.category', ['category' => $popularLaw->category->slug]) }}" class="text-body"> {{ $popularLaw->category->name }}</a></u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Nomor</h4>
@@ -174,11 +174,11 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Tgl. Penetapan</h4>
-                                        <p class="mb-0">{{ $popularLaw->dateFormatted($popularLaw->approved) }}</p>
+                                        <p class="mb-0">{{ $popularLaw->timeformatted($popularLaw->approved, "j F Y") }}</p>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Tgl. Pengundangan</h4>
-                                        <p class="mb-0">{{ $popularLaw->dateFormatted($popularLaw->approved) }}</p>
+                                        <p class="mb-0">{{ $popularLaw->timeformatted($popularLaw->published, "j F Y") }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +195,9 @@
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Status</h4>
-                                        <p class="mb-0">{!! $popularLaw->statusBadge !!}</p>
+                                        <p class="mb-0">
+                                            <a href="{{ route('legislation.law.index', ['status' => $popularLaw->status]) }}" class="text-body">{!! $popularLaw->statusBadge !!}</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -208,11 +210,21 @@
                                 <div class="row flex-fill">
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
-                                        <p class="mb-0">{{ $popularLaw->institute->name }}</p>
+                                        <u>
+                                            <a href="{{ route('legislation.law.index', ['institute' => $popularLaw->institute->slug]) }}" class="text-body">{{ $popularLaw->institute->name }}</a>
+                                        </u>
                                     </div>
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Urusan Pemerintahan</h4>
-                                        <p class="mb-0">{!! $popularLaw->matterList !!}</p>
+                                        @if($popularLaw->matters->count() > 0)
+                                            <ul class="list-inline mb-0">
+                                                @foreach ($popularLaw->matters as $matter)
+                                                    <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matter' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            -
+                                        @endif
                                     </div>
                                 </div>
                             </div>
