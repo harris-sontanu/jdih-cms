@@ -113,25 +113,9 @@
                 <!-- Popular law -->
                 <div class="row pb-5">
                     <div class="col-xl-6 m-auto">
-                        <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->name }}" class="rounded shadow" style="height: 700px;">
+                        <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->file_name }}" class="rounded shadow" style="height: 700px;">
                         </figure>
-                        <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                        <script type="text/javascript">
-                            document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "adobe-dc-view"});
-                            const article = document.querySelector("#adobe-dc-view");
-                            adobeDCView.previewFile({
-                                content:{ location:
-                                { url: article.dataset.file }},
-                                metaData:{fileName: article.dataset.name}
-                            },
-                            {
-                                embedMode: "SIZED_CONTAINER",
-                                showDownloadPDF: false,
-                                showPrintPDF: false
-                            });
-                            });
-                        </script>
+                        @include('jdih.legislation.pdfEmbed', ['el' => 'adobe-dc-view'])
                     </div>
                     <div class="col-xl-5 offset-xl-1">
                         <span class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2"><i class="ph-fire me-2"></i>Terhangat</span>

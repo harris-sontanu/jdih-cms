@@ -334,23 +334,7 @@
                                 @isset($legislation->masterDocumentSource)
                                     <figure id="master-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded mb-0" style="height: 720px;">
                                     </figure>
-                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                                    <script type="text/javascript">
-                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "master-view"});
-                                            const article = document.querySelector("#master-view");
-                                            adobeDCView.previewFile({
-                                                content:{ location:
-                                                { url: article.dataset.file }},
-                                                metaData:{fileName: article.dataset.name}
-                                            },
-                                            {
-                                                embedMode: "SIZED_CONTAINER",
-                                                showDownloadPDF: false,
-                                                showPrintPDF: false
-                                            });
-                                        });
-                                    </script>
+                                    @include('jdih.legislation.pdfEmbed', ['el' => 'master-view'])
                                 @else
                                     <figure class="rounded mb-0">
                                         <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
@@ -361,46 +345,14 @@
                                 <div class="tab-pane fade" id="lampiran-{{ $attachment->media->id }}" role="tabpanel">
                                     <figure id="attachment-{{ $attachment->media->id }}-view" data-file="{{ $legislation->documentSource($attachment->media->path) }}" data-name="{{ $attachment->media->name }}" class="rounded mb-0" style="height: 720px;">
                                     </figure>
-                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                                    <script type="text/javascript">
-                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "attachment-{{ $attachment->media->id }}-view"});
-                                            const article = document.querySelector("#attachment-{{ $attachment->media->id }}-view");
-                                            adobeDCView.previewFile({
-                                                content:{ location:
-                                                { url: article.dataset.file }},
-                                                metaData:{fileName: article.dataset.name}
-                                            },
-                                            {
-                                                embedMode: "SIZED_CONTAINER",
-                                                showDownloadPDF: false,
-                                                showPrintPDF: false
-                                            });
-                                        });
-                                    </script>
+                                    @include('jdih.legislation.pdfEmbed', ['el' => 'attachment-' . $attachment->media->id . '-view'])
                                 </div>
                             @endforeach
                             <div class="tab-pane fade" id="abstract" role="tabpanel">
                                 @isset($legislation->abstractDocumentSource)
                                     <figure id="abstract-view" data-file="{{ $legislation->abstractDocumentSource }}" data-name="{{ $legislation->abstractDocument()->media->name }}" class="rounded mb-0" style="height: 720px;">
                                     </figure>
-                                    <script src="https://documentservices.adobe.com/view-sdk/viewer.js"></script>
-                                    <script type="text/javascript">
-                                        document.addEventListener("adobe_dc_view_sdk.ready", function(){
-                                            var adobeDCView = new AdobeDC.View({clientId: "{{ $adobeKey }}", divId: "abstract-view"});
-                                            const article = document.querySelector("#abstract-view");
-                                            adobeDCView.previewFile({
-                                                content:{ location:
-                                                { url: article.dataset.file }},
-                                                metaData:{fileName: article.dataset.name}
-                                            },
-                                            {
-                                                embedMode: "SIZED_CONTAINER",
-                                                showDownloadPDF: false,
-                                                showPrintPDF: false
-                                            });
-                                        });
-                                    </script>
+                                    @include('jdih.legislation.pdfEmbed', ['el' => 'abstract-view'])
                                 @else
                                     <figure class="rounded mb-0">
                                         <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
