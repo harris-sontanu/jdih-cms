@@ -392,6 +392,10 @@ class Legislation extends Model
             $query->where('category_id', $category);
         }
 
+        if ($categories = $request->categories AND $categories = $request->categories) {
+            $query->whereIn('category_id', $categories);
+        }
+
         if ($code_number = $request->code_number AND $code_number = $request->code_number) {
             $query->where('code_number', 'LIKE', '%' . $code_number . '%');
         }
@@ -412,8 +416,22 @@ class Legislation extends Model
             $query->whereDate('approved', Carbon::parse($approved)->format('Y-m-d'));
         }
 
+        if ($rgapproved = $request->rgapproved AND $rgapproved = $request->rgapproved) {
+            $dates = explode(' - ', $rgapproved);
+            $fromDate = Carbon::createFromFormat('d/m/Y', $dates[0]);
+            $toDate = Carbon::createFromFormat('d/m/Y', $dates[1]);
+            $query->whereBetween('approved', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
+        }
+
         if ($published = $request->published AND $published = $request->published) {
             $query->whereDate('published', Carbon::parse($published)->format('Y-m-d'));
+        }
+
+        if ($rgpublished = $request->rgpublished AND $rgpublished = $request->rgpublished) {
+            $dates = explode(' - ', $rgpublished);
+            $fromDate = Carbon::createFromFormat('d/m/Y', $dates[0]);
+            $toDate = Carbon::createFromFormat('d/m/Y', $dates[1]);
+            $query->whereBetween('published', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         }
 
         if ($place = $request->place AND $place = $request->place) {
@@ -454,6 +472,10 @@ class Legislation extends Model
 
         if ($status = $request->status AND $status = $request->status) {
             $query->where('status', $status);
+        }
+
+        if ($statuses = $request->statuses AND $statuses = $request->statuses) {
+            $query->whereIn('status', $statuses);
         }
 
         if ($matter = $request->matter AND $matter = $request->matter) {

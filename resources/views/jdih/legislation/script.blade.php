@@ -12,6 +12,16 @@
             return true;
         });
 
+        $(document).on('keypress', '.filter-form :input', function(e) {
+            if (e.which == 13) {
+                $('.filter-form').submit();
+            }
+        })
+
+        $(document).on('change', '.filter-form :input', function(e) {
+            $('.filter-form').submit();
+        })
+
         $(document).on('click', '.copy-link', function(){
             let url = $(this).data('url');
             navigator.clipboard.writeText(url);
@@ -39,7 +49,7 @@
                 }
             });
         })
-        
+
         if ($().daterangepicker) {
             $('.daterange-datemenu').daterangepicker({
                 showDropdowns: true,

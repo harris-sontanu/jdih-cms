@@ -45,18 +45,20 @@
             <div class="collapse show" id="categories">
                 <div class="sidebar-section-body">
                     @foreach ($categories as $key => $value)
-                        @if ($loop->iteration === 6)
+                        @if ($loop->iteration === 6 AND !Request::get('categories'))
                             <div id="categories-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
-                            <input type="checkbox" name="categories[]" class="form-check-input form-check-input-danger" value="{{ $key }}">
+                            <input type="checkbox" name="categories[]" @checked(Request::get('categories') AND in_array($key, Request::get('categories'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last)
+                        @if ($loop->last AND !Request::get('categories'))
                             </div>
                         @endif
                     @endforeach
-                    <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="categories-hidden">Lihat semua</a>
+                    @empty(Request::get('categories'))
+                        <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="categories-hidden">Lihat semua</a>
+                    @endempty
                 </div>
             </div>
         </div>
@@ -76,11 +78,11 @@
             <div class="collapse show" id="status">
                 <div class="sidebar-section-body">
                     <label class="form-check mb-2">
-                        <input type="checkbox" name="statuses[]" class="form-check-input form-check-input-danger" value="berlaku">
+                        <input type="checkbox" name="statuses[]" @checked(Request::get('statuses') AND in_array('berlaku', Request::get('statuses'))) class="form-check-input form-check-input-danger" value="berlaku">
                         <span class="form-check-label">Berlaku</span>
                     </label>
                     <label class="form-check">
-                        <input type="checkbox" name="statuses[]" class="form-check-input form-check-input-danger" value="tidak berlaku">
+                        <input type="checkbox" name="statuses[]" @checked(Request::get('statuses') AND in_array('tidak berlaku', Request::get('statuses'))) class="form-check-input form-check-input-danger" value="tidak berlaku">
                         <span class="form-check-label">Tidak Berlaku</span>
                     </label>
                 </div>
@@ -106,7 +108,7 @@
                         <input id="code_number" type="search" name="code_number" class="form-control" placeholder="Contoh: 3" value="{{ Request::get('code_number') }}">
                     </div>
                     <label class="form-label">Tahun: <output id="value"></output></label>
-                    <input id="year" type="range" name="year" class="form-range" min="1945" max="{{ now()->year }}" step="1" value="{{ Request::get('year') }}">
+                    <input id="year" type="number" name="year" class="form-control" placeholder="Contoh: {{ now()->year }}" value="{{ Request::get('year') }}">
                 </div>
             </div>
         </div>
@@ -128,14 +130,14 @@
                     <div class="mb-3">
                         <label class="form-label">Ditetapkan:</label>
                         <div class="input-group">
-                            <input type="text" name="approved" class="form-control daterange-datemenu" placeholder="08/03/2023">
+                            <input type="text" name="rgapproved" class="form-control daterange-datemenu" placeholder="08/03/2023" value="{{ Request::get('rgapproved') }}">
                             <span class="input-group-text"><i class="ph-calendar"></i></span>
                         </div>
                     </div>
 
                     <label class="form-label">Diundangkan:</label>
                     <div class="input-group">
-                        <input type="text" name="published" class="form-control daterange-datemenu" placeholder="08/03/2023">
+                        <input type="text" name="rgpublished" class="form-control daterange-datemenu" placeholder="08/03/2023" value="{{ Request::get('rgpublished') }}">
                         <span class="input-group-text"><i class="ph-calendar"></i></span>
                     </div>
                 </div>
