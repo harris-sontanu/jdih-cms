@@ -16,8 +16,8 @@
                     <div class="col-xl-6">
                         <h2 class="fw-bold mt-5 text-white display-6">
                             Cari Produk Hukum <br />
-                            <span class="typer fw-bold text-nowrap text-danger display-6" data-delay="100" data-words="peraturan,monografi hukum,artikel hukum,putusan pengadilan">peraturan</span>
-                            <span class="cursor fw-bold text-danger display-6" data-owner="typer"></span>
+                            <span id="first-typer" class="typer fw-bold text-nowrap text-danger display-6" data-delay="100" data-words="peraturan,monografi hukum,artikel hukum,putusan pengadilan">peraturan</span>
+                            <span class="cursor fw-bold text-danger display-6" data-owner="first-typer"></span>
                         </h2>
                         <h3 class="text-white">{{ $appDesc }}</h3>
                         <form class="filter-form" action="{{ route('legislation.index') }}" method="get">

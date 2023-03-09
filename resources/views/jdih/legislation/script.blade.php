@@ -21,10 +21,12 @@
 
         const value = document.querySelector("#value")
         const input = document.querySelector("#year")
-        value.textContent = input.value
-        input.addEventListener("input", (event) => {
-            value.textContent = event.target.value
-        })
+        if (!!value) {
+            value.textContent = input.value
+            input.addEventListener("input", (event) => {
+                value.textContent = event.target.value
+            })
+        }
 
         $('.options-hide-toggle').click(function() {
             let target = $(this).data('target');
@@ -37,49 +39,51 @@
                 }
             });
         })
+        
+        if ($().daterangepicker) {
+            $('.daterange-datemenu').daterangepicker({
+                showDropdowns: true,
+                applyButtonClasses: "btn-danger",
+                autoUpdateInput: false,
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    applyLabel: "Ok",
+                    cancelLabel: "Batal",
+                    fromLabel: "Dari",
+                    toLabel: "Ke",
+                    daysOfWeek: [
+                        "Mg",
+                        "Sn",
+                        "Sl",
+                        "Rb",
+                        "Km",
+                        "Jm",
+                        "Sb"
+                    ],
+                    monthNames: [
+                        "Januari",
+                        "Februari",
+                        "Maret",
+                        "April",
+                        "Mei",
+                        "Juni",
+                        "Juli",
+                        "Agustus",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Desember"
+                    ],
+                }
+            });
 
-        $('.daterange-datemenu').daterangepicker({
-            showDropdowns: true,
-            applyButtonClasses: "btn-danger",
-            autoUpdateInput: false,
-            locale: {
-                format: 'DD/MM/YYYY',
-                applyLabel: "Ok",
-                cancelLabel: "Batal",
-                fromLabel: "Dari",
-                toLabel: "Ke",
-                daysOfWeek: [
-                    "Mg",
-                    "Sn",
-                    "Sl",
-                    "Rb",
-                    "Km",
-                    "Jm",
-                    "Sb"
-                ],
-                monthNames: [
-                    "Januari",
-                    "Februari",
-                    "Maret",
-                    "April",
-                    "Mei",
-                    "Juni",
-                    "Juli",
-                    "Agustus",
-                    "September",
-                    "Oktober",
-                    "November",
-                    "Desember"
-                ],
-            }
-        });
+            $('.daterange-datemenu').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
 
-        $('.daterange-datemenu').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        });
-
-        $('.daterange-datemenu').on('cancel.daterangepicker', function(ev, picker) {
-            $(this).val('');
-        });
+            $('.daterange-datemenu').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+            });
+        }
     });
 </script>
