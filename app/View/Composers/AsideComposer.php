@@ -23,21 +23,7 @@ class AsideComposer
 
         $fields = Field::sorted()->pluck('name', 'slug');
 
-        $popularNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
-            ->popular()
-            ->published()
-            ->take(5)
-            ->get();
-
-        $popularMonographs = Legislation::ofType(2)
-            ->published()
-            ->latest()
-            ->take(3)
-            ->get();
-
         $view->with('types', $types)
-            ->with('fields', $fields)
-            ->with('popularNews', $popularNews)
-            ->with('popularMonographs', $popularMonographs);
+            ->with('fields', $fields);
     }
 }

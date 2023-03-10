@@ -54,6 +54,12 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $latestMonographs = Legislation::ofType(2)
+            ->published()
+            ->latest()
+            ->take(3)
+            ->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/ui/moment/moment.min.js',
@@ -62,6 +68,7 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'latestMonographs',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('banners', $this->banners())
@@ -74,20 +81,27 @@ class LawController extends LegislationController
     {
         $legislations = Legislation::ofType(1)
             ->where('category_id', $category->id)
+            ->filter($request)
             ->published()
             ->sorted($request)
             ->paginate($this->limit)
             ->withQueryString();
 
-        $matters = Matter::sorted()->pluck('name', 'id');
-        $institutes = Institute::sorted()->pluck('name', 'id');
+        $latestMonographs = Legislation::ofType(2)
+            ->published()
+            ->latest()
+            ->take(3)
+            ->get();
 
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
+            'assets/jdih/js/vendor/ui/moment/moment.min.js',
+            'assets/jdih/js/vendor/pickers/daterangepicker.js',
         ];
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'latestMonographs',
             'category',
             'vendors',
         ))->with('categories', $this->categories)
