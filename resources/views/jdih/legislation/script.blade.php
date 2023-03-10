@@ -94,6 +94,7 @@
 
             $('.daterange-datemenu').on('cancel.daterangepicker', function(ev, picker) {
                 $(this).val('');
+                $('.filter-form').submit();
             });
         }
     });

@@ -4,7 +4,13 @@
         <h5 class="mb-0">Filter</h5>
     </div>
 
-    <form class="filter-form" action="{{ route('legislation.law.index') }}" method="get">
+    <form class="filter-form"
+        @isset($category)
+            action="{{ route('legislation.law.category', ['category' => $category->slug]) }}"
+        @else
+            action="{{ route('legislation.law.index') }}"
+        @endisset
+        method="get">
 
         <!-- Sidebar search -->
         <div class="sidebar-section">
@@ -32,36 +38,38 @@
         <!-- /sidebar search -->
 
         <!-- Categories filter -->
-        <div class="sidebar-section">
-            <div class="sidebar-section-header border-bottom">
-                <span class="fw-semibold">Jenis / Bentuk</span>
-                <div class="ms-auto">
-                    <a href="#categories" class="text-reset" data-bs-toggle="collapse">
-                        <i class="ph-caret-down collapsible-indicator"></i>
-                    </a>
+        @empty($category)
+            <div class="sidebar-section">
+                <div class="sidebar-section-header border-bottom">
+                    <span class="fw-semibold">Jenis / Bentuk</span>
+                    <div class="ms-auto">
+                        <a href="#categories" class="text-reset" data-bs-toggle="collapse">
+                            <i class="ph-caret-down collapsible-indicator"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="collapse show" id="categories">
-                <div class="sidebar-section-body">
-                    @foreach ($categories as $key => $value)
-                        @if ($loop->iteration === 6 AND !Request::get('categories'))
-                            <div id="categories-hidden" style="display: none">
-                        @endif
-                        <label class="form-check mb-2">
-                            <input type="checkbox" name="categories[]" @checked(Request::get('categories') AND in_array($key, Request::get('categories'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
-                            <span class="form-check-label">{{ Str::title($value) }}</span>
-                        </label>
-                        @if ($loop->last AND !Request::get('categories'))
-                            </div>
-                        @endif
-                    @endforeach
-                    @empty(Request::get('categories'))
-                        <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="categories-hidden">Lihat semua</a>
-                    @endempty
+                <div class="collapse show" id="categories">
+                    <div class="sidebar-section-body">
+                        @foreach ($categories as $key => $value)
+                            @if ($loop->iteration === 6 AND !Request::get('categories'))
+                                <div id="categories-hidden" style="display: none">
+                            @endif
+                            <label class="form-check mb-2">
+                                <input type="checkbox" name="categories[]" @checked(Request::get('categories') AND in_array($key, Request::get('categories'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
+                                <span class="form-check-label">{{ Str::title($value) }}</span>
+                            </label>
+                            @if ($loop->last AND !Request::get('categories'))
+                                </div>
+                            @endif
+                        @endforeach
+                        @empty(Request::get('categories'))
+                            <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="categories-hidden">Lihat semua</a>
+                        @endempty
+                    </div>
                 </div>
             </div>
-        </div>
+        @endempty
         <!-- /categories options -->
 
         <!-- Status options -->
