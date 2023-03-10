@@ -31,44 +31,9 @@
 
         <!-- Content area -->
         <div class="content row gx-5">
-            <aside class="col-xl-1 text-center pe-0 my-5">
-                <div class="post-like my-4">
-                    <button type="button" class="btn btn-flat-pink rounded-pill p-2 border-0 mb-1">
-                        <i class="ph-heart"></i>
-                    </button>
-                    <p>12</p>
-                </div>
-                <div class="post-view my-4">
-                    <div class="bg-dark bg-opacity-10 text-dark lh-1 rounded-pill p-2 d-inline-block mb-1">
-                        <i class="ph-eye"></i>
-                    </div>
-                    <p>{{ $legislation->view }}</p>
-                </div>
-                <div class="post-download my-4">
-                    <div class="bg-dark bg-opacity-10 text-dark lh-1 rounded-pill p-2 d-inline-block mb-1">
-                        <i class="ph-download"></i>
-                    </div>
-                    <p>{{ $legislation->documents->sum('download') }}</p>
-                </div>
-                <div class="post-share my-4">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-flat-dark btn-icon rounded-pill border-0" data-bs-toggle="dropdown">
-                            <i class="ph-share-network "></i>
-                        </button>
 
-                        <div class="dropdown-menu">
-                            @foreach ($shares as $share)
-                                <a href="{{ $share['url'] }}" target="_blank" class="dropdown-item">
-                                    <i class="{{ $share['icon'] }} me-2"></i>Bagikan ke {{ $share['title'] }}
-                                </a>
-                            @endforeach
-                            <button type="button" data-url="{{ url()->current() }}" class="dropdown-item">
-                                <i class="ph-link me-2"></i>Salin Tautan
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+            @include('jdih.layouts.like-and-share', ['like' => 5, 'view' => $legislation->view, 'download' => $legislation->documents->sum('download')])
+            
             <main class="col-xl-8">
                 <article class="card shadow-sm mb-4">
                     <div class="card-header px-4 pb-0 pt-4 border-bottom-0">
@@ -386,10 +351,8 @@
 
                 <!-- Download -->
                 <div class="card shadow">
-
-                    <div class="card-img-actions mx-1 mt-1">
-                        <img class="card-img img-fluid" @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}">
-                    </div>
+                    
+                    {{-- <img class="card-img-top img-fluid border-bottom" @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}"> --}}
 
                     <div class="card-body">
                         <div class="text-center pt-2">

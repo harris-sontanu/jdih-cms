@@ -7,7 +7,7 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
-use App\Models\Link;
+use App\Models\Post;
 use Illuminate\Support\Facades\Config;
 
 class MonographController extends LegislationController
@@ -92,7 +92,7 @@ class MonographController extends LegislationController
             ->whereNot('id', $legislation->id)
             ->published()
             ->sorted()
-            ->take(6)
+            ->take(4)
             ->get();
 
         $vendors = [
@@ -106,6 +106,7 @@ class MonographController extends LegislationController
             'otherLegislations',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
+            ->with('banners', $this->banners())
             ->with('shares', $this->shares());
     }
 
