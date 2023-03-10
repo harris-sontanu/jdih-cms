@@ -1,6 +1,6 @@
 <!-- Filter -->
 <div class="card shadow">
-    <div class="sidebar-section-header">
+    <div class="sidebar-section-header pb-0">
         <h5 class="mb-0">Filter</h5>
     </div>
 

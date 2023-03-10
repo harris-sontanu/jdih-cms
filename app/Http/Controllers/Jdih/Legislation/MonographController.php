@@ -23,7 +23,7 @@ class MonographController extends LegislationController
 
         $this->categories = Category::ofType(2)
             ->sorted()
-            ->pluck('name', 'id');
+            ->pluck('name', 'slug');
     }
 
     /**
