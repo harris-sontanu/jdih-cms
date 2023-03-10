@@ -393,10 +393,9 @@ class Legislation extends Model
         }
 
         if ($categories = $request->categories AND $categories = $request->categories) {
-            $query->whereHas('categories', function (Builder $q) use ($categories) {
+            $query->whereHas('category', function (Builder $q) use ($categories) {
                 $q->whereIn('slug', $categories);
             });
-            // $query->whereIn('category_id', $categories);
         }
 
         if ($code_number = $request->code_number AND $code_number = $request->code_number) {
@@ -462,7 +461,9 @@ class Legislation extends Model
         }
 
         if ($institutes = $request->institutes AND $institutes = $request->institutes) {
-            $query->whereIn('institute_id', $institutes);
+            $query->whereHas('institute', function (Builder $q) use ($institutes) {
+                $q->whereIn('slug', $institutes);
+            });
         }
 
         if ($field = $request->field AND $field = $request->field) {
@@ -470,7 +471,9 @@ class Legislation extends Model
         }
 
         if ($fields = $request->fields AND $fields = $request->fields) {
-            $query->whereIn('field_id', $fields);
+            $query->whereHas('field', function (Builder $q) use ($fields) {
+                $q->whereIn('slug', $fields);
+            });
         }
 
         if ($signer = $request->signer AND $signer = $request->signer) {
@@ -495,7 +498,7 @@ class Legislation extends Model
 
         if ($matters = $request->matters AND $matters = $request->matters) {
             $query->whereHas('matters', function (Builder $q) use ($matters) {
-                $q->whereIn('id', $matters);
+                $q->whereIn('slug', $matters);
             });
         }
 

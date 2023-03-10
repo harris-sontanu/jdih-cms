@@ -33,10 +33,10 @@ class LawController extends LegislationController
 
         $this->categories = Category::ofType(1)
             ->sorted()
-            ->pluck('name', 'id');
+            ->pluck('name', 'slug');
 
-        $this->matters = Matter::sorted()->pluck('name', 'id');
-        $this->institutes = Institute::sorted()->pluck('name', 'id');
+        $this->matters = Matter::sorted()->pluck('name', 'slug');
+        $this->institutes = Institute::sorted()->pluck('name', 'slug');
     }
 
     /**

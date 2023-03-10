@@ -89,6 +89,7 @@
 
             $('.daterange-datemenu').on('apply.daterangepicker', function(ev, picker) {
                 $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                $('.filter-form').submit();
             });
 
             $('.daterange-datemenu').on('cancel.daterangepicker', function(ev, picker) {

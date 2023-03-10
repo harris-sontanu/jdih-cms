@@ -19,9 +19,9 @@ class AsideComposer
      */
     public function compose(View $view)
     {
-        $types = Type::pluck('name', 'id');
+        $types = Type::pluck('name', 'slug');
 
-        $fields = Field::sorted()->pluck('name', 'id');
+        $fields = Field::sorted()->pluck('name', 'slug');
 
         $popularNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->popular()
