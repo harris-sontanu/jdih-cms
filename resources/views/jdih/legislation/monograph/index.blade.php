@@ -35,7 +35,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.layouts.aside', ['view' => 'jdih.legislation.monograph.filter'])
+    @include('jdih.legislation.aside', ['view' => 'jdih.legislation.monograph.filter'])
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -90,7 +90,7 @@
             </section>
 
             @foreach ($legislations as $legislation)
-                <article class="card card-body shadow-lg mb-4">
+                <article class="card card-body shadow mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="{{ route('legislation.monograph.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block me-sm-3 mb-3 mb-sm-0">

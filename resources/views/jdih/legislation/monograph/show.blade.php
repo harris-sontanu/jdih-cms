@@ -56,7 +56,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Jenis Monografi</h4>
-                                    <p class="mb-0"><a href="{{ route('legislation.monograph.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></p>
+                                    <u><a href="{{ route('legislation.monograph.category', ['category' => $legislation->category->slug]) }}" class="text-body"> {{ $legislation->category->name }}</a></u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Tahun Terbit</h4>
@@ -146,9 +146,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
-                                    <p class="mb-0">
-                                        <a href="{{ route('legislation.monograph.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
-                                    </p>
+                                    <u><a href="{{ route('legislation.monograph.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a></u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bahasa</h4>
