@@ -41,12 +41,19 @@ class MonographController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $latestLaws = Legislation::ofType(1)
+            ->published()
+            ->latestApproved()
+            ->take(5)
+            ->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
         ];
 
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
+            'latestLaws',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('banners', $this->banners())

@@ -388,9 +388,9 @@ class Legislation extends Model
             $query->whereRelation('category', 'type_id', $type);
         }
 
-        // if ($category = $request->category AND $category = $request->category) {
-        //     $query->where('category_id', $category);
-        // }
+        if ($category = $request->category AND $category = $request->category AND !is_object($category)) {
+            $query->where('category_id', $category);
+        }
 
         if ($categories = $request->categories AND $categories = $request->categories) {
             $query->whereHas('category', function (Builder $q) use ($categories) {

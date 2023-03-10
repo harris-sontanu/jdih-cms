@@ -33,7 +33,7 @@
         <div class="content row gx-5">
 
             @include('jdih.layouts.like-and-share', ['like' => 5, 'view' => $legislation->view, 'download' => $legislation->documents->sum('download')])
-            
+
             <main class="col-xl-8">
                 <article class="card shadow-sm mb-4">
                     <div class="card-header px-4 pb-0 pt-4 border-bottom-0">
@@ -157,7 +157,7 @@
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
                                     <u>
-                                        <a href="{{ route('legislation.law.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
+                                        <a href="{{ route('legislation.law.index', ['fields[]' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a>
                                     </u>
                                 </div>
                                 <div class="col-6">
@@ -176,7 +176,7 @@
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
                                     <u>
-                                        <a href="{{ route('legislation.law.index', ['institute' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
+                                        <a href="{{ route('legislation.law.index', ['institutes[]' => $legislation->institute->slug]) }}" class="text-body">{{ $legislation->institute->name }}</a>
                                     </u>
                                 </div>
                                 <div class="col-6">
@@ -184,7 +184,7 @@
                                     @if($legislation->matters->count() > 0)
                                         <ul class="list-inline mb-0">
                                             @foreach ($legislation->matters as $matter)
-                                                <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matter' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
+                                                <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matters[]' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     @else
@@ -351,8 +351,6 @@
 
                 <!-- Download -->
                 <div class="card shadow">
-                    
-                    {{-- <img class="card-img-top img-fluid border-bottom" @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}"> --}}
 
                     <div class="card-body">
                         <div class="text-center pt-2">
