@@ -20,7 +20,7 @@
             <div class="collapse show" id="sidebar-search">
                 <div class="sidebar-section-body">
                     <div class="form-control-feedback form-control-feedback-end">
-                        <input id="title" type="search" name="title" class="form-control form-control-danger" placeholder="Contoh: covid-19" value="{{ Request::get('title') }}">
+                        <input id="title" type="search" name="title" autofocus class="form-control form-control-danger" placeholder="Contoh: covid-19" value="{{ Request::get('title') }}">
                         <div class="form-control-feedback-icon">
                             <i class="ph-magnifying-glass opacity-50"></i>
                         </div>
@@ -150,27 +150,29 @@
             <div class="sidebar-section-header border-bottom">
                 <span class="fw-semibold">Bidang Hukum</span>
                 <div class="ms-auto">
-                    <a href="#fields" class="text-reset collapsed" data-bs-toggle="collapse" aria-expanded="false">
+                    <a href="#fields" class="text-reset @empty(Request::get('fields')) collapsed @endempty" data-bs-toggle="collapse" aria-expanded="false">
                         <i class="ph-caret-down collapsible-indicator"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="collapse" id="fields">
+            <div class="collapse @if(Request::get('fields')) show @endif" id="fields">
                 <div class="sidebar-section-body">
                     @foreach ($fields as $key => $value)
-                        @if ($loop->iteration === 6)
+                        @if ($loop->iteration === 6 AND !Request::get('fields'))
                             <div id="fields-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
-                            <input type="checkbox" name="fields[]" class="form-check-input form-check-input-danger" value="{{ $key }}">
+                            <input type="checkbox" name="fields[]" @checked(Request::get('fields') AND in_array($key, Request::get('fields'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last)
+                        @if ($loop->last AND !Request::get('fields'))
                             </div>
                         @endif
                     @endforeach
-                    <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="fields-hidden">Lihat semua</a>
+                    @empty(Request::get('fields'))
+                        <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="fields-hidden">Lihat semua</a>
+                    @endempty
                 </div>
             </div>
         </div>
@@ -181,27 +183,29 @@
             <div class="sidebar-section-header border-bottom">
                 <span class="fw-semibold">Urusan Pemerintahan</span>
                 <div class="ms-auto">
-                    <a href="#matters" class="text-reset collapsed" data-bs-toggle="collapse">
+                    <a href="#matters" class="text-reset @empty(Request::get('matters')) collapsed @endempty" data-bs-toggle="collapse">
                         <i class="ph-caret-down collapsible-indicator"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="collapse" id="matters">
+            <div class="collapse @if(Request::get('matters')) show @endif" id="matters">
                 <div class="sidebar-section-body">
                     @foreach ($matters as $key => $value)
-                        @if ($loop->iteration === 6)
+                        @if ($loop->iteration === 6 AND !Request::get('matters'))
                             <div id="matters-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
-                            <input type="checkbox" name="matters[]" class="form-check-input form-check-input-danger" value="{{ $key }}">
+                            <input type="checkbox" name="matters[]" @checked(Request::get('matters') AND in_array($key, Request::get('matters'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last)
+                        @if ($loop->last AND !Request::get('matters'))
                             </div>
                         @endif
                     @endforeach
-                    <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="matters-hidden">Lihat semua</a>
+                    @empty(Request::get('matters'))
+                        <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="matters-hidden">Lihat semua</a>
+                    @endempty
                 </div>
             </div>
         </div>
@@ -212,27 +216,29 @@
             <div class="sidebar-section-header border-bottom">
                 <span class="fw-semibold">Pemrakarsa</span>
                 <div class="ms-auto">
-                    <a href="#institutes" class="text-reset collapsed" data-bs-toggle="collapse">
+                    <a href="#institutes" class="text-reset @empty(Request::get('institutes')) collapsed @endempty" data-bs-toggle="collapse">
                         <i class="ph-caret-down collapsible-indicator"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="collapse" id="institutes">
+            <div class="collapse @if(Request::get('institutes')) show @endif" id="institutes">
                 <div class="sidebar-section-body">
                     @foreach ($institutes as $key => $value)
-                        @if ($loop->iteration === 6)
+                        @if ($loop->iteration === 6 AND !Request::get('institutes'))
                             <div id="institutes-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
-                            <input type="checkbox" name="institutes[]" class="form-check-input form-check-input-danger" value="{{ $key }}">
+                            <input type="checkbox" name="institutes[]" @checked(Request::get('institutes') AND in_array($key, Request::get('institutes'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last)
+                        @if ($loop->last AND !Request::get('institutes'))
                             </div>
                         @endif
                     @endforeach
-                    <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="institutes-hidden">Lihat semua</a>
+                    @empty(Request::get('institutes'))
+                        <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="institutes-hidden">Lihat semua</a>
+                    @endempty
                 </div>
             </div>
         </div>
@@ -257,10 +263,10 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Sumber:</label>
-                        <input id="subject" type="search" name="subject" class="form-control" placeholder="Contoh: BD PROVINSI BALI 2022" value="{{ Request::get('source') }}">
+                        <input id="source" type="search" name="source" class="form-control" placeholder="Contoh: BD PROVINSI BALI 2022" value="{{ Request::get('source') }}">
                     </div>
                     <label class="form-label">Penandatangan:</label>
-                    <input id="subject" type="search" name="subject" class="form-control" placeholder="Contoh: Wayan Koster" value="{{ Request::get('author') }}">
+                    <input id="author" type="search" name="author" class="form-control" placeholder="Contoh: Wayan Koster" value="{{ Request::get('author') }}">
                 </div>
             </div>
         </div>
