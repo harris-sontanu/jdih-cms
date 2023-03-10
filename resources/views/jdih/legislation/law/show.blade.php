@@ -318,12 +318,12 @@
                                 <li class="nav-item dropdown" role="presentation">
                                     <a href="#" class="nav-link py-3 px-4 fw-semibold" data-bs-toggle="dropdown">Lampiran</a>
                                     <div class="dropdown-menu">
-                                        @foreach ($legislation->attachments() as $attachment)                                        
+                                        @foreach ($legislation->attachments() as $attachment)
                                             <a href="#lampiran-{{ $attachment->media->id}}" class="dropdown-item" data-bs-toggle="tab" role="tab">{{ $attachment->media->name}}</a>
                                         @endforeach
                                     </div>
                                 </li>
-                            @endif                                
+                            @endif
                             <li class="nav-item" role="presentation">
                                 <h6 class="mb-0"><a class="nav-link py-3 px-4" data-bs-toggle="tab" role="tab" href="#abstract">Abstrak</a></h6>
                             </li>
@@ -341,7 +341,7 @@
                                     </figure>
                                 @endisset
                             </div>
-                            @foreach ($legislation->attachments() as $attachment) 
+                            @foreach ($legislation->attachments() as $attachment)
                                 <div class="tab-pane fade" id="lampiran-{{ $attachment->media->id }}" role="tabpanel">
                                     <figure id="attachment-{{ $attachment->media->id }}-view" data-file="{{ $legislation->documentSource($attachment->media->path) }}" data-name="{{ $attachment->media->name }}" class="rounded mb-0" style="height: 720px;">
                                     </figure>
@@ -385,39 +385,46 @@
             <aside class="col-xl-3">
 
                 <!-- Download -->
-                <div class="card card-body shadow">
-                    <div class="text-center pt-2">
-                        {!! QrCode::size(180)->margin(2)->generate(url()->current()); !!}
-                        <p class="mb-0">Pindai kode QR</p>
+                <div class="card shadow">
+
+                    <div class="card-img-actions mx-1 mt-1">
+                        <img class="card-img img-fluid" @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}">
                     </div>
 
-                    <div class="mt-4">
-                        @isset($legislation->masterDocumentSource)                            
-                            <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
-                                @method('PUT')
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-lg btn-labeled btn-labeled-start fw-bold rounded w-100 mb-2">
-                                    <span class="btn-labeled-icon bg-black bg-opacity-20">
-                                        <i class="ph-download"></i>
-                                    </span>
-                                    Dokumen
-                                </button>
-                            </form>
-                        @endisset
+                    <div class="card-body">
+                        <div class="text-center pt-2">
+                            {!! QrCode::size(180)->margin(2)->generate(url()->current()); !!}
+                            <p class="mb-0">Pindai kode QR</p>
+                        </div>
+                        <div class="mt-4">
+                            @isset($legislation->masterDocumentSource)
+                                <form action="{{ route('legislation.download', $legislation->masterDocument()->id) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-lg btn-labeled btn-labeled-start fw-bold rounded w-100 mb-2">
+                                        <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                            <i class="ph-download"></i>
+                                        </span>
+                                        Dokumen
+                                    </button>
+                                </form>
+                            @endisset
 
-                        @isset($legislation->abstractDocument()->id)
-                            <form action="{{ route('legislation.download', $legislation->abstractDocument()->id) }}" method="post">
-                                @method('PUT')
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger btn-lg btn-labeled btn-labeled-start fw-bold w-100 rounded">
-                                    <span class="btn-labeled-icon bg-danger text-white">
-                                        <i class="ph-download"></i>
-                                    </span>
-                                    Abstrak
-                                </button>
-                            </form>
-                        @endisset
+                            @isset($legislation->abstractDocument()->id)
+                                <form action="{{ route('legislation.download', $legislation->abstractDocument()->id) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger btn-lg btn-labeled btn-labeled-start fw-bold w-100 rounded">
+                                        <span class="btn-labeled-icon bg-danger text-white">
+                                            <i class="ph-download"></i>
+                                        </span>
+                                        Abstrak
+                                    </button>
+                                </form>
+                            @endisset
+                        </div>
                     </div>
+
                 </div>
                 <!-- /download -->
 
