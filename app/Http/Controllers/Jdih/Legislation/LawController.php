@@ -25,6 +25,7 @@ class LawController extends LegislationController
         'most-viewed'       => 'Dilihat paling banyak',
         'rare-viewed'       => 'Dilihat paling sedikit',
     ];
+    private $latestMonographs;
 
     public function __construct(Request $request)
     {
@@ -37,6 +38,12 @@ class LawController extends LegislationController
 
         $this->matters = Matter::sorted()->pluck('name', 'slug');
         $this->institutes = Institute::sorted()->pluck('name', 'slug');
+
+        $this->latestMonographs = Legislation::ofType(2)
+            ->published()
+            ->latest()
+            ->take(3)
+            ->get();
     }
 
     /**
@@ -54,12 +61,6 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $latestMonographs = Legislation::ofType(2)
-            ->published()
-            ->latest()
-            ->take(3)
-            ->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/ui/moment/moment.min.js',
@@ -68,9 +69,9 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
-            'latestMonographs',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('latestMonographs', $this->latestMonographs)
             ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
@@ -87,12 +88,6 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
-        $latestMonographs = Legislation::ofType(2)
-            ->published()
-            ->latest()
-            ->take(3)
-            ->get();
-
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/ui/moment/moment.min.js',
@@ -101,10 +96,10 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
-            'latestMonographs',
             'category',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('latestMonographs', $this->latestMonographs)
             ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)

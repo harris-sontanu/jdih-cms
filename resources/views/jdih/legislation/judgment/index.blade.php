@@ -35,7 +35,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.layouts.aside', ['view' => 'jdih.legislation.judgment.filter'])
+    @include('jdih.legislation.aside', ['view' => 'jdih.legislation.judgment.filter'])
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -46,10 +46,14 @@
             <section class="d-flex align-items-center mb-3">
                 <p class="mb-0">
                     Menampilkan
-                    <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
-                    sampai
-                    <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
-                    dari
+
+                    @isset ($legislation)
+                        <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
+                        sampai
+                        <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
+                        dari
+                    @endisset
+
                     <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
                     putusan
                     @if (Request::get('title'))
@@ -89,8 +93,8 @@
                 </div>
             </section>
 
-            @foreach ($legislations as $legislation)
-                <article class="card card-body shadow-lg mb-4">
+            @forelse ($legislations as $legislation)
+                <article class="card card-body shadow mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="{{ route('legislation.judgment.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block me-sm-3 mb-3 mb-sm-0">
@@ -122,7 +126,11 @@
 
                 @include('jdih.legislation.banner')
 
-            @endforeach
+            @empty
+
+                @include('jdih.layouts.not-found')
+
+            @endforelse
 
             {{ $legislations->links('jdih.layouts.pagination') }}
 

@@ -597,7 +597,7 @@
                     <div class="row gx-5 mb-5">
                         <div class="col-xl-7">
                             <figure>
-                                <img src="{{ asset('assets/jdih/images/backgrounds/i8.png') }}" class="img-fluid">
+                                <img src="{{ asset('assets/jdih/images/illustrations/1.png') }}" class="img-fluid">
                             </figure>
                         </div>
                         <div class="col-xl-5 m-auto">

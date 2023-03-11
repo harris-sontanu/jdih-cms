@@ -102,7 +102,7 @@
                         <input id="year" type="number" name="year" class="form-control" placeholder="Contoh: 2012" value="{{ Request::get('year') }}">
                     </div>
                     <label class="form-label">Subjek: <output id="value"></output></label>
-                    <input id="subject" type="number" name="subject" class="form-control" placeholder="Contoh: Sinar Grafika" value="{{ Request::get('subject') }}">
+                    <input id="subject" type="text" name="subject" class="form-control" placeholder="Contoh: PUNGUTAN LIAR" value="{{ Request::get('subject') }}">
                 </div>
             </div>
         </div>

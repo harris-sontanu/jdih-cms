@@ -198,7 +198,7 @@
 
                 <!-- Download -->
                 <div class="card shadow">
-                    
+
                     <img class="card-img-top img-fluid border-bottom" src="{{ $legislation->coverSource }}" alt="{{ $legislation->title }}">
 
                     <div class="card-body">
@@ -226,7 +226,7 @@
                 <!-- /download -->
 
                 <!-- Latest News -->
-                @if (isset($latestNews) AND $latestNews->count() > 0)                    
+                @if (isset($latestNews) AND $latestNews->count() > 0)
                     <div class="mt-4">
                         <h5 class="fw-bold mb-3">Berita Terbaru</h5>
 
@@ -278,7 +278,7 @@
                     <div class="row gx-4">
                         @foreach ($otherLegislations as $monograph)
                             <div class="col-xl-3 my-3">
-                                <div class="card lift shadow-lg h-100">
+                                <div class="card lift h-100">
                                     <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug])}}" class="text-body">
                                         <div class="card-img-actions mx-1 mt-1">
                                             <img class="card-img img-fluid" src="{{ $monograph->coverSource }}" alt="">

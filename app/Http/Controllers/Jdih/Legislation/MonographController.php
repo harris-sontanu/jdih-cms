@@ -15,6 +15,7 @@ class MonographController extends LegislationController
     use VisitorTrait;
 
     private $categories;
+    private $latestLaws;
 
     public function __construct(Request $request)
     {
@@ -24,6 +25,12 @@ class MonographController extends LegislationController
         $this->categories = Category::ofType(2)
             ->sorted()
             ->pluck('name', 'slug');
+
+        $this->latestLaws = Legislation::ofType(1)
+            ->published()
+            ->latestApproved()
+            ->take(5)
+            ->get();
     }
 
     /**
@@ -35,6 +42,29 @@ class MonographController extends LegislationController
     {
         $legislations = Legislation::ofType(2)
             ->with(['category', 'category.type'])
+            ->filter($request)
+            ->published()
+            ->sorted($request)
+            ->paginate($this->limit)
+            ->withQueryString();
+
+        $vendors = [
+            'assets/jdih/js/vendor/forms/selects/select2.min.js',
+        ];
+
+        return view('jdih.legislation.monograph.index', compact(
+            'legislations',
+            'vendors',
+        ))->with('categories', $this->categories)
+            ->with('latestLaws', $this->latestLaws)
+            ->with('banners', $this->banners())
+            ->with('orderOptions', $this->orderOptions);
+    }
+
+    public function category(Category $category, Request $request)
+    {
+        $legislations = Legislation::ofType(2)
+            ->where('category_id', $category->id)
             ->filter($request)
             ->published()
             ->sorted($request)
@@ -53,31 +83,10 @@ class MonographController extends LegislationController
 
         return view('jdih.legislation.monograph.index', compact(
             'legislations',
-            'latestLaws',
-            'vendors',
-        ))->with('categories', $this->categories)
-            ->with('banners', $this->banners())
-            ->with('orderOptions', $this->orderOptions);
-    }
-
-    public function category(Category $category, Request $request)
-    {
-        $legislations = Legislation::ofType(2)
-            ->where('category_id', $category->id)
-            ->published()
-            ->sorted($request)
-            ->paginate($this->limit)
-            ->withQueryString();
-
-        $vendors = [
-            'assets/jdih/js/vendor/forms/selects/select2.min.js',
-        ];
-
-        return view('jdih.legislation.monograph.index', compact(
-            'legislations',
             'category',
             'vendors',
         ))->with('categories', $this->categories)
+            ->with('latestLaws', $this->latestLaws)
             ->with('banners', $this->banners())
             ->with('orderOptions', $this->orderOptions);
     }

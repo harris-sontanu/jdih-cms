@@ -46,10 +46,14 @@
             <section class="d-flex align-items-center mb-3">
                 <p class="mb-0">
                     Menampilkan
-                    <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
-                    sampai
-                    <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
-                    dari
+
+                    @isset ($legislation)
+                        <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
+                        sampai
+                        <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
+                        dari
+                    @endisset
+
                     <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
                     peraturan
                     @if (Request::get('title'))
@@ -89,7 +93,7 @@
                 </div>
             </section>
 
-            @foreach ($legislations as $legislation)
+            @forelse ($legislations as $legislation)
                 <article class="card card-body shadow mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
@@ -123,7 +127,11 @@
 
                 @include('jdih.legislation.banner')
 
-            @endforeach
+            @empty
+
+                @include('jdih.layouts.not-found')
+
+            @endforelse
 
             {{ $legislations->links('jdih.layouts.pagination') }}
 
