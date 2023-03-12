@@ -302,7 +302,7 @@
                                     @include('jdih.legislation.pdfEmbed', ['el' => 'master-view'])
                                 @else
                                     <figure class="rounded mb-0">
-                                        <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
+                                        <img src="{{ asset('assets/jdih/images/illustrations/file-not-found.jpeg') }}" class="img-fluid rounded">
                                     </figure>
                                 @endisset
                             </div>
@@ -320,7 +320,7 @@
                                     @include('jdih.legislation.pdfEmbed', ['el' => 'abstract-view'])
                                 @else
                                     <figure class="rounded mb-0">
-                                        <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
+                                        <img src="{{ asset('assets/jdih/images/illustrations/file-not-found.jpeg') }}" class="img-fluid rounded">
                                     </figure>
                                 @endisset
                             </div>

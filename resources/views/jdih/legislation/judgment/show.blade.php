@@ -56,7 +56,7 @@
                         </script>
                     @else
                         <figure class="rounded shadow-lg">
-                            <img src="{{ asset('assets/jdih/images/placeholders/file-not-found.jpg') }}" class="img-fluid rounded">
+                            <img src="{{ asset('assets/jdih/images/illustrations/file-not-found.jpeg') }}" class="img-fluid rounded">
                         </figure>
                     @endisset
 
