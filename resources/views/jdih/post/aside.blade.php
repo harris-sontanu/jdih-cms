@@ -4,8 +4,6 @@
 
         @isset($view)
             @include($view)
-        @else
-            @include('jdih.post.filter')
         @endisset
 
         @if (isset($popularNews) AND $popularNews->count() > 0)
