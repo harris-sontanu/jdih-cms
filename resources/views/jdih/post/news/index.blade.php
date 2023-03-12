@@ -44,7 +44,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.layouts.aside', ['view' => 'jdih.post.news.filter'])
+    @include('jdih.post.aside', ['view' => 'jdih.post.news.filter'])
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -55,7 +55,7 @@
             <div class="row gx-4">
                 @foreach ($posts as $news)
                     <article class="col-xl-6 mb-4">
-                        <div class="card shadow-lg">
+                        <div class="card shadow">
                             <div class="card-body">
                                 <figure class="figure">
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
@@ -63,7 +63,7 @@
                                     </a>
                                 </figure>
 
-                                <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</a>
+                                <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-danger bg-opacity-10 text-danger rounded-pill">{{ $news->taxonomy->name }}</a>
                                 <h4 class="card-title pt-1 mb-1">
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="text-body">{{ $news->title }}</a>
                                 </h4>
@@ -86,7 +86,7 @@
                                 @foreach ($banners as $banner)
                                     @break($loop->iteration > 3)
                                     <div class="col-xl-4">
-                                        <div class="card shadow-lg bg-white border-0 lift mb-0">
+                                        <div class="card shadow bg-white border-0 lift mb-0">
                                             <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
                                         </div>
                                     </div>

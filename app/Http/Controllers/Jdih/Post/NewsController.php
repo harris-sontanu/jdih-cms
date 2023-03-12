@@ -14,6 +14,7 @@ class NewsController extends PostController
 {
     use VisitorTrait;
     protected $taxonomies;
+    protected $popularNews;
 
     public function __construct(Request $request)
     {
@@ -22,6 +23,13 @@ class NewsController extends PostController
 
         $this->taxonomies = Taxonomy::type('news')
             ->sorted($request->only(['order', 'sort']))
+            ->get();
+
+        $this->popularNews = Post::ofType('news')
+            ->with('taxonomy', 'author', 'cover')
+            ->popular()
+            ->published()
+            ->take(5)
             ->get();
     }
 
@@ -39,10 +47,11 @@ class NewsController extends PostController
             ->latestPublished()
             ->paginate($this->limit)
             ->withQueryString();
-        
+
         return view('jdih.post.news.index', compact(
             'posts',
         ))->with('taxonomies', $this->taxonomies)
+            ->with('popularNews', $this->popularNews)
             ->with('banners', $this->banners());
     }
 
@@ -58,6 +67,7 @@ class NewsController extends PostController
             'posts',
             'taxonomy',
         ))->with('taxonomies', $this->taxonomies)
+            ->with('popularNews', $this->popularNews)
             ->with('banners', $this->banners());
     }
 
@@ -79,13 +89,6 @@ class NewsController extends PostController
             ->take(3)
             ->get();
 
-        $popularNews = Post::ofType('news')
-            ->with('taxonomy', 'author', 'cover')
-            ->popular()
-            ->published()
-            ->take(5)
-            ->get();
-
         $youtubes = Link::youtubes()->with('user', 'image')->take(3)->get();
 
         $photos = Media::images()->published()->take(9)->get();
@@ -97,12 +100,12 @@ class NewsController extends PostController
 
         return view('jdih.post.news.show', compact(
             'otherNews',
-            'popularNews',
             'youtubes',
             'photos',
             'vendors',
         ))->with('news', $post)
             ->with('shares', $this->shares())
+            ->with('popularNews', $this->popularNews)
             ->with('banners', $this->banners());
     }
 }
