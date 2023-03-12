@@ -180,7 +180,7 @@
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Status</h4>
                                         <p class="mb-0">
-                                            <a href="{{ route('legislation.law.index', ['status' => $popularLaw->status]) }}" class="text-body">{!! $popularLaw->statusBadge !!}</a>
+                                            <a href="{{ route('legislation.law.index', ['statuses[]' => $popularLaw->status]) }}" class="text-body">{!! $popularLaw->statusBadge !!}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                     <div class="col-6">
                                         <h4 class="mb-1 fw-bold">Pemrakarsa</h4>
                                         <u>
-                                            <a href="{{ route('legislation.law.index', ['institute' => $popularLaw->institute->slug]) }}" class="text-body">{{ $popularLaw->institute->name }}</a>
+                                            <a href="{{ route('legislation.law.index', ['institutes[]' => $popularLaw->institute->slug]) }}" class="text-body">{{ $popularLaw->institute->name }}</a>
                                         </u>
                                     </div>
                                     <div class="col-6">
@@ -203,7 +203,7 @@
                                         @if($popularLaw->matters->count() > 0)
                                             <ul class="list-inline mb-0">
                                                 @foreach ($popularLaw->matters as $matter)
-                                                    <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matter' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
+                                                    <li class="list-inline-item me-1 mb-1"><a href="{{ route('legislation.law.index', ['matters[]' => $matter->slug]) }}" class="badge bg-purple bg-opacity-20 text-purple">{{ $matter->name }}</a></li>
                                                 @endforeach
                                             </ul>
                                         @else
