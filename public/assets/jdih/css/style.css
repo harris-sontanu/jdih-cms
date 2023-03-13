@@ -90,3 +90,26 @@ a.text-body:focus {
     background-color: #ef4444;
     border-color: #ef4444;
 }
+
+.tns-nav {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.tns-nav > [aria-controls] {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: #ddd;
+    border: 0;
+}
+
+.tns-nav > .tns-nav-active {
+    background: #999;
+}
+
+.tns-outer [aria-controls], .tns-outer [data-action] {
+    cursor: pointer;
+}

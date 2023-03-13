@@ -5,7 +5,7 @@
 
         let el = document.querySelectorAll( '.counter' );
 
-        // Start counting, typically you need to call this when the 
+        // Start counting, typically you need to call this when the
         // element becomes visible, or whenever you like.
         for (var i = 0; i < el.length; i++) {
             counterUp( el[i], {
@@ -61,14 +61,9 @@
                 }
             },
             "controls": false,
-            "autoplay": true,
-            "autoplayTimeout": 3500,
-            "autoplayHoverPause": true,
             "mouseDrag": true,
-            "swipeAngle": false,
-            "speed": 400,
-            "nav": false,
-            "autoplayButtonOutput": false
+            "nav": true,
+            "navPosition": "bottom",
         });
 
     })

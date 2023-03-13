@@ -40,8 +40,13 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $vendors = [
+            'assets/admin/js/vendor/media/glightbox.min.js',
+        ];
+
         return view('jdih.post.news.index', compact(
             'posts',
+            'vendors',
         ))->with('taxonomies', $this->taxonomies)
             ->with('popularNews', $this->popularNews())
             ->with('youtubes', $this->latestVideos())
@@ -57,9 +62,14 @@ class NewsController extends PostController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $vendors = [
+            'assets/admin/js/vendor/media/glightbox.min.js',
+        ];
+
         return view('jdih.post.news.index', compact(
             'posts',
             'taxonomy',
+            'vendors',
         ))->with('taxonomies', $this->taxonomies)
             ->with('popularNews', $this->popularNews())
             ->with('youtubes', $this->latestVideos())

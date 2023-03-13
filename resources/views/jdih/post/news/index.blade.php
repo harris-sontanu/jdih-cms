@@ -110,3 +110,7 @@
 <!-- /page container -->
 
 @endsection
+
+@section('script')
+    @include('jdih.post.news.script')
+@endsection
