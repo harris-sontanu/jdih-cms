@@ -55,7 +55,7 @@
             <div class="row gx-4">
                 @foreach ($posts as $news)
                     <article class="col-xl-6 mb-4">
-                        <div class="card shadow">
+                        <div class="card shadow mb-0">
                             <div class="card-body">
                                 <figure class="figure">
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
