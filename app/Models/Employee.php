@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 class Employee extends Model
 {
@@ -130,6 +131,14 @@ class Employee extends Model
         if (!empty($request['rank']) AND $rank = $request['rank']) {
             $query->where('rank', 'LIKE', '%' . $rank . '%');
         }
+    }
+
+    public function scopeOfGroup($query, $group)
+    {
+        $query->whereHas('taxonomies', function(Builder $q) use ($group) {
+                $q->where('type', 'employee')
+                ->where('slug', $group);
+        });
     }
 
     public function scopeSorted($query, $request = [])

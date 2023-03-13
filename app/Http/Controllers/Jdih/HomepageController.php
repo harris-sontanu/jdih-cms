@@ -70,10 +70,7 @@ class HomepageController extends JdihController
             ->limit(3)
             ->get();
 
-        $members = Employee::whereHas('taxonomies', function(Builder $query) {
-                $query->where('type', 'employee')
-                    ->where('slug', 'pengelola-jdih');
-            })
+        $members = Employee::ofGroup('pengelola-jdih')
             ->sorted()
             ->get();
 
