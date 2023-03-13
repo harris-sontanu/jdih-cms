@@ -9,7 +9,7 @@
         @endisset
 
         @if (isset($latestMonographs) AND $latestMonographs->count() > 0)
-            <div class="my-4">
+            <div class="mb-4">
                 <div class="sidebar-section-header p-0">
                     <h5 class="fw-bold">Monografi Hukum</h5>
                 </div>
@@ -46,7 +46,7 @@
 
         <!-- Latest laws -->
         @if (isset($latestLaws) AND $latestLaws->count() > 0)
-            <div class="mt-4">
+            <div class="mb-4">
                 <div class="sidebar-section-header p-0">
                     <h5 class="fw-bold mb-0">Peraturan Terbaru</h5>
                 </div>

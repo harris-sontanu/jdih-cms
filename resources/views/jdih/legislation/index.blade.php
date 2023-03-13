@@ -102,6 +102,14 @@
                             </ul>
 
                             <p class="fs-lg mb-0">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
+
+                            @if ($legislation->category->type->id == 1)
+                                <ul class="list-inline list-inline-bullet mb-0 mt-2">
+                                    <li class="list-inline-item"><span class="fw-semibold">Status: </span>{!! $legislation->statusBadge !!}</li>
+                                    <li class="list-inline-item"><span class="fw-semibold">Ditetapkan: </span>{{ $legislation->dateFormatted($legislation->approved) }}</li>
+                                    <li class="list-inline-item"><span class="fw-semibold">Diundangkan: </span>{{ $legislation->dateFormatted($legislation->published) }}</li>
+                                </ul>
+                            @endif
                         </div>
 
                     </div>

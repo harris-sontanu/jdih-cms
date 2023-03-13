@@ -25,7 +25,6 @@ class LawController extends LegislationController
         'most-viewed'       => 'Dilihat paling banyak',
         'rare-viewed'       => 'Dilihat paling sedikit',
     ];
-    private $latestMonographs;
 
     public function __construct(Request $request)
     {
@@ -38,12 +37,6 @@ class LawController extends LegislationController
 
         $this->matters = Matter::sorted()->pluck('name', 'slug');
         $this->institutes = Institute::sorted()->pluck('name', 'slug');
-
-        $this->latestMonographs = Legislation::ofType(2)
-            ->published()
-            ->latest()
-            ->take(3)
-            ->get();
     }
 
     /**
@@ -71,7 +64,7 @@ class LawController extends LegislationController
             'legislations',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('latestMonographs', $this->latestMonographs)
+            ->with('latestMonographs', $this->latestMonographs())
             ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)
@@ -99,7 +92,7 @@ class LawController extends LegislationController
             'category',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('latestMonographs', $this->latestMonographs)
+            ->with('latestMonographs', $this->latestMonographs())
             ->with('banners', $this->banners())
             ->with('matters', $this->matters)
             ->with('institutes', $this->institutes)

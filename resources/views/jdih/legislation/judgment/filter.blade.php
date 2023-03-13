@@ -1,5 +1,5 @@
 <!-- Filter -->
-<div class="card shadow-lg">
+<div class="card shadow mb-4">
     <div class="sidebar-section-header pb-0">
         <h5 class="mb-0">Filter</h5>
     </div>

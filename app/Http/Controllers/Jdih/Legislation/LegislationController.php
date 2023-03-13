@@ -33,6 +33,24 @@ class LegislationController extends JdihController
         return Config::get('services.adobe.key');
     }
 
+    protected function latestMonographs()
+    {
+        return Legislation::ofType(2)
+            ->published()
+            ->latest()
+            ->take(3)
+            ->get();
+    }
+
+    protected function latestLaws()
+    {
+        return Legislation::ofType(1)
+            ->published()
+            ->latestApproved()
+            ->take(5)
+            ->get();
+    }
+
     public function index(Request $request)
     {
         $legislations = Legislation::with(['category', 'category.type'])
@@ -53,7 +71,8 @@ class LegislationController extends JdihController
             'legislations',
             'categories',
             'vendors',
-        ))->with('orderOptions', $this->orderOptions);
+        ))->with('orderOptions', $this->orderOptions)
+            ->with('latestMonographs', $this->latestMonographs());
     }
 
     public function search(Request $request)

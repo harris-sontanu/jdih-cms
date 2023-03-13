@@ -14,7 +14,6 @@ class ArticleController extends LegislationController
     use VisitorTrait;
 
     private $categories;
-    private $latestLaws;
 
     public function __construct(Request $request)
     {
@@ -24,12 +23,6 @@ class ArticleController extends LegislationController
         $this->categories = Category::ofType(3)
             ->sorted()
             ->pluck('name', 'slug');
-
-        $this->latestLaws = Legislation::ofType(1)
-            ->published()
-            ->latestApproved()
-            ->take(5)
-            ->get();
     }
 
     /**
@@ -55,7 +48,7 @@ class ArticleController extends LegislationController
             'legislations',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('latestLaws', $this->latestLaws)
+            ->with('latestLaws', $this->latestLaws())
             ->with('banners', $this->banners())
             ->with('orderOptions', $this->orderOptions);
     }
@@ -80,7 +73,7 @@ class ArticleController extends LegislationController
             'category',
             'vendors',
         ))->with('categories', $this->categories)
-            ->with('latestLaws', $this->latestLaws)
+            ->with('latestLaws', $this->latestLaws())
             ->with('banners', $this->banners())
             ->with('orderOptions', $this->orderOptions);
     }
