@@ -14,7 +14,6 @@ use App\Models\Legislation;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Database\Eloquent\Builder;
 
 class HomepageController extends JdihController
 {

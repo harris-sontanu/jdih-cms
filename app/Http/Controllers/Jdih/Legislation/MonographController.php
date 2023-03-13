@@ -7,7 +7,6 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
-use App\Models\Post;
 use Illuminate\Support\Facades\Config;
 
 class MonographController extends LegislationController

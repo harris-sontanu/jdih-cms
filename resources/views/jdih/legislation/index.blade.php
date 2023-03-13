@@ -29,7 +29,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.layouts.aside')
+    @include('jdih.legislation.aside')
 
     <!-- Main content -->
     <div class="content-wrapper">
@@ -40,10 +40,14 @@
             <section class="d-flex align-items-center mb-3">
                 <p class="mb-0">
                     Menampilkan
-                    <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
-                    sampai
-                    <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
-                    dari
+
+                    @isset ($legislation)
+                        <span class="fw-semibold">{{ $legislations->firstItem() }}</span>
+                        sampai
+                        <span class="fw-semibold">{{ $legislations->lastItem() }}</span>
+                        dari
+                    @endisset
+
                     <span class="fw-semibold">{{ number_format($legislations->total(), 0, ',', '.') }}</span>
                     produk hukum
                     @if (Request::get('title'))
@@ -73,12 +77,12 @@
                 </div>
             </section>
 
-            @foreach ($legislations as $legislation)
-                <article class="card card-body shadow-lg mb-4">
+            @forelse ($legislations as $legislation)
+                <article class="card card-body shadow mb-4">
                     <div class="d-sm-flex align-items-sm-start">
 
                         <a href="{{ route('legislation.'.$legislation->category->type->route.'.show', ['category' => $legislation->category->slug, 'legislation' => $legislation->slug]) }}" class="d-block me-sm-3 mb-3 mb-sm-0">
-                            <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px border">
+                            <img @isset ($legislation->masterDocumentSource) data-pdf-thumbnail-file="{{ $legislation->masterDocumentSource }}" @endisset src="{{ $legislation->coverThumbSource }}" alt="{{ $legislation->title }}" class="w-lg-120px shadow">
                         </a>
 
                         <div class="flex-fill">
@@ -94,19 +98,22 @@
                                 <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $legislation->dateFormatted($legislation->published_at) }}</li>
                                 <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $legislation->view }}</li>
                                 <li class="list-inline-item"><i class="ph-download me-2"></i>{{ $legislation->documents->sum('download') }}</li>
+                                <li class="list-inline-item"><i class="ph-heart text-pink me-2"></i>12</li>
                             </ul>
 
                             <p class="fs-lg mb-0">{!! Str::highlightPhrase($legislation->excerpt, Request::get('title')) !!}</p>
                         </div>
 
-                        @isset($legislation->status)
-                            <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0">
-                                {!! $legislation->statusBadge !!}
-                            </div>
-                        @endisset
                     </div>
                 </article>
-            @endforeach
+
+                @include('jdih.legislation.banner')
+
+            @empty
+
+                @include('jdih.layouts.not-found')
+
+            @endforelse
 
             {{ $legislations->links('jdih.layouts.pagination') }}
 

@@ -6,7 +6,6 @@ use App\Http\Controllers\Jdih\JdihController;
 use App\Models\Post;
 use App\Models\Media;
 use App\Models\Link;
-use Illuminate\Http\Request;
 
 class PostController extends JdihController
 {
