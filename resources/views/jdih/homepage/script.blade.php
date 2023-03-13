@@ -49,8 +49,8 @@
 			$('#search-dropdown').dropdown('hide');
 		})
 
-        var slider = tns({
-            "container": "#slider",
+        const bannerSlider = tns({
+            "container": "#banner-slider",
             "loop": true,
             "responsive": {
                 "350": {
@@ -66,6 +66,15 @@
             "navPosition": "bottom",
         });
 
+        var memberSlider = tns({
+            "container": "#member-slider",
+            "loop": true,
+            "items": 3,
+            "controls": false,
+            "mouseDrag": true,
+            "nav": true,
+            "navPosition": "bottom",
+        });
     })
 
     function chartLawYearlyColumn(elementId) {
