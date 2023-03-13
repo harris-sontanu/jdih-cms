@@ -60,6 +60,7 @@
                 "items": 4
                 }
             },
+            "gutter": 20,
             "controls": false,
             "mouseDrag": true,
             "nav": true,
@@ -70,6 +71,7 @@
             "container": "#member-slider",
             "loop": true,
             "items": 3,
+            "gutter": 20,
             "controls": false,
             "mouseDrag": true,
             "slideBy": 1,
