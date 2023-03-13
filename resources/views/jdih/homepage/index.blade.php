@@ -533,70 +533,35 @@
     <div class="container py-5">
         <div class="content-wrapper">
             <div class="content py-4">
-                <div class="row gx-5 mb-4">
-                    <div class="col-xl-4 m-auto">
-                        <h3 class="display-7 fw-bold">Struktur Pengelola {!! $appName !!}</h3>
-                        <p class="fs-lg mb-3">Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros tempus porttitor.</p>
-                        <button type="button" class="btn btn-lg btn-danger lift px-3 fw-semibold">
-                            Lihat Semua Pengelola<i class="ph-arrow-right ms-2"></i>
-                        </button>
-                    </div>
-                    <div class="col-xl-8">
-                        <div id="member-slider" class="row gx-4">
-                            <div class="col-xl-4">
-                                <div class="card shadow h-100">
-                                    <div class="card-body text-center">
-                                        <img class="img-fluid rounded-circle mb-3" src="{{ asset('assets/jdih/images/placeholders/user.png') }}" alt="" width="170" height="170">
 
-                                        <h6 class="mb-0">James Alexander</h6>
-                                        <span class="text-muted">Lead developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card shadow h-100">
-                                    <div class="card-body text-center">
-                                        <img class="img-fluid rounded-circle mb-3" src="{{ asset('assets/jdih/images/placeholders/user.png') }}" alt="" width="170" height="170">
+                @if (isset($members) AND $members->count() > 0)
+                    <div class="row gx-5 mb-5">
+                        <div class="col-xl-4 m-auto">
+                            <h3 class="display-7 fw-bold">Struktur Pengelola {!! $appName !!}</h3>
+                            <p class="fs-lg mb-3">Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros tempus porttitor.</p>
+                            <button type="button" class="btn btn-lg btn-danger lift px-3 fw-semibold">
+                                Lihat Semua Pengelola<i class="ph-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                        <div class="col-xl-8">
+                            <div id="member-slider" class="row gx-4">
+                                @foreach ($members as $member)                                
+                                    <div class="col-xl-4">
+                                        <div class="card shadow h-100">
+                                            <div class="card-body text-center">
+                                                <img class="img-fluid rounded-circle mb-3" src="{{ $member->pictureThumbUrl }}" alt="{{ $member->name }}" width="170" height="170">
 
-                                        <h6 class="mb-0">James Alexander</h6>
-                                        <span class="text-muted">Lead developer</span>
+                                                <h6 class="mb-0">{{ $member->name }}</h6>
+                                                <span class="text-muted">{{ $member->position }}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card shadow h-100">
-                                    <div class="card-body text-center">
-                                        <img class="img-fluid rounded-circle mb-3" src="{{ asset('assets/jdih/images/placeholders/user.png') }}" alt="" width="170" height="170">
-
-                                        <h6 class="mb-0">James Alexander</h6>
-                                        <span class="text-muted">Lead developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card shadow h-100">
-                                    <div class="card-body text-center">
-                                        <img class="img-fluid rounded-circle mb-3" src="{{ asset('assets/jdih/images/placeholders/user.png') }}" alt="" width="170" height="170">
-
-                                        <h6 class="mb-0">James Alexander</h6>
-                                        <span class="text-muted">Lead developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card shadow h-100">
-                                    <div class="card-body text-center">
-                                        <img class="img-fluid rounded-circle mb-3" src="{{ asset('assets/jdih/images/placeholders/user.png') }}" alt="" width="170" height="170">
-
-                                        <h6 class="mb-0">James Alexander</h6>
-                                        <span class="text-muted">Lead developer</span>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                </div>
-
+                @endif
+                   
                 <h2 class="fw-bold section-title text-center mb-4 pb-2">Aplikasi Terkait JDIH</h2>
                 <div class="row gx-5">
 
@@ -646,6 +611,7 @@
                     </div>
 
                 </div>
+                
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Jdih\JdihController;
 use App\Http\Traits\VisitorTrait;
 use App\Models\Type;
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Field;
@@ -13,6 +14,7 @@ use App\Models\Legislation;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Database\Eloquent\Builder;
 
 class HomepageController extends JdihController
 {
@@ -68,6 +70,13 @@ class HomepageController extends JdihController
             ->limit(3)
             ->get();
 
+        $members = Employee::whereHas('taxonomies', function(Builder $query) {
+                $query->where('type', 'employee')
+                    ->where('slug', 'pengelola-jdih');
+            })
+            ->sorted()
+            ->get();
+
         // Record visitor
         $this->recordVisitor($request);
 
@@ -102,6 +111,7 @@ class HomepageController extends JdihController
             'monograph',
             'cover',
             'latestNews',
+            'members',
             'styles',
             'vendors',
         ))->with('banners', $this->banners());

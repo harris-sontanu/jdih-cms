@@ -72,6 +72,7 @@
             "items": 3,
             "controls": false,
             "mouseDrag": true,
+            "slideBy": 1,
             "nav": true,
             "navPosition": "bottom",
         });
