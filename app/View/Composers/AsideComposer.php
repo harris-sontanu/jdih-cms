@@ -2,11 +2,8 @@
 
 namespace App\View\Composers;
 
-use App\Models\Legislation;
 use App\Models\Type;
 use App\Models\Field;
-use App\Models\Post;
-use App\Models\Link;
 use Illuminate\View\View;
 
 class AsideComposer

@@ -388,6 +388,12 @@ class Legislation extends Model
             $query->whereRelation('category', 'type_id', $type);
         }
 
+        if ($types = $request->types AND $types = $request->types) {
+            $query->whereHas('category.type', function (Builder $q) use ($types) {
+                $q->whereIn('slug', $types);
+            });
+        }
+
         if ($category = $request->category AND $category = $request->category AND !is_object($category)) {
             $query->where('category_id', $category);
         }

@@ -42,6 +42,7 @@
 	<script src="{{ asset('assets/jdih/js/app.js') }}"></script>
 	<script async src="https://unpkg.com/typer-dot-js@0.1.0/typer.js"></script>
     <script src="{{ asset('assets/jdih/js/pdfThumbnails.js') }}" data-pdfjs-src="{{ asset('assets/jdih/js/vendor/pdf.js/build/pdf.js') }}"></script>
+
     @yield('script')
 	<!-- /theme JS files -->
 

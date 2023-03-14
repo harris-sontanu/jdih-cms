@@ -25,48 +25,48 @@
                     <div class="col-lg-4">
                         <h4 class="fw-bold">Kontak Kami</h4>
                         <dl class="row mb-0">
-                            <dt class="col-sm-1"><i class="ph-phone"></i></dt> 
-                            <dd class="col-sm-11 mb-2">{{ $phone }}</dd> 
-                            
-                            <dt class="col-sm-1"><i class="ph-house"></i></dt> 
-                            <dd class="col-sm-11 mb-2">
-								{{ $fullAddress }}						
-                            </dd>  
-                            
-                            <dt class="col-sm-1"><i class="ph-envelope"></i></dt> 
-                            <dd class="col-sm-11 mb-2">{{ $email }}</dd>  
+                            <dt class="col-sm-1"><i class="ph-phone"></i></dt>
+                            <dd class="col-sm-11 mb-2">{{ $phone }}</dd>
 
-                            <dt class="col-sm-1"><i class="ph-globe"></i></dt> 
-                            <dd class="col-sm-11 mb-2">{{ $appUrl }}</dd>  
-                            
+                            <dt class="col-sm-1"><i class="ph-house"></i></dt>
+                            <dd class="col-sm-11 mb-2">
+								{{ $fullAddress }}
+                            </dd>
+
+                            <dt class="col-sm-1"><i class="ph-envelope"></i></dt>
+                            <dd class="col-sm-11 mb-2">{{ $email }}</dd>
+
+                            <dt class="col-sm-1"><i class="ph-globe"></i></dt>
+                            <dd class="col-sm-11 mb-2">{{ $appUrl }}</dd>
+
 						</dl>
                         <hr>
                         <ul class="list-inline list-inline-condensed">
-                            @isset($facebook)                                
+                            @isset($facebook)
                                 <li class="list-inline-item">
                                     <a href="{{ $facebook }}" class="text-light" title="Facebook"><i class="ph-facebook-logo ph-2x" aria-hidden="true"></i></a>
                                 </li>
                             @endisset
-                            
-                            @isset($twitter)       
+
+                            @isset($twitter)
                                 <li class="list-inline-item">
                                     <a href="{{ $twitter }}" class="text-light" title="Twitter"><i class="ph-twitter-logo ph-2x" aria-hidden="true"></i></a>
                                 </li>
                             @endisset
 
-                            @isset($instagram)       
+                            @isset($instagram)
                                 <li class="list-inline-item">
                                     <a href="{{ $instagram }}" class="text-light" title="Instagram"><i class="ph-instagram-logo ph-2x" aria-hidden="true"></i></a>
                                 </li>
                             @endisset
 
-                            @isset($tiktok)       
+                            @isset($tiktok)
                                 <li class="list-inline-item">
                                     <a href="{{ $tiktok }}" class="text-light" title="TikTok"><i class="ph-tiktok-logo ph-2x" aria-hidden="true"></i></a>
                                 </li>
                             @endisset
 
-                            @isset($youtube)       
+                            @isset($youtube)
                                 <li class="list-inline-item">
                                     <a href="{{ $youtube }}" class="text-light" title="YouTube"><i class="ph-youtube-logo ph-2x" aria-hidden="true"></i></a>
                                 </li>
@@ -112,7 +112,7 @@
     <div class="modal-dialog modal-lg" style="margin-top: 25vh">
         <div class="modal-content">
 
-            <form class="filter-form" action="{{ route('legislation.index') }}" method="get">
+            <form class="search-form" action="{{ route('legislation.index') }}" method="get">
                 <div class="navbar-search flex-fill position-relative m-0">
                     <div class="form-control-feedback form-control-lg form-control-feedback-start flex-grow-1">
                         <input id="search-dropdown" name="title" type="text" autocomplete="off" autofocus class="form-control form-control-lg border-0 py-3" placeholder="Cari Peraturan, Monografi, Artikel atau Putusan..." data-bs-toggle="dropdown" value="{{ Request::get('title') }}">
@@ -126,7 +126,7 @@
                             <i class="ph-faders-horizontal"></i>
                         </a>
 
-                        <div id="filter-dropdown-container" class="dropdown-menu w-100 p-3 dropdown-menu-end start-5">
+                        <div id="filter-dropdown-container" class="dropdown-menu w-100 p-4 dropdown-menu-end start-5">
                             <div class="d-flex align-items-center mb-3">
                                 <h6 class="mb-0">Filter Pencarian Produk Hukum</h6>
                             </div>
@@ -134,9 +134,10 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="type" class="d-block form-label">Tipe</label>
-                                    <select id="type" name="type" class="form-select select">
+                                    <select id="type" name="types[]" class="form-select select">
+                                        <option value="">Pilih Tipe</option>
                                         @foreach ($types as $key => $value)
-                                            <option value="{{ $key }}" @selected(Request::get('type') == $key)>{{ Str::title($value) }}</option>
+                                            <option value="{{ $key }}">{{ Str::title($value) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -145,7 +146,7 @@
                                     <select name="category" id="category" class="form-select select-search">
                                         <option value="">Pilih Jenis</option>
                                         @foreach ($categories as $key => $value)
-                                            <option value="{{ $key }}" @selected(Request::get('category') == $key)>{{ $value }}</option>
+                                            <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -165,35 +166,44 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="field" class="d-block form-label">Bidang Hukum</label>
-                                    <select name="field" id="field" class="form-select select-search">
+                                    <select name="fields[]" id="field" class="form-select select-search">
                                         <option value="">Pilih Bidang Hukum</option>
                                         @foreach ($fields as $key => $value)
-                                            <option value="{{ $key }}" @selected(Request::get('field') == $key)>{{ Str::title($value) }}</option>
+                                            <option value="{{ $key }}">{{ Str::title($value) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <label for="institute" class="form-label">Pemrakarsa</label>
-                                    <select name="institute" id="institute" class="form-select select-search">
-                                        <option value="">Pilih Pemrakarsa</option>
-                                        @foreach ($institutes as $key => $value)
-                                            <option value="{{ $key }}" @selected(Request::get('institute') == $key)>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="status" class="form-label">Status</label>
+                                    <div class="mt-2">
+										<label class="form-check form-check-inline">
+											<input type="checkbox" class="form-check-input form-check-input-danger" name="status[]" value="berlaku">
+											<span class="form-check-label">Berlaku</span>
+										</label>
+
+										<label class="form-check form-check-inline">
+											<input type="checkbox" class="form-check-input form-check-input-danger" name="status[]" value="tidak berlaku">
+											<span class="form-check-label">Tidak Berlaku</span>
+										</label>
+									</div>
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="matters" class="form-label">Urusan Pemerintahan</label>
-                                <select id="matters" name="matters[]" multiple="multiple" class="form-select select">
-                                    <option value="">Pilih Urusan Pemerintahan</option>
-                                    @foreach ($matters as $key => $value)
-                                        <option value="{{ $key }}" @selected(Request::get('matters') == $key)>{{ $value }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="author" class="d-block form-label">T.E.U. Orang / Badan</label>
+                                    <input type="text" name="author" id="author" class="form-control" placeholder="Contoh: Bali">
+                                </div>
+                                <div class="col">
+                                    <label for="subject" class="form-label">Subjek</label>
+                                    <input type="text" name="subject" id="subject" class="form-control" placeholder="Contoh: PUNGUTAN LIAR">
+                                </div>
                             </div>
 
-                            <button type="submit" class="btn btn-danger w-100">Cari</button>
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn btn-danger fw-bold px-3">Filter</button>
+                                <button type="reset" class="btn btn-outline-danger fw-bold me-2 reset px-3">Reset</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,3 +213,20 @@
     </div>
 </div>
 <!-- /search modal -->
+
+<script>
+    const searchModal = document.getElementById('search-modal');
+    searchModal.addEventListener('shown.bs.modal', event => {
+        document.getElementById('search-dropdown').focus();
+    })
+
+    $(document).on('click', '.reset', function() {
+        $('.select-search').val(null).trigger('change');
+        $('.select').val(null).trigger('change');
+    })
+
+    $(".search-form").submit(function() {
+        $(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
+        return true;
+    });
+</script>

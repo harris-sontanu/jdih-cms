@@ -4,7 +4,7 @@
         <h5 class="mb-0">Filter</h5>
     </div>
 
-    <form class="filter-form" action="{{ route('legislation.law.index') }}" method="get">
+    <form class="filter-form" action="{{ route('legislation.index') }}" method="get">
 
         <!-- Sidebar search -->
         <div class="sidebar-section">
