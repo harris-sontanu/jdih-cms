@@ -25,7 +25,7 @@
         <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="ph_text_input_right_icon">
             <form action="#" class="mb-3 mb-lg-0">
                 <div class="form-control-feedback form-control-feedback-end">
-                    <input type="text" class="form-control wmin-lg-200" placeholder="Cari">
+                    <input type="text" class="form-control wmin-lg-200" data-bs-toggle="modal" data-bs-target="#search-modal" placeholder="Cari">
                     <div class="form-control-feedback-icon">
                         <i class="ph-magnifying-glass"></i>
                     </div>

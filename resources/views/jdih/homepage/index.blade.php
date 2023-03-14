@@ -420,7 +420,7 @@
                                         </a>
                                         <figcaption class="figure-caption fs-6">{{ $news->cover->caption }}</figcaption>
                                     </figure>
-                                    <div class="post-title">
+                                    <div class="post-title mt-2">
                                         <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2">{{ $news->taxonomy->name }}</a>
                                         <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
                                     </div>
