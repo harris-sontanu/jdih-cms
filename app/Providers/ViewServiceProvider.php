@@ -51,6 +51,9 @@ class ViewServiceProvider extends ServiceProvider
 
         View::share($settings);
 
-        View::composer('jdih.layouts.footer', FooterComposer::class);
+        View::composer(
+            ['jdih.layouts.footer', 'jdih.legislation.aside'],
+            FooterComposer::class
+        );
     }
 }
