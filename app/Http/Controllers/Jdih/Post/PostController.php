@@ -25,6 +25,7 @@ class PostController extends JdihController
     {
         return Media::images()
             ->published()
+            ->sorted(['order' => 'published_at', 'sort' => 'desc'])
             ->take(9)
             ->get();
     }
@@ -33,6 +34,8 @@ class PostController extends JdihController
     {
         return Link::youtubes()
             ->with('user', 'image')
+            ->published()
+            ->sorted(['order' => 'published_at', 'sort' => 'desc'])
             ->take(3)
             ->get();
     }

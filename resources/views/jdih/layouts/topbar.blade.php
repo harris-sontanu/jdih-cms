@@ -1,5 +1,5 @@
 <!-- Main navbar -->
-<div class="navbar navbar-sm navbar-dark navbar-expand-lg py-1">
+<div class="navbar navbar-sm navbar-dark navbar-static navbar-expand-lg py-1">
     <div class="container jusitfy-content-start px-lg-3">
 
         <div class="d-flex d-lg-none me-2">
@@ -40,7 +40,7 @@
             <li class="nav-item dropdown">
                 <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown" title="Pilih Bahasa">
                     <img src="{{ asset('assets/jdih/images/lang/id.svg') }}" class="h-16px me-2" alt="Indonesian">
-                    Indonesian
+                    ID
                 </a>
 
                 <div class="dropdown-menu">

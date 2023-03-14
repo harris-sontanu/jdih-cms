@@ -4,9 +4,10 @@ namespace App\View\Composers;
 
 use App\Models\Type;
 use App\Models\Field;
+use App\Models\Category;
 use Illuminate\View\View;
 
-class AsideComposer
+class FooterComposer
 {
     /**
      * Bind data to the view.
@@ -20,7 +21,11 @@ class AsideComposer
 
         $fields = Field::sorted()->pluck('name', 'slug');
 
+        $allCategories = Category::sorted()
+            ->pluck('name', 'slug');
+
         $view->with('types', $types)
-            ->with('fields', $fields);
+            ->with('fields', $fields)
+            ->with('allCategories', $allCategories);
     }
 }

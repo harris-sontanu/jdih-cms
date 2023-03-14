@@ -175,7 +175,7 @@ class Link extends Model
                 $query->orderBy($request['order'], $request['sort']);
             }
         } else {
-            $query->orderBy('sort', 'asc');
+            $query->latest();
         }
 
         return $query;

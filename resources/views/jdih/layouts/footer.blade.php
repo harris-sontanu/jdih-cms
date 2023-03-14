@@ -145,7 +145,7 @@
                                     <label class="form-label">Jenis / Bentuk</label>
                                     <select name="category" id="category" class="form-select select-search">
                                         <option value="">Pilih Jenis</option>
-                                        @foreach ($categories as $key => $value)
+                                        @foreach ($allCategories as $key => $value)
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>

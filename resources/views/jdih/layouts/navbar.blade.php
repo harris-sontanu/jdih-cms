@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<div class="navbar navbar-sm shadow py-1">
+<div class="navbar navbar-sm sticky-top shadow py-1">
     <div class="container position-relative px-lg-3">
         <div class="flex-fill overflow-auto overflow-lg-visible scrollbar-hidden">
             <ul class="main-nav nav gap-1 flex-nowrap flex-lg-wrap">

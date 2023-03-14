@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
-use App\View\Composers\AsideComposer;
+use App\View\Composers\FooterComposer;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -51,9 +51,6 @@ class ViewServiceProvider extends ServiceProvider
 
         View::share($settings);
 
-        View::composer(
-            ['jdih.legislation.aside', 'jdih.layouts.footer'],
-            AsideComposer::class
-        );
+        View::composer('jdih.layouts.footer', FooterComposer::class);
     }
 }
