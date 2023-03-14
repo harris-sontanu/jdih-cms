@@ -35,7 +35,7 @@ class AdminController extends Controller
         $thumbnail = Str::replace(".{$extension}", "_sq.{$extension}", $path);
         if (Storage::disk('public')->exists($path)) {
             Image::make(storage_path('app/public/' . $path))
-                ->fit(200)
+                ->fit($dimension)
                 ->save(storage_path('app/public/' . $thumbnail));
         }
     }

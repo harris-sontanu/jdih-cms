@@ -120,6 +120,7 @@ class ImageController extends MediaController
 
             // Create thumbnail
             $this->createImageThumbnail($path, $image->getClientOriginalExtension());
+            $this->createFitImage($path, $image->getClientOriginalExtension());
 
             $data = [
                 'name'  => $name,

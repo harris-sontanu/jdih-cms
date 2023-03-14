@@ -121,6 +121,20 @@ class Media extends Model
         );
     }
 
+    public function fitSource(): Attribute
+    {
+        $fitSource = asset('assets/admin/images/placeholders/placeholder.jpg');
+        if (!empty($this->path)) {
+            $ext = substr(strchr($this->path, '.'), 1);
+            $fit = str_replace(".{$ext}", "_sq.{$ext}", $this->path);
+            if (Storage::disk('public')->exists($fit)) $fitSource = Storage::url($fit);
+        }
+
+        return Attribute::make(
+            get: fn ($value) => $fitSource
+        );
+    }
+
     public function icon(): Attribute
     {
         $ext = substr(strchr($this->path, '.'), 1);
