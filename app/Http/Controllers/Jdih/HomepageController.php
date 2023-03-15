@@ -12,6 +12,7 @@ use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
 use App\Models\Post;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
@@ -73,6 +74,9 @@ class HomepageController extends JdihController
             ->sorted()
             ->get();
 
+        $slides = Slide::orderBy('sort', 'asc')
+            ->get();
+
         // Record visitor
         $this->recordVisitor($request);
 
@@ -108,6 +112,7 @@ class HomepageController extends JdihController
             'cover',
             'latestNews',
             'members',
+            'slides',
             'styles',
             'vendors',
         ))->with('banners', $this->banners());

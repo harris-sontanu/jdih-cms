@@ -2,10 +2,9 @@
 
     <div id="carouselExampleFade" class="carousel slide carousel-fade overlay" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url({{ asset('assets/jdih/images/demo/slide2.jpg') }}); background-position:bottom; min-height: 480px"></div>
-            <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide1.jpg') }}); background-position:center; min-height: 480px"></div>
-            <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide3.jpg') }}); background-position:center; min-height: 480px"></div>
-            <div class="carousel-item" style="background-image: url({{ asset('assets/jdih/images/demo/slide4.jpg') }}); background-position:center; min-height: 480px"></div>
+            @foreach ($slides as $slide)
+                <div class="carousel-item active" style="background-image: url({{ asset('assets/jdih/images/demo/slide2.jpg') }}); background-position:bottom; min-height: 480px"></div>
+            @endforeach
         </div>
     </div>
 
