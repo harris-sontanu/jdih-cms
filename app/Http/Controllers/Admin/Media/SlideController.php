@@ -61,29 +61,23 @@ class SlideController extends MediaController
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|max:2048|dimensions:min_width=1920,min_height:480',
+            'image' => 'required|image|max:2048|dimensions:min_width=1920,min_height=480',
         ]);
 
-        Slide::create([
+        $newSlide = Slide::create([
             'header'    => $request->header,
             'subheader' => $request->subheader,
             'desc'      => $request->desc,
             'position'  => $request->position,
         ]);
 
-        $this->imageUpload($request);
+        $this->imageUpload($request, $newSlide);
 
         $request->session()->flash('message', '<strong>Berhasil!</strong> Slide baru telah berhasil diunggah');
     }
 
-    private function imageUpload($request, $slideId = null)
+    private function imageUpload($request, $slide)
     {
-        $update = false;
-        if ($slideId) {
-            $media = Slide::find($slideId);
-            $update = true;
-        }
-
         $hasFile = $request->hasFile('image');
         if ($hasFile) {
             $image  = $request->file('image');
@@ -95,33 +89,15 @@ class SlideController extends MediaController
             // Create thumbnail
             $this->createImageThumbnail($path, $image->getClientOriginalExtension());
 
-            $data = [
+            $slide->image()->create([
                 'name'  => $name,
                 'file_name' => $image->getClientOriginalName(),
                 'mime_type' => $image->getClientMimeType(),
                 'path'  => $path,
                 'is_image'  => 0,
-            ];
-        }
-
-        if ($request->name) {
-            $data['name'] = $request->name;
-        }
-
-        if ($request->caption) {
-            $data['caption'] = $request->caption;
-        }
-
-        $data['published_at'] = ($request->publication) ? now()->format('Y-m-d H:i:s') : null;
-
-        if ($update) {
-            if ($hasFile) {
-                $this->removeMedia($media->path);
-            }
-            $media->update($data);
-        } else {
-            $request->user()->media()->create($data);
-        }
+                'user_id'   => request()->user()->id,
+            ]);
+        }          
     }
 
     /**
