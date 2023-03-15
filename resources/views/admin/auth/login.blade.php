@@ -77,7 +77,7 @@
                                         @endif
                                         <a href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
                                     </span>
-                                    <span class="text-muted">{{ $appName }} v5.0.1</span>
+                                    <span class="text-muted">{!! $appName !!} v5.0.1</span>
                                 </span>
                             </div>
                         </div>

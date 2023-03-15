@@ -97,7 +97,7 @@
                     <a href="#" class="nav-link"><i class="ph-image"></i> <span>Media</span></a>
 
                     <ul class="nav-group-sub {{ (request()->is('admin/media*') OR request()->is('admin/link/youtube')) ? 'show' : 'collapse' }}">
-                        {{-- <li class="nav-item"><a href="#" class="nav-link">Slide</a></li> --}}
+                        <li class="nav-item"><a href="#" class="nav-link">Slide</a></li>
                         <li class="nav-item"><a href="{{ route('admin.media.image.index') }}" class="nav-link {{ (request()->is('admin/media/image')) ? 'active' : '' }}">Gambar</a></li>
                         <li class="nav-item"><a href="{{ route('admin.media.file.index') }}" class="nav-link {{ (request()->is('admin/media/file')) ? 'active' : '' }}">Berkas</a></li>
                         <li class="nav-item"><a href="{{ route('admin.link.youtube.index') }}" class="nav-link {{ (request()->is('admin/link/youtube')) ? 'active' : '' }}">YouTube</a></li>

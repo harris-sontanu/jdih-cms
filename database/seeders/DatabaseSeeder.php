@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             LegislationDocumentSeeder::class,
             LegislationDownloadLogSeeder::class,
             LegislationLogSeeder::class,
+            SlideSeeder::class,
         ]);
     }
 }
