@@ -46,7 +46,7 @@
                                 @cannot('isAuthor')
                                     <td class="drag-handle"><i class="ph-dots-six-vertical  dragula-handle"></i></td>
                                 @endcannot
-                                <td class="safezone text-center"><img src="{{ $slide->image->source }}" class="img-preview rounded"></td>
+                                <td class="safezone text-center"><img src="{{ $slide->image->thumbSource }}" class="img-preview rounded"></td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $slide->header }}</span>
                                     @isset ($slide->subheader)

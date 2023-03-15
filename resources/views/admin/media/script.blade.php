@@ -122,7 +122,6 @@
 
         $(document).on('change', '.upload-img', function() {
             let id = $(this).data('id');
-            console.log(id);
             readURL(this, id);
         });
 
@@ -174,8 +173,8 @@
             let errors = response.responseJSON.errors;
             Object.entries(errors).forEach((entry) => {
                 const [key, value] = entry;
-                element.find('#media').addClass('is-invalid');
-                element.find('#media').parent().append('<div class="invalid-feedback">' + value + '</div>');
+                element.find('#' + key).addClass('is-invalid');
+                element.find('#' + key).parent().append('<div class="invalid-feedback">' + value + '</div>');
             });
         })
     }

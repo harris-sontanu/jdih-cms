@@ -5,7 +5,7 @@
             <form id="store-image-form" action="{{ route('admin.media.slide.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">Unggah Gambar</h5>
+                    <h5 class="modal-title">Unggah Slide</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -27,12 +27,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="media" class="form-label">Unggah Gambar</label>
-                        <input id="media" type="file" class="form-control upload-img" name="image" data-id="0">
+                        <label for="image" class="form-label">Unggah Gambar</label>
+                        <input id="image" type="file" class="form-control upload-img" name="image" data-id="0">
                         <div class="form-text text-muted">Format: gif, png, jpg, jpeg, bmp, svg, webp. Ukuran maks: 2Mb.</div>
                     </div>
 
-                    <label for="media" class="form-label">Posisi Gambar</label>
+                    <label for="position" class="form-label">Posisi Gambar</label>
                     <div>
                         <label class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" name="position" value="top" checked>

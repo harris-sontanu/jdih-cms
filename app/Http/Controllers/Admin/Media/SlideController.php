@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Media;
 
 use App\Http\Controllers\Admin\Media\MediaController;
+use App\Http\Requests\SlideRequest;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 
@@ -58,18 +59,10 @@ class SlideController extends MediaController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SlideRequest $request)
     {
-        $request->validate([
-            'image' => 'required|image|max:2048|dimensions:min_width=1920,min_height=480',
-        ]);
-
-        $newSlide = Slide::create([
-            'header'    => $request->header,
-            'subheader' => $request->subheader,
-            'desc'      => $request->desc,
-            'position'  => $request->position,
-        ]);
+        $validated = $request->validated();
+        $newSlide = Slide::create($validated);
 
         $this->imageUpload($request, $newSlide);
 
@@ -78,6 +71,11 @@ class SlideController extends MediaController
 
     private function imageUpload($request, $slide)
     {
+        if (isset($slide->image)) {
+            $this->removeMedia($slide->image->path);
+            $slide->image()->delete();
+        }
+
         $hasFile = $request->hasFile('image');
         if ($hasFile) {
             $image  = $request->file('image');
@@ -97,30 +95,35 @@ class SlideController extends MediaController
                 'is_image'  => 0,
                 'user_id'   => request()->user()->id,
             ]);
-        }          
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Slide $slide)
     {
-        //
+        return view('admin.media.slide.edit')->with('slide', $slide);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SlideRequest $request, Slide $slide)
     {
-        //
+        $validated = $request->validated();
+        $slide->update($validated);
+
+        $this->imageUpload($request, $slide);
+
+        $request->session()->flash('message', '<strong>Berhasil!</strong> Slide telah berhasil diperbarui');
     }
 
     /**
