@@ -41,7 +41,6 @@ class SlideSeeder extends Seeder
                 'path'      => $storageDir . $fileName,
                 'mediaable_id'  => $slide->id,
                 'mediaable_type'=> 'App\Models\Slide',
-                'published_at'  => now(),
             ])->create();
         });
     }

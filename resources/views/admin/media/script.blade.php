@@ -126,6 +126,33 @@
             readURL(this, id);
         });
 
+        Sortable.create(sortable,{
+            group: "category",
+            handle: '.drag-handle',
+            draggable: '.item',
+            store: {
+                get: function (sortable) {
+                    return order = [];
+                },
+
+                set: function (sortable) {
+                    var orders = sortable.toArray();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        url: '/admin/media/slide/order-update',
+                        method: 'POST',
+                        data: {'orders': orders}
+                    })
+                }
+            }
+        });
+
     })
 
     function mediaUpload(element, data) {

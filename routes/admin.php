@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Employee\EmployeeController;
 use App\Http\Controllers\Admin\Employee\GroupController;
 use App\Http\Controllers\Admin\Media\FileController;
 use App\Http\Controllers\Admin\Media\ImageController;
+use App\Http\Controllers\Admin\Media\SlideController;
 use App\Http\Controllers\Admin\Media\MediaController;
 use App\Http\Controllers\Admin\Link\LinkController;
 use App\Http\Controllers\Admin\Link\YoutubeController;
@@ -190,7 +191,9 @@ Route::name('admin.')->group(function () {
         Route::name('media.')->group(function () {
             Route::resource('/media/image', ImageController::class)->except(['show', 'create']);
             Route::resource('/media/file', FileController::class)->except(['show', 'create']);
+            Route::resource('/media/slide', SlideController::class)->except(['show', 'create']);
             Route::post('/media/trigger', [MediaController::class, 'trigger'])->name('trigger');
+            Route::post('/media/slide/order-update', [SlideController::class, 'orderUpdate'])->name('slide.order-update');
         });
 
         Route::name('link.')->group(function () {

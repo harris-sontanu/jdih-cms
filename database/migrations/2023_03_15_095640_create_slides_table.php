@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->tinyInteger('sort')->default(0);
-            $table->string('header');
-            $table->string('subheader');
-            $table->text('desc');
+            $table->string('header')->nullable();
+            $table->string('subheader')->nullable();
+            $table->text('desc')->nullable();
+            $table->enum('position', ['top', 'center', 'bottom'])->default('top');
         });
     }
 
