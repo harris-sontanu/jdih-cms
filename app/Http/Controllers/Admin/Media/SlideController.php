@@ -129,11 +129,17 @@ class SlideController extends MediaController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Slide $slide)
     {
-        //
+        $image = $slide->image->path;
+        $slide->image()->delete();
+        $slide->delete();
+
+        $this->removeMedia($image);
+
+        return redirect('/admin/media/slide')->with('message', '<strong>Berhasil!</strong> Data Slide telah berhasil dihapus');
     }
 }
