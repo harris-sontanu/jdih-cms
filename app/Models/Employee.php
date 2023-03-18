@@ -144,9 +144,11 @@ class Employee extends Model
     public function scopeSorted($query, $request = [])
     {
         if (isset($request['order'])) {
-            return $query->orderBy($request['order'], $request['sort']);
+            $query->orderBy($request['order'], $request['sort']);
         } else {
-            return $query->orderBy('sort', 'asc');
+            $query->orderBy('name', 'asc');
         }
+
+        return $query;
     }
 }

@@ -31,7 +31,7 @@ class NewsController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $news = Post::ofType('news')->with('author', 'cover');
+        $news = Post::ofType('news')->with('author', 'cover', 'taxonomy');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -47,12 +47,11 @@ class NewsController extends AdminController
                 $news->draft();
             }
         }
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
 
         $news = $news->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

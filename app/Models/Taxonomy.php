@@ -54,7 +54,15 @@ class Taxonomy extends Model
     {
         if (isset($request['order'])) {
             if ($request['order'] == 'total') {
-                $query->withCount('posts')->orderBy('posts_count', $request['sort']);
+                $hasPost = clone $query;
+                if ($hasPost->has('posts')->exists()) {
+                    $query->withCount('posts')->orderBy('posts_count', $request['sort']);
+                }
+
+                $hasEmployee = clone $query;
+                if ($hasEmployee->has('employees')->exists()) {
+                    $query->withCount('employees')->orderBy('employees_count', $request['sort']);
+                }
             } else {
                 $query->orderBy($request['order'], $request['sort']);
             }

@@ -34,7 +34,7 @@ class EmployeeController extends AdminController
             ->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate((!empty($request->limit)) ? $request->limit : $this->limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $groups = Taxonomy::type('employee')->pluck('name', 'id');

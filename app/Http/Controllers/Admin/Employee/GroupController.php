@@ -16,7 +16,7 @@ class GroupController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $pageHeader = 'Grup Pegawai';
         $pageTitle = $pageHeader . $this->pageTitle;
@@ -26,7 +26,10 @@ class GroupController extends AdminController
             'Grup' => TRUE
         ];
 
-        $groups = Taxonomy::type('employee')->sorted()->paginate($this->limit);
+        $groups = Taxonomy::type('employee')
+            ->sorted($request->only(['order', 'sort']))
+            ->paginate($request->limit ?: $this->limit)
+            ->withQueryString();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
