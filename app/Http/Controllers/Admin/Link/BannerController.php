@@ -41,11 +41,9 @@ class BannerController extends LinkController
             }
         }
 
-        $limit  = !empty($request->limit) ? $request->limit : $this->limit;
-
         $banners = $banners->search($request->only(['search']))
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);
@@ -55,7 +53,7 @@ class BannerController extends LinkController
             'assets/admin/js/vendor/media/glightbox.min.js',
             'assets/admin/js/vendor/ui/sortable.min.js',
         ];
-        
+
         if (Gate::denies('isAuthor')) {
             $vendors[] = 'assets/admin/js/vendor/tables/finderSelect/jquery.finderSelect.min.js';
         }

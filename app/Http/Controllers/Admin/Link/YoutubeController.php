@@ -41,11 +41,9 @@ class YoutubeController extends LinkController
             }
         }
 
-        $limit  = !empty($request->limit) ? $request->limit : $this->limit;
-
         $youtubes = $youtubes->search($request->only(['search']))
             ->latest()
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

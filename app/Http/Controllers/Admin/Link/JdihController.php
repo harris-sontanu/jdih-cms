@@ -41,11 +41,9 @@ class JdihController extends LinkController
             }
         }
 
-        $limit  = !empty($request->limit) ? $request->limit : $this->limit;
-
         $jdih = $jdih->search($request->only(['search']))
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);
@@ -88,16 +86,6 @@ class JdihController extends LinkController
                                 ->search($request->only(['search']))
                                 ->count(),
         ];
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -148,17 +136,6 @@ class JdihController extends LinkController
                     'published_at'  => now(),
                 ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Link  $link
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Link $link)
-    {
-        //
     }
 
     /**

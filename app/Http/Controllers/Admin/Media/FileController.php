@@ -34,11 +34,9 @@ class FileController extends MediaController
             }
         }
 
-        $limit  = !empty($request->limit) ? $request->limit : $this->limit;
-
         $files = $files->search($request->only(['search']))
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

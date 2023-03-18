@@ -46,12 +46,10 @@ class PageController extends AdminController
             }
         }
 
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-
         $pages = $pages->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

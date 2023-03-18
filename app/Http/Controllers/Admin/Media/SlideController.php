@@ -24,7 +24,7 @@ class SlideController extends MediaController
             'Slide' => TRUE
         ];
 
-        $slides = Slide::with('image')
+        $slides = Slide::with('image', 'image.user')
             // ->search($request->only(['search']))
             ->orderBy('sort', 'asc')
             ->paginate($this->limit)
