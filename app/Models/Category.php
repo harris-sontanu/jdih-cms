@@ -62,14 +62,19 @@ class Category extends Model
         if (isset($request['order'])) {
             if ($request['order'] == 'type') {
                 $sort = $request['sort'];
-                return $query->whereHas('type', function (Builder $q) use ($sort) {
+                $query->whereHas('type', function (Builder $q) use ($sort) {
                     $q->orderBy('name', $sort);
                 });
+            } else if ($request['order'] == 'total') {
+                $query->withCount('legislations')->orderBy('legislations_count', $request['sort']);
+            } else {
+                $query->orderBy($request['order'], $request['sort']);
             }
-            return $query->orderBy($request['order'], $request['sort']);
         } else {
-            return $query->orderBy('sort', 'asc');
+            $query->orderBy('sort', 'asc');
         }
+
+        return $query;
     }
 
     public function scopeSearch($query, $request)

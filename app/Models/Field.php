@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Field extends Model
 {
@@ -36,10 +37,16 @@ class Field extends Model
     public function scopeSorted($query, $request = [])
     {
         if (isset($request['order'])) {
-            return $query->orderBy($request['order'], $request['sort']);
+            if ($request['order'] == 'total') {
+                $query->withCount('legislations')->orderBy('legislations_count', $request['sort']);
+            } else {
+                $query->orderBy($request['order'], $request['sort']);
+            }
         } else {
-            return $query->orderBy('name', 'asc');
+            $query->orderBy('name', 'asc');
         }
+
+        return $query;
     }
 
     public function scopeSearch($query, $request)
