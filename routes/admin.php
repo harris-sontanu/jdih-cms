@@ -123,7 +123,7 @@ Route::name('admin.')->group(function () {
             Route::resource('/legislation/institute', InstituteController::class);
 
             Route::post('/legislation/field/select-options', [FieldController::class, 'selectOptions'])->name('field.select-options');
-            Route::resource('/legislation/field', FieldController::class);
+            Route::resource('/legislation/field', FieldController::class)->except(['show', 'create']);
 
             Route::controller(LegislationController::class)->group(function () {
                 Route::get('/legislation/search', 'search')->name('search');

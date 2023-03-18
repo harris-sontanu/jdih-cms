@@ -39,7 +39,7 @@ class LawController extends LegislationController
             'Peraturan Perundang-undangan' => TRUE
         ];
 
-        $laws = Legislation::ofType(1)->with('user');
+        $laws = Legislation::ofType(1)->with(['category', 'user']);
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -56,12 +56,10 @@ class LawController extends LegislationController
             }
         }
 
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-
         $laws = $laws->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

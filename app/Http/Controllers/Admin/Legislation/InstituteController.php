@@ -29,12 +29,11 @@ class InstituteController extends LegislationController
             'Pemrakarsa' => TRUE
         ];
 
-        $institutes = Institute::sorted($request->only(['order', 'sort']));
-
-        $institutes = $institutes->search($request->only(['search']));
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-        $institutes = $institutes->paginate($limit)
-                    ->withQueryString();
+        $institutes = Institute::with('legislations')
+            ->search($request->only(['search']))
+            ->sorted($request->only(['order', 'sort']))
+            ->paginate($request->limit ?: $this->limit)
+            ->withQueryString();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -78,7 +77,7 @@ class InstituteController extends LegislationController
         $validated = $request->validated();
         $new_institute = Institute::create($validated);
 
-        if ($request->has('ajax')) {             
+        if ($request->has('ajax')) {
             return response()->json(['id' => $new_institute->id]);
         } else {
             return redirect('/admin/legislation/institute')->with('message', '<strong>Berhasil!</strong> Data Pemrakarsa baru telah berhasil disimpan');

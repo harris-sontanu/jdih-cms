@@ -28,13 +28,11 @@ class FieldController extends LegislationController
             'Bidang Hukum' => TRUE
         ];
 
-        $fields = Field::sorted($request->only(['order', 'sort']));
-
-        $fields = $fields->search($request->only(['search']));
-        $count = $fields->count();
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-        $fields = $fields->paginate($limit)
-                    ->withQueryString();
+        $fields = Field::with('legislations')
+            ->search($request->only(['search']))
+            ->sorted($request->only(['order', 'sort']))
+            ->paginate($request->limit ?: $this->limit)
+            ->withQueryString();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -45,7 +43,6 @@ class FieldController extends LegislationController
             'pageHeader',
             'breadCrumbs',
             'fields',
-            'count',
             'vendors'
         ));
     }
@@ -56,16 +53,6 @@ class FieldController extends LegislationController
         $selectedId = $request->selectedId;
 
         return view('admin.legislation.field.select-options', compact('fields', 'selectedId'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -87,24 +74,13 @@ class FieldController extends LegislationController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Field  $field
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Field $field)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Field  $field
      * @return \Illuminate\Http\Response
      */
     public function edit(Field $field)
-    {        
+    {
         return view('admin.legislation.field.edit', compact('field'));
     }
 

@@ -32,10 +32,10 @@ class CategoryController extends LegislationController
 
         $categories = Category::with(['type', 'user' => function($query) {
             $query->withTrashed();
-        }]);
+        }, 'legislations']);
 
         $limit = !empty($request->limit) ? $request->limit : $this->limit;
-        
+
         $categories = $categories->search($request->only(['search']))
             ->sorted($request->only(['order', 'sort']))
             ->paginate($limit)
@@ -82,7 +82,7 @@ class CategoryController extends LegislationController
     public function edit(Category $category)
     {
         $types = Type::pluck('name', 'id');
-        
+
         return view('admin.legislation.category.edit', compact('category', 'types'));
     }
 

@@ -53,12 +53,10 @@ class MonographController extends LegislationController
             }
         }
 
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-
         $monographs = $monographs->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HelperTrait;
+use App\Models\Traits\HasUser;
+use App\Models\Traits\TimeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    use HasFactory, HelperTrait;
+    use HasFactory, TimeHelper, HasUser;
 
      /**
      * The attributes that are mass assignable.
@@ -58,6 +60,12 @@ class Category extends Model
     public function scopeSorted($query, $request = [])
     {
         if (isset($request['order'])) {
+            if ($request['order'] == 'type') {
+                $sort = $request['sort'];
+                return $query->whereHas('type', function (Builder $q) use ($sort) {
+                    $q->orderBy('name', $sort);
+                });
+            }
             return $query->orderBy($request['order'], $request['sort']);
         } else {
             return $query->orderBy('sort', 'asc');
@@ -74,12 +82,4 @@ class Category extends Model
             });
         }
     }
-
-    public function scopeOrder($query, $request)
-    {
-        if (!empty($request['order']) AND $order = $request['order']) {
-            $query->orderBy($order, $request['sort']);
-        }
-    }
-
 }

@@ -29,12 +29,11 @@ class MatterController extends LegislationController
             'Urusan Pemerintahan' => TRUE
         ];
 
-        $matters = Matter::sorted($request->only(['order', 'sort']));
-
-        $matters = $matters->search($request->only(['search']));
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-        $matters = $matters->paginate($limit)
-                    ->withQueryString();
+        $matters = Matter::with('legislations')
+            ->search($request->only(['search']))
+            ->sorted($request->only(['order', 'sort']))
+            ->paginate($request->limit ?: $this->limit)
+            ->withQueryString();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',

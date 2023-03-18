@@ -54,12 +54,10 @@ class JudgmentController extends LegislationController
             }
         }
 
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-
         $judgments = $judgments->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);

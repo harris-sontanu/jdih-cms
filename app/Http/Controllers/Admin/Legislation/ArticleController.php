@@ -53,12 +53,10 @@ class ArticleController extends LegislationController
             }
         }
 
-        $limit = !empty($request->limit) ? $request->limit : $this->limit;
-
         $articles = $articles->search($request->only(['search']))
             ->filter($request)
             ->sorted($request->only(['order', 'sort']))
-            ->paginate($limit)
+            ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
         $tabFilters = $this->tabFilters($request);
