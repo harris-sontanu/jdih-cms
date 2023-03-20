@@ -15,6 +15,14 @@ class TaxonomySeeder extends Seeder
      */
     public function run()
     {
+        // Create one type of page taxonomy
+        Taxonomy::factory()->create([
+            'type'  => 'page',
+            'name'  => 'Page',
+            'slug'  => 'page',
+            'desc'  => null
+        ]);
+
         Taxonomy::factory()->count(18)->create();
     }
 }

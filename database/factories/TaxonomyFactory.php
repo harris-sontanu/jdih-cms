@@ -16,12 +16,12 @@ class TaxonomyFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {   
-        $types = ['news', 'page', 'employee'];
+    {
+        $types = ['page', 'news', 'employee'];
         $name = fake()->unique()->words(1, true);
 
         return [
-            'type'      => $types[rand(0, 2)],
+            'type'      => $types[rand(1, 2)],
             'name'      => Str::title($name),
             'slug'      => Str::slug($name),
             'desc'      => fake()->paragraph(rand(1, 3))
