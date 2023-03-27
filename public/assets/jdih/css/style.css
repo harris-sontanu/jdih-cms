@@ -7,6 +7,14 @@ a.text-body:focus {
     color: dimgray !important;
 }
 
+.pb-7 {
+    padding-bottom: 7.5rem !important;
+}
+
+.mt-n7 {
+    margin-top: -6rem !important;
+}
+
 .form-control:focus {
     border-color: #ef4444;
     box-shadow: 0 0 0 0.125rem rgba(239, 68, 68, 0.25);

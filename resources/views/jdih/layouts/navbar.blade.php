@@ -29,14 +29,14 @@
                 </li>
 
                 <li class="nav-item nav-item-dropdown-lg dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-nav-link dropdown-toggle fw-semibold rounded {{ request()->is('profil*') ? 'active fw-bold' : 'fw-semibold' }}" data-bs-toggle="dropdown">
                         Profil
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Visi & Misi</a>
-                        <a href="#" class="dropdown-item">Tugas Pokok & Fungsi</a>
-                        <a href="#" class="dropdown-item">Struktur Organisasi</a>
+                        <a href="{{ route('profile.show', 'visi-misi') }}" class="dropdown-item {{ request()->is('profil/visi-misi*') ? 'active' : null }}">Visi & Misi</a>
+                        <a href="{{ route('profile.show', 'tugas-pokok-fungsi') }}" class="dropdown-item {{ request()->is('profil/tugas-pokok-fungsi*') ? 'active' : null }}">Tugas Pokok & Fungsi</a>
+                        <a href="{{ route('profile.show', 'struktur-organisasi') }}" class="dropdown-item {{ request()->is('profil/struktur-organisasi*') ? 'active' : null }}">Struktur Organisasi</a>
                     </div>
                 </li>
 

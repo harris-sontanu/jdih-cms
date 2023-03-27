@@ -8,6 +8,7 @@ use App\Http\Controllers\Jdih\Legislation\MonographController;
 use App\Http\Controllers\Jdih\Legislation\ArticleController;
 use App\Http\Controllers\Jdih\Legislation\JudgmentController;
 use App\Http\Controllers\Jdih\Post\NewsController;
+use App\Http\Controllers\Jdih\Post\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,4 +88,8 @@ Route::name('news.')->group(function () {
         Route::get('/berita/{taxonomy:slug}/{post:slug}', 'show')
             ->name('show');
     });
+});
+
+Route::name('profile.')->group(function () {
+    Route::get('/profil/{post:slug}', [PageController::class, 'show'])->name('show');
 });
