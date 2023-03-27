@@ -41,6 +41,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

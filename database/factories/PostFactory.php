@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Employee;
 use App\Models\Media;
 use App\Models\Taxonomy;
 use App\Models\User;
@@ -36,14 +37,15 @@ class PostFactory extends Factory
         $deleted_at = empty($published_at) ? (rand(0, 1) ? Carbon::parse($updated_at)->addDays(rand(1, 3)) : null) : null;
 
         return [
-            'taxonomy_id'   => Taxonomy::whereIn('type', ['news', 'page'])->get()->random(),
+            'taxonomy_id'   => Taxonomy::ofType('news')->get()->random(),
             'title'         => $title,
             'slug'          => $slug,
             'excerpt'       => fake()->paragraph(),
             'body'          => $body,
             'source'        => fake()->words(rand(1, 3), true),
             'view'          => fake()->randomDigitNotNull() * 10,
-            'author_id'     => User::all()->random(),
+            'author_id'     => Employee::all()->random(),
+            'user_id'       => User::all()->random(),
             'created_at'    => $created_at->toDateTimeString(),
             'updated_at'    => $updated_at->toDateTimeString(),
             'published_at'  => isset($published_at) ? $published_at->toDateTimeString() : null,

@@ -59,7 +59,7 @@ return new class extends Migration
             $table->string('index_number')->nullable();
             $table->string('justice')->nullable();
             $table->integer('view')->default(0);
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();;
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();

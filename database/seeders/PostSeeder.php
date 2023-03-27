@@ -15,6 +15,30 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
+        Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Visi & Misi',
+                'slug'          => 'visi-misi',
+                'source'        => null,
+            ]);
+
+        Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Tugas Pokok & Fungsi',
+                'slug'          => 'tugas-pokok-fungsi',
+                'source'        => null,
+            ]);
+
+        Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Struktur Organisasi',
+                'slug'          => 'struktur-organisasi',
+                'source'        => null,
+            ]);
+
         $posts = Post::factory()
             ->count(20)
             ->hasCover()
