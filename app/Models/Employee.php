@@ -51,6 +51,11 @@ class Employee extends Model
         return $this->belongsToMany(Taxonomy::class);
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function pictureUrl(): Attribute
     {
         $pictureUrl = asset('assets/admin/images/placeholders/user.png');

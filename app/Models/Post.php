@@ -35,6 +35,11 @@ class Post extends Model
 
     public function author()
     {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 

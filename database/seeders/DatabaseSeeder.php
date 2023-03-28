@@ -29,15 +29,16 @@ class DatabaseSeeder extends Seeder
             LegislationMatterSeeder::class,
             LegislationRelationshipSeeder::class,
             TaxonomySeeder::class,
-            PostSeeder::class,
             EmployeeSeeder::class,
             EmployeeTaxonomySeeder::class,
+            PostSeeder::class,
             QuestionSeeder::class,
             AnswerSeeder::class,
             VoteSeeder::class,
             LegislationDocumentSeeder::class,
             LegislationDownloadLogSeeder::class,
             LegislationLogSeeder::class,
+            LinkSeeder::class,
             SlideSeeder::class,
         ]);
     }

@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Employee;
-use App\Models\Media;
 use App\Models\Taxonomy;
 use App\Models\User;
-use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
@@ -37,7 +35,7 @@ class PostFactory extends Factory
         $deleted_at = empty($published_at) ? (rand(0, 1) ? Carbon::parse($updated_at)->addDays(rand(1, 3)) : null) : null;
 
         return [
-            'taxonomy_id'   => Taxonomy::ofType('news')->get()->random(),
+            'taxonomy_id'   => Taxonomy::whereType('news')->get()->random(),
             'title'         => $title,
             'slug'          => $slug,
             'excerpt'       => fake()->paragraph(),

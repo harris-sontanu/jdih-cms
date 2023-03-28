@@ -31,7 +31,7 @@ class LinkFactory extends Factory
             'desc'      => fake()->paragraph(rand(1, 2)),
             'url'       => fake()->url(),
             'type'      => $types[rand(0, 2)],
-            'display'   => $displays[rand(0, 2)],
+            'display'   => $displays[rand(0, 1)],
             'user_id'   => User::all()->random(),
             'created_at'    => $created_at->toDateTimeString(),
             'updated_at'    => $updated_at->toDateTimeString(),
