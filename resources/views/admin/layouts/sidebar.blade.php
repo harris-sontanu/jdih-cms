@@ -44,10 +44,10 @@
                     </a>
                 </li>
 
-                <li class="nav-item nav-item-submenu nav-item-expanded nav-item-open">
+                <li class="nav-item nav-item-submenu {{ request()->is('admin/legislation*') ? 'nav-item-expanded nav-item-open' : '' }}">
                     <a href="#" class="nav-link"><i class="ph-stack"></i> <span>Produk Hukum</span></a>
 
-                    <ul class="nav-group-sub collapse show">
+                    <ul class="nav-group-sub {{ request()->is('admin/legislation*') ? 'show' : 'collapse' }}">
                         <li class="nav-item"><a href="{{ route('admin.legislation.law.index') }}" class="nav-link {{ (request()->is('admin/legislation/law*')) ? 'active' : '' }}">Peraturan</a></li>
                         <li class="nav-item"><a href="{{ route('admin.legislation.monograph.index') }}" class="nav-link {{ (request()->is('admin/legislation/monograph*')) ? 'active' : '' }}">Monografi</a></li>
                         <li class="nav-item"><a href="{{ route('admin.legislation.article.index') }}" class="nav-link {{ (request()->is('admin/legislation/article*')) ? 'active' : '' }}">Artikel</a></li>
