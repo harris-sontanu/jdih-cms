@@ -62,11 +62,11 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('news', function ($value) {
-            return Post::where('id', $value)->firstOrFail();
+            return Post::where('id', $value)->withTrashed()->firstOrFail();
         });
 
         Route::bind('page', function ($value) {
-            return Post::where('id', $value)->firstOrFail();
+            return Post::where('id', $value)->withTrashed()->firstOrFail();
         });
 
         Route::bind('image', function ($value) {
