@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class PageRequest extends FormRequest
 {
@@ -26,17 +27,20 @@ class PageRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'taxonomy_id' => 'required',
             'title'     => 'required|max:255',
             'slug'      => 'unique:posts',
             'body'      => 'required',
             'excerpt'   => 'nullable',
-            'cover'     => 'image|dimensions:min_width=400|max:2048'
+            'author_id' => 'nullable',
+            'cover'     => 'nullable|image|dimensions:min_width=400|max:2048'
         ];
 
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
                 $rules['slug'] = Rule::unique('posts')->ignore($this->route('page'));
+                $rules = Arr::except($rules, ['taxonomy_id']);
                 break;
         }
 
@@ -67,6 +71,7 @@ class PageRequest extends FormRequest
             'slug'          => 'Judul',
             'body'          => 'Isi',
             'excerpt'       => 'Cuplikan',
+            'author_id'     => 'Penulis',
             'cover'         => 'Sampul',
         ];
     }

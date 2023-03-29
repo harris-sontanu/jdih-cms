@@ -82,14 +82,8 @@
                                         <td class="text-end"><span class="badge bg-warning bg-opacity-20 text-warning">{!! $page->publicationLabel() !!}</span></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Penulis:</td>
-                                        <td class="text-end">{{ $page->author->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-nowrap"><i class="ph-calendar-blank me-2"></i>Posting:</td>
-                                        <td class="text-end">
-                                            <abbr data-bs-popup="tooltip" title="{{ $page->dateFormatted($page->created_at, true) }}">{{ $page->dateFormatted($page->created_at) }}</abbr>
-                                        </td>
+                                        <td class="text-nowrap"><i class="ph-user me-2"></i>Operator:</td>
+                                        <td class="text-end">{{ $page->user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-nowrap"><i class="ph-calendar-blank me-2"></i>Terbit:</td>
@@ -102,6 +96,25 @@
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <button type="submit" name="draft" class="btn btn-link px-0">Ubah ke Draf</button>
                                 <button type="submit" name="publish" class="btn btn-indigo">Ubah</button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="sidebar-section-header border-bottom">
+                                <span class="fw-semibold"><i class="ph-user me-2"></i>Penulis</span>
+                            </div>
+                            <div class="sidebar-section-body">
+                                <div id="taxonomy-options">
+                                    <select id="author_id" name="author_id" class="select @error('author_id') is-invalid @enderror">
+                                        <option value="">Pilih Penulis</option>
+                                        @foreach ($authors as $key => $value)
+                                            <option value="{{ $key }}" @selected($key == $page->author_id)>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('author_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 

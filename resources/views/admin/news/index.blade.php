@@ -86,7 +86,7 @@
                                 @php $sortState = 'asc' @endphp
                             @endif
 
-                            @cannot('isAuthor')                                
+                            @cannot('isAuthor')
                                 <th width="1"><input type="checkbox" /></th>
                             @endcannot
                             <th width="1" class="text-center">Sampul</th>
@@ -97,7 +97,7 @@
                                 <a href="{{ route('admin.news.index', ['order' => 'taxonomy_id', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Kategori</a>
                             </th>
                             <th class="text-center sorting @if (!empty($sort) AND Request::get('order') == 'view') {{ 'sorting_' . $sort }} @endif">
-                                <a href="{{ route('admin.news.index', ['order' => 'view', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Dilihat</a>
+                                <a href="{{ route('admin.news.index', ['order' => 'view', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block"><i class="ph-eye"></i></a>
                             </th>
                             <th class="text-center sorting @if (!empty($sort) AND Request::get('order') == 'author') {{ 'sorting_' . $sort }} @endif">
                                 <a href="{{ route('admin.news.index', ['order' => 'author', 'sort' => $sortState] + Request::all()) }}" class="text-dark d-block">Penulis</a>
@@ -111,7 +111,7 @@
                     <tbody>
                         @forelse ($news as $post)
                             <tr>
-                                @cannot('isAuthor')       
+                                @cannot('isAuthor')
                                     <td><input type="checkbox" class="checkbox" data-item="{{ $post->id }}"></td>
                                 @endcannot
                                 <td class="safezone text-center">
@@ -119,7 +119,7 @@
                                 </td>
                                 <td>
                                     <span class="fw-semibold d-block">{{ $post->title }}</span>
-                                    <span class="text-muted fs-sm">{!! Str::limit($post->excerpt, 150) !!}</span>
+                                    <span class="text-muted fs-sm">{!! Str::limit($post->body, 150) !!}</span>
                                 </td>
                                 <td>{{ $post->taxonomy->name ?? '-'; }}</td>
                                 <td class="text-center"><span class="badge bg-info bg-opacity-20 text-info rounded-pill">{{ $post->view; }}</span></td>
@@ -134,15 +134,15 @@
                                     <div class="d-inline-flex">
                                         <a href="{{ route('admin.news.show', $post->id) }}" class="text-body mx-1" data-bs-popup="tooltip" title="Lihat"><i class="ph-eye"></i></a>
                                         @if ($onlyTrashed)
-                                            @can('restore', $post)                                                
+                                            @can('restore', $post)
                                                 <form action="{{ route('admin.news.restore', $post->id) }}" method="POST">
                                                     @method('PUT')
                                                     @csrf
                                                     <button type="submit" class="btn btn-link p-0 text-body mx-1" data-bs-popup="tooltip" title="Kembalikan"><i class="ph-arrow-arc-left"></i></button>
                                                 </form>
                                             @endcan
-                                            
-                                            @can('forceDelete', $post) 
+
+                                            @can('forceDelete', $post)
                                                 <form class="delete-form" action="{{ route('admin.news.force-destroy', $post->id) }}" data-confirm="Apakah Anda yakin menghapus berita {{ $post->title }}?" method="POST">
                                                     @method('DELETE')
                                                     @csrf
@@ -150,11 +150,11 @@
                                                 </form>
                                             @endcan
                                         @else
-                                            @can('update', $post)  
+                                            @can('update', $post)
                                                 <a href="{{ route('admin.news.edit', $post->id) }}" class="text-body mx-2" data-bs-popup="tooltip" title="Ubah"><i class="ph-pen"></i></a>
                                             @endcan
 
-                                            @can('delete', $post)                                                
+                                            @can('delete', $post)
                                                 <form action="{{ route('admin.news.destroy', $post->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
