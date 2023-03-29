@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HelperTrait;
+use App\Models\Traits\TimeHelper;
+use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 class LegislationLog extends Model
 {
-    use HasFactory, HelperTrait;
+    use HasFactory, TimeHelper, HasUser;
 
     public $timestamps = ["created_at"];
     const UPDATED_AT = null;

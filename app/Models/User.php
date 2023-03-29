@@ -4,7 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Traits\HelperTrait;
+use App\Models\Traits\HasUser;
+use App\Models\Traits\TimeHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,7 @@ use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HelperTrait;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, TimeHelper, HasUser;
 
     /**
      * The attributes that are mass assignable.

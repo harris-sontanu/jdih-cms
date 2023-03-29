@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HelperTrait;
+use App\Models\Traits\TimeHelper;
+use App\Models\Traits\HasPublishedAt;
+use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Link extends Model
 {
-    use HasFactory, HelperTrait;
+    use HasFactory, TimeHelper, HasPublishedAt, HasUser;
 
     /**
      * The attributes that are mass assignable.
@@ -175,7 +177,7 @@ class Link extends Model
                 $query->orderBy($request['order'], $request['sort']);
             }
         } else {
-            $query->latest();
+            $query->orderBy('sort', 'asc');
         }
 
         return $query;

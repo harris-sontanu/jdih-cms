@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Traits\HelperTrait;
+use App\Models\Traits\TimeHelper;
+use App\Models\Traits\HasUser;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, HelperTrait;
-
+    use HasFactory, SoftDeletes, TimeHelper, HasUser;
     /**
      * The attributes that are mass assignable.
      *
