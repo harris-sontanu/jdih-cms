@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Jdih\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Jdih\HomepageController;
 use App\Http\Controllers\Jdih\Legislation\LegislationController;
@@ -92,4 +93,9 @@ Route::name('news.')->group(function () {
 
 Route::name('profile.')->group(function () {
     Route::get('/profil/{post:slug}', [PageController::class, 'show'])->name('show');
+});
+
+Route::name('gallery.')->group(function () {
+    Route::get('/galeri/foto', [GalleryController::class, 'photo'])->name('photo');
+    Route::get('/galeri/video', [GalleryController::class, 'video'])->name('video');
 });

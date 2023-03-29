@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Jdih\Post;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Jdih\Post\PostController;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PageController extends Controller
+class PageController extends PostController
 {
     /**
      * Display the specified resource.
@@ -16,7 +16,7 @@ class PageController extends Controller
      */
     public function show(Post $post)
     {
-        return view('jdih.post.page.show')->with('page', $post);
+        return view('jdih.post.page')->with('page', $post);
     }
 
 }

@@ -31,7 +31,7 @@
         <div class="content row gx-5">
 
             <main class="col-xl-10 offset-xl-1">
-                <article class="card shadow-sm post-entry mb-4">
+                <article class="card shadow post-entry mb-4">
                     <figure class="card-image">
                         <img src="{{ $page->cover->source }}" class="figure-img img-fluid rounded-top" alt="{{ $page->cover->name }}">
                         @isset($page->cover->caption)

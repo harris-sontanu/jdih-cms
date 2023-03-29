@@ -46,8 +46,8 @@
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Foto</a>
-                        <a href="#" class="dropdown-item">Video</a>
+                        <a href="{{ route('gallery.photo') }}" class="dropdown-item {{ request()->is('galeri/foto*') ? 'active' : null }}">Foto</a>
+                        <a href="{{ route('gallery.video') }}" class="dropdown-item {{ request()->is('galeri/video*') ? 'active' : null }}">Video</a>
                     </div>
                 </li>
 
