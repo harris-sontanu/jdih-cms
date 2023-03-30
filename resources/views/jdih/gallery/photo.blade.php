@@ -28,7 +28,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <main class="content row gx-5">
+        <main class="content row gx-4">
 
             @forelse ($photos as $photo)
                 <div class="col-xl-4">

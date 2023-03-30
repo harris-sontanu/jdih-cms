@@ -41,26 +41,6 @@
 
                     <div class="card-body fs-5 px-4">
                         {!! $page->body !!}
-
-                        @if (isset($page->galleries) AND $page->galleries->count() > 0)
-                            <h3 class="fw-bold mt-4">Foto-foto</h3>
-                            <div class="row gx-4">
-                                @foreach ($page->galleries as $gallery)
-                                    <div class="col-4">
-                                        <div class="card shadow mb-4">
-                                            <div class="card-img-actions m-0">
-                                                <img class="card-img img-fluid" src="{{ $gallery->thumbSource }}">
-                                                <div class="card-img-actions-overlay card-img">
-                                                    <a href="{{ $gallery->source }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
-                                                        <i class="ph-magnifying-glass-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
                     </div>
                 </article>
 

@@ -34,9 +34,9 @@
                     </a>
 
                     <div class="dropdown-menu">
-                        <a href="{{ route('profile.show', 'visi-misi') }}" class="dropdown-item {{ request()->is('profil/visi-misi*') ? 'active' : null }}">Visi & Misi</a>
-                        <a href="{{ route('profile.show', 'tugas-pokok-fungsi') }}" class="dropdown-item {{ request()->is('profil/tugas-pokok-fungsi*') ? 'active' : null }}">Tugas Pokok & Fungsi</a>
-                        <a href="{{ route('profile.show', 'struktur-organisasi') }}" class="dropdown-item {{ request()->is('profil/struktur-organisasi*') ? 'active' : null }}">Struktur Organisasi</a>
+                        <a href="{{ route('profile', 'visi-misi') }}" class="dropdown-item {{ request()->is('profil/visi-misi*') ? 'active' : null }}">Visi & Misi</a>
+                        <a href="{{ route('profile', 'tugas-pokok-fungsi') }}" class="dropdown-item {{ request()->is('profil/tugas-pokok-fungsi*') ? 'active' : null }}">Tugas Pokok & Fungsi</a>
+                        <a href="{{ route('profile', 'struktur-organisasi') }}" class="dropdown-item {{ request()->is('profil/struktur-organisasi*') ? 'active' : null }}">Struktur Organisasi</a>
                     </div>
                 </li>
 

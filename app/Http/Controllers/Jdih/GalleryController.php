@@ -11,6 +11,12 @@ class GalleryController extends JdihController
 {
     use VisitorTrait;
 
+    public function __construct(Request $request)
+    {
+        // Record visitor
+        $this->recordVisitor($request);
+    }
+
     public function photo(Request $request)
     {
         $photos = Media::images()

@@ -91,9 +91,7 @@ Route::name('news.')->group(function () {
     });
 });
 
-Route::name('profile.')->group(function () {
-    Route::get('/profil/{post:slug}', [PageController::class, 'show'])->name('show');
-});
+Route::get('/profil/{post:slug}', PageController::class)->name('profile');
 
 Route::name('gallery.')->group(function () {
     Route::get('/galeri/foto', [GalleryController::class, 'photo'])->name('photo');
