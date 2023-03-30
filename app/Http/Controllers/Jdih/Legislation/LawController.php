@@ -9,6 +9,7 @@ use App\Models\Institute;
 use App\Models\Legislation;
 use App\Models\Post;
 use App\Http\Traits\VisitorTrait;
+use App\Models\Link;
 use Illuminate\Http\Request;
 
 class LawController extends LegislationController
@@ -138,6 +139,11 @@ class LawController extends LegislationController
             ->take(5)
             ->get();
 
+        $asideBanners = Link::banners('aside')
+            ->published()
+            ->sorted()
+            ->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/share/share.js',
@@ -153,6 +159,7 @@ class LawController extends LegislationController
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
             ->with('banners', $this->banners())
+            ->with('asideBanners', $asideBanners)
             ->with('shares', $this->shares());
     }
 }

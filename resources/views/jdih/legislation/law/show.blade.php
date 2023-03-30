@@ -409,13 +409,16 @@
                 </div>
                 <!-- /latest news -->
 
-                <!-- Infographs -->
+                @if (isset($asideBanners) AND $asideBanners->count() > 0)
+                <!-- Aside banners -->
                 <div class="mt-4">
-                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2023-02-20_at_11_30_59.jpeg') }}" class="img-fluid shadow rounded">
-                    <img src="{{ asset('assets/jdih/images/demo/akhlak_biro_hukum.jpg') }}" class="img-fluid shadow rounded mt-3">
-                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2022-12-05_at_13_35_10.jpeg') }}" class="img-fluid shadow rounded mt-3">
+                    @foreach ($asideBanners as $banner)
+                        @break($loop->iteration > 3)
+                        <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid shadow rounded @if($loop->iteration > 1) mt-3 @endif" alt="{{ $banner->title }}"></a>
+                    @endforeach
                 </div>
-                <!-- /infographs -->
+                <!-- /aside banners -->
+                @endif
 
             </aside>
         </div>
