@@ -212,7 +212,7 @@ class MonographController extends LegislationController
 
         if ($request->hasFile('attachment'))
         {
-            $this->storeDocument($request->file('attachment'), $legislation, 'attachment');
+            $this->storeDocument($request->file('attachment'), $legislation, 'master');
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -283,7 +283,7 @@ class MonographController extends LegislationController
             ->first();
 
         $attachment = $legislation->documents()
-            ->ofType('attachment')
+            ->ofType('master')
             ->first();
 
         $vendors = [
