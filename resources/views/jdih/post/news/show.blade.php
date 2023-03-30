@@ -44,10 +44,10 @@
                         </ul>
                     </div>
 
-                    <figure class="card-image">
+                    <figure class="card-image mx-auto">
                         <img src="{{ $news->cover->source }}" class="figure-img img-fluid" alt="{{ $news->cover->name }}">
                         @isset($news->cover->caption)
-                            <figcaption class="figure-caption fs-6 px-4">{{ $news->cover->caption }}</figcaption>
+                            <figcaption class="figure-caption fs-6 px-4 text-center">{{ $news->cover->caption }}</figcaption>
                         @endisset
                     </figure>
 
@@ -116,16 +116,18 @@
             <div class="content-wrapper">
                 <div class="content py-4">
                     <h2 class="fw-bold section-title text-center mb-4 pb-2">Lihat Berita {{ $news->taxonomy->name }} lainnya</h2>
-                    <div class="row gx-5">
+                    <div class="row gx-4">
                         @foreach ($otherNews as $news)
                             <div class="col-xl-4 my-3">
                                 <div class="card shadow">
+
+                                    <figure class="figure card-img mb-0">
+                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
+                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0" alt="{{ $news->cover->name }}">
+                                        </a>
+                                    </figure>
+
                                     <div class="card-body">
-                                        <figure class="figure">
-                                            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                                <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded m-0" alt="{{ $news->cover->name }}">
-                                            </a>
-                                        </figure>
 
                                         <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</a>
                                         <h4 class="card-title pt-1 mb-1">

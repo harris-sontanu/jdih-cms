@@ -249,14 +249,6 @@
                 @endif
                 <!-- /latest news -->
 
-                <!-- Infographs -->
-                {{-- <div class="mt-4">
-                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2023-02-20_at_11_30_59.jpeg') }}" class="img-fluid shadow rounded">
-                    <img src="{{ asset('assets/jdih/images/demo/akhlak_biro_hukum.jpg') }}" class="img-fluid shadow rounded mt-3">
-                    <img src="{{ asset('assets/jdih/images/demo/WhatsApp_Image_2022-12-05_at_13_35_10.jpeg') }}" class="img-fluid shadow rounded mt-3">
-                </div> --}}
-                <!-- /infographs -->
-
             </aside>
 
         </div>
@@ -280,8 +272,8 @@
                             <div class="col-xl-3 my-3">
                                 <div class="card lift h-100">
                                     <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug])}}" class="text-body">
-                                        <div class="card-img-actions mx-1 mt-1">
-                                            <img class="card-img img-fluid" src="{{ $monograph->coverSource }}" alt="">
+                                        <div class="card-img-actions">
+                                            <img class="card-img-top img-fluid" src="{{ $monograph->coverSource }}" alt="">
                                         </div>
 
                                         <div class="card-body fs-lg pb-0">

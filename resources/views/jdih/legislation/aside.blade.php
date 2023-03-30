@@ -14,28 +14,28 @@
                     <h5 class="fw-bold">Monografi Hukum</h5>
                 </div>
 
-                <div id="carouselExampleIndicators" class="carousel slide shadow rounded" data-bs-ride="carousel">
+                <div id="carouselMonographs" class="carousel slide shadow rounded" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($latestMonographs as $monograph)
                             <div class="carousel-item @if ($loop->first) active @endif">
                                 <div class="card shadow-none m-0">
                                     <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug]) }}">
-                                        <img class="card-img-top img-fluid" src="{{ $monograph->coverThumbSource }}">
+                                        <img class="card-img-top img-fluid" src="{{ $monograph->coverThumbSource }}" style="height: 450px;">
                                     </a>
 
                                     <div class="card-body">
-                                        <h6 class="card-title mb-0">{{ $monograph->title }}</h6>
+                                        <h6 class="card-title mb-0 text-truncate" title="{{ $monograph->title }}">{{ $monograph->title }}</h6>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselMonographs"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselMonographs"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>

@@ -56,13 +56,12 @@
                 @foreach ($posts as $news)
                     <article class="col-xl-6 mb-4">
                         <div class="card shadow mb-0">
+                            <figure class="figure mb-0">
+                                <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
+                                    <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0" alt="{{ $news->cover->name }}">
+                                </a>
+                            </figure>
                             <div class="card-body">
-                                <figure class="figure">
-                                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                        <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded m-0" alt="{{ $news->cover->name }}">
-                                    </a>
-                                </figure>
-
                                 <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-danger bg-opacity-10 text-danger rounded-pill">{{ $news->taxonomy->name }}</a>
                                 <h4 class="card-title pt-1 mb-1">
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="text-body">{{ $news->title }}</a>
