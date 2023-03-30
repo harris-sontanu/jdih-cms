@@ -30,7 +30,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <main class="content row gx-5">
+        <div class="content row gx-5">
 
             @include('jdih.layouts.like-and-share', ['like' => 5, 'view' => $legislation->view, 'download' => $legislation->documents->sum('download')])
 
@@ -146,7 +146,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bidang Hukum</h4>
-                                    <u><a href="{{ route('legislation.monograph.index', ['field' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a></u>
+                                    <u><a href="{{ route('legislation.monograph.index', ['fields[]' => $legislation->field->slug]) }}" class="text-body">{{ $legislation->field->name }}</a></u>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Bahasa</h4>

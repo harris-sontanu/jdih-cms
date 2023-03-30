@@ -95,7 +95,7 @@ class ArticleController extends LegislationController
             ->whereNot('id', $legislation->id)
             ->published()
             ->sorted()
-            ->take(6)
+            ->take(4)
             ->get();
 
         $vendors = [
@@ -109,6 +109,7 @@ class ArticleController extends LegislationController
             'otherLegislations',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
+            ->with('banners', $this->banners())
             ->with('shares', $this->shares());
     }
 }
