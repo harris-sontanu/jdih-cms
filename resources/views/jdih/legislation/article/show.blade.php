@@ -141,6 +141,21 @@
 
                 </article>
 
+                @isset($legislation->masterDocumentSource)
+                    <!-- Documents preview -->
+                    <section class="card shadow-sm fs-lg mb-4">
+                        <div class="card-header border-bottom-0 pb-0 px-4">
+                            <h4 class="fw-bold mb-0">Pratinjau Dokumen</h4>
+                        </div>
+                        <div class="card-body">
+                            <figure id="master-view" data-file="{{ $legislation->masterDocumentSource }}" data-name="{{ $legislation->masterDocument()->media->name }}" class="rounded mb-0" style="height: 720px;">
+                            </figure>
+                            @include('jdih.legislation.pdfEmbed', ['el' => 'master-view'])
+                        </div>
+                    </section>
+                    <!-- /documents preview -->
+                @endisset
+
                 @if (isset($banners) AND $banners->count() > 3)
                     <!-- Banners -->
                     <section class="mb-4">
