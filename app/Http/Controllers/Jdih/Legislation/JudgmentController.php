@@ -7,6 +7,8 @@ use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Legislation;
+use App\Models\Post;
+use App\Models\Link;
 use Illuminate\Support\Facades\Config;
 
 class JudgmentController extends LegislationController
@@ -97,6 +99,17 @@ class JudgmentController extends LegislationController
             ->take(6)
             ->get();
 
+        $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
+            ->published()
+            ->latestPublished()
+            ->take(5)
+            ->get();
+
+        $asideBanners = Link::banners('aside')
+            ->published()
+            ->sorted()
+            ->get();
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/share/share.js',
@@ -106,8 +119,11 @@ class JudgmentController extends LegislationController
             'legislation',
             'adobeKey',
             'otherLegislations',
+            'latestNews',
+            'asideBanners',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
+            ->with('banners', $this->banners())
             ->with('shares', $this->shares());
     }
 }

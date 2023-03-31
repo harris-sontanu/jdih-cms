@@ -54,7 +54,7 @@
                     @foreach ($latestLaws as $law)
                         <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
                             <a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug]) }}" class="me-3 mb-3">
-                                <img @isset ($law->masterDocumentSource) data-pdf-thumbnail-file="{{ $law->masterDocumentSource }}" @endisset src="{{ $law->coverThumbSource }}" alt="{{ $law->title }}" class="rounded shadow" width="48">
+                                <img @isset ($law->masterDocumentSource) data-pdf-thumbnail-file="{{ $law->masterDocumentSource }}" @endisset src="{{ $law->coverThumbSource }}" alt="{{ $law->title }}" class="rounded shadow" width="64">
                             </a>
                             <div class="flex-fill">
                                 <h6 class="mb-1"><a href="{{ route('legislation.law.show', ['category' => $law->category->slug, 'legislation' => $law->slug]) }}" class="fw-semibold text-body">{{ $law->shortTitle }}</a></h6>

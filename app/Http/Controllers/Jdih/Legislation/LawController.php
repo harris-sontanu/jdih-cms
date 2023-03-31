@@ -156,10 +156,10 @@ class LawController extends LegislationController
             'documentRelationships',
             'otherLegislations',
             'latestNews',
+            'asideBanners',
             'vendors',
         ))->with('adobeKey', $this->adobeKey())
             ->with('banners', $this->banners())
-            ->with('asideBanners', $asideBanners)
             ->with('shares', $this->shares());
     }
 }

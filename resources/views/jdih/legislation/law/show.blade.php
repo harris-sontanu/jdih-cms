@@ -396,7 +396,7 @@
                     @foreach ($latestNews as $news)
                         <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
                             <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
-                                <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
+                                <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="64">
                             </a>
                             <div class="flex-fill">
                                 <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
@@ -410,14 +410,14 @@
                 <!-- /latest news -->
 
                 @if (isset($asideBanners) AND $asideBanners->count() > 0)
-                <!-- Aside banners -->
-                <div class="mt-4">
-                    @foreach ($asideBanners as $banner)
-                        @break($loop->iteration > 3)
-                        <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid shadow rounded @if($loop->iteration > 1) mt-3 @endif" alt="{{ $banner->title }}"></a>
-                    @endforeach
-                </div>
-                <!-- /aside banners -->
+                    <!-- Aside banners -->
+                    <div class="mt-4">
+                        @foreach ($asideBanners as $banner)
+                            @break($loop->iteration > 3)
+                            <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid shadow rounded @if($loop->iteration > 1) mt-3 @endif" alt="{{ $banner->title }}"></a>
+                        @endforeach
+                    </div>
+                    <!-- /aside banners -->
                 @endif
 
             </aside>
