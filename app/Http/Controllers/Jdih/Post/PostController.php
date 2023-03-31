@@ -9,7 +9,7 @@ use App\Models\Link;
 
 class PostController extends JdihController
 {
-    protected $limit = 12;
+    protected $limit = 10;
 
     protected function popularNews()
     {

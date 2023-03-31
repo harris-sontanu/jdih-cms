@@ -6,7 +6,7 @@
             @include($view)
         @endisset
 
-        @include('jdih.post.aside-content')        
+        @include('jdih.post.aside-content')
 
     </div>
 

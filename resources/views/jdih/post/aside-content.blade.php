@@ -1,16 +1,18 @@
 <!-- Popular News -->
 @if (isset($popularNews) AND $popularNews->count() > 0)
 <div class="mb-4">
-    <h5 class="fw-bold mb-3">Berita Populer</h5>
+    <h4 class="fw-bold mb-3">Berita Populer</h4>
 
     @foreach ($popularNews as $news)
-        <div class="d-flex @if (!$loop->last) mb-3 border-bottom @endif">
-            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
-                <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="64">
-            </a>
+        <div class="d-flex mb-3">
+            <div class="me-3">
+                <div class="bg-danger bg-opacity-10 text-danger lh-1 rounded-pill p-2">
+                    <span class="letter-icon">0{{ $loop->iteration }}</span>
+                </div>
+            </div>
             <div class="flex-fill">
                 <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
-                <ul class="list-inline list-inline-bullet text-muted fs-sm @if ($loop->last) mb-0 @endif">
+                <ul class="list-inline list-inline-bullet text-muted fs-sm mb-0">
                     <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
                 </ul>
             </div>
@@ -24,7 +26,7 @@
 <!-- YouTubes -->
 @if (isset($youtubes) AND $youtubes->count() > 0)
 <div class="mb-4">
-    <h5 class="fw-bold mb-3">Video</h5>
+    <h4 class="fw-bold mb-3">Video</h4>
 
     <div id="carouselExampleIndicators" class="carousel shadow slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -59,7 +61,7 @@
 <!-- Photos -->
 @if (isset($photos) AND $photos->count() > 0)
 <div class="mb-4">
-    <h5 class="fw-bold mb-3">Galeri Foto</h5>
+    <h4 class="fw-bold mb-3">Galeri Foto</h4>
     <div class="row g-0">
         @php
             $imgClass = null;
