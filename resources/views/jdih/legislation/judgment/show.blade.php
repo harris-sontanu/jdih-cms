@@ -103,7 +103,7 @@
                             <div class="row flex-fill">
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Tgl. Dibacakan</h4>
-                                    <p class="mb-0">{{ $legislation->dateFormatted($legislation->published) }}</p>
+                                    <p class="mb-0">{{ $legislation->timeFormatted($legislation->published, 'j F Y') }}</p>
                                 </div>
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">T.E.U. Badan</h4>
@@ -205,7 +205,7 @@
             <aside class="col-xl-3">
 
                 <!-- Download -->
-                <div class="card shadow">
+                <div class="card shadow mb-4">
 
                     <div class="card-body">
                         <div class="text-center pt-2">
@@ -231,40 +231,7 @@
                 </div>
                 <!-- /download -->
 
-                <!-- Latest News -->
-                @if (isset($latestNews) AND $latestNews->count() > 0)
-                    <div class="mt-4">
-                        <h5 class="fw-bold mb-3">Berita Terbaru</h5>
-
-                        <div class="sidebar-section-body px-0 pb-0">
-                            @foreach ($latestNews as $news)
-                                <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
-                                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
-                                        <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="64">
-                                    </a>
-                                    <div class="flex-fill">
-                                        <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
-                                        <ul class="list-inline list-inline-bullet text-muted fs-sm">
-                                            <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-                <!-- /latest news -->
-
-                @if (isset($asideBanners) AND $asideBanners->count() > 0)
-                    <!-- Aside banners -->
-                    <div class="mt-4">
-                        @foreach ($asideBanners as $banner)
-                            @break($loop->iteration > 3)
-                            <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid shadow rounded @if($loop->iteration > 1) mt-3 @endif" alt="{{ $banner->title }}"></a>
-                        @endforeach
-                    </div>
-                    <!-- /aside banners -->
-                @endif
+                @include('jdih.legislation.rightbar')
 
             </aside>
 

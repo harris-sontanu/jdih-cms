@@ -94,6 +94,16 @@ a.text-body:focus {
     --bg-opacity: 0.85;
 }
 
+.scrollable {
+    max-height: 32.5rem;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .active > .page-link, .page-link.active {
     background-color: #ef4444;
     border-color: #ef4444;

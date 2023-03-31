@@ -350,7 +350,7 @@
             <aside class="col-xl-3">
 
                 <!-- Download -->
-                <div class="card shadow">
+                <div class="card shadow mb-4">
 
                     <div class="card-body">
                         <div class="text-center pt-2">
@@ -389,36 +389,7 @@
                 </div>
                 <!-- /download -->
 
-                <!-- Latest News -->
-                <div class="mt-4">
-                    <h5 class="fw-bold mb-3">Berita Terbaru</h5>
-
-                    @foreach ($latestNews as $news)
-                        <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
-                            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
-                                <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="64">
-                            </a>
-                            <div class="flex-fill">
-                                <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
-                                <ul class="list-inline list-inline-bullet text-muted fs-sm @if ($loop->last) mb-0 @endif">
-                                    <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <!-- /latest news -->
-
-                @if (isset($asideBanners) AND $asideBanners->count() > 0)
-                    <!-- Aside banners -->
-                    <div class="mt-4">
-                        @foreach ($asideBanners as $banner)
-                            @break($loop->iteration > 3)
-                            <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid shadow rounded @if($loop->iteration > 1) mt-3 @endif" alt="{{ $banner->title }}"></a>
-                        @endforeach
-                    </div>
-                    <!-- /aside banners -->
-                @endif
+                @include('jdih.legislation.rightbar')
 
             </aside>
         </div>

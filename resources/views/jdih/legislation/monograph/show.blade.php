@@ -212,7 +212,7 @@
             <aside class="col-xl-3">
 
                 <!-- Download -->
-                <div class="card shadow">
+                <div class="card shadow mb-4">
 
                     <img class="card-img-top img-fluid border-bottom" src="{{ $legislation->coverSource }}" alt="{{ $legislation->title }}">
 
@@ -240,29 +240,7 @@
                 </div>
                 <!-- /download -->
 
-                <!-- Latest News -->
-                @if (isset($latestNews) AND $latestNews->count() > 0)
-                    <div class="mt-4">
-                        <h5 class="fw-bold mb-3">Berita Terbaru</h5>
-
-                        <div class="sidebar-section-body px-0 pb-0">
-                            @foreach ($latestNews as $news)
-                                <div class="d-flex mb-3 @if (!$loop->last) border-bottom @endif">
-                                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="me-3">
-                                        <img src="{{ $news->cover->thumbSource }}" class="rounded shadow" alt="{{ $news->cover->name }}" width="48">
-                                    </a>
-                                    <div class="flex-fill">
-                                        <h6 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="fw-semibold text-body">{{ $news->title }}</a></h6>
-                                        <ul class="list-inline list-inline-bullet text-muted fs-sm">
-                                            <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-                <!-- /latest news -->
+                @include('jdih.legislation.rightbar')
 
             </aside>
 

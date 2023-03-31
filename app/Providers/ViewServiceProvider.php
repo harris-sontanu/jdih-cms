@@ -52,7 +52,7 @@ class ViewServiceProvider extends ServiceProvider
         View::share($settings);
 
         View::composer(
-            ['jdih.layouts.footer', 'jdih.legislation.aside'],
+            ['jdih.layouts.footer', 'jdih.legislation.leftbar'],
             FooterComposer::class
         );
     }

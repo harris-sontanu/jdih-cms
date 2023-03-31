@@ -35,7 +35,7 @@
 <!-- Page container -->
 <div class="page-content container">
 
-    @include('jdih.legislation.aside', ['view' => 'jdih.legislation.article.filter'])
+    @include('jdih.legislation.leftbar', ['view' => 'jdih.legislation.article.filter'])
 
     <!-- Main content -->
     <div class="content-wrapper">
