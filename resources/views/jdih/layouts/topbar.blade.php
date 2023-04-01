@@ -37,7 +37,7 @@
                 </a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown ms-lg-2">
                 <a href="#" class="navbar-nav-link rounded dropdown-toggle" data-bs-toggle="dropdown" title="Pilih Bahasa">
                     <img src="{{ asset('assets/jdih/images/lang/id.svg') }}" class="h-16px me-2" alt="Indonesian">
                     ID

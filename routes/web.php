@@ -99,3 +99,4 @@ Route::name('gallery.')->group(function () {
 });
 
 Route::get('/kontak', [PageController::class, 'contact'])->name('contact');
+Route::get('/survei', [PageController::class, 'survey'])->name('survey');

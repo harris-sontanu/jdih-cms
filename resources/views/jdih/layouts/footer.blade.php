@@ -84,10 +84,10 @@
 						</ul>
                         <hr>
                         <h5 class="fw-bold">Apakah pelayanan dokumentasi di Biro Hukum Setda Provinsi Bali dirasa puas?</h5>
-                        <button type="button" class="btn btn-outline-yellow btn-icon">
+                        <a href="/survei" class="btn btn-outline-yellow btn-icon">
                             <i class="ph-pencil-line ms-lg-1"></i>
                             <span class="d-none d-lg-inline-block ms-2 me-1">Ikuti Survei IKM</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

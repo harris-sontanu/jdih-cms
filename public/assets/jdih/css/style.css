@@ -15,6 +15,10 @@ a.text-body:focus {
     margin-top: -6rem !important;
 }
 
+.post-container {
+    padding: 2.8rem 3rem 2.8rem;
+}
+
 .form-control:focus {
     border-color: #ef4444;
     box-shadow: 0 0 0 0.125rem rgba(239, 68, 68, 0.25);
