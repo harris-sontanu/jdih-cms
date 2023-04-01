@@ -41,7 +41,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <main class="content ms-lg-3">
+        <main class="content">
 
             <section class="d-flex align-items-center mb-3">
                 <p class="mb-0">

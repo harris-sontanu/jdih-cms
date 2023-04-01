@@ -30,7 +30,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <div class="content row gx-5">
+        <div class="content row gx-4">
 
             @include('jdih.layouts.like-and-share', ['like' => 5, 'view' => $legislation->view, 'download' => $legislation->documents->sum('download')])
 

@@ -30,7 +30,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <div class="content row gx-5">
+        <div class="content row gx-4">
 
             @include('jdih.layouts.like-and-share', ['like' => 5, 'view' => $legislation->view, 'download' => $legislation->documents->sum('download')])
 
@@ -231,7 +231,7 @@
                                 <div class="card lift h-100">
                                     <a href="{{ route('legislation.article.show', ['category' => $article->category->slug, 'legislation' => $article->slug])}}" class="text-body">
                                         <div class="card-img-actions">
-                                            <img class="card-img-top img-fluid" src="{{ $article->coverSource }}" alt="">
+                                            <img class="card-img-top img-fluid h-450 object-fit-cover" src="{{ $article->coverSource }}" alt="{{ $article->title }}">
                                         </div>
 
                                         <div class="card-body fs-lg pb-0">
