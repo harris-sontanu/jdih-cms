@@ -29,26 +29,6 @@
             return true;
         });
 
-		$('#search-dropdown').on('keyup change', function() {
-			let search 	= $(this).val(),
-				dom		= $('#search-dropdown-results');
-
-				console.log(search);
-
-			if (search.length > 0) {
-				$(this).dropdown('show');
-
-				$.get('/legislation/search', {search: search})
-				.done(function(html){
-					dom.html(html);
-				});
-			}
-		})
-
-		$('body').click(function() {
-			$('#search-dropdown').dropdown('hide');
-		})
-
         const bannerSlider = tns({
             "container": "#banner-slider",
             "loop": true,

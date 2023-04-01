@@ -42,6 +42,29 @@
 	<script src="{{ asset('assets/jdih/js/app.js') }}"></script>
 	<script async src="https://unpkg.com/typer-dot-js@0.1.0/typer.js"></script>
     <script src="{{ asset('assets/jdih/js/pdfThumbnails.js') }}" data-pdfjs-src="{{ asset('assets/jdih/js/vendor/pdf.js/build/pdf.js') }}"></script>
+    <script>
+        $(function() {
+            $('#search-dropdown').on('keyup change', function() {
+                let search 	= $(this).val(),
+                    dom		= $('#search-dropdown-results');
+
+                    console.log(search);
+
+                if (search.length > 0) {
+                    $(this).dropdown('show');
+
+                    $.get('/legislation/search', {search: search})
+                    .done(function(html){
+                        dom.html(html);
+                    });
+                }
+            })
+
+            $('body').click(function() {
+                $('#search-dropdown').dropdown('hide');
+            })
+        })
+    </script>
 
     @yield('script')
 	<!-- /theme JS files -->

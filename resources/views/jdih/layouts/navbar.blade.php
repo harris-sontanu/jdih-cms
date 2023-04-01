@@ -52,7 +52,7 @@
                 </li>
 
                 <li class="nav-item ms-lg-auto">
-                    <a href="index.html" class="navbar-nav-link fw-semibold rounded">
+                    <a href="{{ route('contact') }}" class="navbar-nav-link fw-semibold rounded {{ request()->is('kontak*') ? 'active fw-bold' : 'fw-semibold' }}">
                         Kontak
                     </a>
                 </li>
