@@ -6,6 +6,7 @@ use App\Http\Controllers\Jdih\JdihController;
 use App\Http\Traits\VisitorTrait;
 use Illuminate\Http\Request;
 use App\Models\Media;
+use App\Models\Link;
 
 class GalleryController extends JdihController
 {
@@ -17,7 +18,7 @@ class GalleryController extends JdihController
         $this->recordVisitor($request);
     }
 
-    public function photo(Request $request)
+    public function photo()
     {
         $photos = Media::images()
             ->published()
@@ -33,5 +34,16 @@ class GalleryController extends JdihController
             'photos',
             'vendors',
         ));
+    }
+
+    public function video()
+    {
+        $videos = Link::youtubes()
+            ->published()
+            ->sorted()
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('jdih.gallery.video')->with('videos', $videos);
     }
 }

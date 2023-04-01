@@ -1,6 +1,6 @@
 @extends('jdih.layouts.app')
 
-@section('title', 'Galeri Foto | ' . strip_tags($appName))
+@section('title', 'Galeri Video | ' . strip_tags($appName))
 @section('content')
 
 <!-- Page title -->
@@ -11,7 +11,7 @@
                 <div class="page-header text-center">
                     <div class="page-header-content">
                         <div class="page-title pt-5 pb-7">
-                            <h2 class="d-block display-6 fw-bold mb-0">Galeri Foto</h2>
+                            <h2 class="d-block display-6 fw-bold mb-0">Galeri Video</h2>
                         </div>
                     </div>
                 </div>
@@ -30,24 +30,19 @@
         <!-- Content area -->
         <main class="content row gx-4">
 
-            @forelse ($photos as $photo)
+            @forelse ($videos as $video)
                 <div class="col-xl-4">
                     <article class="card shadow post-entry mb-4">
-                        <figure class="card-img-actions m-0">
-                            <img class="card-img img-fluid h-450 object-fit-cover" src="{{ $photo->thumbSource }}">
-                            <div class="card-img-actions-overlay card-img">
-                                <a href="{{ $photo->source }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
-                                    <i class="ph-plus"></i>
-                                </a>
-                            </div>
-                        </figure>
+                        <div class="ratio ratio-16x9">
+                            {!! $video->youtubeThumbUrl !!}
+                        </div>
                     </article>
                 </div>
             @empty
 
             @endforelse
 
-            {{ $photos->links('jdih.layouts.pagination') }}
+            {{ $videos->links('jdih.layouts.pagination') }}
 
         </main>
         <!-- /content area -->

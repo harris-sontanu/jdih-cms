@@ -87,7 +87,7 @@
 
             <div class="card-img-actions">
                 <a href="{{ $photo->source }}" class="text-white" data-bs-popup="lightbox">
-                    <img class="img-fluid {{ $imgClass }}" src="{{ $photo->fitSource }}" alt="{{ $photo->title }}">
+                    <img class="img-fluid {{ $imgClass }} wh-100 object-fit-cover" src="{{ $photo->thumbSource }}" alt="{{ $photo->title }}">
                     <span class="card-img-actions-overlay {{ $imgClass }}">
                         <i class="ph-plus"></i>
                     </span>
