@@ -67,7 +67,7 @@ class HomepageController extends JdihController
         $latestNews = Post::ofType('news')->with('taxonomy', 'author', 'cover')
             ->published()
             ->latestPublished()
-            ->limit(3)
+            ->limit(6)
             ->get();
 
         $members = Employee::ofGroup('pengelola-jdih')

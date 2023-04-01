@@ -409,7 +409,7 @@
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
                         <a href="{{ route('news.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="row gx-4">
+                    <div id="news-slider" class="row gx-4">
                         @foreach ($latestNews as $news)
                             <div class="col-xl-4 my-3">
                                 <div class="card shadow">

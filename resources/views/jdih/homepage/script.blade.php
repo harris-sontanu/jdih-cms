@@ -67,8 +67,20 @@
             "navPosition": "bottom",
         });
 
-        var memberSlider = tns({
+        const memberSlider = tns({
             "container": "#member-slider",
+            "loop": true,
+            "items": 3,
+            "gutter": 20,
+            "controls": false,
+            "mouseDrag": true,
+            "slideBy": 1,
+            "nav": true,
+            "navPosition": "bottom",
+        });
+
+        const newsSlider = tns({
+            "container": "#news-slider",
             "loop": true,
             "items": 3,
             "gutter": 20,
