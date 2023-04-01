@@ -91,9 +91,11 @@ Route::name('news.')->group(function () {
     });
 });
 
-Route::get('/profil/{post:slug}', PageController::class)->name('profile');
+Route::get('/profil/{post:slug}', [PageController::class, 'profile'])->name('profile');
 
 Route::name('gallery.')->group(function () {
     Route::get('/galeri/foto', [GalleryController::class, 'photo'])->name('photo');
     Route::get('/galeri/video', [GalleryController::class, 'video'])->name('video');
 });
+
+Route::get('/kontak', [PageController::class, 'contact'])->name('contact');

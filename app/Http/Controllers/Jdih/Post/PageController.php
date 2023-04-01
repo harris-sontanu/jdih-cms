@@ -17,12 +17,19 @@ class PageController extends PostController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Post $post)
+    public function profile(Post $post)
     {
         // Record visitor
         $this->recordVisitor(request());
 
         return view('jdih.post.page')->with('page', $post);
+    }
+
+    public function contact()
+    {
+        $post = Post::whereSlug('kontak')->first();
+
+        return view('jdih.post.contact')->with('page', $post);
     }
 
 }
