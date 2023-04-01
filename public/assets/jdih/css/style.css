@@ -94,6 +94,18 @@ a.text-body:focus {
     --bg-opacity: 0.85;
 }
 
+.h-250 {
+    height: 250px;
+}
+
+.h-450 {
+    height: 450px;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
 .scrollable {
     max-height: 32.5rem;
     display: -ms-flexbox;

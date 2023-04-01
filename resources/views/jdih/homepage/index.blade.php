@@ -111,13 +111,13 @@
 
             @isset ($popularLaw)
                 <!-- Popular law -->
-                <div class="row pb-5">
+                <div class="row pb-5 gx-5">
                     <div class="col-xl-6 m-auto">
                         <figure id="adobe-dc-view" data-file="{{ $popularLaw->masterDocumentSource }}" data-name="{{ $popularLaw->masterDocument()->media->file_name }}" class="rounded shadow" style="height: 700px;">
                         </figure>
                         @include('jdih.legislation.pdfEmbed', ['el' => 'adobe-dc-view'])
                     </div>
-                    <div class="col-xl-5 offset-xl-1">
+                    <div class="col-xl-6">
                         <span class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2"><i class="ph-fire me-2"></i>Terhangat</span>
                         <a href="{{ route('legislation.law.show', ['category' => $popularLaw->category->slug, 'legislation' => $popularLaw->slug]) }}" class="d-block display-6 fw-bold text-body mb-4">{{ $popularLaw->shortTitle }}</a>
                         <div class="fs-lg">
@@ -409,53 +409,31 @@
                         <h2 class="fw-bold me-xl-auto section-title mb-0">Berita dan Kegiatan Terbaru</h2>
                         <a href="{{ route('news.index') }}" class="btn btn-dark lift px-3 fw-semibold">Lihat semua Berita dan Kegiatan<i class="ph-arrow-right ms-2"></i></a>
                     </div>
-                    <div class="row">
+                    <div class="row gx-4">
                         @foreach ($latestNews as $news)
-                            @if ($loop->first)
-                                <!-- Highlight news -->
-                                <div class="post col-xl-7">
-                                    <figure class="figure">
-                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid rounded shadow" alt="{{ $news->cover->name }}">
-                                        </a>
-                                        <figcaption class="figure-caption fs-6">{{ $news->cover->caption }}</figcaption>
-                                    </figure>
-                                    <div class="post-title mt-2">
-                                        <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-2 fs-lg px-3 py-2">{{ $news->taxonomy->name }}</a>
-                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block display-7 fw-bold text-body mb-3">{{ $news->title }}</a>
-                                    </div>
-                                    <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
-                                        <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
-                                        <li class="list-inline-item"><i class="ph-user me-2"></i>{{ $news->author->name }}</li>
-                                        <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
-                                    </ul>
-                                    <p class="fs-5 mb-3">{!! strip_tags($news->excerpt) !!}</p>
-                                    <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news-> slug]) }}" class="btn btn-outline-danger lift px-3 me-3 fw-semibold">Baca Selengapnya<i class="ph-arrow-right ms-2"></i></a>
-                                </div>
-                                <!-- /highlight news -->
+                            <div class="col-xl-4 my-3">
+                                <div class="card shadow">
 
-                                <!-- Latest news -->
-                                <div class="col-xl-4 offset-xl-1">
-                            @else
-                                    <div class="post mb-4">
-                                        <figure class="figure">
-                                            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                                <img src="{{ $news->cover->source }}" class="figure-img mb-0 img-fluid rounded shadow" alt="{{ $news->cover->name }}">
-                                            </a>
-                                        </figure>
-                                        <div class="post-title">
-                                            <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="fw-bold badge bg-danger bg-opacity-10 text-danger rounded-pill mb-1">{{ $news->taxonomy->name }}</a>
-                                            <h4 class="mb-1"><a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="d-block fw-bold text-body">{!! $news->title !!}</a></h4>
-                                        </div>
-                                        <ul class="post-meta list-inline list-inline-bullet text-muted mb-3">
+                                    <figure class="figure card-img mb-0">
+                                        <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
+                                            <img src="{{ $news->cover->source }}" class="img-fluid card-img-top m-0 h-250 object-fit-cover" alt="{{ $news->cover->name }}">
+                                        </a>
+                                    </figure>
+
+                                    <div class="card-body">
+                                        <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</a>
+                                        <h4 class="card-title pt-1">
+                                            <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="text-body">{{ $news->title }}</a>
+                                        </h4>
+
+                                        <ul class="list-inline list-inline-bullet text-muted mb-0">
                                             <li class="list-inline-item"><i class="ph-calendar-blank me-2"></i>{{ $news->dateFormatted($news->published_at) }}</li>
                                             <li class="list-inline-item"><i class="ph-eye me-2"></i>{{ $news->view }}</li>
                                         </ul>
                                     </div>
-                            @endif
+                                </div>
+                            </div>
                         @endforeach
-                        </div>
-                        <!-- /latest news -->
                     </div>
                 </div>
             </div>
@@ -545,7 +523,7 @@
                         </div>
                         <div class="col-xl-8">
                             <div id="member-slider" class="row gx-4">
-                                @foreach ($members as $member)                                
+                                @foreach ($members as $member)
                                     <div class="col-xl-4">
                                         <div class="card shadow h-100">
                                             <div class="card-body text-center">
@@ -561,7 +539,7 @@
                         </div>
                     </div>
                 @endif
-                   
+
                 <h2 class="fw-bold section-title text-center mb-4 pb-2">Aplikasi Terkait JDIH</h2>
                 <div class="row gx-5">
 
@@ -611,7 +589,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
         </div>
     </div>

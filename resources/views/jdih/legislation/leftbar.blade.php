@@ -20,7 +20,7 @@
                             <div class="carousel-item @if ($loop->first) active @endif">
                                 <div class="card shadow-none m-0">
                                     <a href="{{ route('legislation.monograph.show', ['category' => $monograph->category->slug, 'legislation' => $monograph->slug]) }}">
-                                        <img class="card-img-top img-fluid" src="{{ $monograph->coverThumbSource }}" style="height: 450px;">
+                                        <img class="card-img-top img-fluid h-450 object-fit-cover" src="{{ $monograph->coverThumbSource }}">
                                     </a>
 
                                     <div class="card-body">

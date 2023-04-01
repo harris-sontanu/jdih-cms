@@ -123,14 +123,14 @@
 
                                     <figure class="figure card-img mb-0">
                                         <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0" alt="{{ $news->cover->name }}">
+                                            <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0" alt="{{ $news->cover->name }}" style="height: 250px; object-fit: cover">
                                         </a>
                                     </figure>
 
                                     <div class="card-body">
 
                                         <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-teal bg-opacity-10 text-teal rounded-pill">{{ $news->taxonomy->name }}</a>
-                                        <h4 class="card-title pt-1 mb-1">
+                                        <h4 class="card-title pt-1">
                                             <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="text-body">{{ $news->title }}</a>
                                         </h4>
 

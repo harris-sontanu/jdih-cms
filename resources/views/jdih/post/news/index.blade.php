@@ -50,7 +50,7 @@
     <div class="content-wrapper">
 
         <!-- Content area -->
-        <main class="content ms-lg-3">
+        <main class="content">
 
             <div class="row gx-4">
                 @foreach ($posts as $news)
@@ -58,12 +58,12 @@
                         <div class="card shadow mb-0">
                             <figure class="figure mb-0">
                                 <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}">
-                                    <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0" alt="{{ $news->cover->name }}">
+                                    <img src="{{ $news->cover->source }}" class="figure-img img-fluid card-img-top m-0 h-250 object-fit-cover" alt="{{ $news->cover->name }}">
                                 </a>
                             </figure>
                             <div class="card-body">
                                 <a href="{{ route('news.taxonomy', ['taxonomy' => $news->taxonomy->slug]) }}" class="badge bg-danger bg-opacity-10 text-danger rounded-pill">{{ $news->taxonomy->name }}</a>
-                                <h4 class="card-title pt-1 mb-1">
+                                <h4 class="card-title pt-1">
                                     <a href="{{ route('news.show', ['taxonomy' => $news->taxonomy->slug, 'post' => $news->slug]) }}" class="text-body">{{ $news->title }}</a>
                                 </h4>
 
