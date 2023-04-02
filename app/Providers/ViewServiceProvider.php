@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use App\Models\Visitor;
 use App\View\Composers\FooterComposer;
 
 class ViewServiceProvider extends ServiceProvider
@@ -55,5 +56,19 @@ class ViewServiceProvider extends ServiceProvider
             ['jdih.layouts.footer', 'jdih.legislation.leftbar'],
             FooterComposer::class
         );
+
+        View::composer('jdih.layouts.footer', function ($view) {
+            $todayVisitor = Visitor::countDaily()->get()->count();
+            $yesterdayVisitor = Visitor::countDaily(1)->get()->count();
+            $lastWeekVisitor = Visitor::countWeekly()->get()->count();
+            $lastMonthVisitor = Visitor::countMonthly()->get()->count();
+            $allVisitor = Visitor::countAll()->get()->count();
+
+            return $view->with('todayVisitor', $todayVisitor)
+                ->with('yesterdayVisitor', $yesterdayVisitor)
+                ->with('lastWeekVisitor', $lastWeekVisitor)
+                ->with('lastMonthVisitor', $lastMonthVisitor)
+                ->with('allVisitor', $allVisitor);
+        });
     }
 }

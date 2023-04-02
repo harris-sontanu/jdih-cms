@@ -76,14 +76,29 @@
                     <div class="col-lg-3">
                         <h4 class="fw-bold">Statistik Pengunjung</h4>
                         <ul class="list list-unstyled mb-0">
-							<li class="d-flex"><span class="me-auto">Hari ini</span><label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">308</label></li>
-							<li class="d-flex"><span class="me-auto">Minggu lalu</span><label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">10.325</label></li>
-							<li class="d-flex"><span class="me-auto">Bulan lalu</span><label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">43.804</label></li>
-							<li class="d-flex"><span class="me-auto">Total</span><label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">1.923.993</label></li>
-							<li class="d-flex"><span class="me-auto">Online</span><label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">38</label></li>
+							<li class="d-flex">
+                                <span class="me-auto">Hari ini</span>
+                                <label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">{{ $todayVisitor }}</label>
+                            </li>
+                            <li class="d-flex">
+                                <span class="me-auto">Kemarin</span>
+                                <label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">{{ $yesterdayVisitor }}</label>
+                            </li>
+							<li class="d-flex">
+                                <span class="me-auto">Minggu lalu</span>
+                                <label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">{{ $lastWeekVisitor }}</label>
+                            </li>
+							<li class="d-flex">
+                                <span class="me-auto">Bulan lalu</span>
+                                <label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">{{ $lastMonthVisitor }}</label>
+                            </li>
+							<li class="d-flex">
+                                <span class="me-auto">Total</span>
+                                <label class="badge bg-light bg-opacity-20 text-reset rounded-pill pull-end">{{ $allVisitor }}</label>
+                            </li>
 						</ul>
                         <hr>
-                        <h5 class="fw-bold">Apakah pelayanan dokumentasi di Biro Hukum Setda Provinsi Bali dirasa puas?</h5>
+                        <h5 class="fw-bold">Apakah pelayanan dokumentasi di {{ $company }} dirasa puas?</h5>
                         <a href="{{ route('questionner') }}" target="_blank" class="btn btn-outline-yellow btn-icon">
                             <i class="ph-pencil-line ms-lg-1"></i>
                             <span class="d-none d-lg-inline-block ms-2 me-1">Ikuti Survei IKM</span>
