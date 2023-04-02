@@ -92,14 +92,16 @@ Route::name('news.')->group(function () {
     });
 });
 
-Route::get('/profil/{post:slug}', [PageController::class, 'profile'])->name('profile');
+Route::controller(PageController::class)->group(function () {
+    Route::get('/profil/{post:slug}', 'profile')->name('profile');
+    Route::get('/kebijakan/{post:slug}', 'policy')->name('policy');
+    Route::get('/kontak', 'contact')->name('contact');
+});
 
 Route::name('gallery.')->group(function () {
     Route::get('/galeri/foto', [GalleryController::class, 'photo'])->name('photo');
     Route::get('/galeri/video', [GalleryController::class, 'video'])->name('video');
 });
-
-Route::get('/kontak', [PageController::class, 'contact'])->name('contact');
 
 Route::controller(VoteController::class)->group(function () {
     Route::get('kuisioner', 'show')->name('questionner');

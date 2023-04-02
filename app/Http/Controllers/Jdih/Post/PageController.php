@@ -35,4 +35,8 @@ class PageController extends PostController
         return view('jdih.post.contact')->with('page', $post);
     }
 
+    public function policy(Post $post)
+    {
+        return view('jdih.post.page')->with('page', $post);
+    }
 }

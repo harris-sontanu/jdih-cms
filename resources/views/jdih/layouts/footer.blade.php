@@ -115,8 +115,8 @@
     <div class="container px-lg-3">
         <span class="navbar-text d-block d-xl-inline-block">&copy; {{ now()->year }} <a href="{{ $appUrl }}">{{ strip_tags($appName) }}</a> oleh <a href="{{ $companyUrl }}" target="_blank">{{ $company }}</a></span>
         <ul class="navbar-nav ms-xl-auto">
-            <li class="nav-item"><a href="kebijakan/syarat-dan-ketentuan" class="navbar-nav-link rounded">Syarat dan Ketentuan</a></li>
-            <li class="nav-item"><a href="kebijakan/privasi" class="navbar-nav-link rounded">Privasi</a></li>
+            <li class="nav-item"><a href="{{ route('policy', 'syarat-dan-ketentuan') }}" class="navbar-nav-link rounded">Syarat dan Ketentuan</a></li>
+            <li class="nav-item"><a href="{{ route('policy', 'privasi') }}" class="navbar-nav-link rounded">Privasi</a></li>
         </ul>
     </div>
 </div>
