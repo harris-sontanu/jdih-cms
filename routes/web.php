@@ -10,6 +10,7 @@ use App\Http\Controllers\Jdih\Legislation\ArticleController;
 use App\Http\Controllers\Jdih\Legislation\JudgmentController;
 use App\Http\Controllers\Jdih\Post\NewsController;
 use App\Http\Controllers\Jdih\Post\PageController;
+use App\Http\Controllers\Jdih\VoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,4 +100,8 @@ Route::name('gallery.')->group(function () {
 });
 
 Route::get('/kontak', [PageController::class, 'contact'])->name('contact');
-Route::get('/survei', [PageController::class, 'survey'])->name('survey');
+
+Route::controller(VoteController::class)->group(function () {
+    Route::get('kuisioner', 'show')->name('questionner');
+    Route::post('vote', 'vote')->name('vote');
+});

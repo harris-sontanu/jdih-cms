@@ -189,6 +189,10 @@ class PageController extends AdminController
             $page->update([
                 'cover_id' => $new_media->id
             ]);
+        } else {
+            $page->images()->update([
+                'caption'   => $request->caption,
+            ]);
         }
     }
 

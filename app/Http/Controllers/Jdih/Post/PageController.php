@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Jdih\Post;
 use App\Http\Controllers\Jdih\Post\PostController;
 use App\Http\Traits\VisitorTrait;
 use App\Models\Post;
-use App\Models\Question;
 use Illuminate\Http\Request;
 
 class PageController extends PostController
 {
     use VisitorTrait;
+
+    public function __construct(Request $request)
+    {
+        // Record visitor
+        $this->recordVisitor($request);
+    }
 
     /**
      * Display the specified resource.
@@ -20,9 +25,6 @@ class PageController extends PostController
      */
     public function profile(Post $post)
     {
-        // Record visitor
-        $this->recordVisitor(request());
-
         return view('jdih.post.page')->with('page', $post);
     }
 
@@ -31,19 +33,6 @@ class PageController extends PostController
         $post = Post::whereSlug('kontak')->first();
 
         return view('jdih.post.contact')->with('page', $post);
-    }
-
-    public function survey()
-    {
-        $page = Post::whereSlug('survei')->first();
-        $identityQuestions = Question::with('answers')->identities()->get();
-        $questions = Question::with('answers')->questions()->get();
-
-        return view('jdih.post.survey', compact(
-            'page',
-            'identityQuestions',
-            'questions',
-        ));
     }
 
 }
