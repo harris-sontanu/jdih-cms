@@ -460,12 +460,12 @@ class LegislationController extends AdminController
 
     public function mostDownloadChart()
     {
-        $downloads = LegislationDownloadLog::selectRaw('COUNT( document_id ) AS `count`, categories.abbrev')
-            ->join('documents', 'downloads.document_id', '=', 'documents.id')
-            ->join('legislations', 'documents.legislation_id', '=', 'legislations.id')
+        $downloads = LegislationDownloadLog::selectRaw('COUNT( legislation_document_id ) AS `count`, categories.abbrev')
+            ->join('legislation_documents', 'legislation_download_logs.legislation_document_id', '=', 'legislation_documents.id')
+            ->join('legislations', 'legislation_documents.legislation_id', '=', 'legislations.id')
             ->join('categories', 'legislations.category_id', '=', 'categories.id')
-            ->whereRaw('DATE(downloads.created_at) >= (DATE(NOW()) - INTERVAL 30 DAY)')
-            ->groupBy('document_id')
+            ->whereRaw('DATE(legislation_download_logs.created_at) >= (DATE(NOW()) - INTERVAL 30 DAY)')
+            ->groupBy('legislation_document_id')
             ->orderBy('count', 'desc')
             ->take(5)
             ->pluck('abbrev', 'count')
