@@ -26,7 +26,7 @@ const themeSwitcher = function() {
     //
 
     const layoutTheme = function() {
-        var docsTheme = document.getElementById("btncheck1"),
+        var docsTheme = document.getElementById("theme-switch"),
             darkIcon = 'ph-moon',
             lightIcon = 'ph-sun';
 
