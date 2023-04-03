@@ -14,12 +14,12 @@
         @foreach ($laws as $law)
             <a href="{{ route('admin.legislation.law.show', $law->id) }}" title="{{ $law->title }}" class="text-body dropdown-item">
                 <div class="me-3">
-                    <img src="{{ $law->userPictureUrl($law->user->picture, $law->user->name) }}" alt="{{ $law->user->name }}" class="w-32px h-32px rounded-pill">
+                    {!! $law->typeFlatButton !!}
                 </div>
 
                 <div class="d-flex flex-column flex-grow-1 text-truncate">
-                    <div class="fw-semibold text-truncate">{{ $law->title }}</div>
-                    <span class="fs-sm text-muted text-truncate">{{ $law->category_name }}</span>
+                    <div class="fw-semibold text-truncate">{!! Str::highlightPhrase($law->title, $term) !!}</div>
+                    <span class="fs-sm text-muted text-truncate">{!! Str::highlightPhrase($law->category->name, $term) !!}</span>
                 </div>
             </a>
         @endforeach
@@ -41,12 +41,12 @@
         @foreach ($monographs as $monograph)
             <a href="{{ route('admin.legislation.monograph.show', $monograph->id) }}" title="{{ $monograph->title }}" class="dropdown-item text-body">
                 <div class="me-3">
-                    <img src="{{ $monograph->userPictureUrl($monograph->user->picture, $monograph->user->name) }}" alt="{{ $monograph->user->name }}" class="w-32px h-32px rounded-pill">
+                    {!! $monograph->typeFlatButton !!}
                 </div>
 
                 <div class="d-flex flex-column flex-grow-1 text-truncate">
-                    <div class="fw-semibold text-truncate">{{ $monograph->title }}</div>
-                    <span class="fs-sm text-muted text-truncate">{{ $monograph->category_name }}</span>
+                    <div class="fw-semibold text-truncate">{!! Str::highlightPhrase($monograph->title, $term) !!}</div>
+                    <span class="fs-sm text-muted text-truncate">{!! Str::highlightPhrase($monograph->category->name, $term) !!}</span>
                 </div>
             </a>
         @endforeach
@@ -68,12 +68,12 @@
         @foreach ($articles as $article)
             <a href="{{ route('admin.legislation.article.show', $article->id) }}" title="{{ $article->title }}" class="text-body dropdown-item">
                 <div class="me-3">
-                    <img src="{{ $article->userPictureUrl($article->user->picture, $article->user->name) }}" alt="{{ $article->user->name }}" class="w-32px h-32px rounded-pill">
+                    {!! $article->typeFlatButton !!}
                 </div>
 
                 <div class="d-flex flex-column flex-grow-1 text-truncate">
-                    <div class="fw-semibold text-truncate">{{ $article->title }}</div>
-                    <span class="fs-sm text-muted text-truncate">{{ $article->category_name }}</span>
+                    <div class="fw-semibold text-truncate">{!! Str::highlightPhrase($article->title, $term) !!}</div>
+                    <span class="fs-sm text-muted text-truncate">{!! Str::highlightPhrase($article->category->name, $term) !!}</span>
                 </div>
             </a>
         @endforeach
@@ -85,7 +85,7 @@
         <div class="dropdown-header">
             Putusan Pengadilan
             @if (count($judgments) == 3)
-                <a href="{{ route('admin.legislation.judgment.index', ['search' => $term]) }}" title="{{ $judgment->title }}" class="float-end">
+                <a href="{{ route('admin.legislation.judgment.index', ['search' => $term]) }}" class="float-end">
                     Lihat semua
                     <i class="ph-arrow-circle-right ms-1"></i>
                 </a>
@@ -95,12 +95,12 @@
         @foreach ($judgments as $judgment)
             <a href="{{ route('admin.legislation.judgment.show', $judgment->id) }}" class="text-body dropdown-item">
                 <div class="me-3">
-                    <img src="{{ $judgment->userPictureUrl($judgment->user->picture, $judgment->user->name) }}" alt="{{ $judgment->user->name }}" class="w-32px h-32px rounded-pill">
+                    {!! $judgment->typeFlatButton !!}
                 </div>
 
                 <div class="d-flex flex-column flex-grow-1 text-truncate">
-                    <div class="fw-semibold text-truncate">{{ $judgment->title }}</div>
-                    <span class="fs-sm text-muted text-truncate">{{ $judgment->category_name }}</span>
+                    <div class="fw-semibold text-truncate">{!! Str::highlightPhrase($judgment->title, $term) !!}</div>
+                    <span class="fs-sm text-muted text-truncate">{!! Str::highlightPhrase($judgment->category->name, $term) !!}</span>
                 </div>
             </a>
         @endforeach
