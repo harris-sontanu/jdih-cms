@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class SlideController extends MediaController
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Slide::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
