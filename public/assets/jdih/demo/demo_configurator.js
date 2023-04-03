@@ -27,7 +27,10 @@ const themeSwitcher = function() {
 
     const layoutTheme = function() {
         var docsTheme = document.getElementById("theme-switch"),
+            labelTheme = docsTheme.parentElement,
+            darkTitle = 'Aktifkan mode gelap',
             darkIcon = 'ph-moon',
+            lightTitle = 'Aktifkan mode terang',
             lightIcon = 'ph-sun';
 
         if (docsTheme) {
@@ -44,6 +47,7 @@ const themeSwitcher = function() {
             var darkThemeSelected = localStorage.getItem("theme") !== null && localStorage.getItem("theme") === "dark";
             docsTheme.checked = darkThemeSelected;
             darkThemeSelected && docsTheme.nextElementSibling.classList.replace(darkIcon, lightIcon);
+            labelTheme.setAttribute("title", darkTitle);
         }
 
         function resetTheme() {
@@ -52,11 +56,13 @@ const themeSwitcher = function() {
                 document.documentElement.setAttribute("data-color-theme", "dark");
                 localStorage.setItem("theme", "dark");
                 docsTheme.nextElementSibling.classList.replace(darkIcon, lightIcon);
+                labelTheme.setAttribute("title", lightTitle);
             }
             else {
                 document.documentElement.removeAttribute("data-color-theme");
                 localStorage.removeItem("theme");
                 docsTheme.nextElementSibling.classList.replace(lightIcon, darkIcon);
+                labelTheme.setAttribute("title", darkTitle);
             }
         }
     };

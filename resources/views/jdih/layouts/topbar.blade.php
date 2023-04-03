@@ -31,14 +31,10 @@
 
         <ul class="navbar-nav ms-lg-2 order-1 order-lg-2 ">
             <li class="nav-item">
-                <label class="navbar-nav-link navbar-nav-link-icon rounded cursor-pointer" for="theme-switch">
+                <label class="navbar-nav-link navbar-nav-link-icon rounded cursor-pointer" for="theme-switch" title="Aktifkan mode gelap">
                     <input type="checkbox" class="btn-check" id="theme-switch" autocomplete="off">
                     <i class="ph-moon"></i>
                 </label>
-                {{-- <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded" title="Mode terang">
-                    <i class="ph-sun"></i>
-                    <span class="d-xl-none ms-2">Mode terang</span>
-                </a> --}}
             </li>
         </ul>
 
