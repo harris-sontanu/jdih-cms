@@ -70,13 +70,17 @@
                                     <div class="d-inline-flex">
                                         <a href="{{ $slide->image->source }}" class="text-body mx-1" data-lightbox="lightbox" data-bs-popup="tooltip" title="Pratinjau"><i class="ph-eye"></i></a>
 
-                                        <button type="button" class="btn btn-link text-body p-0 mx-1" data-bs-popup="tooltip" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $slide->id }}" data-route="slide"><i class="ph-pen"></i></button>
+                                        @can('update', $slide)
+                                            <button type="button" class="btn btn-link text-body p-0 mx-1" data-bs-popup="tooltip" title="Ubah" data-bs-toggle="modal" data-bs-target="#edit-modal" data-id="{{ $slide->id }}" data-route="slide"><i class="ph-pen"></i></button>
+                                        @endcan
 
-                                        <form class="delete-form" action="{{ route('admin.media.slide.destroy', $slide->id) }}" data-confirm="Apakah Anda yakin ingin menghapus slide?" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-link text-body p-0 mx-1 delete" data-bs-popup="tooltip" title="Hapus"><i class="ph-x"></i></button>
-                                        </form>
+                                        @can('delete', $slide)
+                                            <form class="delete-form" action="{{ route('admin.media.slide.destroy', $slide->id) }}" data-confirm="Apakah Anda yakin ingin menghapus slide?" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-link text-body p-0 mx-1 delete" data-bs-popup="tooltip" title="Hapus" ><i class="ph-x"></i></button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

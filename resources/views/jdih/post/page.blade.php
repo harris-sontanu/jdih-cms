@@ -32,14 +32,14 @@
 
             <main class="col-xl-10 offset-xl-1">
                 <article class="card shadow post-entry mb-4">
-                    <figure class="card-image">
-                        <img src="{{ $page->cover->source }}" class="figure-img img-fluid rounded-top" alt="{{ $page->cover->name }}">
+                    <figure class="card-image mb-0">
+                        <img src="{{ $page->cover->source }}" class="figure-img img-fluid rounded-top mb-0" alt="{{ $page->cover->name }}">
                         @isset($page->cover->caption)
-                            <figcaption class="figure-caption fs-6 px-4">{{ $page->cover->caption }}</figcaption>
+                            <figcaption class="figure-caption fs-6 post-container mt-3 py-0 text-center">{{ $page->cover->caption }}</figcaption>
                         @endisset
                     </figure>
 
-                    <div class="card-body fs-5 px-4">
+                    <div class="card-body fs-5 post-container">
                         {!! $page->body !!}
                     </div>
                 </article>

@@ -266,7 +266,7 @@
                         <h5 class="mb-0"><i class="ph-clock-counter-clockwise me-2"></i>Riwayat</h5>
                     </div>
 
-                    <div class="sidebar-section-body media-chat-scrollable">
+                    <div class="sidebar-section-body scrollable">
                         <div class="list-feed">
                             @forelse ($latestLogs as $log)
                                 <div class="list-feed-item">

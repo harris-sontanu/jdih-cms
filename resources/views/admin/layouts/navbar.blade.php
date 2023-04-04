@@ -24,7 +24,7 @@
             </li>
 
             <li class="nav-item">
-                <label class="btn btn-flat-white btn-icon border-transparent rounded-pill p-2" for="btncheck1">
+                <label class="navbar-nav-link navbar-nav-link-icon rounded-pill cursor-pointer" for="btncheck1" title="Aktifkan mode gelap">
                     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
                     <i class="ph-moon"></i>
                 </label>
