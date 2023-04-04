@@ -23,7 +23,6 @@
                                         <img src="{{ $appLogoUrl }}" class="h-48px" alt="{{ $appName }}">
 									</div>
                                     <h1 class="fw-bold font-title text-indigo"><span class="text-pink">JDIH</span> Admin</h1>
-                                    {{-- <span class="d-block px-4">{!! $appDesc !!}</span> --}}
                                 </div>
 
                                 <div class="mb-3">
@@ -77,7 +76,7 @@
                                         @endif
                                         <a href="{{ $companyUrl }}" target="_blank">{{ $company }}</a>
                                     </span>
-                                    <span class="text-muted">{!! $appName !!} v5.0.1</span>
+                                    <span class="text-muted">{!! $appName . ' ' . config('app.version') !!}</span>
                                 </span>
                             </div>
                         </div>

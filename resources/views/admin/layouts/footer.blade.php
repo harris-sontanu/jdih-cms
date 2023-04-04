@@ -11,7 +11,7 @@
         </span>
 
         <ul class="nav">
-            <li class="nav-item">v1.1.0</li>
+            <li class="nav-item">{{ config('app.version') }}</li>
         </ul>
     </div>
 </div>
