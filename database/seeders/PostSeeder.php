@@ -116,6 +116,9 @@ class PostSeeder extends Seeder
             'caption'   => fake()->sentence(rand(4, 7)),
             'is_image'  => 1,
             'user_id'   => $post->user_id,
+            'created_at'=> $post->created_at,
+            'updated_at'=> $post->updated_at,
+            'published_at'  => ($post->taxonomy->type == 'news') ? $post->published_at : null,
         ]);
 
         return $media;

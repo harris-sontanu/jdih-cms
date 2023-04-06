@@ -20,7 +20,7 @@ class LinkSeeder extends Seeder
     public function run()
     {
         $links = Link::factory()
-            ->count(8)
+            ->count(12)
             ->create();
 
         $links->each(function ($link, $key) {

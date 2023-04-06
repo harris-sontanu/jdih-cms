@@ -23,6 +23,13 @@ class TaxonomySeeder extends Seeder
             'desc'  => null
         ]);
 
+        Taxonomy::factory()->create([
+            'type'  => 'employee',
+            'name'  => 'Pengelola JDIH',
+            'slug'  => 'pengelola-jdih',
+            'desc'  => null
+        ]);
+
         Taxonomy::factory()->count(18)->create();
     }
 }
