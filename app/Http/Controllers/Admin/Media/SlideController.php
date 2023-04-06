@@ -85,7 +85,7 @@ class SlideController extends MediaController
         if ($hasFile) {
             $image  = $request->file('image');
             $name   = $image->hashName();
-            $dir    = 'slide';
+            $dir    = 'images/slide';
 
             $path   = $image->storeAs($dir, $name, 'public');
 
