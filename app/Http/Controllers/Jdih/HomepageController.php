@@ -42,7 +42,7 @@ class HomepageController extends JdihController
         $totalArticles 	  = Legislation::ofType(3)->published()->count();
         $totalJudgments	  = Legislation::ofType(4)->published()->count();
 
-        $popularLaw = Legislation::ofType(1)->popular(120)->first();
+        $popularLaw = Legislation::ofType(1)->popular()->first();
         $popularLawDoc = $popularLaw->documents()
             ->ofType('master')
             ->first();
