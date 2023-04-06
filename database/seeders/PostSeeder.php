@@ -48,6 +48,36 @@ class PostSeeder extends Seeder
 
         $this->createCover($page, 'halaman/', '4.jpg', 'assets/jdih/images/illustrations/');
 
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Kontak',
+                'slug'          => 'kontak',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '7.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Privasi',
+                'slug'          => 'privasi',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '8.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Syarat dan Ketentuan',
+                'slug'          => 'syarat-dan-ketentuan',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '6.jpg', 'assets/jdih/images/illustrations/');
+
         $posts = Post::factory()
             ->count(20)
             ->create();
