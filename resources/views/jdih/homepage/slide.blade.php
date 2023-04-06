@@ -28,13 +28,13 @@
                     <div class="col-xl-6 text-center">
                         <div class="row mt-5">
                             <div class="col">
-                                <img src="{{ asset('assets/jdih/images/backgrounds/baliprov.png') }}" class="img-fluid" height="94">
+                                <img src="{{ $appLogoUrl }}" height="86">
                             </div>
                             <div class="col">
-                                <img src="{{ asset('assets/jdih/images/backgrounds/gubwagub.png') }}" class="img-fluid" height="94">
+                                <img src="{{ asset('assets/jdih/images/backgrounds/gubwagub.png') }}" class="img-fluid" height="86">
                             </div>
                         </div>
-                        <img src="{{ asset('assets/jdih/images/backgrounds/nangunsatkerthi2.png') }}" class="img-fluid mt-3 mb-4 px-5">
+                        <img src="{{ asset('assets/jdih/images/backgrounds/nangunsatkerthi2.png') }}" class="img-fluid my-4 px-5">
                         <h3 class="fw-bold text-white"><?php echo $company;?></h3>
                     </div>
                 </div>
