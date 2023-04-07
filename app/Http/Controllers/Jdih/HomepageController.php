@@ -11,10 +11,14 @@ use App\Models\Matter;
 use App\Models\Institute;
 use App\Models\Field;
 use App\Models\Legislation;
+use App\Models\Link;
 use App\Models\Post;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
+
+use function PHPUnit\Framework\isNull;
 
 class HomepageController extends JdihController
 {
@@ -77,6 +81,8 @@ class HomepageController extends JdihController
         $slides = Slide::orderBy('sort', 'asc')
             ->get();
 
+        $popupBanner = $this->popupBanner();
+
         // Record visitor
         $this->recordVisitor($request);
 
@@ -113,8 +119,27 @@ class HomepageController extends JdihController
             'latestNews',
             'members',
             'slides',
+            'popupBanner',
             'styles',
             'vendors',
         ))->with('banners', $this->banners());
+    }
+
+    private function popupBanner()
+    {
+        $popupBanner = Link::banners()
+            ->whereDisplay('popup')
+            ->first();
+
+        if ($popupBanner->count() > 0) {
+            $cookie = Cookie::get('popup-banner');
+            if (is_null($cookie)) {
+                Cookie::queue('popup-banner', $popupBanner->title, 120);
+            } else {
+                $popupBanner = null;
+            }
+        }
+
+        return $popupBanner;
     }
 }

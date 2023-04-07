@@ -229,7 +229,27 @@
 </div>
 <!-- /search modal -->
 
+<!-- Popup Banner modal -->
+@if(isset($popupBanner) AND $popupBanner->count() > 0)
+    <div id="popup-banner" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <a href="{{ $popupBanner->url }}" target="_blank"><img src="{{ $popupBanner->image->source }}" class="img-fluid rounded"></a>
+            </div>
+        </div>
+    </div>
+@endif
+<!-- /popup banner modal -->
+
 <script>
+    const el = document.getElementById('popup-banner');
+    if (el) {
+        const popupBanner = new bootstrap.Modal(document.getElementById('popup-banner'), {});
+        setTimeout(() => {
+            popupBanner.show();
+        }, 3000);
+    }
+
     const searchModal = document.getElementById('search-modal');
     searchModal.addEventListener('shown.bs.modal', event => {
         document.getElementById('search-dropdown').focus();
