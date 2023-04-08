@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
-class TaxonomyRequest extends FormRequest
+class UpdateGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,9 @@ class TaxonomyRequest extends FormRequest
     public function rules()
     {
         return [
-            'type'      => 'required',
-            'name'      => 'required|max:255',
-            'desc'      => 'nullable',
+            'name'  => 'required|max:255',
+            'slug'  => Rule::unique('taxonomies')->ignore($this->route('group')),
+            'desc'  => 'nullable',
         ];
     }
 

@@ -139,10 +139,9 @@ class Link extends Model
         return $query->where('type', 'youtube');
     }
 
-    public function scopeBanners($query, $display = 'main')
+    public function scopeBanners($query)
     {
-        return $query->where('type', 'banner')
-            ->where('display', $display);
+        return $query->where('type', 'banner');
     }
 
     public function scopeJdih($query)
