@@ -67,7 +67,7 @@ trait HasPublishedAt
         return $query->whereNull('published_at');
     }
 
-    public function scopePopular($query, $days = 180)
+    public function scopePopular($query, $days = 365)
     {
         return $query->where('published_at', '>', Carbon::now()->subDays($days))
             ->orderBy('view', 'desc');

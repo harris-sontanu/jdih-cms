@@ -131,7 +131,7 @@ class HomepageController extends JdihController
             ->whereDisplay('popup')
             ->first();
 
-        if ($popupBanner->count() > 0) {
+        if (isset($popupBanner)) {
             $cookie = Cookie::get('popup-banner');
             if (is_null($cookie)) {
                 Cookie::queue('popup-banner', $popupBanner->title, 120);
