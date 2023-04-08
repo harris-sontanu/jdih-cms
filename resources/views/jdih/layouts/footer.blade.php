@@ -4,12 +4,12 @@
         <div class="content-wrapper">
             <div class="content py-4">
                 <div class="row gx-5">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 fs-lg">
                         <div class="d-flex mb-3">
                             <img src="{{ $appLogoUrl }}" alt="{{ $appName }}" class="me-3" height="58">
                             <h4 class="fw-bold mb-0">{!! $appName !!}</h4>
                         </div>
-                        <p class="fs-lg">JDIH Pemerintah Provinsi Bali hadir untuk meningkatkan pelayanan kepada masyarakat atas kebutuhan dokumentasi dan informasi hukum secara lengkap, akurat, mudah dan cepat.</p>
+                        {!! $welcome->excerpt !!}
                     </div>
                     <div class="col-lg-2">
                         <h4 class="fw-bold">Navigasi</h4>

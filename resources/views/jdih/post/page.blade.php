@@ -41,6 +41,10 @@
 
                     <div class="card-body fs-5 post-container">
                         {!! $page->body !!}
+
+                        @isset ($page->author)
+                            <p class="mt-4 mb-0"><span class="fw-bold">Oleh: </span>{{ $page->author->name }}</p>
+                        @endisset
                     </div>
                 </article>
 
@@ -50,7 +54,7 @@
                             @break($loop->iteration > 3)
                             <div class="col-xl-4">
                                 <div class="card shadow bg-white border-0 lift mb-0">
-                                    <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="" srcset=""></a>
+                                    <a href="{{ $banner->url }}"><img src="{{ $banner->image->source }}" class="img-fluid rounded" alt="{{ $banner->image->name }}"></a>
                                 </div>
                             </div>
                         @endforeach

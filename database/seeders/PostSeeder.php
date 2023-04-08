@@ -21,6 +21,16 @@ class PostSeeder extends Seeder
         $page = Post::factory()
             ->create([
                 'taxonomy_id'   => 1,
+                'title'         => 'Selamat Datang',
+                'slug'          => 'selamat-datang',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '10.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
                 'title'         => 'Visi & Misi',
                 'slug'          => 'visi-misi',
                 'source'        => null,
