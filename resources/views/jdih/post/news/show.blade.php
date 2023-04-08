@@ -61,7 +61,7 @@
                                     <div class="col-4">
                                         <div class="card shadow mb-4">
                                             <div class="card-img-actions m-0">
-                                                <img class="card-img img-fluid" src="{{ $gallery->thumbSource }}">
+                                                <img class="card-img img-fluid h-150 object-fit-cover" src="{{ $gallery->thumbSource }}">
                                                 <div class="card-img-actions-overlay card-img">
                                                     <a href="{{ $gallery->source }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
                                                         <i class="ph-magnifying-glass-plus"></i>
