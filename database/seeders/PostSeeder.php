@@ -21,6 +21,16 @@ class PostSeeder extends Seeder
         $page = Post::factory()
             ->create([
                 'taxonomy_id'   => 1,
+                'title'         => 'Selamat Datang',
+                'slug'          => 'selamat-datang',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '10.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
                 'title'         => 'Visi & Misi',
                 'slug'          => 'visi-misi',
                 'source'        => null,
@@ -47,6 +57,36 @@ class PostSeeder extends Seeder
             ]);
 
         $this->createCover($page, 'halaman/', '4.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Kontak',
+                'slug'          => 'kontak',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '7.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Privasi',
+                'slug'          => 'privasi',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '8.jpg', 'assets/jdih/images/illustrations/');
+
+        $page = Post::factory()
+            ->create([
+                'taxonomy_id'   => 1,
+                'title'         => 'Syarat dan Ketentuan',
+                'slug'          => 'syarat-dan-ketentuan',
+                'source'        => null,
+            ]);
+
+        $this->createCover($page, 'halaman/', '6.jpg', 'assets/jdih/images/illustrations/');
 
         $posts = Post::factory()
             ->count(20)
@@ -86,6 +126,9 @@ class PostSeeder extends Seeder
             'caption'   => fake()->sentence(rand(4, 7)),
             'is_image'  => 1,
             'user_id'   => $post->user_id,
+            'created_at'=> $post->created_at,
+            'updated_at'=> $post->updated_at,
+            'published_at'  => ($post->taxonomy->type == 'news') ? $post->published_at : null,
         ]);
 
         return $media;

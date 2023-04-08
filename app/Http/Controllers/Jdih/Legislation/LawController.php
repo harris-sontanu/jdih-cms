@@ -139,7 +139,8 @@ class LawController extends LegislationController
             ->take(5)
             ->get();
 
-        $asideBanners = Link::banners('aside')
+        $asideBanners = Link::banners()
+            ->whereDisplay('aside')
             ->published()
             ->sorted()
             ->get();

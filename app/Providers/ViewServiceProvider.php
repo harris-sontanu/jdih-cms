@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
 use App\Models\Visitor;
+use App\Models\Post;
 use App\View\Composers\FooterComposer;
 
 class ViewServiceProvider extends ServiceProvider
@@ -64,11 +65,14 @@ class ViewServiceProvider extends ServiceProvider
             $lastMonthVisitor = Visitor::countMonthly()->get()->count();
             $allVisitor = Visitor::countAll()->get()->count();
 
+            $welcome = Post::whereSlug('selamat-datang')->first();
+
             return $view->with('todayVisitor', $todayVisitor)
                 ->with('yesterdayVisitor', $yesterdayVisitor)
                 ->with('lastWeekVisitor', $lastWeekVisitor)
                 ->with('lastMonthVisitor', $lastMonthVisitor)
-                ->with('allVisitor', $allVisitor);
+                ->with('allVisitor', $allVisitor)
+                ->with('welcome', $welcome);
         });
     }
 }

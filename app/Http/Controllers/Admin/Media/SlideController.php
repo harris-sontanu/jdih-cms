@@ -76,16 +76,18 @@ class SlideController extends MediaController
 
     private function imageUpload($request, $slide)
     {
-        if (isset($slide->image)) {
-            $this->removeMedia($slide->image->path);
-            $slide->image()->delete();
-        }
-
         $hasFile = $request->hasFile('image');
         if ($hasFile) {
+
+            // Remove older image
+            if (isset($slide->image)) {
+                $this->removeMedia($slide->image->path);
+                $slide->image()->delete();
+            }
+
             $image  = $request->file('image');
             $name   = $image->hashName();
-            $dir    = 'slide';
+            $dir    = 'images/slide';
 
             $path   = $image->storeAs($dir, $name, 'public');
 

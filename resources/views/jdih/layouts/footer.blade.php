@@ -4,12 +4,12 @@
         <div class="content-wrapper">
             <div class="content py-4">
                 <div class="row gx-5">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 fs-lg">
                         <div class="d-flex mb-3">
                             <img src="{{ $appLogoUrl }}" alt="{{ $appName }}" class="me-3" height="58">
                             <h4 class="fw-bold mb-0">{!! $appName !!}</h4>
                         </div>
-                        <p class="fs-lg">JDIH Pemerintah Provinsi Bali hadir untuk meningkatkan pelayanan kepada masyarakat atas kebutuhan dokumentasi dan informasi hukum secara lengkap, akurat, mudah dan cepat.</p>
+                        {!! $welcome->excerpt !!}
                     </div>
                     <div class="col-lg-2">
                         <h4 class="fw-bold">Navigasi</h4>
@@ -229,7 +229,27 @@
 </div>
 <!-- /search modal -->
 
+<!-- Popup Banner modal -->
+@if(isset($popupBanner) AND $popupBanner->count() > 0)
+    <div id="popup-banner" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <a href="{{ $popupBanner->url }}" target="_blank"><img src="{{ $popupBanner->image->source }}" class="img-fluid rounded"></a>
+            </div>
+        </div>
+    </div>
+@endif
+<!-- /popup banner modal -->
+
 <script>
+    const el = document.getElementById('popup-banner');
+    if (el) {
+        const popupBanner = new bootstrap.Modal(document.getElementById('popup-banner'), {});
+        setTimeout(() => {
+            popupBanner.show();
+        }, 3000);
+    }
+
     const searchModal = document.getElementById('search-modal');
     searchModal.addEventListener('shown.bs.modal', event => {
         document.getElementById('search-dropdown').focus();

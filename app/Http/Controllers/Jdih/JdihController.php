@@ -11,7 +11,7 @@ class JdihController extends Controller
 {
     protected static function banners()
     {
-        return Link::banners()->published()->sorted()->get();
+        return Link::banners()->whereDisplay('main')->published()->sorted()->get();
     }
 
     protected function shares()

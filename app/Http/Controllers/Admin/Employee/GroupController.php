@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Employee;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Taxonomy;
 use App\Http\Requests\TaxonomyRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -76,7 +77,7 @@ class GroupController extends AdminController
      * @param  \App\Models\Taxonomy  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(TaxonomyRequest $request, Taxonomy $group)
+    public function update(UpdateGroupRequest $request, Taxonomy $group)
     {
         $validated = $request->validated();
         $group->update($validated);

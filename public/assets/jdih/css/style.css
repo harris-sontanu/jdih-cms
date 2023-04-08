@@ -98,6 +98,10 @@ a.text-body:focus {
     --bg-opacity: 0.85;
 }
 
+.h-150 {
+    height: 150px;
+}
+
 .h-250 {
     height: 250px;
 }
