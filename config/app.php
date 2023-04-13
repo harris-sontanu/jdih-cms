@@ -17,8 +17,6 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'version' => env('APP_VERSION', 'v1.0.0'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -71,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Singapore',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'id',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'id_ID',
+    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +185,6 @@ return [
         /*
          * Package Service Providers...
          */
-        App\Providers\FortifyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -197,11 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\ViewServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-        Jenssegers\Agent\AgentServiceProvider::class,
-        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
     ],
 
     /*
@@ -216,10 +209,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Agent' => Jenssegers\Agent\Facades\Agent::class,
-        'Share' => Jorenvh\Share\ShareFacade::class,
+        // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
 ];
