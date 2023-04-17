@@ -62,7 +62,7 @@ class FortifyServiceProvider extends ServiceProvider
      
             if ($user &&
                 Hash::check($request->password, $user->password) &&
-                in_array($user->role, [
+                in_array($user->role->value, [
                     UserRoleEnum::ADMIN->value,
                     UserRoleEnum::AUTHOR->value,
                     UserRoleEnum::EDITOR->value,
