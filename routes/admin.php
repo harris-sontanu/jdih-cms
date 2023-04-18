@@ -29,7 +29,7 @@ Route::name('admin.')->group(function() {
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
 
-        Route::get('/dashboard', [DashboardController::class, 'index'])
+        Route::get('/dashboard', DashboardController::class)
             ->name('dashboard');
     
     });

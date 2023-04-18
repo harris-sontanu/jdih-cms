@@ -19,12 +19,7 @@ return new class extends Migration
             $table->string('picture')
                 ->after('email')
                 ->nullable();
-            $table->enum('role', [
-                UserRole::ADMIN->value,
-                UserRole::EDITOR->value,
-                UserRole::AUTHOR->value,
-                UserRole::PUBLIC->value,
-            ])->after('email_verified_at')
+            $table->enum('role', UserRole::values())->after('email_verified_at')
                 ->default(UserRole::EDITOR->value);
             $table->dateTime('last_logged_in_at')
                 ->nullable();
