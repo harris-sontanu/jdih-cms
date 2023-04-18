@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserRoleEnum;
+use App\Enums\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,12 +20,12 @@ return new class extends Migration
                 ->after('email')
                 ->nullable();
             $table->enum('role', [
-                UserRoleEnum::ADMIN->value,
-                UserRoleEnum::EDITOR->value,
-                UserRoleEnum::AUTHOR->value,
-                UserRoleEnum::PUBLIC->value,
+                UserRole::ADMIN->value,
+                UserRole::EDITOR->value,
+                UserRole::AUTHOR->value,
+                UserRole::PUBLIC->value,
             ])->after('email_verified_at')
-                ->default(UserRoleEnum::EDITOR->value);
+                ->default(UserRole::EDITOR->value);
             $table->dateTime('last_logged_in_at')
                 ->nullable();
             $table->string('phone')->nullable();

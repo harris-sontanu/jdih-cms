@@ -6,7 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Enums\UserRoleEnum;
+use App\Enums\UserRole;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -63,9 +63,9 @@ class FortifyServiceProvider extends ServiceProvider
             if ($user &&
                 Hash::check($request->password, $user->password) &&
                 in_array($user->role->value, [
-                    UserRoleEnum::ADMIN->value,
-                    UserRoleEnum::AUTHOR->value,
-                    UserRoleEnum::EDITOR->value,
+                    UserRole::ADMIN->value,
+                    UserRole::AUTHOR->value,
+                    UserRole::EDITOR->value,
                 ])) {
                 return $user;
             }
