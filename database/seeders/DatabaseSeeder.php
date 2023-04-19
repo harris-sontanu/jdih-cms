@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             LegislationLogSeeder::class,
             LinkSeeder::class,
             SlideSeeder::class,
+            VisitorSeeder::class,
         ]);
     }
 }
