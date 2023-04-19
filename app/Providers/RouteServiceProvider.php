@@ -7,6 +7,10 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use App\Models\Legislation;
+use App\Models\Post;
+use App\Models\Media;
+use App\Models\Link;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -37,6 +41,50 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
+        });
+
+        Route::bind('law', function (string $value) {
+            return Legislation::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('monograph', function (string $value) {
+            return Legislation::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('article', function (string $value) {
+            return Legislation::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('judgment', function (string $value) {
+            return Legislation::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('news', function (string $value) {
+            return Post::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('page', function (string $value) {
+            return Post::where('id', $value)->withTrashed()->firstOrFail();
+        });
+
+        Route::bind('image', function (string $value) {
+            return Media::where('id', $value)->firstOrFail();
+        });
+
+        Route::bind('file', function (string $value) {
+            return Media::where('id', $value)->firstOrFail();
+        });
+
+        Route::bind('youtube', function (string $value) {
+            return Link::where('id', $value)->firstOrFail();
+        });
+
+        Route::bind('banner', function (string $value) {
+            return Link::where('id', $value)->firstOrFail();
+        });
+
+        Route::bind('jdih', function (string $value) {
+            return Link::where('id', $value)->firstOrFail();
         });
     }
 
