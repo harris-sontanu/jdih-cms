@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LawRelationshipStatus;
 use App\Enums\LegislationDocumentType;
 use App\Enums\LegislationRelationshipType;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
@@ -161,7 +162,7 @@ class LawController extends LegislationController
         ];
 
         $categories = Category::ofType(1)->pluck('name', 'id');
-        $statusOptions = $this->statusOptions;
+        $statusOptions = LawRelationshipStatus::values();
         $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
@@ -395,7 +396,7 @@ class LawController extends LegislationController
         ];
 
         $categories = Category::ofType(1)->pluck('name', 'id');
-        $statusOptions = $this->statusOptions;
+        $statusOptions = LawRelationshipStatus::values();
         $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');

@@ -15,8 +15,8 @@
                         <label for="statusOptions" class="form-label">Status</label>
                         <select id="statusOptions" name="statusOptions" class="form-select @error('statusOptions') is-invalid @enderror">
                             <option value="">Pilih Status</option>
-                            @foreach ($statusOptions as $key => $value)
-                                <option value="{{ $key }}" @selected(old('statusOptions') == $key)>{{ $value }}</option>
+                            @foreach ($statusOptions as $status)
+                                <option value="{{ $status->value }}" @selected(old('statusOptions') == $status->value)>{{ Str::title($status->value) }}</option>
                             @endforeach
                         </select>
                         @error('statusOptions')
