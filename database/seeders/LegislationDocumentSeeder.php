@@ -58,7 +58,7 @@ class LegislationDocumentSeeder extends Seeder
 
     protected function createMedia($media)
     {
-        if ($media->type == 'cover') {
+        if ($media->type == LegislationDocumentType::COVER) {
             $fileName = 'book' . rand(1, 6) . '.jpg';
             $publicPath = public_path('assets/jdih/images/demo/' . $fileName);
         } else {
@@ -70,7 +70,7 @@ class LegislationDocumentSeeder extends Seeder
         $storagePath = storage_path('app/public/' . $storageDir . $fileName);
 
         File::copy($publicPath, $storagePath);
-        if ($media->type == 'cover') {
+        if ($media->type == LegislationDocumentType::COVER) {
             $fileThumbName = Str::replace(".jpg", "_md.jpg", $fileName);
             $storageThumbPath = storage_path('app/public/' . $storageDir . $fileThumbName);
             File::copy($publicPath, $storageThumbPath);

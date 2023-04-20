@@ -25,11 +25,11 @@ class LinkSeeder extends Seeder
             ->create();
 
         $links->each(function ($link, $key) {
-            if ($link->type == LinkType::BANNER->name) {
+            if ($link->type == LinkType::BANNER) {
                 $fileName = 'banner' . rand(1, 5) . '.png';
                 $storageDir = 'images/tautan/banner/';
                 $this->createMedia($link->id, $storageDir, $fileName);
-            } else if ($link->type == LinkType::JDIH->name) {
+            } else if ($link->type == LinkType::JDIH) {
                 $fileName = 'jdih' . rand(1, 9) . '.png';
                 $storageDir = 'images/tautan/jdih/';
                 $this->createMedia($link->id, $storageDir, $fileName);
