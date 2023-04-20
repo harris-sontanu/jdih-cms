@@ -196,7 +196,7 @@
                             </div>
 
                             <div class="card-img-actions mx-1 mt-1">
-                                <img id="cover-image" class="card-img img-fluid" src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" alt="Placeholder">
+                                <img id="cover-img" class="card-img img-fluid" src="{{ asset('assets/admin/images/placeholders/placeholder.jpg') }}" alt="Placeholder">
                             </div>
 
                             <div class="card-body">
