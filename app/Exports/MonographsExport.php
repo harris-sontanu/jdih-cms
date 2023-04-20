@@ -29,15 +29,10 @@ class MonographsExport implements FromView
             'user')
             ->whereIn('id', $this->id);
 
-        if (!empty($this->order))
-        {
-            $monographs = $monographs->orderBy($this->order, $this->sort);
-        }
-        else
-        {
-            $monographs = $monographs->latest();
-        }
-
+        $monographs = isset($this->order)
+            ? $monographs->orderBy($this->order, $this->sort)
+            : $monographs->latest();
+            
         return view('admin.exports.monographs', [
             'monographs' => $monographs->get()
         ]);

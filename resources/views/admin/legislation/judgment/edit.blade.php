@@ -239,8 +239,7 @@
                                         <div class="flex-fill overflow-hidden">
                                             <a href="{{ $attachment->media->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->media->name; }}</a>
                                             <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
-                                                <li class="list-inline-item me-1">{{ $attachment->typeTranslate }}</li>
-                                                <li class="list-inline-item mx-1">{{ $attachment->media->size() }}</li>
+                                                <li class="list-inline-item me-1">{{ $attachment->media->size() }}</li>
                                                 <li class="list-inline-item ms-1"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $attachment->id) }}">Hapus</a></li>
                                             </ul>
                                         </div>

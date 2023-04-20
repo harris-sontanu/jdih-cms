@@ -29,14 +29,9 @@ class ArticlesExport implements FromView
             'user')
             ->whereIn('id', $this->id);
 
-        if (!empty($this->order))
-        {
-            $articles = $articles->orderBy($this->order, $this->sort);
-        }
-        else
-        {
-            $articles = $articles->latest();
-        }
+        $articles = isset($this->order) 
+            ? $articles->orderBy($this->order, $this->sort) 
+            : $articles->latest();
 
         return view('admin.exports.articles', [
             'articles' => $articles->get()
