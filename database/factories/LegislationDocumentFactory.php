@@ -21,7 +21,7 @@ class LegislationDocumentFactory extends Factory
     {
         return [
             'legislation_id'    => Legislation::all()->random(),
-            'type'              => fake()->randomElement(LegislationDocumentType::values()),
+            'type'              => fake()->randomElement(LegislationDocumentType::names()),
             'download'          => rand(1, 10) * rand(1, 10),
         ];
     }

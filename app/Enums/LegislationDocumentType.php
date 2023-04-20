@@ -8,7 +8,7 @@ enum LegislationDocumentType
 {
     use Values;
 
-    case MASTER;
+    case MASTER ;
     case ABSTRACT;
     case ATTACHMENT;
     case COVER;

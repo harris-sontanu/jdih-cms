@@ -60,13 +60,13 @@ class LegislationDocument extends Model
 
     public function typeTranslate(): Attribute
     {
-        if ($this->type === 'master') {
+        if ($this->type === LegislationDocumentType::MASTER) {
             $type = 'Batang Tubuh';
-        } else if ($this->type === 'abstract') {
+        } else if ($this->type === LegislationDocumentType::ABSTRACT) {
             $type = 'Abstrak';
-        } else if ($this->type === 'attachment') {
+        } else if ($this->type === LegislationDocumentType::ATTACHMENT) {
             $type = 'Lampiran';
-        } else if ($this->type === 'cover') {
+        } else if ($this->type === LegislationDocumentType::COVER) {
             $type = 'Sampul';
         }
 

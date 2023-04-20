@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Traits;
 
+use App\Enums\LegislationDocumentType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
 
@@ -9,28 +10,28 @@ trait HasLegislationDocument
     public function masterDocument()
     {
         return $this->documents()
-            ->ofType('master')
+            ->ofType(LegislationDocumentType::MASTER)
             ->first();
     }
 
     public function abstractDocument()
     {
         return $this->documents()
-            ->ofType('abstract')
+            ->ofType(LegislationDocumentType::ABSTRACT)
             ->first();
     }
 
     public function attachments()
     {
         return $this->documents()
-            ->ofType('attachment')
+            ->ofType(LegislationDocumentType::ATTACHMENT)
             ->get();
     }
 
     public function coverDocument()
     {
         return $this->documents()
-            ->ofType('cover')
+            ->ofType(LegislationDocumentType::COVER)
             ->first();
     }
 

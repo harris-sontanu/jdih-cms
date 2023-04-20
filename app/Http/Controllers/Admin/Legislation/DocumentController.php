@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use Illuminate\Http\Request;
 use App\Models\Media;
@@ -14,13 +15,13 @@ class DocumentController extends LegislationController
 
         $this->removeMedia($media->path);
 
-        if ($media->mediaable->type === 'master') {
+        if ($media->mediaable->type === LegislationDocumentType::MASTER) {
             $documentType = 'Batang Tubuh';
-        } else if ($media->mediaable->type === 'abstract') {
+        } else if ($media->mediaable->type === LegislationDocumentType::ABSTRACT) {
             $documentType = 'Abstrak';
-        } else if ($media->mediaable->type === 'attachment') {
+        } else if ($media->mediaable->type === LegislationDocumentType::ATTACHMENT) {
             $documentType = 'Lampiran';
-        } else if ($media->mediaable->type === 'cover') {
+        } else if ($media->mediaable->type === LegislationDocumentType::COVER) {
             $documentType = 'Sampul';
         }
 

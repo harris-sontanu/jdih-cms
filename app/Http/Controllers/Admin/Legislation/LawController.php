@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
+use App\Enums\LegislationRelationshipType;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use App\Models\Category;
 use App\Models\Matter;
@@ -254,7 +256,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('master');
 
-            $this->storeDocument($file, $legislation, 'master');
+            $this->storeDocument($file, $legislation, LegislationDocumentType::MASTER);
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -266,7 +268,7 @@ class LawController extends LegislationController
         {
             $file = $request->file('abstract');
 
-            $this->storeDocument($file, $legislation, 'abstract');
+            $this->storeDocument($file, $legislation, LegislationDocumentType::ABSTRACT);
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -284,7 +286,7 @@ class LawController extends LegislationController
 
             foreach ($files as $attachment) {
 
-                $this->storeDocument($attachment, $legislation, 'attachment', $i);
+                $this->storeDocument($attachment, $legislation, LegislationDocumentType::ATTACHMENT, $i);
 
                 $legislation->logs()->create([
                     'user_id'   => $request->user()->id,
@@ -350,9 +352,9 @@ class LawController extends LegislationController
             'Detail' => TRUE
         ];
 
-        $statusRelationships = $legislation->relations()->where('type', 'status')->get();
-        $lawRelationships = $legislation->relations()->where('type', 'legislation')->get();
-        $documentRelationships = $legislation->relations()->where('type', 'document')->get();
+        $statusRelationships = $legislation->relations()->whereType(LegislationRelationshipType::STATUS->name)->get();
+        $lawRelationships = $legislation->relations()->whereType(LegislationRelationshipType::LEGISLATION->name)->get();
+        $documentRelationships = $legislation->relations()->whereType(LegislationRelationshipType::DOCUMENT->name)->get();
 
         $masterDoc = $legislation->documents()
             ->ofType('master')
@@ -409,10 +411,10 @@ class LawController extends LegislationController
         ];
 
         foreach ($legislation->documents as $document) {
-            if ($document->type === 'master') {
+            if ($document->type === LegislationDocumentType::MASTER) {
                 $showUploadForm['master'] = false;
             }
-            if ($document->type === 'abstract') {
+            if ($document->type === LegislationDocumentType::ABSTRACT) {
                 $showUploadForm['abstract'] = false;
             }
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Legislation;
 use App\Models\Category;
@@ -58,10 +59,10 @@ class LegislationController extends AdminController
 
         $storage_path = 'produk-hukum/' . $legislation->category->type->slug . '/' . $legislation->year . '/' . Str::lower($legislation->category->slug);
 
-        $prefix = match ($documentType) {
-            'abstract'  => 'abs',
-            'attachment'=> ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '',
-            'cover'     => 'img',
+        $prefix = match ($documentType->name) {
+            'ABSTRACT'  => 'abs',
+            'ATTACHMENT'=> ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '',
+            'COVER'     => 'img',
             default     => '',
         };
 
@@ -81,7 +82,7 @@ class LegislationController extends AdminController
         $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
 
         // If document type is cover, create thumbnail
-        if ($documentType === 'cover') {
+        if ($documentType === LegislationDocumentType::COVER) {
             $extension = $file->getClientOriginalExtension();
             $thumbnail = Str::replace(".{$extension}", "_md.{$extension}", $path);
             if (Storage::disk('public')->exists($path)) {
