@@ -16,7 +16,7 @@
                         <select id="statusOptions" name="statusOptions" class="form-select @error('statusOptions') is-invalid @enderror">
                             <option value="">Pilih Status</option>
                             @foreach ($statusOptions as $status)
-                                <option value="{{ $status->value }}" @selected(old('statusOptions') == $status->value)>{{ Str::title($status->value) }}</option>
+                                <option value="{{ $status->name }}" @selected(old('statusOptions') == $status->name)>{{ $status->value }}</option>
                             @endforeach
                         </select>
                         @error('statusOptions')
@@ -34,7 +34,7 @@
                     </div>
                     <div class="mb-0">
                         <label for="statusNote" class="form-label @error('statusNote') is-invalid @enderror">Keterangan</label>
-                        <textarea id="statusNote" name="statusNote" rows="4" class="form-control"></textarea>                        
+                        <textarea id="statusNote" name="statusNote" rows="4" class="form-control"></textarea>
                         @error('statusNote')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @endif

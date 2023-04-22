@@ -162,7 +162,7 @@ class LawController extends LegislationController
         ];
 
         $categories = Category::ofType(1)->pluck('name', 'id');
-        $statusOptions = LawRelationshipStatus::values();
+        $statusOptions = LawRelationshipStatus::cases();
         $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');

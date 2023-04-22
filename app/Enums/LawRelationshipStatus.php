@@ -8,8 +8,8 @@ enum LawRelationshipStatus: string
 {
     use Values;
 
-    case MENCABUT = 'mencabut';
-    case MENGUBAH = 'mengubah';
-    case DICABUT = 'dicabut';
-    case DIUBAH = 'diubah';
+    case mencabut = 'Mencabut';
+    case mengubah = 'Mengubah';
+    case dicabut = 'Dicabut dengan';
+    case diubah = 'Diubah dengan';
 }
