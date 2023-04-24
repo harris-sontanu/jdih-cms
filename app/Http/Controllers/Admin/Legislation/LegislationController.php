@@ -116,7 +116,7 @@ class LegislationController extends AdminController
             'Riwayat' => TRUE
         ];
 
-        $logs = LegislationLog::with('legislation', 'user')
+        $logs = LegislationLog::with(['legislation', 'user', 'legislation.category', 'legislation.category.type'])
             ->search($request->only(['search']))
             ->filter($request)
             ->latest()
