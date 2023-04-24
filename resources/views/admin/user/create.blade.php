@@ -33,8 +33,8 @@
                         <label class="form-label">Level</label>
                         <select id="role" name="role" class="form-select">
                             <option value="">Pilih Level</option>
-                            @foreach ($roles as $key => $value)
-                                <option value="{{ $key }}" @selected(old('role') == $key)>{{ $value }}</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->value }}" @selected(old('role') == $role->value)>{{ $role->label() }}</option>
                             @endforeach
                         </select>
                     </div>

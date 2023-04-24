@@ -6,7 +6,7 @@
         </div>
 
         <h6 class="font-weight-bold mb-0">{{ $user->name }}</h6>
-        <span class="d-block opacity-75">{{ Str::title($user->role) }}</span>
+        <span class="d-block opacity-75">{{ $user->role->label() }}</span>
         
         @if (!empty($user->facebook) OR !empty($user->twitter) OR !empty($user->instagram) OR !empty($user->youtube))
             <ul class="list-inline list-inline-condensed mt-3 mb-0">

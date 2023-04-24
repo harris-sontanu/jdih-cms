@@ -14,7 +14,7 @@
                 <div class="sidebar-resize-hide flex-fill">
                     <div class="fw-semibold">{{ Auth::guard('admin')->user()->name }}</div>
                     <div class="fs-sm line-height-sm opacity-50">
-                        {{ Str::ucfirst(Auth::guard('admin')->user()->role->value) }}
+                        {{ Auth::guard('admin')->user()->role->label() }}
                     </div>
                 </div>
 

@@ -93,13 +93,13 @@ class User extends Authenticatable
     public function scopePending($query): void
     {
         $query->whereNull('deleted_at')
-                    ->whereNull('email_verified_at');
+            ->whereNull('email_verified_at');
     }
 
     public function scopeActive($query): void
     {
         $query->whereNull('deleted_at')
-                    ->whereNotNull('email_verified_at');
+            ->whereNotNull('email_verified_at');
     }
 
     public function scopeSearch($query, $request): void

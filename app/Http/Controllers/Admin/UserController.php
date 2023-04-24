@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserRole;
 use App\Exports\UsersExport;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
@@ -15,12 +16,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends AdminController
 {
-    protected $roles = [
-        'administrator' => 'Administrator',
-        'editor' => 'Editor',
-        'author' => 'Author'
-    ];
-
     public function __construct()
     {
         $this->authorizeResource(User::class, 'user');
@@ -62,7 +57,7 @@ class UserController extends AdminController
 
         $tabFilters = $this->tabFilters($request);
 
-        $roles = $this->roles;
+        $roles = UserRole::cases();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -138,7 +133,7 @@ class UserController extends AdminController
             'Ubah' => TRUE
         ];
 
-        $roles = $this->roles;
+        $roles = UserRole::cases();
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
