@@ -52,20 +52,20 @@
                 <div class="collapse show" id="categories">
                     <div class="sidebar-section-body">
                         @foreach ($categories as $key => $value)
-                            @if ($loop->iteration === 6 AND !Request::get('categories'))
+                            @if ($loop->iteration === 6 AND !Request::get('categories') AND $categories->count() > 5)
                                 <div id="categories-hidden" style="display: none">
                             @endif
                             <label class="form-check mb-2">
                                 <input type="checkbox" name="categories[]" @checked(Request::get('categories') AND in_array($key, Request::get('categories'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                                 <span class="form-check-label">{{ Str::title($value) }}</span>
                             </label>
-                            @if ($loop->last AND !Request::get('categories'))
+                            @if ($loop->last AND !Request::get('categories') AND $categories->count() > 5)
                                 </div>
                             @endif
                         @endforeach
-                        @empty(Request::get('categories'))
+                        @if (empty(Request::get('categories')) AND $categories->count() > 5)
                             <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="categories-hidden">Lihat semua</a>
-                        @endempty
+                        @endif
                     </div>
                 </div>
             </div>
@@ -167,20 +167,20 @@
             <div class="collapse @if(Request::get('fields')) show @endif" id="fields">
                 <div class="sidebar-section-body">
                     @foreach ($fields as $key => $value)
-                        @if ($loop->iteration === 6 AND !Request::get('fields'))
+                        @if ($loop->iteration === 6 AND !Request::get('fields') AND $fields->count() > 5)
                             <div id="fields-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
                             <input type="checkbox" name="fields[]" @checked(Request::get('fields') AND in_array($key, Request::get('fields'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last AND !Request::get('fields'))
+                        @if ($loop->last AND !Request::get('fields') AND $fields->count() > 5)
                             </div>
                         @endif
                     @endforeach
-                    @empty(Request::get('fields'))
+                    @if (empty(Request::get('fields')) AND $fields->count() > 5)
                         <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="fields-hidden">Lihat semua</a>
-                    @endempty
+                    @endif
                 </div>
             </div>
         </div>
@@ -200,20 +200,20 @@
             <div class="collapse @if(Request::get('matters')) show @endif" id="matters">
                 <div class="sidebar-section-body">
                     @foreach ($matters as $key => $value)
-                        @if ($loop->iteration === 6 AND !Request::get('matters'))
+                        @if ($loop->iteration === 6 AND !Request::get('matters') AND $matters->count() > 5)
                             <div id="matters-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
                             <input type="checkbox" name="matters[]" @checked(Request::get('matters') AND in_array($key, Request::get('matters'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last AND !Request::get('matters'))
+                        @if ($loop->last AND !Request::get('matters') AND $matters->count() > 5)
                             </div>
                         @endif
                     @endforeach
-                    @empty(Request::get('matters'))
+                    @if(empty(Request::get('matters')) AND $matters->count() > 5)
                         <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="matters-hidden">Lihat semua</a>
-                    @endempty
+                    @endif
                 </div>
             </div>
         </div>
@@ -233,20 +233,20 @@
             <div class="collapse @if(Request::get('institutes')) show @endif" id="institutes">
                 <div class="sidebar-section-body">
                     @foreach ($institutes as $key => $value)
-                        @if ($loop->iteration === 6 AND !Request::get('institutes'))
+                        @if ($loop->iteration === 6 AND !Request::get('institutes') AND $institutes->count() > 5)
                             <div id="institutes-hidden" style="display: none">
                         @endif
                         <label class="form-check mb-2">
                             <input type="checkbox" name="institutes[]" @checked(Request::get('institutes') AND in_array($key, Request::get('institutes'))) class="form-check-input form-check-input-danger" value="{{ $key }}">
                             <span class="form-check-label">{{ Str::title($value) }}</span>
                         </label>
-                        @if ($loop->last AND !Request::get('institutes'))
+                        @if ($loop->last AND !Request::get('institutes') AND $institutes->count() > 5)
                             </div>
                         @endif
                     @endforeach
-                    @empty(Request::get('institutes'))
+                    @if(empty(Request::get('institutes')) AND $institutes->count() > 5)
                         <a role="button" class="link-danger fs-sm options-hide-toggle" data-target="institutes-hidden">Lihat semua</a>
-                    @endempty
+                    @endif
                 </div>
             </div>
         </div>
