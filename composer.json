@@ -12,6 +12,7 @@
         "intervention/image": "^2.7",
         "itsgoingd/clockwork": "^5.1",
         "jenssegers/agent": "^2.6",
+        "jorenvanhocht/laravel-share": "^4.2",
         "laravel/fortify": "^1.16",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",

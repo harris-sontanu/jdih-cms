@@ -198,10 +198,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
-        // Intervention\Image\ImageServiceProvider::class,
-        // Maatwebsite\Excel\ExcelServiceProvider::class,
-        // Jenssegers\Agent\AgentServiceProvider::class,
-        // Jorenvh\Share\Providers\ShareServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
 
     ],
 
@@ -217,10 +217,10 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Image' => Intervention\Image\Facades\Image::class,
-        // 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        // 'Agent' => Jenssegers\Agent\Facades\Agent::class,
-        // 'Share' => Jorenvh\Share\ShareFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
     ])->toArray(),
 
 ];
