@@ -52,16 +52,5 @@ class LegislationRelationship extends Model
     {
         return $this->belongsTo(Legislation::class, 'related_to', 'id');
     }
-
-    public function statusPhrase(): Attribute
-    {
-        $statusPhrase = $this->status;
-        if ($this->status == 'diubah' OR $this->status == 'dicabut'){
-            $statusPhrase .= ' dengan';
-        }
-
-        return Attribute::make(
-            get: fn ($value) => $statusPhrase
-        );
-    }
+    
 }

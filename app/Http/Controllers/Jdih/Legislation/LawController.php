@@ -121,9 +121,7 @@ class LawController extends LegislationController
     {
         $legislation->incrementViewCount();
 
-        $statusRelationships = $legislation->relations()->where('type', 'status')->get();
-        $lawRelationships = $legislation->relations()->where('type', 'legislation')->get();
-        $documentRelationships = $legislation->relations()->where('type', 'document')->get();
+        $relationships = $legislation->relations()->get();
 
         $otherLegislations = Legislation::ofType(1)
             ->where('category_id', $legislation->category_id)
@@ -152,9 +150,7 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.show', compact(
             'legislation',
-            'statusRelationships',
-            'lawRelationships',
-            'documentRelationships',
+            'relationships',
             'otherLegislations',
             'latestNews',
             'asideBanners',
