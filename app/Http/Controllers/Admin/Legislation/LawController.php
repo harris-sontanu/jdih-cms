@@ -221,31 +221,14 @@ class LawController extends LegislationController
 
     private function relationship($legislation, $request)
     {
-        if ($request->has('statusOptions'))
-        {
-            foreach ($request['statusOptions'] as $key => $value) {
-                $relatedToId = (int)$request['statusRelatedTo'][$key];
-                $related = Legislation::find($relatedToId);
+        if ($request->has('relatedTo'))
+        {   
+            foreach ($request->relatedTo as $key => $value) {
+                $type = LegislationRelationshipType::from($request['typeRelationship'][$key]);
+                $status = LawRelationshipStatus::tryFrom($request['statusRelationship'][$key]);
+                $related = Legislation::find($value);
 
-                $this->storeRelationship($legislation, $related, LegislationRelationshipType::STATUS, $value, $request['statusNote'][$key]);
-            }
-        }
-
-        if ($request->has('lawRelationshipOptions'))
-        {
-            foreach ($request['lawRelatedTo'] as $key => $relatedToId) {
-                $related = Legislation::find($relatedToId);
-
-                $this->storeRelationship($legislation, $related, LegislationRelationshipType::LEGISLATION, $request['lawRelationshipOptions'][$key], $request['lawRelatedNote'][$key]);
-            }
-        }
-
-        if ($request->has('docRelatedTo'))
-        {
-            foreach ($request['docRelatedTo'] as $key => $relatedToId) {
-                $related = Legislation::find($relatedToId);
-
-                $this->storeRelationship($legislation, $related, LegislationRelationshipType::DOCUMENT, null, $request['docRelatedNote'][$key]);
+                $this->storeRelationship($legislation, $related, $type, $status, $request['noteRelationship'][$key]);
             }
         }
     }
@@ -347,6 +330,7 @@ class LawController extends LegislationController
             'Detail' => TRUE
         ];
 
+        $relationships = $legislation->relations()->get();
         $statusRelationships = $legislation->relations()->whereType(LegislationRelationshipType::STATUS->name)->get();
         $lawRelationships = $legislation->relations()->whereType(LegislationRelationshipType::LEGISLATION->name)->get();
         $documentRelationships = $legislation->relations()->whereType(LegislationRelationshipType::DOCUMENT->name)->get();
@@ -362,6 +346,7 @@ class LawController extends LegislationController
             'pageHeader',
             'breadCrumbs',
             'legislation',
+            'relationships',
             'statusRelationships',
             'lawRelationships',
             'documentRelationships',

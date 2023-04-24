@@ -111,9 +111,7 @@
     @include('admin.legislation.matter.create')
     @include('admin.legislation.institute.create')
     @include('admin.legislation.field.create')
-    @include('admin.legislation.law.tab.add-status-relation-modal')
-    @include('admin.legislation.law.tab.add-law-relation-modal')
-    @include('admin.legislation.law.tab.add-doc-relation-modal')
+    @include('admin.legislation.law.tab.add-relation-modal')
 @endsection
 
 @section('script')
