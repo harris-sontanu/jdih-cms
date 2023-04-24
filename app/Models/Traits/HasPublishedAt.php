@@ -52,29 +52,29 @@ trait HasPublishedAt
         return $publicationBadge;
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query): void
     {
-        return $query->where('published_at', '<=', Carbon::now());
+        $query->where('published_at', '<=', Carbon::now());
     }
 
-    public function scopeScheduled($query)
+    public function scopeScheduled($query): void
     {
-        return $query->where('published_at', '>', Carbon::now());
+        $query->where('published_at', '>', Carbon::now());
     }
 
-    public function scopeDraft($query)
+    public function scopeDraft($query): void
     {
-        return $query->whereNull('published_at');
+        $query->whereNull('published_at');
     }
 
-    public function scopePopular($query, $days = 365)
+    public function scopePopular($query, $days = 365): void
     {
-        return $query->where('published_at', '>', Carbon::now()->subDays($days))
+        $query->where('published_at', '>', Carbon::now()->subDays($days))
             ->orderBy('view', 'desc');
     }
 
-    public function scopeLatestPublished($query)
+    public function scopeLatestPublished($query): void
     {
-        return $query->orderBy('published_at', 'desc');
+        $query->orderBy('published_at', 'desc');
     }
 }

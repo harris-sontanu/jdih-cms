@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\LegislationDocumentType;
+use App\Enums\UserRole;
 use App\Models\Legislation;
 use App\Models\LegislationDocument;
 use App\Models\User;
@@ -27,7 +29,7 @@ class LegislationDocumentSeeder extends Seeder
 
                 $master = LegislationDocument::create([
                     'legislation_id'    => $legislation->id,
-                    'type'  => 'master'
+                    'type'  => LegislationDocumentType::MASTER
                 ]);
 
                 $this->createMedia($master);
@@ -36,7 +38,7 @@ class LegislationDocumentSeeder extends Seeder
 
                     $abstract = LegislationDocument::create([
                         'legislation_id'    => $legislation->id,
-                        'type'  => 'abstract'
+                        'type'  => LegislationDocumentType::ABSTRACT
                     ]);
 
                     $this->createMedia($abstract);
@@ -46,7 +48,7 @@ class LegislationDocumentSeeder extends Seeder
 
                 $cover = LegislationDocument::create([
                     'legislation_id'    => $legislation->id,
-                    'type'  => 'cover'
+                    'type'  => LegislationDocumentType::COVER
                 ]);
 
                 $this->createMedia($cover);
@@ -56,7 +58,7 @@ class LegislationDocumentSeeder extends Seeder
 
     protected function createMedia($media)
     {
-        if ($media->type == 'cover') {
+        if ($media->type == LegislationDocumentType::COVER) {
             $fileName = 'book' . rand(1, 6) . '.jpg';
             $publicPath = public_path('assets/jdih/images/demo/' . $fileName);
         } else {
@@ -68,7 +70,7 @@ class LegislationDocumentSeeder extends Seeder
         $storagePath = storage_path('app/public/' . $storageDir . $fileName);
 
         File::copy($publicPath, $storagePath);
-        if ($media->type == 'cover') {
+        if ($media->type == LegislationDocumentType::COVER) {
             $fileThumbName = Str::replace(".jpg", "_md.jpg", $fileName);
             $storageThumbPath = storage_path('app/public/' . $storageDir . $fileThumbName);
             File::copy($publicPath, $storageThumbPath);
@@ -81,7 +83,7 @@ class LegislationDocumentSeeder extends Seeder
             'is_image'  => 0,
             'path'      => $storageDir . $fileName,
             'caption'   => fake()->sentence(rand(4, 7)),
-            'user_id'   => User::all()->random()->value('id'),
+            'user_id'   => User::whereIn('role', [UserRole::ADMIN, UserRole::EDITOR, UserRole::AUTHOR])->get()->random()->value('id'),
         ]);
     }
 }

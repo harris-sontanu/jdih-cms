@@ -13,7 +13,7 @@ class JudgmentRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class JudgmentRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'title'         => 'required|max:767',
@@ -62,7 +62,7 @@ class JudgmentRequest extends FormRequest
      *
      * @return void
      */
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'slug' => Str::slug($this->title),
@@ -74,7 +74,7 @@ class JudgmentRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'category_id'   => 'Jenis Putusan',

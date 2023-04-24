@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\File;
@@ -18,7 +19,7 @@ class MediaFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name'      => fake()->words(rand(1, 3), true),
@@ -26,7 +27,7 @@ class MediaFactory extends Factory
             'mime_type' => 'image/jpeg',
             'caption'   => fake()->sentence(rand(4, 7)),
             'is_image'  => 1,
-            'user_id'   => User::all()->random()
+            'user_id'   => User::whereIn('role', [UserRole::ADMIN, UserRole::EDITOR, UserRole::AUTHOR])->get()->random()
         ];
     }
 }

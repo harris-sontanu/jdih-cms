@@ -56,7 +56,7 @@
                                         <p>{{ $slide->desc }}</p>
                                     @endisset
                                 </td>
-                                <td><span class="badge bg-info bg-opacity-20 text-info">{{ $slide->positionText }}</span></td>
+                                <td><span class="badge bg-info bg-opacity-20 text-info">{{ $slide->position->label() }}</span></td>
                                 <td>{{ $slide->image->size() }}</td>
                                 <td>
                                     <div class="d-flex align-items-center">

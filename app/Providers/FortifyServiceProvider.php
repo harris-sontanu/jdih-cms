@@ -6,16 +6,16 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Enums\UserRole;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use App\Models\User;
-use App\Models\Member;
+use Illuminate\Support\Facades\Hash;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -24,11 +24,12 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Set fortify configuration for admin request
         if (request()->is('admin/*')) {
             config()->set('fortify.guard', 'admin');
             config()->set('fortify.home', '/admin/dashboard');
         }
-
+        
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
@@ -55,24 +56,18 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         Fortify::authenticateUsing(function (Request $request) {
-            if (config('fortify.guard') === 'admin') {
-
-                $user = User::where('email', $request->email)
-                            ->orWhere('username', $request->email)
-                            ->first();
-
-                if ($user &&
-                    Hash::check($request->password, $user->password)) {
-                    return $user;
-                }
-            } else {
-
-                $member = Member::where('email', $request->email)->first();
-
-                if ($member &&
-                    Hash::check($request->password, $member->password)) {
-                    return $member;
-                }
+            $user = User::where('email', $request->email)
+                        ->orWhere('username', $request->email)
+                        ->first();
+     
+            if ($user &&
+                Hash::check($request->password, $user->password) &&
+                in_array($user->role->value, [
+                    UserRole::ADMIN->value,
+                    UserRole::AUTHOR->value,
+                    UserRole::EDITOR->value,
+                ])) {
+                return $user;
             }
         });
 

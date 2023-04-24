@@ -157,45 +157,45 @@
 
                 </div>
 
-                @if(isset($statusRelationships) AND $statusRelationships->count() > 0)
+                @if (isset($relationships) AND $relationships->byType('status')->isNotEmpty())
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mb-0">Keterangan Status</h4>
                         </div>
                         <div class="card-body">
                             <ol class="list mb-0">
-                                @foreach ($statusRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
-                                @endforeach
-                            </ol>
-                        </div>
-                    </div>
-                @endisset
-
-                @if(isset($lawRelationships) AND $lawRelationships->count() > 0)
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="mb-0">Peraturan Terkait</h4>
-                        </div>
-                        <div class="card-body">
-                            <ol class="list mb-0">
-                                @foreach ($lawRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                @foreach ($relationships->byType('status') as $relation)
+                                    <li>{{ $relation->status->label() }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
                                 @endforeach
                             </ol>
                         </div>
                     </div>
                 @endif
 
-                @if(isset($documentRelationships) AND $documentRelationships->count() > 0)
+                @if (isset($relationships) AND $relationships->byType('legislation')->isNotEmpty())
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0">Peraturan Terkait</h4>
+                        </div>
+                        <div class="card-body">
+                            <ol class="list mb-0">
+                                @foreach ($relationships->byType('legislation') as $relation)
+                                    <li>{{ $relation->status->label() }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    </div>
+                @endif
+
+                @if (isset($relationships) AND $relationships->byType('document')->isNotEmpty())
                     <div class="card">
                         <div class="card-header">
                             <h4 class="mb-0">Dokumen Terkait</h4>
                         </div>
                         <div class="card-body">
                             <ol class="list mb-0">
-                                @foreach ($documentRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                @foreach ($relationships->byType('document') as $relation)
+                                    <li><a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
                                 @endforeach
                             </ol>
                         </div>

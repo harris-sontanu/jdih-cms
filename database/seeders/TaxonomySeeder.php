@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\TaxonomyType;
 use App\Models\Taxonomy;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,14 +18,14 @@ class TaxonomySeeder extends Seeder
     {
         // Create one type of page taxonomy
         Taxonomy::factory()->create([
-            'type'  => 'page',
+            'type'  => TaxonomyType::PAGE,
             'name'  => 'Page',
             'slug'  => 'page',
             'desc'  => null
         ]);
 
         Taxonomy::factory()->create([
-            'type'  => 'employee',
+            'type'  => TaxonomyType::EMPLOYEE,
             'name'  => 'Pengelola JDIH',
             'slug'  => 'pengelola-jdih',
             'desc'  => null

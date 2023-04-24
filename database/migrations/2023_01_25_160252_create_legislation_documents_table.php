@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\LegislationDocumentType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->foreignId('legislation_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->enum('type', ['master', 'abstract', 'attachment', 'cover']);
+            $table->enum('type', LegislationDocumentType::values());
             $table->tinyInteger('order')->default(1);
             $table->integer('download')
                 ->default(0);

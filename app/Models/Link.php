@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\LinkDisplay;
+use App\Enums\LinkType;
 use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasPublishedAt;
 use App\Models\Traits\HasUser;
@@ -9,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Link extends Model
 {
@@ -31,16 +35,23 @@ class Link extends Model
         'published_at',
     ];
 
-    protected $casts  = [
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
         'published_at' => 'datetime',
+        'type'  => LinkType::class,
+        'display'   => LinkDisplay::class,
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function image()
+    public function image(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediaable');
     }
@@ -121,45 +132,32 @@ class Link extends Model
         return $publicationBadge;
     }
 
-    public function displayBadge()
+    public function scopeYoutubes($query): void
     {
-        if ($this->display === 'popup') {
-            $displayBadge = '<span class="badge bg-pink bg-opacity-20 text-pink">Popup</span>';
-        } else if ($this->display === 'main') {
-            $displayBadge = '<span class="badge bg-primary bg-opacity-20 text-primary">Utama</span>';
-        } else if ($this->display === 'aside') {
-            $displayBadge = '<span class="badge bg-success bg-opacity-20 text-success">Samping</span>';
-        }
-
-        return $displayBadge;
+        $query->where('type', LinkType::YOUTUBE);
     }
 
-    public function scopeYoutubes($query)
+    public function scopeBanners($query): void
     {
-        return $query->where('type', 'youtube');
+        $query->where('type', LinkType::BANNER);
     }
 
-    public function scopeBanners($query)
+    public function scopeJdih($query): void
     {
-        return $query->where('type', 'banner');
+        $query->where('type', LinkType::JDIH);
     }
 
-    public function scopeJdih($query)
+    public function scopePublished($query): void
     {
-        return $query->where('type', 'jdih');
+        $query->where('published_at', '<=', Carbon::now());
     }
 
-    public function scopePublished($query)
+    public function scopeUnpublished($query): void
     {
-        return $query->where('published_at', '<=', Carbon::now());
+        $query->whereNull('published_at');
     }
 
-    public function scopeUnpublished($query)
-    {
-        return $query->whereNull('published_at');
-    }
-
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where('title', 'LIKE', '%' . $search . '%')
@@ -167,7 +165,7 @@ class Link extends Model
         }
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] === 'user') {
@@ -179,7 +177,5 @@ class Link extends Model
         } else {
             $query->orderBy('sort', 'asc');
         }
-
-        return $query;
     }
 }

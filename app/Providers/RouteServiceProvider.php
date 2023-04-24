@@ -25,10 +25,8 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configureRateLimiting();
 
@@ -45,57 +43,55 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/admin.php'));
         });
 
-        Route::bind('law', function ($value) {
+        Route::bind('law', function (string $value) {
             return Legislation::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('monograph', function ($value) {
+        Route::bind('monograph', function (string $value) {
             return Legislation::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('article', function ($value) {
+        Route::bind('article', function (string $value) {
             return Legislation::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('judgment', function ($value) {
+        Route::bind('judgment', function (string $value) {
             return Legislation::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('news', function ($value) {
+        Route::bind('news', function (string $value) {
             return Post::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('page', function ($value) {
+        Route::bind('page', function (string $value) {
             return Post::where('id', $value)->withTrashed()->firstOrFail();
         });
 
-        Route::bind('image', function ($value) {
+        Route::bind('image', function (string $value) {
             return Media::where('id', $value)->firstOrFail();
         });
 
-        Route::bind('file', function ($value) {
+        Route::bind('file', function (string $value) {
             return Media::where('id', $value)->firstOrFail();
         });
 
-        Route::bind('youtube', function ($value) {
+        Route::bind('youtube', function (string $value) {
             return Link::where('id', $value)->firstOrFail();
         });
 
-        Route::bind('banner', function ($value) {
+        Route::bind('banner', function (string $value) {
             return Link::where('id', $value)->firstOrFail();
         });
 
-        Route::bind('jdih', function ($value) {
+        Route::bind('jdih', function (string $value) {
             return Link::where('id', $value)->firstOrFail();
         });
     }
 
     /**
      * Configure the rate limiters for the application.
-     *
-     * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());

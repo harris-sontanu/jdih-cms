@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rules\Enum;
 
 class UserRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +25,7 @@ class UserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'name'  => 'required|string',
@@ -31,7 +33,7 @@ class UserRequest extends FormRequest
             'picture'   => 'nullable|image|max:2048',
             'email' => 'required|email|unique:users',
             'password'  => 'required|string|min:6|confirmed',
-            'role'  => 'required',
+            'role'  => ['required', new Enum(UserRole::class)],
             'phone' => 'nullable',
             'www'   => 'nullable|url',
             'bio'   => 'nullable',
@@ -62,7 +64,7 @@ class UserRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name'          => 'Nama',

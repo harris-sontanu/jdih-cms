@@ -15,7 +15,7 @@ class MatterFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $name = fake()->unique()->words(rand(1, 3), true);
         return [

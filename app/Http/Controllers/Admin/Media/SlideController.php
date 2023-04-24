@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Media;
 
+use App\Enums\SlidePosition;
 use App\Http\Controllers\Admin\Media\MediaController;
 use App\Http\Requests\SlideRequest;
 use App\Models\Slide;
@@ -30,10 +31,11 @@ class SlideController extends MediaController
         ];
 
         $slides = Slide::with('image', 'image.user')
-            // ->search($request->only(['search']))
             ->orderBy('sort', 'asc')
             ->paginate($this->limit)
             ->withQueryString();
+
+        $positions = SlidePosition::cases();
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -46,6 +48,7 @@ class SlideController extends MediaController
             'pageHeader',
             'breadCrumbs',
             'slides',
+            'positions',
             'vendors'
         ));
     }
@@ -113,7 +116,9 @@ class SlideController extends MediaController
      */
     public function edit(Slide $slide)
     {
-        return view('admin.media.slide.edit')->with('slide', $slide);
+        return view('admin.media.slide.edit')
+            ->with('slide', $slide)
+            ->with('positions', SlidePosition::cases());
     }
 
     /**

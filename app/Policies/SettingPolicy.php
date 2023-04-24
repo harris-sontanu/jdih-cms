@@ -10,12 +10,12 @@ class SettingPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return Gate::denies('isAuthor');
     }
 
-    public function update(User $user)
+    public function update(User $user): bool
     {
         return Gate::denies('isAuthor');
     }

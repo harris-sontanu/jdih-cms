@@ -26,7 +26,7 @@
                 </div>
             </div>
         @endif
-
+        
         <div class="row mb-3">
             <label class="col-form-label col-sm-3">Jenis</label>
             <div class="col-sm-9">
@@ -40,8 +40,8 @@
         </div>
     </div>
 
-    <div class="modal-footer">
+    <div class="modal-footer border-top-0 pt-0">
         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary">OK</button>
+        <button type="submit" class="btn btn-indigo">Terapkan</button>
     </div>
 </form>

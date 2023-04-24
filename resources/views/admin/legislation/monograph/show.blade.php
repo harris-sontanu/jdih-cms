@@ -178,8 +178,7 @@
                                     <div class="flex-fill overflow-hidden">
                                         <a href="{{ $attachment->media->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $attachment->media->name; }}</a>
                                         <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
-                                            <li class="list-inline-item me-1">{{ $attachment->typeTranslate }}</li>
-                                            <li class="list-inline-item ms-1">{{ $attachment->media->size() }}</li>
+                                            <li class="list-inline-item">{{ $attachment->media->size() }}</li>
                                         </ul>
                                     </div>
                                 </div>

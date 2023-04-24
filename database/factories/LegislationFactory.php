@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\Category;
 use App\Models\Field;
 use App\Models\Institute;
@@ -20,7 +21,7 @@ class LegislationFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $category = Category::all()->random();
         $title = fake()->unique()->sentence(rand(6, 12));
@@ -66,7 +67,7 @@ class LegislationFactory extends Factory
             'index_number'  => fake()->randomDigitNotNull(),
             'justice'       => $category->type_id == 4 ? fake()->words(2, 4) : null,
             'view'          => fake()->randomDigitNotNull() * 10,
-            'user_id'       => User::all()->random(),
+            'user_id'       => User::whereIn('role', [UserRole::ADMIN, UserRole::EDITOR, UserRole::AUTHOR])->get()->random(),
             'created_at'    => $created_at->toDateTimeString(),
             'updated_at'    => $updated_at->toDateTimeString(),
             'published_at'  => isset($published_at) ? $published_at->toDateTimeString() : null,

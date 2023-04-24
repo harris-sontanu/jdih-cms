@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -10,10 +11,8 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Create a default user
         User::factory()
@@ -21,10 +20,9 @@ class UserSeeder extends Seeder
                 'name'  => 'Harris Sontanu',
                 'username'  => 'admin',
                 'email' => 'harris.sontanu@gmail.com',
-                'role'  => 'administrator',
-                'default'   => 1,
+                'role'  => UserRole::ADMIN,
             ]);
 
-        User::factory()->count(5)->create();
+        User::factory()->count(15)->create();
     }
 }

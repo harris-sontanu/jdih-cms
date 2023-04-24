@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\QuestionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,12 +15,11 @@ class QuestionFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        $types = ['identity', 'question'];
         return [
             'title' => fake()->words(rand(2, 7), true) . '?',
-            'type'  => $types[rand(0, 1)],
+            'type'  => fake()->randomElement(QuestionType::values()),
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\SlidePosition;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->string('header')->nullable();
             $table->string('subheader')->nullable();
             $table->text('desc')->nullable();
-            $table->enum('position', ['top', 'center', 'bottom'])->default('top');
+            $table->enum('position', SlidePosition::values())->default(SlidePosition::TOP->value);
         });
     }
 

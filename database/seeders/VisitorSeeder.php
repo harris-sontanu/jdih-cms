@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Member;
+use App\Models\Visitor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MemberSeeder extends Seeder
+class VisitorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        Member::factory()->count(20)->create();
+        Visitor::factory()->count(200)->create();
     }
 }

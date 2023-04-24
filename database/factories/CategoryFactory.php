@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,7 +18,7 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $name = fake()->unique()->words(rand(1, 3), true);
         return [
@@ -27,7 +28,7 @@ class CategoryFactory extends Factory
             'abbrev'    => Str::upper(fake()->unique()->word()),
             'code'      => rand(0, 1) ? fake()->unique()->word() : null,
             'desc'      => fake()->paragraph(rand(1, 3)),
-            'user_id'   => User::where('role', 'administrator')->get()->random()
+            'user_id'   => User::where('role', UserRole::ADMIN)->get()->random()  
         ];
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Category extends Model
@@ -30,17 +32,17 @@ class Category extends Model
         'user_id',
     ];
 
-    public function legislations()
+    public function legislations(): HasMany
     {
         return $this->hasMany(Legislation::class);
     }
 
-    public function type()
+    public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -52,12 +54,12 @@ class Category extends Model
         );
     }
 
-    public function scopeOfType($query, $type)
+    public function scopeOfType($query, $type): void
     {
-        return $query->where('type_id', $type);
+        $query->where('type_id', $type);
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] == 'type') {
@@ -73,11 +75,9 @@ class Category extends Model
         } else {
             $query->orderBy('sort', 'asc');
         }
-
-        return $query;
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {

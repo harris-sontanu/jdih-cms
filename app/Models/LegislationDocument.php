@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\LegislationDocumentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class LegislationDocument extends Model
 {
@@ -30,30 +34,39 @@ class LegislationDocument extends Model
         'download'
     ];
 
-    public function media()
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'type'  => LegislationDocumentType::class,
+    ];
+
+    public function media(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediaable');
     }
 
-    public function legislation()
+    public function legislation(): BelongsTo
     {
         return $this->belongsTo(Legislation::class);
     }
 
-    public function downloads()
+    public function downloads(): HasMany
     {
         return $this->hasMany(LegislationDownloadLog::class);
     }
 
     public function typeTranslate(): Attribute
     {
-        if ($this->type === 'master') {
+        if ($this->type === LegislationDocumentType::MASTER) {
             $type = 'Batang Tubuh';
-        } else if ($this->type === 'abstract') {
+        } else if ($this->type === LegislationDocumentType::ABSTRACT) {
             $type = 'Abstrak';
-        } else if ($this->type === 'attachment') {
+        } else if ($this->type === LegislationDocumentType::ATTACHMENT) {
             $type = 'Lampiran';
-        } else if ($this->type === 'cover') {
+        } else if ($this->type === LegislationDocumentType::COVER) {
             $type = 'Sampul';
         }
 
@@ -62,9 +75,9 @@ class LegislationDocument extends Model
         );
     }
 
-    public function scopeOfType($query, $type)
+    public function scopeOfType($query, $type): void
     {
-        return $query->where('type', $type);
+        $query->where('type', $type);
     }
 
     public function incrementDownloadCount()

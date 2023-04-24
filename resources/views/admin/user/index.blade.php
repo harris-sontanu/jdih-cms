@@ -118,7 +118,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ Str::ucfirst($user->role) }}</td>
+                                <td>{{ $user->role->label() }}</td>
                                 <td class="text-center">{!! $user->statusBadge !!}</td>
                                 <td><abbr data-bs-popup="tooltip" title="{{ $user->dateFormatted($user->last_logged_in_at, true) }}">{{ $user->dateFormatted($user->last_logged_in_at) }}</abbr></td>
                                 <td><abbr data-bs-popup="tooltip" title="{{ $user->dateFormatted($user->created_at, true) }}">{{ $user->dateFormatted($user->created_at) }}</abbr></td>

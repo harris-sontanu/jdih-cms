@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\LinkDisplay;
+use App\Enums\LinkType;
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -16,11 +19,9 @@ class LinkFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        $types = ['banner', 'jdih', 'youtube'];
-        $type  = $types[rand(0, 2)];
-        $displays = ['main', 'aside', 'popup'];
+        $type  = fake()->randomElement(LinkType::values());
 
         $youtubeUrls = ['https://youtu.be/dGO3_oznSB0', 'https://youtu.be/lcQ1dH6GL7k', 'https://youtu.be/CFUbfuIGYls'];
 
@@ -32,10 +33,10 @@ class LinkFactory extends Factory
         return [
             'title'     => fake()->sentence(rand(6, 12)),
             'desc'      => fake()->paragraph(rand(1, 2)),
-            'url'       => $type == 'youtube' ? $youtubeUrls[rand(0, 2)] : fake()->url(),
+            'url'       => $type == 'youtube' ? fake()->randomElement($youtubeUrls) : fake()->url(),
             'type'      => $type,
-            'display'   => $type == 'banner' ? $displays[rand(0, 1)] : null,
-            'user_id'   => User::all()->random(),
+            'display'   => $type == 'banner' ? fake()->randomElement(LinkDisplay::values()) : null,
+            'user_id'   => User::whereIn('role', [UserRole::ADMIN, UserRole::EDITOR, UserRole::AUTHOR])->get()->random(),
             'created_at'    => $created_at->toDateTimeString(),
             'updated_at'    => $updated_at->toDateTimeString(),
             'published_at'  => $published_at->toDateTimeString(),

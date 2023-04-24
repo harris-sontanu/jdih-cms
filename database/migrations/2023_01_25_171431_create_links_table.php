@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\LinkDisplay;
+use App\Enums\LinkType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,8 +21,8 @@ return new class extends Migration
             $table->text('desc')->nullable();
             $table->string('url');
             $table->integer('sort')->default(0);
-            $table->enum('type', ['banner', 'jdih', 'youtube']);
-            $table->enum('display', ['main', 'aside', 'popup'])
+            $table->enum('type', LinkType::values());
+            $table->enum('display', LinkDisplay::values())
                 ->nullable();
             $table->bigInteger('user_id')
                 ->unsigned()

@@ -18,7 +18,7 @@ class LegislationPolicy
      * @param  string  $ability
      * @return void|bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability): bool
     {
         if (Gate::allows('isAdmin')) return true;
     }
@@ -29,7 +29,7 @@ class LegislationPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -41,7 +41,7 @@ class LegislationPolicy
      * @param  \App\Models\Legislation  $legislation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Legislation $legislation)
+    public function view(User $user, Legislation $legislation): bool
     {
         return true;
     }
@@ -52,7 +52,7 @@ class LegislationPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -64,7 +64,7 @@ class LegislationPolicy
      * @param  \App\Models\Legislation  $legislation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Legislation $legislation)
+    public function update(User $user, Legislation $legislation): bool
     {
         return Gate::allows('isEditor') OR $user->id === $legislation->user_id;
     }
@@ -76,7 +76,7 @@ class LegislationPolicy
      * @param  \App\Models\Legislation  $legislation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Legislation $legislation)
+    public function delete(User $user, Legislation $legislation): bool
     {
         return Gate::allows('isEditor') OR $user->id === $legislation->user_id;
     }
@@ -88,7 +88,7 @@ class LegislationPolicy
      * @param  \App\Models\Legislation  $legislation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Legislation $legislation)
+    public function restore(User $user, Legislation $legislation): bool
     {
         return Gate::allows('isEditor') OR $user->id === $legislation->user_id;
     }
@@ -100,7 +100,7 @@ class LegislationPolicy
      * @param  \App\Models\Legislation  $legislation
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Legislation $legislation)
+    public function forceDelete(User $user, Legislation $legislation): bool
     {
         return Gate::denies('isAuthor');
     }

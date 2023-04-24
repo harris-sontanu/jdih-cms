@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\LegislationRelationshipType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
         Schema::create('legislation_relationships', function (Blueprint $table) {
             $table->bigInteger('legislation_id')->unsigned();
             $table->bigInteger('related_to')->unsigned();
-            $table->enum('type', ['status', 'legislation', 'document']);
+            $table->enum('type', LegislationRelationshipType::values());
             $table->string('status')->nullable();
             $table->text('note')->nullable();
 

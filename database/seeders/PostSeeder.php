@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\TaxonomyType;
 use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -128,7 +129,7 @@ class PostSeeder extends Seeder
             'user_id'   => $post->user_id,
             'created_at'=> $post->created_at,
             'updated_at'=> $post->updated_at,
-            'published_at'  => ($post->taxonomy->type == 'news') ? $post->published_at : null,
+            'published_at'  => ($post->taxonomy->type == TaxonomyType::NEWS) ? $post->published_at : null,
         ]);
 
         return $media;

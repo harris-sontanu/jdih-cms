@@ -3,7 +3,7 @@
     @method('PUT')
     @csrf
     <input type="hidden" name="type" value="{{ $banner->type }}">
-    <div class="modal-header">
+    <div class="modal-header border-bottom-0 pb-0">
         <h5 class="modal-title">Ubah Banner</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
@@ -34,20 +34,12 @@
         <div class="mb-3">
             <label class="form-label">Tampilan:</label>
             <div>
-                <div class="form-check form-check-inline form-check-reverse">
-                    <input type="radio" class="form-check-input" name="display" value="main" @checked($banner->display == 'main')>
-                    <label class="form-check-label">Utama</label>
-                </div>
-
-                <div class="form-check form-check-inline form-check-reverse">
-                    <input type="radio" class="form-check-input" name="display" value="aside" @checked($banner->display == 'aside')>
-                    <label class="form-check-label">Samping</label>
-                </div>
-
-                <div class="form-check form-check-inline form-check-reverse">
-                    <input type="radio" class="form-check-input" name="display" value="popup" @checked($banner->display == 'popup')>
-                    <label class="form-check-label">Popup</label>
-                </div>
+                @foreach ($displays as $display)    
+                    <div class="form-check form-check-inline form-check-reverse">
+                        <input type="radio" class="form-check-input" name="display" value="{{ $display->value }}" @checked($banner->display == $display)>
+                        <label class="form-check-label">{{ $display->label() }}</label>
+                    </div>
+                @endforeach
             </div>
         </div>
 
@@ -56,7 +48,7 @@
             <label class="form-check-label" for="publication">Tayang:</label>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer border-top-0 pt-0">
         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
         <button class="btn btn-indigo">Ubah</button>
     </div>

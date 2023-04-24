@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,10 +9,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')
@@ -20,9 +19,8 @@ return new class extends Migration
             $table->string('picture')
                 ->after('email')
                 ->nullable();
-            $table->enum('role', ['administrator', 'editor', 'author'])
-                ->after('email')
-                ->default('author');
+            $table->enum('role', UserRole::values())->after('email_verified_at')
+                ->default(UserRole::EDITOR->value);
             $table->dateTime('last_logged_in_at')
                 ->nullable();
             $table->string('phone')->nullable();
@@ -33,7 +31,6 @@ return new class extends Migration
             $table->string('tiktok')->nullable();
             $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
-            $table->boolean('default')->default(0);
 
             $table->softDeletes();
         });
@@ -41,12 +38,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {            
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['username', 'picture', 'role', 'last_logged_in_at', 'phone', 'bio', 'www', 'facebook', 'twitter', 'tiktok', 'instagram', 'youtube']);
             $table->dropSoftDeletes();
         });

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form action="{{ route('admin.user.store') }}" method="post">
                 @csrf
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0 pb-0">
                     <h5 class="modal-title">Tambah Operator</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -33,13 +33,13 @@
                         <label class="form-label">Level</label>
                         <select id="role" name="role" class="form-select">
                             <option value="">Pilih Level</option>
-                            @foreach ($roles as $key => $value)
-                                <option value="{{ $key }}" @selected(old('role') == $key)>{{ $value }}</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->value }}" @selected(old('role') == $role->value)>{{ $role->label() }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0 pt-0">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
                     <button id="save-btn" type="button" class="btn btn-indigo">Simpan</button>
                 </div>

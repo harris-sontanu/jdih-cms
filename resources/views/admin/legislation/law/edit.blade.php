@@ -134,7 +134,7 @@
                                 <h5 class="mb-0"><i class="ph-clock-counter-clockwise me-2"></i>Riwayat</h5>
                             </div>
 
-                            <div class="sidebar-section-body media-chat-scrollable">
+                            <div class="sidebar-section-body scrollable">
                                 <div class="list-feed">
                                     @forelse ($law->logs->take(5) as $log)
                                         <div class="list-feed-item">
@@ -167,10 +167,7 @@
     @include('admin.legislation.matter.create')
     @include('admin.legislation.institute.create')
     @include('admin.legislation.field.create')
-    @include('admin.legislation.law.tab.add-status-relation-modal')
-    @include('admin.legislation.law.tab.add-law-relation-modal')
-    @include('admin.legislation.law.tab.add-doc-relation-modal')
-    @include('admin.layouts.modal')
+    @include('admin.legislation.law.tab.add-relation-modal')
 @endsection
 
 @section('script')

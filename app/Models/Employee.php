@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -46,12 +48,12 @@ class Employee extends Model
         'sort',
     ];
 
-    public function taxonomies()
+    public function taxonomies(): BelongsToMany
     {
         return $this->belongsToMany(Taxonomy::class);
     }
 
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
@@ -108,7 +110,7 @@ class Employee extends Model
         );
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {
@@ -118,7 +120,7 @@ class Employee extends Model
         }
     }
 
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request): void
     {
         if (!empty($request['name']) AND $name = $request['name']) {
             $query->where('name', 'LIKE', '%' . $name . '%');
@@ -138,7 +140,7 @@ class Employee extends Model
         }
     }
 
-    public function scopeOfGroup($query, $group)
+    public function scopeOfGroup($query, $group): void
     {
         $query->whereHas('taxonomies', function(Builder $q) use ($group) {
                 $q->where('type', 'employee')
@@ -146,14 +148,12 @@ class Employee extends Model
         });
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             $query->orderBy($request['order'], $request['sort']);
         } else {
             $query->orderBy('name', 'asc');
         }
-
-        return $query;
     }
 }

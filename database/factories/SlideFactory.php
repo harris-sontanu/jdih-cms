@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\SlidePosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,12 +15,13 @@ class SlideFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'header'    => fake()->sentence(rand(2, 5)),
             'subheader' => fake()->sentence(rand(6, 12)),
             'desc'      => fake()->text(),
+            'position'  => fake()->randomElement(SlidePosition::values())
         ];
     }
 }

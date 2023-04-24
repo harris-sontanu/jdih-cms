@@ -18,7 +18,7 @@ class SlidePolicy
      * @param  string  $ability
      * @return void|bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability): bool
     {
         if (Gate::allows('isAdmin')) return true;
     }
@@ -29,7 +29,7 @@ class SlidePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -41,7 +41,7 @@ class SlidePolicy
      * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Slide $slide)
+    public function view(User $user, Slide $slide): bool
     {
         return true;
     }
@@ -52,7 +52,7 @@ class SlidePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -64,7 +64,7 @@ class SlidePolicy
      * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Slide $slide)
+    public function update(User $user, Slide $slide): bool
     {
         return Gate::allows('isEditor') OR $user->id === $slide->image->user_id;
     }
@@ -76,7 +76,7 @@ class SlidePolicy
      * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Slide $slide)
+    public function delete(User $user, Slide $slide): bool
     {
         return Gate::allows('isEditor') OR $user->id === $slide->image->user_id;
     }

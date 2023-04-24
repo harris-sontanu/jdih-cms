@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\TaxonomyType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,11 +18,11 @@ class TaxonomyFactory extends Factory
      */
     public function definition()
     {
-        $types = ['page', 'news', 'employee'];
+        $types = [TaxonomyType::PAGE, TaxonomyType::NEWS, TaxonomyType::EMPLOYEE];
         $name = fake()->unique()->words(1, true);
 
         return [
-            'type'      => $types[rand(1, 2)],
+            'type'      => fake()->randomElement($types),
             'name'      => Str::title($name),
             'slug'      => Str::slug($name),
             'desc'      => fake()->paragraph(rand(1, 3))

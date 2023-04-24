@@ -16,7 +16,7 @@ class LegislationDownloadLogFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $dt = fake()->dateTimeBetween('-2 weeks');
         $created_at = Carbon::parse($dt);

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form id="store-image-form" action="{{ route('admin.media.slide.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0 pb-0">
                     <h5 class="modal-title">Unggah Slide</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -34,23 +34,15 @@
 
                     <label for="position" class="form-label">Posisi Gambar</label>
                     <div>
-                        <label class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="position" value="top" checked>
-                            <span class="form-check-label">Atas</span>
-                        </label>
-
-                        <label class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="position" value="center">
-                            <span class="form-check-label">Tengah</span>
-                        </label>
-
-                        <label class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="position" value="bottom">
-                            <span class="form-check-label">Bawah</span>
-                        </label>
+                        @foreach ($positions as $position)    
+                            <label class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="position" value="{{ $position->value }}" checked>
+                                <span class="form-check-label">{{ $position->label() }}</span>
+                            </label>
+                        @endforeach
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0 pt-0">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
                     <button class="btn btn-indigo">Unggah</button>
                 </div>

@@ -18,7 +18,7 @@ class PostPolicy
      * @param  string  $ability
      * @return void|bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability): bool
     {
         if (Gate::allows('isAdmin')) return true;
     }
@@ -29,7 +29,7 @@ class PostPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -41,7 +41,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Post $post)
+    public function view(User $user, Post $post): bool
     {
         return true;
     }
@@ -52,7 +52,7 @@ class PostPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -64,7 +64,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Post $post)
+    public function update(User $user, Post $post): bool
     {
         return Gate::allows('isEditor') OR $user->id === $post->user_id;
     }
@@ -76,7 +76,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Post $post)
+    public function delete(User $user, Post $post): bool
     {
         return Gate::allows('isEditor') OR $user->id === $post->user_id;
     }
@@ -88,7 +88,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user, Post $post): bool
     {
         return Gate::allows('isEditor') OR $user->id === $post->user_id;
     }
@@ -100,7 +100,7 @@ class PostPolicy
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user, Post $post): bool
     {
         return Gate::denies('isAuthor');
     }

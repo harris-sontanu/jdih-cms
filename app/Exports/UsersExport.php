@@ -24,14 +24,9 @@ class UsersExport implements FromView
     public function view(): View
     {   
         $users = User::whereIn('id', $this->id);
-        if (!empty($this->order)) 
-        {
-            $users = $users->orderBy($this->order, $this->sort);
-        } 
-        else 
-        {
-            $users = $users->latest();
-        }
+        $users = isset($this->order)
+            ? $users->orderBy($this->order, $this->sort)
+            : $users->latest();
 
         return view('admin.exports.users', [
             'users' => $users->get()

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\QuestionType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Question extends Model
 {
@@ -26,18 +28,27 @@ class Question extends Model
         'type'
     ];
 
-    public function answers()
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'type'  => QuestionType::class,
+    ];
+
+    public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
     }
 
-    public function scopeIdentities($query)
+    public function scopeIdentities($query): void
     {
-        return $query->where('type', 'identity');
+        $query->where('type', QuestionType::IDENTITY);
     }
 
-    public function scopeQuestions($query)
+    public function scopeQuestions($query): void
     {
-        return $query->where('type', 'question');
+        $query->where('type', QuestionType::QUESTION);
     }
 }

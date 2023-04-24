@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use App\Models\Legislation;
 use App\Models\Category;
@@ -202,7 +203,7 @@ class MonographController extends LegislationController
     {
         if ($request->hasFile('cover'))
         {
-            $this->storeDocument($request->file('cover'), $legislation, 'cover');
+            $this->storeDocument($request->file('cover'), $legislation, LegislationDocumentType::COVER);
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -212,7 +213,7 @@ class MonographController extends LegislationController
 
         if ($request->hasFile('attachment'))
         {
-            $this->storeDocument($request->file('attachment'), $legislation, 'master');
+            $this->storeDocument($request->file('attachment'), $legislation, LegislationDocumentType::MASTER);
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -239,11 +240,11 @@ class MonographController extends LegislationController
         ];
 
         $cover = $legislation->documents()
-            ->ofType('cover')
+            ->ofType(LegislationDocumentType::COVER->name)
             ->first();
 
         $attachment = $legislation->documents()
-            ->ofType('attachment')
+            ->ofType(LegislationDocumentType::MASTER->name)
             ->first();
 
         return view('admin.legislation.monograph.show', compact(
@@ -279,11 +280,11 @@ class MonographController extends LegislationController
         $fields = Field::sorted()->pluck('name', 'id');
 
         $cover = $legislation->documents()
-            ->ofType('cover')
+            ->ofType(LegislationDocumentType::COVER->name)
             ->first();
 
         $attachment = $legislation->documents()
-            ->ofType('master')
+            ->ofType(LegislationDocumentType::MASTER->name)
             ->first();
 
         $vendors = [

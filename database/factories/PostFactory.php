@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\TaxonomyType;
+use App\Enums\UserRole;
 use App\Models\Employee;
 use App\Models\Taxonomy;
 use App\Models\User;
@@ -19,7 +21,7 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         $title = fake()->unique()->sentence(rand(5, 12));
         $slug  = Str::slug($title);
@@ -35,7 +37,7 @@ class PostFactory extends Factory
         $deleted_at = empty($published_at) ? (rand(0, 1) ? Carbon::parse($updated_at)->addDays(rand(1, 3)) : null) : null;
 
         return [
-            'taxonomy_id'   => Taxonomy::whereType('news')->get()->random(),
+            'taxonomy_id'   => Taxonomy::where('type', TaxonomyType::NEWS)->get()->random(),
             'title'         => $title,
             'slug'          => $slug,
             'excerpt'       => fake()->paragraph(),
@@ -43,7 +45,7 @@ class PostFactory extends Factory
             'source'        => fake()->words(rand(1, 3), true),
             'view'          => fake()->randomDigitNotNull() * 10,
             'author_id'     => Employee::all()->random(),
-            'user_id'       => User::all()->random(),
+            'user_id'       => User::whereIn('role', [UserRole::ADMIN, UserRole::EDITOR, UserRole::AUTHOR])->get()->random(),
             'created_at'    => $created_at->toDateTimeString(),
             'updated_at'    => $updated_at->toDateTimeString(),
             'published_at'  => isset($published_at) ? $published_at->toDateTimeString() : null,

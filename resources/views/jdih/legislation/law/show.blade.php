@@ -237,8 +237,8 @@
                         <div class="tab-content p-4 fs-lg">
                             <div class="tab-pane fade active show" id="status" role="tabpanel">
                                 <ol class="list mb-0">
-                                    @forelse ($statusRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <u><a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a></u> {{ $relation->note }}</li>
+                                    @forelse ($relationships->byType('status') as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ $relation->status->label() }}</span> <u><a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a></u> {{ $relation->note }}</li>
                                     @empty
                                         <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
@@ -247,8 +247,8 @@
 
                             <div class="tab-pane fade" id="legislation" role="tabpanel">
                                 <ol class="list mb-0">
-                                    @forelse ($lawRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @forelse ($relationships->byType('legislation') as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ $relation->status->label() }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                     @empty
                                         <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse
@@ -257,8 +257,8 @@
 
                             <div class="tab-pane fade" id="document" role="tabpanel">
                                 <ol class="list mb-0">
-                                    @forelse ($documentRelationships as $relation)
-                                        <li class="mb-3"><span class="fw-bold">{{ Str::ucfirst($relation->statusPhrase) }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    @forelse ($relationships->byType('document') as $relation)
+                                        <li class="mb-3"><span class="fw-bold">{{ $relation->status->label() }}</span> <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank" class="text-body">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                     @empty
                                         <span class="d-block mb-3 text-muted">Tidak ada data</span>
                                     @endforelse

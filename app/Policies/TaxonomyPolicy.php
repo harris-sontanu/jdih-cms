@@ -17,7 +17,7 @@ class TaxonomyPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -29,7 +29,7 @@ class TaxonomyPolicy
      * @param  \App\Models\Taxonomy  $taxonomy
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Taxonomy $taxonomy)
+    public function view(User $user, Taxonomy $taxonomy): bool
     {
         return true;
     }
@@ -40,7 +40,7 @@ class TaxonomyPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return Gate::denies('isAuthor');
     }
@@ -52,7 +52,7 @@ class TaxonomyPolicy
      * @param  \App\Models\Taxonomy  $taxonomy
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Taxonomy $taxonomy)
+    public function update(User $user, Taxonomy $taxonomy): bool
     {
         return Gate::denies('isAuthor');
     }
@@ -64,7 +64,7 @@ class TaxonomyPolicy
      * @param  \App\Models\Taxonomy  $taxonomy
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Taxonomy $taxonomy)
+    public function delete(User $user, Taxonomy $taxonomy): bool
     {
         return Gate::denies('isAuthor');
     }

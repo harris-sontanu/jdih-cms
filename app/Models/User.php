@@ -6,12 +6,14 @@ namespace App\Models;
 
 use App\Models\Traits\HasUser;
 use App\Models\Traits\TimeHelper;
+use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 
@@ -59,47 +61,48 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'last_logged_in_at' => 'datetime'
+        'last_logged_in_at' => 'datetime',
+        'role'  => UserRole::class,
     ];
 
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(Category::class);
     }
 
-    public function legislations()
+    public function legislations(): HasMany
     {
         return $this->hasMany(Legislation::class);
     }
 
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function media()
+    public function media(): HasMany
     {
         return $this->hasMany(Media::class);
     }
 
-    public function links()
+    public function links(): HasMany
     {
         return $this->hasMany(Link::class);
     }
 
-    public function scopePending($query)
+    public function scopePending($query): void
     {
-        return $query->whereNull('deleted_at')
-                    ->whereNull('email_verified_at');
+        $query->whereNull('deleted_at')
+            ->whereNull('email_verified_at');
     }
 
-    public function scopeActive($query)
+    public function scopeActive($query): void
     {
-        return $query->whereNull('deleted_at')
-                    ->whereNotNull('email_verified_at');
+        $query->whereNull('deleted_at')
+            ->whereNotNull('email_verified_at');
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {
@@ -110,7 +113,7 @@ class User extends Authenticatable
         }
     }
 
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request): void
     {
         if (!empty($request['name']) AND $name = $request['name']) {
             $query->where('name', 'LIKE', '%' . $name . '%');
@@ -149,12 +152,12 @@ class User extends Authenticatable
         }
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
-            return $query->orderBy($request['order'], $request['sort']);
+            $query->orderBy($request['order'], $request['sort']);
         } else {
-            return $query->orderBy('name', 'asc');
+            $query->orderBy('name', 'asc');
         }
     }
 
@@ -185,5 +188,4 @@ class User extends Authenticatable
             get: fn ($value) => $badge
         );
     }
-
 }

@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\TaxonomyType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 class Taxonomy extends Model
@@ -30,27 +33,36 @@ class Taxonomy extends Model
         'sort',
     ];
 
-    public function posts()
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'type'  => TaxonomyType::class,
+    ];
+
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function publishedPosts()
+    public function publishedPosts(): HasMany
     {
         return $this->hasMany(Post::class)->where('published_at', '<=', Carbon::now());
     }
 
-    public function employees()
+    public function employees(): BelongsToMany
     {
         return $this->belongsToMany(Employee::class);
     }
 
-    public function scopeType($query, $type)
+    public function scopeType($query, $type): void
     {
-        return $query->where('type', $type);
+        $query->where('type', $type);
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] == 'total') {
@@ -69,11 +81,9 @@ class Taxonomy extends Model
         } else {
             $query->orderBy('name', 'asc');
         }
-
-        return $query;
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {

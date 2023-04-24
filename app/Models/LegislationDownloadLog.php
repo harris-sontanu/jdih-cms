@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 class LegislationDownloadLog extends Model
@@ -34,12 +35,12 @@ class LegislationDownloadLog extends Model
         'legislation_document_id',
     ];
 
-    public function document()
+    public function document(): BelongsTo
     {
         return $this->belongsTo(LegislationDocument::class);
     }
 
-    public function scopeCountDaily($query, $subDays = 0)
+    public function scopeCountDaily($query, $subDays = 0): void
     {
         $dt = Carbon::now();
 
@@ -50,7 +51,5 @@ class LegislationDownloadLog extends Model
         } else {
             $query->whereDate('created_at', $dt->subDays($subDays));
         }
-
-        return $query;
     }
 }

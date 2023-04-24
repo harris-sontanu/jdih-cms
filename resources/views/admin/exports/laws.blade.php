@@ -47,7 +47,7 @@
             <td>{{ Str::title($law->status) }}</td>
             <td>
                 <ol class="list mb-0">
-                    @foreach ($law->statusRelationships as $relation)
+                    @foreach ($law->relations()->whereType('STATUS')->get() as $relation)
                         <li>{{ Str::title($relation->status) . ' ' . $relation->relatedTo->title . ' ' . $relation->note }}</li>
                     @endforeach
                 </ol>
@@ -61,14 +61,14 @@
             <td>{{ $law->institute->name ?? '-' }}</td>
             <td>
                 <ol class="list mb-0">
-                    @foreach ($law->lawRelationships as $relation)
+                    @foreach ($law->relations()->whereType('LEGISLATION')->get() as $relation)
                         <li>{{ Str::title($relation->status) . ' ' . $relation->relatedTo->title . ' ' . $relation->note }}</li>
                     @endforeach
                 </ol>
             </td>
             <td>
                 <ol class="list mb-0">
-                    @foreach ($law->documentRelationships as $relation)
+                    @foreach ($law->relations()->whereType('DOCUMENT')->get() as $relation)
                         <li>{{ Str::title($relation->status) . ' ' . $relation->relatedTo->title . ' ' . $relation->note }}</li>
                     @endforeach
                 </ol>

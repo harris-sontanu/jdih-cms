@@ -25,23 +25,16 @@ class LawsExport implements FromView
     {
         $laws = Legislation::with(
             'category',
-            'statusRelationships',
-            'lawRelationships',
-            'documentRelationships',
+            'relations',
             'matters',
             'field',
             'institute',
             'user')
             ->whereIn('id', $this->id);
 
-        if (!empty($this->order))
-        {
-            $laws = $laws->orderBy($this->order, $this->sort);
-        }
-        else
-        {
-            $laws = $laws->latest();
-        }
+        $laws = isset($this->order) 
+            ? $laws->orderBy($this->order, $this->sort)
+            : $laws->latest();
 
         return view('admin.exports.laws', [
             'laws' => $laws->get()

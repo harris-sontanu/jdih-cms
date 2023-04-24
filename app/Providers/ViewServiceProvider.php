@@ -1,33 +1,30 @@
 <?php
-
+ 
 namespace App\Providers;
-
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Storage;
+ 
+use Illuminate\Support\Facades;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use App\Models\Setting;
 use App\Models\Visitor;
 use App\Models\Post;
 use App\View\Composers\FooterComposer;
-
+ 
 class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        // ...
     }
-
+ 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $settings = Setting::pluck('value', 'key')->toArray();
 

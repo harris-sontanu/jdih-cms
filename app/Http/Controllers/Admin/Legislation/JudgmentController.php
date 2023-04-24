@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use App\Models\Legislation;
 use App\Models\Category;
@@ -203,7 +204,7 @@ class JudgmentController extends LegislationController
     {
         if ($request->hasFile('master'))
         {
-            $this->storeDocument($request->file('master'), $legislation, 'master');
+            $this->storeDocument($request->file('master'), $legislation, LegislationDocumentType::MASTER);
 
             $legislation->logs()->create([
                 'user_id'   => $request->user()->id,
@@ -230,7 +231,7 @@ class JudgmentController extends LegislationController
         ];
 
         $attachment = $legislation->documents()
-            ->ofType('master')
+            ->ofType(LegislationDocumentType::MASTER->name)
             ->first();
 
         $adobeKey = Config::get('services.adobe.key');
@@ -268,7 +269,7 @@ class JudgmentController extends LegislationController
         $fields = Field::sorted()->pluck('name', 'id');
 
         $attachment = $legislation->documents()
-            ->ofType('master')
+            ->ofType(LegislationDocumentType::MASTER->name)
             ->first();
 
         $vendors = [

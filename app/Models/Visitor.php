@@ -26,12 +26,12 @@ class Visitor extends Model
         'robot',
     ];
 
-    public function scopeCountAll($query)
+    public function scopeCountAll($query): void
     {
-        return $query->selectRaw('MAX(ipv4)')->groupByRaw('DATE(created_at), ipv4');
+        $query->selectRaw('MAX(ipv4)')->groupByRaw('DATE(created_at), ipv4');
     }
 
-    public function scopeCountDaily($query, $subDays = 0)
+    public function scopeCountDaily($query, $subDays = 0): void
     {
         $visitor = $query->selectRaw('MAX(ipv4)');
         $dt = Carbon::now();
@@ -44,10 +44,10 @@ class Visitor extends Model
             $visitor->whereDate('created_at', $dt->subDays($subDays));
         }
 
-        return $visitor->groupByRaw('DATE(created_at), ipv4');
+        $visitor->groupByRaw('DATE(created_at), ipv4');
     }
 
-    public function scopeCountWeekly($query, $subWeeks = 0)
+    public function scopeCountWeekly($query, $subWeeks = 0): void
     {
         $week = Carbon::now()->translatedFormat('W');
         $weekNumber = $week * 1;
@@ -55,15 +55,15 @@ class Visitor extends Model
             ? 52 + ($weekNumber - $subWeeks)
             : $weekNumber - $subWeeks;
 
-        return $query->selectRaw('MAX(ipv4)')->whereRaw('WEEKOFYEAR(created_at) = ' . $weekOfYear)->groupByRaw('DATE(created_at), ipv4');
+        $query->selectRaw('MAX(ipv4)')->whereRaw('WEEKOFYEAR(created_at) = ' . $weekOfYear)->groupByRaw('DATE(created_at), ipv4');
     }
 
-    public function scopeCountMonthly($query, $subMonths = 0)
+    public function scopeCountMonthly($query, $subMonths = 0): void
     {
         $dt = Carbon::now()->settings([
             'monthOverflow' => false,
         ]);
 
-        return $query->selectRaw('MAX(ipv4)')->whereMonth('created_at', $dt->subMonths($subMonths))->groupByRaw('DATE(created_at), ipv4');
+        $query->selectRaw('MAX(ipv4)')->whereMonth('created_at', $dt->subMonths($subMonths))->groupByRaw('DATE(created_at), ipv4');
     }
 }

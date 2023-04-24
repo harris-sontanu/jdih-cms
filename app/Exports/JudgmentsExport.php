@@ -28,15 +28,10 @@ class JudgmentsExport implements FromView
             'field',
             'user')
             ->whereIn('id', $this->id);
-
-        if (!empty($this->order))
-        {
-            $judgments = $judgments->orderBy($this->order, $this->sort);
-        }
-        else
-        {
-            $judgments = $judgments->latest();
-        }
+            
+        $judgments = isset($this->order)
+            ? $judgments->orderBy($this->order, $this->sort)
+            : $judgments->latest();
 
         return view('admin.exports.judgments', [
             'judgments' => $judgments->get()

@@ -5,7 +5,7 @@
             <form id="store-youtube-form" action="{{ route('admin.link.youtube.store') }}" method="post" novalidate enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="type" value="youtube">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0 pb-0">
                     <h5 class="modal-title">Tambah Tautan YouTube</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -31,7 +31,7 @@
                         <label class="form-check-label" for="publication">Tayangkan di Galeri Video</label>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0 pt-0">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
                     <button class="btn btn-indigo">Simpan</button>
                 </div>

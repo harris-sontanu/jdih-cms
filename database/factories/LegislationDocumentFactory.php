@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\LegislationDocumentType;
 use App\Models\Legislation;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -16,13 +17,11 @@ class LegislationDocumentFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        $types = ['master', 'abstract', 'attachment', 'cover'];
         return [
             'legislation_id'    => Legislation::all()->random(),
-            // 'media_id'          => Media::factory()->create(),
-            'type'              => $types[rand(0, 3)],
+            'type'              => fake()->randomElement(LegislationDocumentType::values()),
             'download'          => rand(1, 10) * rand(1, 10),
         ];
     }

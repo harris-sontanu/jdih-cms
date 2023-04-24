@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Institute extends Model
 {
@@ -30,12 +31,12 @@ class Institute extends Model
         'sort',
     ];
 
-    public function legislations()
+    public function legislations(): HasMany
     {
         return $this->hasMany(Legislation::class);
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] == 'total') {
@@ -46,11 +47,9 @@ class Institute extends Model
         } else {
             $query->orderBy('name', 'asc');
         }
-
-        return $query;
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {

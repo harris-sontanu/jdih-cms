@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\TaxonomyType;
 use App\Models\Employee;
 use App\Models\Taxonomy;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,7 +21,7 @@ class EmployeeTaxonomySeeder extends Seeder
         foreach ($employees as $employee) {
             $sync = [];
             for ($i=0; $i < rand(1, 3); $i++) { 
-                $taxonomy = Taxonomy::where('type', 'employee')->get()->random();
+                $taxonomy = Taxonomy::where('type', TaxonomyType::EMPLOYEE)->get()->random();
                 $sync[] = $taxonomy->id;
             }
             $employee->taxonomies()->sync($sync);

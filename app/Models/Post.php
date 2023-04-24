@@ -9,6 +9,9 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasUser;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
 {
@@ -33,32 +36,32 @@ class Post extends Model
 
     protected $casts  = ['published_at' => 'datetime'];
 
-    public function author()
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function taxonomy()
+    public function taxonomy(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class);
     }
 
-    public function cover()
+    public function cover(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediaable');
     }
 
-    public function images()
+    public function images(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediaable');
     }
 
-    public function galleries()
+    public function galleries(): MorphMany
     {
         return $this->morphMany(Media::class, 'mediaable')->where('id', '<>', $this->cover_id);
     }
@@ -110,27 +113,27 @@ class Post extends Model
         return $publicationBadge;
     }
 
-    public function scopeOfType($query, $type)
+    public function scopeOfType($query, $type): void
     {
-        return $query->whereRelation('taxonomy', 'type', $type);
+        $query->whereRelation('taxonomy', 'type', $type);
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query): void
     {
-        return $query->where('published_at', '<=', Carbon::now());
+        $query->where('published_at', '<=', Carbon::now());
     }
 
-    public function scopeScheduled($query)
+    public function scopeScheduled($query): void
     {
-        return $query->where('published_at', '>', Carbon::now());
+        $query->where('published_at', '>', Carbon::now());
     }
 
-    public function scopeDraft($query)
+    public function scopeDraft($query): void
     {
-        return $query->whereNull('published_at');
+        $query->whereNull('published_at');
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where('title', 'LIKE', '%' . $search . '%')
@@ -139,7 +142,7 @@ class Post extends Model
         }
     }
 
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request): void
     {
         if ($title = $request->title AND $title = $request->title) {
             $query->where('title', 'LIKE', '%' . $title . '%');
@@ -166,12 +169,12 @@ class Post extends Model
         }
     }
 
-    public function scopePopular($query)
+    public function scopePopular($query): void
     {
-        return $query->orderBy('view', 'desc');
+        $query->orderBy('view', 'desc');
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] === 'author') {
@@ -183,13 +186,11 @@ class Post extends Model
         } else {
             $query->latest();
         }
-
-        return $query;
     }
 
-    public function scopeLatestPublished($query)
+    public function scopeLatestPublished($query): void
     {
-        return $query->orderBy('published_at', 'desc');
+        $query->orderBy('published_at', 'desc');
     }
 
     public function incrementViewCount()

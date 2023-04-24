@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Models\Legislation;
 use App\Models\Post;
 use App\Models\Visitor;
@@ -12,8 +13,11 @@ use Illuminate\Support\Carbon;
 
 class DashboardController extends AdminController
 {
-    public function index()
-    {
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke()
+    {   
         $pageHeader = 'Dasbor';
         $pageTitle = $pageHeader . $this->pageTitle;
 

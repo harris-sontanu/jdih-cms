@@ -13,6 +13,9 @@ use App\Models\Traits\HasUser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cookie;
 
 class Legislation extends Model
@@ -61,47 +64,47 @@ class Legislation extends Model
         'published_at' => 'datetime',
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function relations()
+    public function relations(): HasMany
     {
         return $this->hasMany(LegislationRelationship::class);
     }
 
-    public function scopeOfRelation($query, $type)
+    public function scopeOfRelation($query, $type): void
     {
-        return $query->whereRelation('relations', 'type', $type);
+        $query->whereRelation('relations', 'type', $type);
     }
 
-    public function documents()
+    public function documents(): HasMany
     {
         return $this->hasMany(LegislationDocument::class);
     }
 
-    public function matters()
+    public function matters(): BelongsToMany
     {
         return $this->belongsToMany(Matter::class);
     }
 
-    public function institute()
+    public function institute(): BelongsTo
     {
         return $this->belongsTo(Institute::class);
     }
 
-    public function field()
+    public function field(): BelongsTo
     {
         return $this->belongsTo(Field::class);
     }
 
-    public function logs()
+    public function logs(): HasMany
     {
         return $this->hasMany(LegislationLog::class)->latest();
     }
@@ -212,7 +215,7 @@ class Legislation extends Model
         );
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {
@@ -223,7 +226,7 @@ class Legislation extends Model
         }
     }
 
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request): void
     {
         if ($title = $request->title AND $title = $request->title) {
             $query->where('title', 'LIKE', '%' . $title . '%');
@@ -398,7 +401,7 @@ class Legislation extends Model
         }
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] === 'category') {
@@ -423,18 +426,16 @@ class Legislation extends Model
         } else {
             $query->latest();
         }
-
-        return $query;
     }
 
-    public function scopeLatestApproved($query)
+    public function scopeLatestApproved($query): void
     {
-        return $query->orderBy('published', 'desc');
+        $query->orderBy('published', 'desc');
     }
 
-    public function scopeOfType($query, $typeId)
+    public function scopeOfType($query, $typeId): void
     {
-        return $query->whereRelation('category', 'type_id', $typeId);
+        $query->whereRelation('category', 'type_id', $typeId);
     }
 
     public function publisher(): Attribute

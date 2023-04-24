@@ -6,6 +6,7 @@ use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 class LegislationLog extends Model
@@ -26,17 +27,17 @@ class LegislationLog extends Model
         'message',
     ];
 
-    public function legislation()
+    public function legislation(): BelongsTo
     {
         return $this->belongsTo(Legislation::class)->withTrashed();
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {
@@ -46,7 +47,7 @@ class LegislationLog extends Model
         }
     }
 
-    public function scopeFilter($query, $request)
+    public function scopeFilter($query, $request): void
     {
         if ($message = $request->message AND $message = $request->message) {
             $query->where(function($q) use ($message) {

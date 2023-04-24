@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\LinkDisplay;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rules\Enum;
 
 class LinkRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class LinkRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,7 +24,7 @@ class LinkRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'type'  => 'required',
@@ -30,6 +32,7 @@ class LinkRequest extends FormRequest
             'title' => 'required',
             'url'   => 'required|url',
             'desc'  => 'nullable',
+            'display'   => ['exclude_unless:type,banner', 'required', new Enum(LinkDisplay::class)]
         ];
 
         switch ($this->method()) {
@@ -51,7 +54,7 @@ class LinkRequest extends FormRequest
      *
      * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'title' => 'Judul',

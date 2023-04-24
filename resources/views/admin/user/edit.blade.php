@@ -127,8 +127,8 @@
                                             <label class="col-lg-3 col-form-label">Level</label>
                                             <div class="col-lg-9">
                                                 <select name="role" class="select @error('role') is-invalid @enderror">
-                                                    @foreach ($roles as $key => $value)
-                                                        <option value="{{ $key }}" @selected($user->role == $key)>{{ $value }}</option>
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{ $role->value }}" @selected($user->role == $role)>{{ $role->label() }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('role')

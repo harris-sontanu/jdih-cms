@@ -18,7 +18,7 @@ class EmployeePolicy
      * @param  string  $ability
      * @return void|bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability): bool
     {
         return Gate::any(['isAdmin', 'isEditor']);
     }
@@ -29,7 +29,7 @@ class EmployeePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -41,7 +41,7 @@ class EmployeePolicy
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Employee $employee)
+    public function view(User $user, Employee $employee): bool
     {
         return true;
     }
@@ -52,7 +52,7 @@ class EmployeePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -64,7 +64,7 @@ class EmployeePolicy
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Employee $employee)
+    public function update(User $user, Employee $employee): bool
     {
         return true;
     }
@@ -76,7 +76,7 @@ class EmployeePolicy
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Employee $employee)
+    public function delete(User $user, Employee $employee): bool
     {
         return true;
     }

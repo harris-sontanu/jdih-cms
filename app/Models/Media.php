@@ -7,6 +7,9 @@ use App\Models\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
 
@@ -35,27 +38,27 @@ class Media extends Model
         'published_at' => 'datetime',
     ];
 
-    public function mediaable()
+    public function mediaable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function post()
+    public function post(): HasOne
     {
         return $this->hasOne(Post::class, 'cover_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function link()
+    public function link(): HasOne
     {
         return $this->hasOne(Link::class, 'image_id');
     }
 
-    public function legislationDocument()
+    public function legislationDocument(): HasOne
     {
         return $this->hasOne(LegislationDocument::class);
     }
@@ -215,28 +218,28 @@ class Media extends Model
         return $publicationBadge;
     }
 
-    public function scopeImages($query)
+    public function scopeImages($query): void
     {
-        return $query->where('is_image', 1);
+        $query->where('is_image', 1);
     }
 
-    public function scopeFiles($query)
+    public function scopeFiles($query): void
     {
-        return $query->where('is_image', 0)
+        $query->where('is_image', 0)
             ->whereNull('mediaable_id');
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query): void
     {
-        return $query->where('published_at', '<=', Carbon::now());
+        $query->where('published_at', '<=', Carbon::now());
     }
 
-    public function scopeUnpublished($query)
+    public function scopeUnpublished($query): void
     {
-        return $query->whereNull('published_at');
+        $query->whereNull('published_at');
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where('name', 'LIKE', '%' . $search . '%')
@@ -244,7 +247,7 @@ class Media extends Model
         }
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] === 'user') {
@@ -256,7 +259,5 @@ class Media extends Model
         } else {
             $query->latest();
         }
-
-        return $query;
     }
 }

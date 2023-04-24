@@ -17,7 +17,7 @@ class InstitutePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -29,7 +29,7 @@ class InstitutePolicy
      * @param  \App\Models\Institute  $institute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Institute $institute)
+    public function view(User $user, Institute $institute): bool
     {
         return true;
     }
@@ -40,7 +40,7 @@ class InstitutePolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return Gate::denies('isAuthor');
     }
@@ -52,7 +52,7 @@ class InstitutePolicy
      * @param  \App\Models\Institute  $institute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Institute $institute)
+    public function update(User $user, Institute $institute): bool
     {
         return Gate::denies('isAuthor');
     }
@@ -64,7 +64,7 @@ class InstitutePolicy
      * @param  \App\Models\Institute  $institute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Institute $institute)
+    public function delete(User $user, Institute $institute): bool
     {
         return Gate::denies('isAuthor');
     }

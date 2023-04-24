@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Matter extends Model
 {
@@ -28,12 +29,12 @@ class Matter extends Model
         'sort',
     ];
 
-    public function legislations()
+    public function legislations(): BelongsToMany
     {
         return $this->belongsToMany(Legislation::class);
     }
 
-    public function scopeSorted($query, $request = [])
+    public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
             if ($request['order'] == 'total') {
@@ -44,11 +45,9 @@ class Matter extends Model
         } else {
             $query->orderBy('name', 'asc');
         }
-
-        return $query;
     }
 
-    public function scopeSearch($query, $request)
+    public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
             $query->where(function($q) use ($search) {

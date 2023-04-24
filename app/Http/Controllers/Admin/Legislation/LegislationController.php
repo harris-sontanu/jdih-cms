@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Legislation;
 
+use App\Enums\LegislationDocumentType;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Legislation;
 use App\Models\Category;
@@ -16,32 +17,6 @@ use Intervention\Image\Facades\Image;
 
 class LegislationController extends AdminController
 {
-    protected $statusOptions = [
-        'mencabut' => 'Mencabut',
-        'mengubah' => 'Mengubah',
-        'dicabut'  => 'Dicabut dengan',
-        'diubah'   => 'Diubah dengan',
-    ];
-
-    protected $lawRelationshipOptions = [
-        'melaksanakan' => 'Melaksanakan',
-    ];
-
-    protected function statusAntonym($status)
-    {
-        if ($status === 'mencabut') {
-            $antonym = 'dicabut';
-        } else if ($status === 'mengubah') {
-            $antonym = 'diubah';
-        } else if ($status === 'dicabut') {
-            $antonym = 'mencabut';
-        } else if ($status === 'diubah') {
-            $antonym = 'mengubah';
-        }
-
-        return $antonym;
-    }
-
     protected $selectedCategories;
 
     function __construct()
@@ -58,10 +33,10 @@ class LegislationController extends AdminController
 
         $storage_path = 'produk-hukum/' . $legislation->category->type->slug . '/' . $legislation->year . '/' . Str::lower($legislation->category->slug);
 
-        $prefix = match ($documentType) {
-            'abstract'  => 'abs',
-            'attachment'=> ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '',
-            'cover'     => 'img',
+        $prefix = match ($documentType->name) {
+            'ABSTRACT'  => 'abs',
+            'ATTACHMENT'=> ($legislation->category->type_id === 1) ? 'lamp' . Str::padLeft($sequence, 2, '0') : '',
+            'COVER'     => 'img',
             default     => '',
         };
 
@@ -81,7 +56,7 @@ class LegislationController extends AdminController
         $path = $file->storeAs($documentStorage['path'], $file_name, 'public');
 
         // If document type is cover, create thumbnail
-        if ($documentType === 'cover') {
+        if ($documentType === LegislationDocumentType::COVER) {
             $extension = $file->getClientOriginalExtension();
             $thumbnail = Str::replace(".{$extension}", "_md.{$extension}", $path);
             if (Storage::disk('public')->exists($path)) {
@@ -141,7 +116,7 @@ class LegislationController extends AdminController
             'Riwayat' => TRUE
         ];
 
-        $logs = LegislationLog::with('legislation', 'user')
+        $logs = LegislationLog::with(['legislation', 'user', 'legislation.category', 'legislation.category.type'])
             ->search($request->only(['search']))
             ->filter($request)
             ->latest()
@@ -209,7 +184,7 @@ class LegislationController extends AdminController
         }
 
         $categories = Category::ofType(1)->pluck('name', 'id');
-        $selectedCategories = $this->selectedCategories;
+        $selectedCategories = $this->selectedCategories->toArray();
 
         return view('admin.legislation.statistic.filter', compact(
             'action',
