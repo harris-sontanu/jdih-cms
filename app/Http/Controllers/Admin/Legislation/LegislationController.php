@@ -184,7 +184,7 @@ class LegislationController extends AdminController
         }
 
         $categories = Category::ofType(1)->pluck('name', 'id');
-        $selectedCategories = $this->selectedCategories;
+        $selectedCategories = $this->selectedCategories->toArray();
 
         return view('admin.legislation.statistic.filter', compact(
             'action',
