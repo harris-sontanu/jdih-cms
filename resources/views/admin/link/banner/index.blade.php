@@ -112,7 +112,7 @@
                                     <span class="fw-semibold d-block">{{ $banner->title }}</span>
                                     <span class="text-muted fs-sm">{{ $banner->url }}</span>
                                 </td>
-                                <td>{!! $banner->displayBadge() !!}</td>
+                                <td>{!! $banner->display->displayBadge() !!}</td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="me-2">

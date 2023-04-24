@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Link;
 
+use App\Enums\LinkDisplay;
 use App\Http\Controllers\Admin\Link\LinkController;
 use App\Models\Link;
 use Illuminate\Http\Request;
@@ -46,6 +47,8 @@ class BannerController extends LinkController
             ->paginate($request->limit ?: $this->limit)
             ->withQueryString();
 
+        $displays = LinkDisplay::cases();
+
         $tabFilters = $this->tabFilters($request);
 
         $vendors = [
@@ -63,6 +66,7 @@ class BannerController extends LinkController
             'pageHeader',
             'breadCrumbs',
             'banners',
+            'displays',
             'tabFilters',
             'vendors'
         ));
@@ -97,7 +101,6 @@ class BannerController extends LinkController
     public function store(LinkRequest $request)
     {
         $validated = $request->validated();
-        $validated['display'] = $request->display;
         $validated['published_at'] = ($request->publication) ? now() : null;
 
         $new_banner = $request->user()
@@ -147,7 +150,9 @@ class BannerController extends LinkController
      */
     public function edit(Link $link)
     {
-        return view('admin.link.banner.edit')->with('banner', $link);
+        return view('admin.link.banner.edit')
+            ->with('banner', $link)
+            ->with('displays', LinkDisplay::cases());
     }
 
     /**
@@ -160,8 +165,7 @@ class BannerController extends LinkController
     public function update(LinkRequest $request, Link $link)
     {
         $validated = $request->validated();
-        $validated['display'] = $request->display;
-        $validated['published_at'] = ($request->publication) ? now() : null;
+        $validated['published_at'] = $request->publication ? now() : null;
 
         $link->update($validated);
 

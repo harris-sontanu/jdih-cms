@@ -132,32 +132,19 @@ class Link extends Model
         return $publicationBadge;
     }
 
-    public function displayBadge()
-    {
-        if ($this->display === 'popup') {
-            $displayBadge = '<span class="badge bg-pink bg-opacity-20 text-pink">Popup</span>';
-        } else if ($this->display === 'main') {
-            $displayBadge = '<span class="badge bg-primary bg-opacity-20 text-primary">Utama</span>';
-        } else if ($this->display === 'aside') {
-            $displayBadge = '<span class="badge bg-success bg-opacity-20 text-success">Samping</span>';
-        }
-
-        return $displayBadge;
-    }
-
     public function scopeYoutubes($query): void
     {
-        $query->where('type', 'youtube');
+        $query->where('type', LinkType::YOUTUBE);
     }
 
     public function scopeBanners($query): void
     {
-        $query->where('type', 'banner');
+        $query->where('type', LinkType::BANNER);
     }
 
     public function scopeJdih($query): void
     {
-        $query->where('type', 'jdih');
+        $query->where('type', LinkType::JDIH);
     }
 
     public function scopePublished($query): void

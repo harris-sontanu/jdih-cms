@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\LinkDisplay;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rules\Enum;
 
 class LinkRequest extends FormRequest
 {
@@ -30,6 +32,7 @@ class LinkRequest extends FormRequest
             'title' => 'required',
             'url'   => 'required|url',
             'desc'  => 'nullable',
+            'display'   => ['exclude_unless:type,banner', 'required', new Enum(LinkDisplay::class)]
         ];
 
         switch ($this->method()) {
