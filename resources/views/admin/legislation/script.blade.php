@@ -7,61 +7,6 @@
             minimumResultsForSearch: Infinity
         });
 
-        const select2AjaxLawsConfig = {
-            url: '/api/laws',
-            data: function (params) {
-                var query = {
-                    search: params.term,
-                }
-
-                return query;
-            },
-            processResults: function (results) {
-                return {
-                    results: $.map(results.data, function (item) {
-                        return {
-                            text: item.judul,
-                            id: item.idData
-                        }
-                    })
-                };
-            }
-        };
-
-        $('.select-laws-data').select2({
-            dropdownParent: $('#add-status-relation-modal'),
-            ajax: select2AjaxLawsConfig
-        });
-
-        $('.select-search-laws').select2({
-            dropdownParent: $('#add-law-relation-modal'),
-            ajax: select2AjaxLawsConfig
-        });
-
-        $('.select-search-docs').select2({
-            dropdownParent: $('#add-doc-relation-modal'),
-            ajax: {
-                url: '/api/monographs',
-                data: function (params) {
-                    var query = {
-                        search: params.term,
-                    }
-
-                    return query;
-                },
-                processResults: function (results) {
-                    return {
-                        results: $.map(results.data, function (item) {
-                            return {
-                                text: item.judul,
-                                id: item.idData
-                            }
-                        })
-                    };
-                }
-            }
-        });
-
         const daterangepickerConfig = {
             parentEl: '.content-inner',
             opens: 'left',
@@ -330,6 +275,78 @@
             });
         })
 
+        $('#add-relation-modal .select2').select2({
+            dropdownParent: $('#add-relation-modal'),
+            minimumResultsForSearch: Infinity
+        });
+
+        $('#add-relation-modal').on('show.bs.modal', function(event) {
+            let button = $(event.relatedTarget), // Button that triggered the modal
+                title = button.data('title'),
+                type  = button.data('type');
+
+            $(this).find('.modal-title').html(title);
+            $(this).find('#relationType').val(type);
+            $('#statusOptions').val(null).trigger('change'); 
+            $('#statusRelatedTo').val(null).trigger('change');            
+            
+            if (type === 'document') {
+                $('#status-options-container').addClass('d-none');
+                $('#statusRelatedTo').prev().html('Cari Monografi');
+                $("#statusRelatedTo option:first").html('Cari Monografi');
+                $('#statusRelatedTo').select2({
+                    dropdownParent: $('#add-relation-modal'),
+                    ajax: {
+                        url: '/api/monographs',
+                        data: function (params) {
+                            var query = {
+                                search: params.term,
+                            }
+
+                            return query;
+                        },
+                        processResults: function (results) {
+                            return {
+                                results: $.map(results.data, function (item) {
+                                    return {
+                                        text: item.judul,
+                                        id: item.idData
+                                    }
+                                })
+                            };
+                        }
+                    }
+                });
+            } else {
+                $('#status-options-container').removeClass('d-none');
+                $('#statusRelatedTo').prev().html('Cari Peraturan');
+                $("#statusRelatedTo option:first").html('Cari Peraturan');
+                $('#statusRelatedTo').select2({
+                    dropdownParent: $('#add-relation-modal'),
+                    ajax: {
+                        url: '/api/laws',
+                        data: function (params) {
+                            var query = {
+                                search: params.term,
+                            }
+
+                            return query;
+                        },
+                        processResults: function (results) {
+                            return {
+                                results: $.map(results.data, function (item) {
+                                    return {
+                                        text: item.judul,
+                                        id: item.idData
+                                    }
+                                })
+                            };
+                        }
+                    }
+                });
+            }
+        });
+
         $('#edit-modal').on('show.bs.modal', function(event) {
             let button = $(event.relatedTarget), // Button that triggered the modal
                 id = button.data('id');
@@ -404,10 +421,11 @@
             });
         })
 
-        $('#add-status-relationship-form').on('submit', function(e) {
+        $('#add-relationship-form').on('submit', function(e) {
             e.preventDefault();
 
-            let tableBody = $('#status-relation-table-body'),
+            let relationType = $('#relationType').val(),
+                tableBody = $('#'+relationType+'-relation-table-body'),
                 sequence  = tableBody.find('.sequence').last(),
                 form      = $(this);
 
@@ -432,82 +450,19 @@
                 });
             }).done(function(html) {
                 tableBody.append(html);
-                $('#add-status-relation-modal').modal('hide');
-            })
-        })
-
-        $('#add-law-relationship-form').on('submit', function(e) {
-            e.preventDefault();
-
-            let tableBody = $('#law-relation-table-body'),
-                sequence  = tableBody.find('.sequence').last(),
-                form      = $(this);
-
-            if (sequence.length > 0) {
-                nextSequence = parseInt(sequence.html()) + 1;
-            } else {
-                nextSequence = 1;
-            }
-
-            tableBody.find('.table-warning').remove();
-
-            $.ajax({
-                url : form.attr('action'),
-                method: 'POST',
-                data: form.serialize() + '&sequence=' + nextSequence,
-            }).fail(function(response) {
-                let errors = response.responseJSON.errors;
-                Object.entries(errors).forEach((entry) => {
-                    const [key, value] = entry;
-                    form.find('#' + key).addClass('is-invalid');
-                    form.find('#' + key).parent().append('<div class="invalid-feedback">' + value + '</div>');
-                });
-            }).done(function(html) {
-                tableBody.append(html);
-                $('#add-law-relation-modal').modal('hide');
-            })
-        })
-
-        $('#add-doc-relationship-form').on('submit', function(e) {
-            e.preventDefault();
-
-            let tableBody = $('#doc-relation-table-body'),
-                sequence  = tableBody.find('.sequence').last(),
-                form      = $(this);
-
-            if (sequence.length > 0) {
-                nextSequence = parseInt(sequence.html()) + 1;
-            } else {
-                nextSequence = 1;
-            }
-
-            tableBody.find('.table-warning').remove();
-
-            $.ajax({
-                url : form.attr('action'),
-                method: 'POST',
-                data: form.serialize() + '&sequence=' + nextSequence,
-            }).fail(function(response) {
-                let errors = response.responseJSON.errors;
-                Object.entries(errors).forEach((entry) => {
-                    const [key, value] = entry;
-                    form.find('#' + key).addClass('is-invalid');
-                    form.find('#' + key).parent().append('<div class="invalid-feedback">' + value + '</div>');
-                });
-            }).done(function(html) {
-                tableBody.append(html);
-                $('#add-doc-relation-modal').modal('hide');
+                $('#add-relation-modal').modal('hide');
             })
         })
 
         $(document).on('click', '.unlink-relationship', function() {
-            // $(this).parent().parent().remove();
+
             const dom   = $(this),
                   route = dom.data('route');
 
             if (route !== undefined) {
-                let related = dom.data('related');
-                let status  = dom.data('status')
+                let related = dom.data('related'),
+                    type    = dom.data('type'),
+                    status  = dom.data('status');
 
                 $.ajaxSetup({
                     headers: {
@@ -518,7 +473,7 @@
                 $.ajax({
                     url: route,
                     method: 'DELETE',
-                    data: {status: status, relatedId: related}
+                    data: {type: type, status: status, relatedId: related}
                 }).done(function() {
                     dom.parent().parent().remove();
                 })

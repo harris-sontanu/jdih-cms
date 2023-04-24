@@ -4,10 +4,10 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum QuestionType
+enum QuestionType: string
 {
     use Values;
 
-    case IDENTITY;
-    case QUESTION;
+    case IDENTITY = 'identity';
+    case QUESTION = 'question';
 }

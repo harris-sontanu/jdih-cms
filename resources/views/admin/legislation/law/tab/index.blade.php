@@ -47,19 +47,43 @@
 
         <div class="tab-pane fade" id="status" role="tabpanel">
 
-            @include('admin.legislation.law.tab.status-relationship')
+            <div class="card-body">
+                <div class="alert alert-info border-0">
+                    Keterangan pelengkap dari status utama peraturan yang bertujuan memberikan informasi bahwa suatu peraturan telah dicabut atau pernah diubah oleh peraturan lain.
+                </div>
+            
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#add-relation-modal" data-type="status" data-title="Tambah Keterangan Status"><i class="ph-link-simple me-2"></i>Tambah Keterangan Status</button>            
+            </div>
+
+            @include('admin.legislation.law.tab.relationship-table', ['relationType' => 'status'])
 
         </div>
 
         <div class="tab-pane fade" id="legislation" role="tabpanel">
             
-            @include('admin.legislation.law.tab.law-relationship')
+            <div class="card-body">
+                <div class="alert alert-info border-0">
+                    Dasar yuridis pembentukan peraturan (lihat pada konsideran menimbang). Contoh: Peraturan Presiden Nomor 33 Tahun 2012.
+                </div>
+
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#add-relation-modal" data-type="legislation" data-title="Tambah Peraturan Terkait"><i class="ph-link-simple me-2"></i>Tambah Peraturan Terkait</button>
+            </div>
+
+            @include('admin.legislation.law.tab.relationship-table', ['relationType' => 'legislation'])
 
         </div>
 
         <div class="tab-pane fade" id="document" role="tabpanel">
+
+            <div class="card-body">
+                <div class="alert alert-info border-0">
+                    Dokumen pendukung pembentukan peraturan tersebut. Contoh: Kajian Hukum.
+                </div>
             
-            @include('admin.legislation.law.tab.document-relationship')
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#add-relation-modal" data-type="document" data-title="Tambah Dokumen Terkait"><i class="ph-link-simple me-2"></i>Tambah Dokumen Terkait</button>            
+            </div>
+            
+            @include('admin.legislation.law.tab.relationship-table', ['relationType' => 'document'])
 
         </div>
     </div>

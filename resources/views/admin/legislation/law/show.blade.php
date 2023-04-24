@@ -165,7 +165,7 @@
                         <div class="card-body">
                             <ol class="list mb-0">
                                 @foreach ($statusRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
+                                    <li>{{ $relation->status->label() }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation->note }}</li>
                                 @endforeach
                             </ol>
                         </div>
@@ -180,7 +180,7 @@
                         <div class="card-body">
                             <ol class="list mb-0">
                                 @foreach ($lawRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    <li>{{ $relation->status->label() }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                 @endforeach
                             </ol>
                         </div>
@@ -195,7 +195,7 @@
                         <div class="card-body">
                             <ol class="list mb-0">
                                 @foreach ($documentRelationships as $relation)
-                                    <li>{{ Str::title($relation->status) }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
+                                    <li>{{ $relation->status->label() }} <a href="{{ route('admin.legislation.law.show', $relation->related_to) }}" target="_blank">{{ $relation->relatedTo->title }}</a> {{ $relation-> note }}</li>
                                 @endforeach
                             </ol>
                         </div>

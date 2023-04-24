@@ -18,7 +18,7 @@ class TaxonomyFactory extends Factory
      */
     public function definition()
     {
-        $types = [TaxonomyType::PAGE->name, TaxonomyType::NEWS->name, TaxonomyType::EMPLOYEE->name];
+        $types = [TaxonomyType::PAGE, TaxonomyType::NEWS, TaxonomyType::EMPLOYEE];
         $name = fake()->unique()->words(1, true);
 
         return [

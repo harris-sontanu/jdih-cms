@@ -4,12 +4,12 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum TaxonomyType
+enum TaxonomyType: string
 {
     use Values;
 
-    case NEWS;
-    case PAGE;
-    case EMPLOYEE;
-    case FORUM;
+    case NEWS = 'news';
+    case PAGE = 'page';
+    case EMPLOYEE = 'employee';
+    case FORUM = 'forum';
 }

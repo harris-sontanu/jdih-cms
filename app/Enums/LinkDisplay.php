@@ -4,11 +4,11 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum LinkDisplay
+enum LinkDisplay: string
 {
     use Values;
 
-    case MAIN;
-    case ASIDE;
-    case POPUP;
+    case MAIN = 'main';
+    case ASIDE = 'aside';
+    case POPUP = 'popup';
 }

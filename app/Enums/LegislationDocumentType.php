@@ -4,12 +4,12 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum LegislationDocumentType
+enum LegislationDocumentType: string
 {
     use Values;
 
-    case MASTER ;
-    case ABSTRACT;
-    case ATTACHMENT;
-    case COVER;
+    case MASTER = 'master';
+    case ABSTRACT = 'abstract';
+    case ATTACHMENT = 'attachment';
+    case COVER = 'cover';
 }

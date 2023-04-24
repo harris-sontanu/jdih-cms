@@ -13,10 +13,10 @@ use App\Models\Institute;
 use App\Models\Field;
 use App\Models\User;
 use App\Http\Requests\LawRequest;
+use App\Http\Requests\LawRelationshipRequest;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LawsExport;
-use App\Models\LegislationRelationship;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
@@ -123,7 +123,7 @@ class LawController extends LegislationController
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'     => Legislation::ofType(1)
+            'sampah'    => Legislation::ofType(1)
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -164,7 +164,6 @@ class LawController extends LegislationController
 
         $categories = Category::ofType(1)->pluck('name', 'id');
         $statusOptions = LawRelationshipStatus::cases();
-        $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
@@ -184,7 +183,6 @@ class LawController extends LegislationController
             'institutes',
             'fields',
             'statusOptions',
-            'lawRelationshipOptions',
             'vendors',
         ));
     }
@@ -300,15 +298,9 @@ class LawController extends LegislationController
         }
     }
 
-    private function storeRelationship($parent, $related, $type, $status, $note)
+    private function storeRelationship(Legislation $parent, Legislation $related, ?LegislationRelationshipType $type, ?LawRelationshipStatus $status, ?string $note)
     {
-        $logMessage = match ($type) {
-            'STATUS'    => 'keterangan status',
-            'LEGISLATION'   => 'peraturan terkait',
-            'DOCUMENT'  => 'dokumen terkait',
-        };
-
-        // Insert related legislation
+        // Store related legislation
         $parent->relations()->create([
             'related_to'=> $related->id,
             'type'      => $type,
@@ -316,23 +308,24 @@ class LawController extends LegislationController
             'note'      => $note,
         ]);
 
+        $msg = isset($status) ? ' <span class="fw-semibold">' . $status->label() . '</span>' : null; 
+
         $parent->logs()->create([
             'user_id'   => request()->user()->id,
-            'message'   => 'menambahkan ' . $logMessage . ' <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
+            'message'   => 'menambahkan ' . $type->logMessage() . $msg . ' <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
         ]);
 
-        if ($type === LegislationRelationshipType::STATUS) {
-            // Insert related legislation with antonym status
-            $antonymStatus = $this->statusAntonym($status);
+        // Insert related legislation with antonym status
+        if ($type == LegislationRelationshipType::STATUS OR $type == LegislationRelationshipType::LEGISLATION) {
             $related->relations()->create([
                 'related_to'  => $parent->id,
-                'type'        => LegislationRelationshipType::STATUS,
-                'status'      => $antonymStatus,
+                'type'        => $type,
+                'status'      => $status->antonym(),
             ]);
 
             $related->logs()->create([
                 'user_id'   => request()->user()->id,
-                'message'   => 'menambahkan keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',
+                'message'   => 'menambahkan ' . $type->logMessage() . ' <span class="fw-semibold">' . $status->antonymLabel() . '</span> <a href="' . route('admin.legislation.law.show', $parent->id) . '" target="_blank">' . $parent->title . '</a>',
             ]);
         }
     }
@@ -359,7 +352,7 @@ class LawController extends LegislationController
         $documentRelationships = $legislation->relations()->whereType(LegislationRelationshipType::DOCUMENT->name)->get();
 
         $masterDoc = $legislation->documents()
-            ->ofType('master')
+            ->ofType(LegislationDocumentType::MASTER->name)
             ->first();
 
         $adobeKey = Config::get('services.adobe.key');
@@ -398,14 +391,11 @@ class LawController extends LegislationController
 
         $categories = Category::ofType(1)->pluck('name', 'id');
         $statusOptions = LawRelationshipStatus::cases();
-        $lawRelationshipOptions = $this->lawRelationshipOptions;
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
-
-        $statusRelationships = $legislation->relations()->where('type', 'status')->get();
-        $lawRelationships = $legislation->relations()->where('type', 'legislation')->get();
-        $documentRelationships = $legislation->relations()->where('type', 'document')->get();
+        
+        $relationships = $legislation->relations()->get();
 
         $showUploadForm = [
             'master'    => true,
@@ -438,10 +428,7 @@ class LawController extends LegislationController
             'institutes',
             'fields',
             'statusOptions',
-            'lawRelationshipOptions',
-            'statusRelationships',
-            'lawRelationships',
-            'documentRelationships',
+            'relationships',
             'showUploadForm',
             'vendors',
         ));
@@ -535,26 +522,24 @@ class LawController extends LegislationController
         $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);
     }
 
-    public function statusRelationshipRow(Request $request)
+    public function showRelationship(LawRelationshipRequest $request)
     {
-        $validated = $request->validate([
-            'statusOptions'   => 'required',
-            'statusRelatedTo' => 'required',
-            'statusNote'      => 'nullable',
-        ]);
+        $validated = $request->validated();
 
-        $status = $validated['statusOptions'];
+        $status = $request->enum('statusOptions', LawRelationshipStatus::class);
         $law = Legislation::find($validated['statusRelatedTo']);
         $note = $validated['statusNote'];
         $sequence = $request->sequence;
+        $type = $request->enum('type', LegislationRelationshipType::class);
 
         $parent = null;
         if ($request->has('id')) {
             $parent = Legislation::find($request->id);
-            $this->storeRelationship($parent, $law, LegislationRelationshipType::STATUS->name, $status, $note);
+            $this->storeRelationship($parent, $law, $type, $status, $note);
         }
 
-        return view('admin.legislation.law.tab.status-relationship-row', compact(
+        return view('admin.legislation.law.tab.show-relationship', compact(
+            'type',
             'status',
             'law',
             'note',
@@ -563,123 +548,37 @@ class LawController extends LegislationController
         ));
     }
 
-    public function statusRelationshipDestroy(Request $request, Legislation $legislation)
+    public function relationshipDestroy(Request $request, Legislation $legislation)
     {
-        $related_to = $request->relatedId;
-        $status = $request->status;
+        $relatedToId = $request->relatedId;
+        $type = $request->enum('type', LegislationRelationshipType::class);
+        $status = $request->enum('status', LawRelationshipStatus::class);
 
         $legislation->relations()
-            ->where('related_to', $related_to)
-            ->where('type', 'status')
+            ->where('related_to', $relatedToId)
+            ->where('type', $type)
             ->delete();
 
-        $related = Legislation::find($related_to);
+        $related = Legislation::find($relatedToId);
 
+        $msg = isset($status) ? ' <span class="fw-semibold">' . $status->label() . '</span>' : null;
         $legislation->logs()->create([
             'user_id'   => $request->user()->id,
-            'message'   => 'menghapus keterangan status <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
+            'message'   => 'menghapus ' . $type->logMessage() . $msg . ' <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
         ]);
 
         // Delete also related Legislation
-        $antonymStatus = $this->statusAntonym($status);
-        $related->relations()
-            ->where('related_to', $legislation->id)
-            ->where('type', 'status')
-            ->delete();
+        if ($type == LegislationRelationshipType::STATUS OR $type == LegislationRelationshipType::LEGISLATION) {
+            $related->relations()
+                ->where('related_to', $legislation->id)
+                ->where('type', $type)
+                ->delete();
 
-        $related->logs()->create([
-            'user_id'   => $request->user()->id,
-            'message'   => 'menghapus keterangan status <span class="fw-semibold">' . $antonymStatus . '</span> <a href="' . route('admin.legislation.law.show', $legislation->id) . '" target="_blank">' . $legislation->title . '</a>',
-        ]);
-    }
-
-    public function lawRelationshipRow(Request $request)
-    {
-        $validated = $request->validate([
-            'lawRelationshipOptions' => 'required',
-            'lawRelatedTo'      => 'required',
-            'lawRelatedNote'    => 'nullable',
-        ]);
-
-        $lawRelationshipOptions = $this->lawRelationshipOptions;
-        $status = $lawRelationshipOptions[$request->lawRelationshipOptions];
-        $law = Legislation::find($request->lawRelatedTo);
-        $note = $request->lawRelatedNote;
-        $sequence = $request->sequence;
-
-        $parent = null;
-        if ($request->has('id')) {
-            $parent = Legislation::find($request->id);
-            $this->storeRelationship($parent, $law, 'legislation', $request->lawRelationshipOptions, $note);
+            $related->logs()->create([
+                'user_id'   => $request->user()->id,
+                'message'   => 'menghapus ' . $type->logMessage() . ' <span class="fw-semibold">' . $status->antonymLabel() . '</span> <a href="' . route('admin.legislation.law.show', $legislation->id) . '" target="_blank">' . $legislation->title . '</a>',
+            ]);
         }
-
-        return view('admin.legislation.law.tab.law-relationship-row', compact(
-            'status',
-            'law',
-            'note',
-            'sequence',
-            'parent',
-        ));
-    }
-
-    public function lawRelationshipDestroy(Request $request, Legislation $legislation)
-    {
-        $related_to = $request->relatedId;
-        $status = $request->status;
-
-        $legislation->relations()
-            ->where('related_to', $related_to)
-            ->where('type', 'legislation')
-            ->delete();
-
-        $related = Legislation::find($related_to);
-
-        $legislation->logs()->create([
-            'user_id'   => $request->user()->id,
-            'message'   => 'menghapus peraturan terkait <span class="fw-semibold">' . $status . '</span> <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
-        ]);
-    }
-
-    public function docRelationshipRow(Request $request)
-    {
-        $validated = $request->validate([
-            'docRelatedTo'      => 'required',
-            'docRelatedNote'    => 'nullable',
-        ]);
-
-        $doc = Legislation::find($request->docRelatedTo);
-        $note = $request->docRelatedNote;
-        $sequence = $request->sequence;
-
-        $parent = null;
-        if ($request->has('id')) {
-            $parent = Legislation::find($request->id);
-            $this->storeRelationship($parent, $doc, 'document', null, $note);
-        }
-
-        return view('admin.legislation.law.tab.doc-relationship-row', compact(
-            'doc',
-            'note',
-            'sequence',
-            'parent'
-        ));
-    }
-
-    public function docRelationshipDestroy(Request $request, Legislation $legislation)
-    {
-        $related_to = $request->relatedId;
-
-        $legislation->relations()
-            ->where('related_to', $related_to)
-            ->where('type', 'document')
-            ->delete();
-
-        $related = Legislation::find($related_to);
-
-        $legislation->logs()->create([
-            'user_id'   => $request->user()->id,
-            'message'   => 'menghapus dokumen terkait <a href="' . route('admin.legislation.law.show', $related->id) . '" target="_blank">' . $related->title . '</a>',
-        ]);
     }
 
     /**

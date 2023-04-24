@@ -37,7 +37,7 @@ class PostFactory extends Factory
         $deleted_at = empty($published_at) ? (rand(0, 1) ? Carbon::parse($updated_at)->addDays(rand(1, 3)) : null) : null;
 
         return [
-            'taxonomy_id'   => Taxonomy::where('type', TaxonomyType::NEWS->name)->get()->random(),
+            'taxonomy_id'   => Taxonomy::where('type', TaxonomyType::NEWS)->get()->random(),
             'title'         => $title,
             'slug'          => $slug,
             'excerpt'       => fake()->paragraph(),

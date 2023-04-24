@@ -17,32 +17,6 @@ use Intervention\Image\Facades\Image;
 
 class LegislationController extends AdminController
 {
-    protected $statusOptions = [
-        'mencabut' => 'Mencabut',
-        'mengubah' => 'Mengubah',
-        'dicabut'  => 'Dicabut dengan',
-        'diubah'   => 'Diubah dengan',
-    ];
-
-    protected $lawRelationshipOptions = [
-        'melaksanakan' => 'Melaksanakan',
-    ];
-
-    protected function statusAntonym($status)
-    {
-        if ($status === 'mencabut') {
-            $antonym = 'dicabut';
-        } else if ($status === 'mengubah') {
-            $antonym = 'diubah';
-        } else if ($status === 'dicabut') {
-            $antonym = 'mencabut';
-        } else if ($status === 'diubah') {
-            $antonym = 'mengubah';
-        }
-
-        return $antonym;
-    }
-
     protected $selectedCategories;
 
     function __construct()

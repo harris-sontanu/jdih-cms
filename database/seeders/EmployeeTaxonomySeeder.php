@@ -21,7 +21,7 @@ class EmployeeTaxonomySeeder extends Seeder
         foreach ($employees as $employee) {
             $sync = [];
             for ($i=0; $i < rand(1, 3); $i++) { 
-                $taxonomy = Taxonomy::where('type', TaxonomyType::EMPLOYEE->name)->get()->random();
+                $taxonomy = Taxonomy::where('type', TaxonomyType::EMPLOYEE)->get()->random();
                 $sync[] = $taxonomy->id;
             }
             $employee->taxonomies()->sync($sync);

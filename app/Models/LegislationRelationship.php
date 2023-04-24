@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\LawRelationshipStatus;
 use App\Enums\LegislationRelationshipType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +40,7 @@ class LegislationRelationship extends Model
      */
     protected $casts = [
         'type'  => LegislationRelationshipType::class,
+        'status'=> LawRelationshipStatus::class,
     ];
 
     public function legislation(): BelongsTo

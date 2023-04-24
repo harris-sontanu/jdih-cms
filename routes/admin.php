@@ -84,12 +84,8 @@ Route::name('admin.')->group(function() {
                     Route::post('/legislation/law/trigger', 'trigger')->name('law.trigger');
                     Route::put('/legislation/law/{law}/restore', 'restore')->name('law.restore');
                     Route::delete('/legislation/law/{law}/force-destroy', 'forceDestroy')->name('law.force-destroy');
-                    Route::post('/legislation/law/status-relationship-row', 'statusRelationshipRow')->name('law.status-relationship-row');
-                    Route::post('/legislation/law/law-relationship-row', 'lawRelationshipRow')->name('law.law-relationship-row');
-                    Route::post('/legislation/law/doc-relationship-row', 'docRelationshipRow')->name('law.doc-relationship-row');
-                    Route::delete('/legislation/law/{law}/status-relationship-destroy', 'statusRelationshipDestroy')->name('law.status-relationship-destroy');
-                    Route::delete('/legislation/law/{law}/law-relationship-destroy', 'lawRelationshipDestroy')->name('law.law-relationship-destroy');
-                    Route::delete('/legislation/law/{law}/doc-relationship-destroy', 'docRelationshipDestroy')->name('law.doc-relationship-destroy');
+                    Route::post('/legislation/law/show-relationship', 'showRelationship')->name('law.show-relationship');
+                    Route::delete('/legislation/law/{law}/relationship-destroy', 'relationshipDestroy')->name('law.relationship-destroy');
                 });
     
                 Route::get('/legislation/monograph/export/{format}', [MonographController::class, 'export'])->name('monograph.export');
