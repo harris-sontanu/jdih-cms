@@ -168,7 +168,6 @@
     @include('admin.legislation.institute.create')
     @include('admin.legislation.field.create')
     @include('admin.legislation.law.tab.add-relation-modal')
-    @include('admin.layouts.modal')
 @endsection
 
 @section('script')

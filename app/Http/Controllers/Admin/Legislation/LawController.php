@@ -331,9 +331,6 @@ class LawController extends LegislationController
         ];
 
         $relationships = $legislation->relations()->get();
-        $statusRelationships = $legislation->relations()->whereType(LegislationRelationshipType::STATUS->name)->get();
-        $lawRelationships = $legislation->relations()->whereType(LegislationRelationshipType::LEGISLATION->name)->get();
-        $documentRelationships = $legislation->relations()->whereType(LegislationRelationshipType::DOCUMENT->name)->get();
 
         $masterDoc = $legislation->documents()
             ->ofType(LegislationDocumentType::MASTER->name)
@@ -347,9 +344,6 @@ class LawController extends LegislationController
             'breadCrumbs',
             'legislation',
             'relationships',
-            'statusRelationships',
-            'lawRelationships',
-            'documentRelationships',
             'masterDoc',
             'adobeKey',
         ));

@@ -347,15 +347,6 @@
             }
         });
 
-        $('#edit-modal').on('show.bs.modal', function(event) {
-            let button = $(event.relatedTarget), // Button that triggered the modal
-                id = button.data('id');
-
-            $.get('/admin/legislation/document/' + id + '/edit', function(data) {
-                $('#ajax-modal-body').html(data);
-            })
-        });
-
         $(document).on('submit', '#update-document-form', function(e) {
             e.preventDefault();
 

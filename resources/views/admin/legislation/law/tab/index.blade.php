@@ -77,7 +77,7 @@
 
             <div class="card-body">
                 <div class="alert alert-info border-0">
-                    Dokumen pendukung pembentukan peraturan tersebut. Contoh: Kajian Hukum.
+                    Dokumen pendukung pembentukan peraturan tersebut. Contoh: Kajian Hukum, Naskah Akademik.
                 </div>
             
                 <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#add-relation-modal" data-type="document" data-title="Tambah Dokumen Terkait"><i class="ph-link-simple me-2"></i>Tambah Dokumen Terkait</button>            
