@@ -4,7 +4,7 @@
         <div class="modal-content">
             <form action="{{ route('admin.legislation.category.store') }}" method="post">
                 @csrf
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0 pb-0">
                     <h5 class="modal-title">Tambah Jenis/Bentuk</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -35,7 +35,7 @@
                         <textarea name="desc" id="desc" class="form-control" rows="4" placeholder="Peraturan Perundang-undangan yang dibentuk oleh Dewan Perwakilan Rakyat Daerah dengan persetujuan bersama Kepala Daerah (gubernur atau bupati/wali kota)"></textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0 pt-0">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
                     <button id="save-btn" type="button" class="btn btn-indigo">Simpan</button>
                 </div>

@@ -2,7 +2,7 @@
 <form id="update-institute-form" action="{{ route('admin.legislation.institute.update', $institute->id) }}" method="post">
     @method('PUT')
     @csrf
-    <div class="modal-header">
+    <div class="modal-header border-bottom-0 pb-0">
         <h5 class="modal-title">Ubah Pemrakarsa</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
@@ -24,7 +24,7 @@
             <textarea name="desc" id="desc" class="form-control" rows="4">{{ $institute->desc }}</textarea>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer border-top-0 -pt-0">
         <button type="button" class="btn btn-link" data-bs-dismiss="modal">Tutup</button>
         <button type="submit" class="btn btn-indigo">Ubah</button>
     </div>
