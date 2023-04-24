@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\SlidePosition;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class SlideRequest extends FormRequest
 {
@@ -28,7 +30,7 @@ class SlideRequest extends FormRequest
             'subheader' => 'nullable|max:255',
             'desc'      => 'nullable',
             'image'     => 'required|image|max:2048|dimensions:min_width=1920,min_height=480',
-            'position'  => 'required',
+            'position'  => ['required', new Enum(SlidePosition::class)],
         ];
 
         switch ($this->method()) {

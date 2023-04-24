@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\SlidePosition;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class SlideFactory extends Factory
             'header'    => fake()->sentence(rand(2, 5)),
             'subheader' => fake()->sentence(rand(6, 12)),
             'desc'      => fake()->text(),
+            'position'  => fake()->randomElement(SlidePosition::values())
         ];
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('header')->nullable();
             $table->string('subheader')->nullable();
             $table->text('desc')->nullable();
-            $table->enum('position', SlidePosition::names())->default(SlidePosition::TOP->name);
+            $table->enum('position', SlidePosition::values())->default(SlidePosition::TOP->value);
         });
     }
 
