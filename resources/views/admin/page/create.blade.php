@@ -12,8 +12,6 @@
         <form method="POST" action="{{ route('admin.page.store') }}" novalidate enctype="multipart/form-data">
             @csrf
 
-            <input type="hidden" name="taxonomy_id" value="1">
-
             <!-- Inner container -->
             <div class="d-flex align-items-stretch align-items-lg-start flex-column flex-lg-row">
 
@@ -103,7 +101,7 @@
 
                         <div class="card">
                             <div class="sidebar-section-header border-bottom">
-                                <span class="fw-semibold"><i class="ph-user me-2"></i>Kategori</span>
+                                <span class="fw-semibold"><i class="ph-folder me-2"></i>Kategori</span>
                             </div>
                             <div class="sidebar-section-body">
                                 <div id="taxonomy-options">
@@ -156,6 +154,10 @@
     </div>
     <!-- /content area -->
 
+@endsection
+
+@section('modal')
+    @include('admin.taxonomy.create')
 @endsection
 
 @section('script')

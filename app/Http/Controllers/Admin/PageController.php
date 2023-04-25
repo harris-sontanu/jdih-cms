@@ -120,7 +120,8 @@ class PageController extends AdminController
             'Detail' => TRUE
         ];
         
-        $taxonomies = Taxonomy::type(TaxonomyType::PAGE)->sorted()->pluck('name', 'id');
+        $type = TaxonomyType::PAGE;
+        $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -134,6 +135,7 @@ class PageController extends AdminController
             'pageTitle',
             'pageHeader',
             'breadCrumbs',
+            'type',
             'taxonomies',
             'authors',
             'vendors',
