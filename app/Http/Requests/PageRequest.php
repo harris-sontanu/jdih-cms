@@ -41,7 +41,6 @@ class PageRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 $rules['slug'] = Rule::unique('posts')->ignore($this->route('page'));
-                $rules = Arr::except($rules, ['taxonomy_id']);
                 break;
         }
 

@@ -247,6 +247,8 @@ class PageController extends AdminController
             'Ubah' => TRUE
         ];
 
+        $type = TaxonomyType::PAGE;
+        $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -261,6 +263,8 @@ class PageController extends AdminController
             'pageTitle',
             'pageHeader',
             'breadCrumbs',
+            'type',
+            'taxonomies',
             'authors',
             'page',
             'vendors',
@@ -277,8 +281,7 @@ class PageController extends AdminController
     public function update(PageRequest $request, Post $page)
     {
         $validated = $request->validated();
-
-        $validated['published_at'] = (empty($page->published_at)) ? now() : $page->published_at;
+        $validated['published_at'] = empty($page->published_at) ? now() : $page->published_at;
         if ($request->has('draft')) {
             $validated['published_at'] = null;
         }
