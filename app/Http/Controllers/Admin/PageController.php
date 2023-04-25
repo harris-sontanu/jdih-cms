@@ -56,6 +56,7 @@ class PageController extends AdminController
 
         $tabFilters = $this->tabFilters($request);
 
+        $taxonomies = Taxonomy::type(TaxonomyType::PAGE)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
@@ -73,6 +74,7 @@ class PageController extends AdminController
             'breadCrumbs',
             'onlyTrashed',
             'pages',
+            'taxonomies',
             'authors',
             'users',
             'tabFilters',
@@ -310,33 +312,42 @@ class PageController extends AdminController
         foreach ($ids as $id)
         {
             $page = Post::withTrashed()->find($id);
-            if ($request->action === 'publication')
-            {
-                if ($request->val === 'draft') {
-                    $page->published_at = null;
-                } else if ($request->val === 'publish') {
-                    $page->published_at = now();
-                }
-                $page->save();
-            }
-            else if ($request->action === 'trash')
-            {
-                $page->delete();
-                $message = 'data Halaman telah berhasil dibuang';
-            }
-            else if ($request->action === 'delete')
-            {
-                // Remove all page media
-                foreach ($page->images as $media) {
-                    $this->removeMedia($media->path);
-                }
 
-                $page->images()->delete();
+            switch ($request->action) {
+                case 'publication':
+                    switch ($request->val) {
+                        case 'draft':
+                            $page->published_at = null;
+                            break;
+                        case 'publish':
+                            $page->published_at = now();
+                            break;
+                    }
+                    $page->save();
+                    break;
+                case 'taxonomy':
+                    $page->taxonomy_id = $request->val;
+                    $page->save();
+                    break;
+                case 'author':
+                    $page->author_id = $request->val != 'null' ? $request->val : null;
+                    $page->save();
+                    break;
+                case 'trash':
+                    $page->delete();
+                    $message = 'data Halaman telah berhasil dibuang';
+                    break;
+                case 'delete':
+                    // Remove all page media
+                    foreach ($page->images as $media) {
+                        $this->removeMedia($media->path);
+                    }
 
-                $page->forceDelete();
-
-                $message = 'data Halaman telah berhasil dihapus';
-            }
+                    $page->images()->delete();
+                    $page->forceDelete();
+                    $message = 'data Halaman telah berhasil dihapus';
+                    break;
+            }                   
         }
 
         $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);
