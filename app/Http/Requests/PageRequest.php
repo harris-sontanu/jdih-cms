@@ -67,6 +67,7 @@ class PageRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'taxonomy_id'   => 'Kategori',
             'title'         => 'Judul',
             'slug'          => 'Judul',
             'body'          => 'Isi',

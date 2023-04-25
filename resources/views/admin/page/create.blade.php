@@ -111,13 +111,13 @@
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
+                                    @error('taxonomy_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-text">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#create-taxonomy-modal">+ Kategori</a>
                                 </div>
-                                @error('taxonomy_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
 
