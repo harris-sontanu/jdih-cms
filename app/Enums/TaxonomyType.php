@@ -12,4 +12,14 @@ enum TaxonomyType: string
     case PAGE = 'page';
     case EMPLOYEE = 'employee';
     case FORUM = 'forum';
+
+    public function label()
+    {
+        return match ($this) {
+            self::NEWS => 'Berita',
+            self::PAGE => 'Halaman',
+            self::EMPLOYEE => 'Pegawai',
+            self::FORUM => 'Forum',
+        };
+    }
 }

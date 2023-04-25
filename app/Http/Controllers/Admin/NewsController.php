@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\TaxonomyType;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Post;
 use App\Models\Taxonomy;
@@ -31,7 +32,7 @@ class NewsController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $news = Post::ofType('news')->with('author', 'cover', 'taxonomy');
+        $news = Post::ofType(TaxonomyType::NEWS)->with('author', 'cover', 'taxonomy');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -56,7 +57,7 @@ class NewsController extends AdminController
 
         $tabFilters = $this->tabFilters($request);
 
-        $taxonomies = Taxonomy::type('news')->sorted()->pluck('name', 'id');
+        $taxonomies = Taxonomy::type(TaxonomyType::NEWS)->sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -83,26 +84,26 @@ class NewsController extends AdminController
     private function tabFilters($request)
     {
         return [
-            'total'     => Post::ofType('news')->with('author', 'cover')
+            'total'     => Post::ofType(TaxonomyType::NEWS)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Post::ofType('news')->with('author', 'cover')
+            'draf'      => Post::ofType(TaxonomyType::NEWS)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Post::ofType('news')->with('author', 'cover')
+            'terbit'    => Post::ofType(TaxonomyType::NEWS)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'terjadwal' => Post::ofType('news')->with('author', 'cover')
+            'terjadwal' => Post::ofType(TaxonomyType::NEWS)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->scheduled()
                                 ->count(),
-            'sampah'    => Post::ofType('news')->with('author', 'cover')
+            'sampah'    => Post::ofType(TaxonomyType::NEWS)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -125,7 +126,7 @@ class NewsController extends AdminController
             'Detail' => TRUE
         ];
 
-        $type = 'news';
+        $type = TaxonomyType::NEWS;
         $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -271,7 +272,7 @@ class NewsController extends AdminController
             'Ubah' => TRUE
         ];
 
-        $type = 'news';
+        $type = TaxonomyType::NEWS;
         $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
 
         $vendors = [

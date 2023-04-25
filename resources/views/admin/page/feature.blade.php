@@ -12,6 +12,28 @@
                             <a href="#" class="dropdown-item trigger" data-route="/admin/page/trigger" data-action="publication" data-val="publish">Terbit</a>
                         </div>
                     </div>
+                    @if ($taxonomies->isNotEmpty())                 
+                        <div class="dropdown-submenu dropdown-submenu-start">
+                            <a href="#" class="dropdown-item">Kategori</a>
+                            <div class="dropdown-menu">
+                                @foreach ($taxonomies as $key => $value)
+                                    <a href="#" class="dropdown-item trigger" data-route="/admin/page/trigger" data-action="taxonomy" data-val="{{ $key }}">{{ Str::title($value) }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    @if ($authors->isNotEmpty())                 
+                        <div class="dropdown-submenu dropdown-submenu-start">
+                            <a href="#" class="dropdown-item">Penulis</a>
+                            <div class="dropdown-menu">
+                                @foreach ($authors as $key => $value)
+                                    <a href="#" class="dropdown-item trigger" data-route="/admin/page/trigger" data-action="author" data-val="{{ $key }}">{{ $value }}</a>
+                                @endforeach
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item trigger" data-route="/admin/page/trigger" data-action="author" data-val="null">Tidak Ada</a>
+                            </div>
+                        </div>
+                    @endif
                 @endif
                 <div class="dropdown-divider"></div>
                 @if (Request::get('tab') == 'sampah')

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TaxonomyType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
 
 class TaxonomyRequest extends FormRequest
 {
@@ -26,9 +28,9 @@ class TaxonomyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'      => 'required',
-            'name'      => 'required|max:255',
-            'desc'      => 'nullable',
+            'name'  => 'required|max:255',
+            'slug'  => 'required',      
+            'desc'  => 'nullable',
         ];
     }
 

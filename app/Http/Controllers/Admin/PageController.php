@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\TaxonomyType;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Employee;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
+use App\Models\Taxonomy;
 
 class PageController extends AdminController
 {
@@ -31,7 +33,7 @@ class PageController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $pages = Post::ofType('page')->with('author', 'cover');
+        $pages = Post::ofType(TaxonomyType::PAGE)->with('author', 'cover');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -54,6 +56,7 @@ class PageController extends AdminController
 
         $tabFilters = $this->tabFilters($request);
 
+        $taxonomies = Taxonomy::type(TaxonomyType::PAGE)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
 
@@ -71,6 +74,7 @@ class PageController extends AdminController
             'breadCrumbs',
             'onlyTrashed',
             'pages',
+            'taxonomies',
             'authors',
             'users',
             'tabFilters',
@@ -81,21 +85,21 @@ class PageController extends AdminController
     private function tabFilters($request)
     {
         return [
-            'total'     => Post::ofType('page')->with('author', 'cover')
+            'total'     => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Post::ofType('page')->with('author', 'cover')
+            'draf'      => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Post::ofType('page')->with('author', 'cover')
+            'terbit'    => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'sampah'    => Post::ofType('page')->with('author', 'cover')
+            'sampah'    => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
@@ -117,7 +121,9 @@ class PageController extends AdminController
             route('admin.page.index') => 'Halaman',
             'Detail' => TRUE
         ];
-
+        
+        $type = TaxonomyType::PAGE;
+        $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -131,6 +137,8 @@ class PageController extends AdminController
             'pageTitle',
             'pageHeader',
             'breadCrumbs',
+            'type',
+            'taxonomies',
             'authors',
             'vendors',
         ));
@@ -241,6 +249,8 @@ class PageController extends AdminController
             'Ubah' => TRUE
         ];
 
+        $type = TaxonomyType::PAGE;
+        $taxonomies = Taxonomy::type($type)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -255,6 +265,8 @@ class PageController extends AdminController
             'pageTitle',
             'pageHeader',
             'breadCrumbs',
+            'type',
+            'taxonomies',
             'authors',
             'page',
             'vendors',
@@ -271,8 +283,7 @@ class PageController extends AdminController
     public function update(PageRequest $request, Post $page)
     {
         $validated = $request->validated();
-
-        $validated['published_at'] = (empty($page->published_at)) ? now() : $page->published_at;
+        $validated['published_at'] = empty($page->published_at) ? now() : $page->published_at;
         if ($request->has('draft')) {
             $validated['published_at'] = null;
         }
@@ -301,33 +312,42 @@ class PageController extends AdminController
         foreach ($ids as $id)
         {
             $page = Post::withTrashed()->find($id);
-            if ($request->action === 'publication')
-            {
-                if ($request->val === 'draft') {
-                    $page->published_at = null;
-                } else if ($request->val === 'publish') {
-                    $page->published_at = now();
-                }
-                $page->save();
-            }
-            else if ($request->action === 'trash')
-            {
-                $page->delete();
-                $message = 'data Halaman telah berhasil dibuang';
-            }
-            else if ($request->action === 'delete')
-            {
-                // Remove all page media
-                foreach ($page->images as $media) {
-                    $this->removeMedia($media->path);
-                }
 
-                $page->images()->delete();
+            switch ($request->action) {
+                case 'publication':
+                    switch ($request->val) {
+                        case 'draft':
+                            $page->published_at = null;
+                            break;
+                        case 'publish':
+                            $page->published_at = now();
+                            break;
+                    }
+                    $page->save();
+                    break;
+                case 'taxonomy':
+                    $page->taxonomy_id = $request->val;
+                    $page->save();
+                    break;
+                case 'author':
+                    $page->author_id = $request->val != 'null' ? $request->val : null;
+                    $page->save();
+                    break;
+                case 'trash':
+                    $page->delete();
+                    $message = 'data Halaman telah berhasil dibuang';
+                    break;
+                case 'delete':
+                    // Remove all page media
+                    foreach ($page->images as $media) {
+                        $this->removeMedia($media->path);
+                    }
 
-                $page->forceDelete();
-
-                $message = 'data Halaman telah berhasil dihapus';
-            }
+                    $page->images()->delete();
+                    $page->forceDelete();
+                    $message = 'data Halaman telah berhasil dihapus';
+                    break;
+            }                   
         }
 
         $request->session()->flash('message', '<span class="badge rounded-pill bg-success">' . $count . '</span> ' . $message);

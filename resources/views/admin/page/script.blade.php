@@ -376,6 +376,45 @@
 
     })
 
+    $(document).on('submit', '#insert-taxonomy-form', function(e) {
+            e.preventDefault();
+
+            let form       = $(this),
+                selectedId = $('#taxonomy_id').val();
+
+            $.ajax({
+                url : form.attr('action'),
+                method: 'POST',
+                data: form.serialize(),
+                dataType: 'json'
+            }).fail(function(response) {
+                if (response.status === 422) {
+                    let errors = response.responseJSON.errors;
+                    form.find('#name').addClass('is-invalid');
+                    Object.entries(errors).forEach((entry) => {
+                        const [key, value] = entry;
+                        form.find('#name').parent().append('<div class="invalid-feedback">' + value + '</div>');
+                    });
+                }
+            }).done(function(response) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/admin/taxonomy/'+response.type+'/select-options',
+                    method: 'POST',
+                    data: {'selectedId': response.id}
+                }).done(function(html) {
+                    $('#taxonomy-options').html(html);
+                    $('#create-taxonomy-modal').modal('hide');
+                    $('.select').select2();
+                })
+            });
+        })
+
     function triggerAction(items, route, action, val) {
         $.ajaxSetup({
             headers: {

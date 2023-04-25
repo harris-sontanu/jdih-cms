@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rules\Enum;
 
 class PageRequest extends FormRequest
 {
@@ -40,7 +41,6 @@ class PageRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 $rules['slug'] = Rule::unique('posts')->ignore($this->route('page'));
-                $rules = Arr::except($rules, ['taxonomy_id']);
                 break;
         }
 
@@ -67,6 +67,7 @@ class PageRequest extends FormRequest
     public function attributes(): array
     {
         return [
+            'taxonomy_id'   => 'Kategori',
             'title'         => 'Judul',
             'slug'          => 'Judul',
             'body'          => 'Isi',
