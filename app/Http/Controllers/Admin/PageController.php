@@ -33,7 +33,7 @@ class PageController extends AdminController
             'Daftar' => TRUE
         ];
 
-        $pages = Post::ofType('page')->with('author', 'cover');
+        $pages = Post::ofType(TaxonomyType::PAGE)->with('author', 'cover');
 
         $onlyTrashed = FALSE;
         if ($tab = $request->tab)
@@ -83,21 +83,21 @@ class PageController extends AdminController
     private function tabFilters($request)
     {
         return [
-            'total'     => Post::ofType('page')->with('author', 'cover')
+            'total'     => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->count(),
-            'draf'      => Post::ofType('page')->with('author', 'cover')
+            'draf'      => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->draft()
                                 ->count(),
-            'terbit'    => Post::ofType('page')->with('author', 'cover')
+            'terbit'    => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->published()
                                 ->count(),
-            'sampah'    => Post::ofType('page')->with('author', 'cover')
+            'sampah'    => Post::ofType(TaxonomyType::PAGE)->with('author', 'cover')
                                 ->search($request->only(['search']))
                                 ->filter($request)
                                 ->onlyTrashed()
