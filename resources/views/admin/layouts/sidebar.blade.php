@@ -84,12 +84,13 @@
                     </ul>
                 </li> --}}
 
-                <li class="nav-item nav-item-submenu {{ (request()->is('admin/page*')) ? 'nav-item-expanded nav-item-open' : '' }}">
+                <li class="nav-item nav-item-submenu {{ (request()->is('admin/page*') OR request()->is('admin/taxonomy/page*')) ? 'nav-item-expanded nav-item-open' : '' }}">
                     <a href="#" class="nav-link"><i class="ph-note"></i> <span>Halaman</span></a>
 
-                    <ul class="nav-group-sub {{ (request()->is('admin/page*')) ? 'show' : 'collapse' }}">
+                    <ul class="nav-group-sub {{ (request()->is('admin/page*') OR request()->is('admin/taxonomy/page*')) ? 'show' : 'collapse' }}">
                         <li class="nav-item"><a href="{{ route('admin.page.index') }}" class="nav-link {{ (request()->is('admin/page')) ? 'active' : '' }}">Daftar Halaman</a></li>
                         <li class="nav-item"><a href="{{ route('admin.page.create') }}" class="nav-link {{ (request()->is('admin/page/create')) ? 'active' : '' }}">Tambah Halaman</a></li>
+                        <li class="nav-item"><a href="{{ route('admin.taxonomy.index', ['type' => 'page']) }}" class="nav-link {{ (request()->is('admin/taxonomy/page')) ? 'active' : '' }}">Kategori</a></li>
                     </ul>
                 </li>
 
