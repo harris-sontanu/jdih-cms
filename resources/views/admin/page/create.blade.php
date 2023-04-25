@@ -53,6 +53,19 @@
                                     @enderror
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="author" class="col-form-label">Penulis:</label>
+                                    <select id="author_id" name="author_id" class="select @error('author_id') is-invalid @enderror">
+                                        <option value="">Pilih Penulis</option>
+                                        @foreach ($authors as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('author_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                             </div>
                         </div>
 
@@ -90,18 +103,21 @@
 
                         <div class="card">
                             <div class="sidebar-section-header border-bottom">
-                                <span class="fw-semibold"><i class="ph-user me-2"></i>Penulis</span>
+                                <span class="fw-semibold"><i class="ph-user me-2"></i>Kategori</span>
                             </div>
                             <div class="sidebar-section-body">
                                 <div id="taxonomy-options">
-                                    <select id="author_id" name="author_id" class="select @error('author_id') is-invalid @enderror">
-                                        <option value="">Pilih Penulis</option>
-                                        @foreach ($authors as $key => $value)
+                                    <select id="taxonomy_id" name="taxonomy_id" class="select @error('taxonomy_id') is-invalid @enderror">
+                                        <option value="">Pilih Kategori</option>
+                                        @foreach ($taxonomies as $key => $value)
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('author_id')
+                                <div class="form-text">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#create-taxonomy-modal">+ Kategori</a>
+                                </div>
+                                @error('taxonomy_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

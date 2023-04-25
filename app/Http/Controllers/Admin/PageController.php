@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\TaxonomyType;
 use App\Http\Controllers\Admin\AdminController;
 use App\Models\Employee;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
+use App\Models\Taxonomy;
 
 class PageController extends AdminController
 {
@@ -117,7 +119,8 @@ class PageController extends AdminController
             route('admin.page.index') => 'Halaman',
             'Detail' => TRUE
         ];
-
+        
+        $taxonomies = Taxonomy::type(TaxonomyType::PAGE)->sorted()->pluck('name', 'id');
         $authors = Employee::sorted()->pluck('name', 'id');
 
         $vendors = [
@@ -131,6 +134,7 @@ class PageController extends AdminController
             'pageTitle',
             'pageHeader',
             'breadCrumbs',
+            'taxonomies',
             'authors',
             'vendors',
         ));
