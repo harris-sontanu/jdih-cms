@@ -115,7 +115,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="subject" class="col-form-label">Status</label>
+                <label class="col-form-label">Status</label>
                 <div class="form-check-horizontal">
                     @foreach ($lawStatusOptions as $status)                        
                         <label class="form-check form-check-inline">

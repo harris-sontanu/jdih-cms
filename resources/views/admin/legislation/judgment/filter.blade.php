@@ -56,7 +56,12 @@
             </div>
             <div class="col-md-3">
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Status" name="status" value="{{ Request::get('status') }}">
+                    <select name="status" class="select">
+                        <option value="">Pilih Status</option>
+                        @foreach ($judgmentStatusOptions as $status)                            
+                            <option value="{{ $status->value }}" @selected(Request::get('status') == $status->value)>{{ $status->label() }}</option>
+                        @endforeach
+                    </select> 
                 </div>
             </div>
             <div class="col-md-3">

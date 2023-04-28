@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Jdih\Legislation;
 
+use App\Enums\LegislationStatus;
 use App\Http\Controllers\Jdih\Legislation\LegislationController;
 use App\Models\Category;
 use App\Models\Matter;
@@ -55,6 +56,11 @@ class LawController extends LegislationController
             ->paginate($this->limit)
             ->withQueryString();
 
+        $lawStatusOptions = [
+            LegislationStatus::BERLAKU,
+            LegislationStatus::TIDAKBERLAKU
+        ];
+
         $vendors = [
             'assets/jdih/js/vendor/forms/selects/select2.min.js',
             'assets/jdih/js/vendor/ui/moment/moment.min.js',
@@ -63,6 +69,7 @@ class LawController extends LegislationController
 
         return view('jdih.legislation.law.index', compact(
             'legislations',
+            'lawStatusOptions',
             'vendors',
         ))->with('categories', $this->categories)
             ->with('latestMonographs', $this->latestMonographs())

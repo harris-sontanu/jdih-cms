@@ -74,6 +74,10 @@ class LawController extends LegislationController
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
+        $lawStatusOptions = [
+            LegislationStatus::BERLAKU,
+            LegislationStatus::TIDAKBERLAKU
+        ];
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -96,6 +100,7 @@ class LawController extends LegislationController
             'matters',
             'institutes',
             'fields',
+            'lawStatusOptions',
             'users',
             'tabFilters',
             'vendors'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Legislation;
 
 use App\Enums\LegislationDocumentType;
+use App\Enums\LegislationStatus;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use App\Models\Legislation;
 use App\Models\Category;
@@ -66,6 +67,9 @@ class JudgmentController extends LegislationController
         $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
+        $judgmentStatusOptions = [
+            LegislationStatus::TETAP
+        ];
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -87,6 +91,7 @@ class JudgmentController extends LegislationController
             'tabFilters',
             'categories',
             'fields',
+            'judgmentStatusOptions',
             'users',
             'vendors'
         ));
@@ -155,6 +160,9 @@ class JudgmentController extends LegislationController
 
         $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
+        $judgmentStatusOptions = [
+            LegislationStatus::TETAP
+        ];
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
@@ -168,6 +176,7 @@ class JudgmentController extends LegislationController
             'breadCrumbs',
             'categories',
             'fields',
+            'judgmentStatusOptions',
             'vendors',
         ));
     }
@@ -267,6 +276,9 @@ class JudgmentController extends LegislationController
 
         $categories = Category::ofType(4)->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
+        $judgmentStatusOptions = [
+            LegislationStatus::TETAP
+        ];
 
         $attachment = $legislation->documents()
             ->ofType(LegislationDocumentType::MASTER->name)
@@ -286,6 +298,7 @@ class JudgmentController extends LegislationController
             'judgment',
             'categories',
             'fields',
+            'judgmentStatusOptions',
             'attachment',
             'vendors',
         ));

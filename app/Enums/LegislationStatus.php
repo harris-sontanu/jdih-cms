@@ -17,7 +17,7 @@ enum LegislationStatus: string
         return match ($this) {
             self::BERLAKU  => 'Berlaku',
             self::TIDAKBERLAKU  => 'Tidak Berlaku',
-            self::TETAP    => 'Tetap',
+            self::TETAP    => 'Hukum Tetap',
         };
     }
 
