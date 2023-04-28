@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\LegislationStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class LawRequest extends FormRequest
 {
@@ -38,7 +40,7 @@ class LawRequest extends FormRequest
             'year'        => 'required|numeric',
             'source'      => 'nullable',
             'subject'     => 'nullable',
-            'status'      => 'required',
+            'status'      => ['required', new Enum(LegislationStatus::class)],
             'institute_id'=> 'nullable',
             'field_id'    => 'nullable',
             'signer'      => 'nullable',

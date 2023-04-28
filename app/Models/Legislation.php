@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\LegislationStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -62,6 +63,7 @@ class Legislation extends Model
         'approved'     => 'date',
         'published'    => 'date',
         'published_at' => 'datetime',
+        'status'       => LegislationStatus::class,
     ];
 
     public function category(): BelongsTo
@@ -153,21 +155,6 @@ class Legislation extends Model
 
         return Attribute::make(
             get: fn ($value) => $excerpt
-        );
-    }
-
-    public function statusBadge(): Attribute
-    {
-        if ($this->status == 'berlaku') {
-            $statusBadge = '<span class="badge bg-success bg-opacity-20 text-success">'.Str::title($this->status).'</span>';
-        } else if ($this->status == 'tidak berlaku') {
-            $statusBadge = '<span class="badge bg-danger bg-opacity-20 text-danger">'.Str::title($this->status).'</span>';
-        } else {
-            $statusBadge = '<span class="badge bg-info bg-opacity-20 text-info">'.Str::title($this->status).'</span>';
-        }
-
-        return Attribute::make(
-            get: fn ($value) => $statusBadge
         );
     }
 

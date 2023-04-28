@@ -123,7 +123,7 @@
                                 <td class="text-center">{{ $law->code_number }}</td>
                                 <td class="text-center">{{ $law->year; }}</td>
                                 <td><span class="fw-semibold">{{ $law->title; }}</span></td>
-                                <td class="text-center">{!! $law->statusBadge !!}</td>
+                                <td class="text-center">{!! $law->status->badge() !!}</td>
                                 <td class="text-center">
                                     <img src="{{ $law->userPictureUrl($law->user->picture, $law->user->name) }}" alt="{{ $law->user->name }}" class="rounded-circle" width="32" height="32" data-bs-popup="tooltip" title="{{ $law->user->name }}">
                                 </td>
