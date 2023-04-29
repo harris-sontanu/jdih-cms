@@ -3,7 +3,7 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Carbon;
 
-trait TimeHelper
+trait TimeFormatter
 {
     public function dateFormatted($time, $showTimes = false)
     {

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasUser;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 class LegislationLog extends Model
 {
-    use HasFactory, TimeHelper, HasUser;
+    use HasFactory, TimeFormatter, HasUser;
 
     public $timestamps = ["created_at"];
     const UPDATED_AT = null;
@@ -32,11 +32,6 @@ class LegislationLog extends Model
         return $this->belongsTo(Legislation::class)->withTrashed();
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
@@ -49,27 +44,28 @@ class LegislationLog extends Model
 
     public function scopeFilter($query, $request): void
     {
-        if ($message = $request->message AND $message = $request->message) {
+        if ($request->has('message')) {
+            $message = $request->message;
             $query->where(function($q) use ($message) {
                 $q->where('message', 'LIKE', '%' . $message . '%')
                 ->orWhereRelation('legislation', 'title', 'LIKE', '%' . $message . '%');
             });
         }
 
-        if ($month = $request->month AND $month = $request->month) {
-            $query->whereMonth('created_at', $month);
+        if ($request->has('month')) {
+            $query->whereMonth('created_at', $request->month);
         }
 
-        if ($year = $request->year AND $year = $request->year) {
-            $query->whereYear('created_at', $year);
+        if ($request->has('year')) {
+            $query->whereYear('created_at', $request->year);
         }
 
-        if ($created_at = $request->created_at AND $created_at = $request->created_at) {
-            $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
+        if ($request->has('created_at')) {
+            $query->whereDate('created_at', Carbon::parse($request->created_at)->format('Y-m-d'));
         }
 
-        if ($user = $request->user AND $user = $request->user) {
-            $query->where('user_id', '=', $user);
+        if ($request->has('user')) {
+            $query->where('user_id', $request->user);
         }
     }
 }

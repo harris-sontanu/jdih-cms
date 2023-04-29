@@ -34,10 +34,10 @@ class YoutubeController extends LinkController
 
         if ($tab = $request->tab)
         {
-            if ($tab == 'tayang') {
+            if ($tab == 'terbit') {
                 $youtubes->published();
-            } else if ($tab == 'tidak tayang') {
-                $youtubes->unpublished();
+            } else if ($tab == 'draf') {
+                $youtubes->draft();
             }
         }
 
@@ -73,13 +73,13 @@ class YoutubeController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'    => Link::youtubes()->with('user', 'image')
+            'terbit'    => Link::youtubes()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tidak tayang' => Link::youtubes()->with('user', 'image')
-                                ->unpublished()
+            'draft'     => Link::youtubes()->with('user', 'image')
+                                ->draft()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),

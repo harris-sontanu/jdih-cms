@@ -35,10 +35,10 @@ class BannerController extends LinkController
 
         if ($tab = $request->tab)
         {
-            if ($tab == 'tayang') {
+            if ($tab == 'terbit') {
                 $banners->published();
-            } else if ($tab == 'tidak tayang') {
-                $banners->unpublished();
+            } else if ($tab == 'draf') {
+                $banners->draft();
             }
         }
 
@@ -79,13 +79,13 @@ class BannerController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'    => Link::banners()->with('user', 'image')
+            'terbit'    => Link::banners()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tidak tayang' => Link::banners()->with('user', 'image')
-                                ->unpublished()
+            'draf'      => Link::banners()->with('user', 'image')
+                                ->draft()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),

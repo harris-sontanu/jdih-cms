@@ -37,11 +37,10 @@ class Matter extends Model
     public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
-            if ($request['order'] == 'total') {
-                $query->withCount('legislations')->orderBy('legislations_count', $request['sort']);
-            } else {
-                $query->orderBy($request['order'], $request['sort']);
-            }
+            match ($request['order']) {
+                'total' => $query->withCount('legislations')->orderBy('legislations_count', $request['sort']),
+                default => $query->orderBy($request['order'], $request['sort'])
+            };
         } else {
             $query->orderBy('name', 'asc');
         }

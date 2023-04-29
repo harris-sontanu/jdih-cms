@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasUser;
-use App\Models\Traits\TimeHelper;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    use HasFactory, TimeHelper, HasUser;
+    use HasFactory, TimeFormatter, HasUser;
 
      /**
      * The attributes that are mass assignable.
@@ -40,11 +40,6 @@ class Category extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 
     protected function name(): Attribute

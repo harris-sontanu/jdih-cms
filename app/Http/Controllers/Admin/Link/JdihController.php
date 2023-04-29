@@ -34,10 +34,10 @@ class JdihController extends LinkController
 
         if ($tab = $request->tab)
         {
-            if ($tab == 'tayang') {
+            if ($tab == 'terbit') {
                 $jdih->published();
-            } else if ($tab == 'tidak tayang') {
-                $jdih->unpublished();
+            } else if ($tab == 'draf') {
+                $jdih->draft();
             }
         }
 
@@ -75,13 +75,13 @@ class JdihController extends LinkController
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'    => Link::jdih()->with('user', 'image')
+            'terbit'    => Link::jdih()->with('user', 'image')
                                 ->published()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tidak tayang' => Link::jdih()->with('user', 'image')
-                                ->unpublished()
+            'draf'      => Link::jdih()->with('user', 'image')
+                                ->draft()
                                 ->sorted($request->only(['order', 'sort']))
                                 ->search($request->only(['search']))
                                 ->count(),

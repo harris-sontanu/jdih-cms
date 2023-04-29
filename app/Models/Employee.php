@@ -121,22 +121,21 @@ class Employee extends Model
     }
 
     public function scopeFilter($query, $request): void
-    {
-        if (!empty($request['name']) AND $name = $request['name']) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+    {   
+        if ($request->has('name')) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
         }
 
-        if (!empty($request['position']) AND $position = $request['position']) {
-            $query->where('position', 'LIKE', '%' . $position . '%');
+        if ($request->has('position')) {
+            $query->where('position', 'LIKE', '%' . $request->position . '%');
         }
 
-        if (!empty($request['group']) AND $group = $request['group']) {
-            $query->join('employee_group', 'employees.id', '=', 'employee_group.employee_id')
-                ->where('employee_group.group_id', $group);
+        if ($request->has('group')) {
+            $query->whereRelation('taxonomies', 'id', $request->group);
         }
 
-        if (!empty($request['rank']) AND $rank = $request['rank']) {
-            $query->where('rank', 'LIKE', '%' . $rank . '%');
+        if ($request->has('rank')) {
+            $query->where('rank', 'LIKE', '%' . $request->rank . '%');
         }
     }
 
@@ -150,10 +149,6 @@ class Employee extends Model
 
     public function scopeSorted($query, $request = []): void
     {
-        if (isset($request['order'])) {
-            $query->orderBy($request['order'], $request['sort']);
-        } else {
-            $query->orderBy('name', 'asc');
-        }
+        isset($request['order']) ? $query->orderBy($request['order'], $request['sort']) : $query->orderBy('name', 'asc');
     }
 }

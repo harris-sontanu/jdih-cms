@@ -5,8 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Traits\HasUser;
-use App\Models\Traits\TimeHelper;
 use App\Enums\UserRole;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, TimeHelper, HasUser;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, TimeFormatter, HasUser;
 
     /**
      * The attributes that are mass assignable.
@@ -114,58 +114,50 @@ class User extends Authenticatable
     }
 
     public function scopeFilter($query, $request): void
-    {
-        if (!empty($request['name']) AND $name = $request['name']) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+    {   
+        if ($request->has('name')) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
         }
 
-        if (!empty($request['email']) AND $email = $request['email']) {
-            $query->where('email', 'LIKE', '%' . $email . '%');
+        if ($request->has('email')) {
+            $query->where('email', 'LIKE', '%' . $request->email . '%');
         }
 
-        if (!empty($request['role']) AND $role = $request['role']) {
-            $query->where('role', '=', $role);
+        if ($request->has('role')) {
+            $query->where('role', $request->enum('role', UserRole::class));
         }
 
-        if (!empty($request['phone']) AND $phone = $request['phone']) {
-            $query->where('phone', 'LIKE', '%' . $phone . '%');
+        if ($request->has('phone')) {
+            $query->where('phone', 'LIKE', '%' . $request->phone . '%');
         }
 
-        if (!empty($request['www']) AND $www = $request['www']) {
-            $query->where('www', 'LIKE', '%' . $www . '%');
+        if ($request->has('www')) {
+            $query->where('www', 'LIKE', '%' . $request->www . '%');
         }
 
-        if (!empty($request['name']) AND $name = $request['name']) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+        if ($request->has('bio')) {
+            $query->where('bio', 'LIKE', '%' . $request->bio . '%');
         }
 
-        if (!empty($request['bio']) AND $bio = $request['bio']) {
-            $query->where('bio', 'LIKE', '%' . $bio . '%');
+        if ($request->has('last_logged_in_at')) {
+            $query->whereDate('last_logged_in_at', Carbon::parse($request->last_logged_in_at)->format('Y-m-d'));
         }
 
-        if (!empty($request['last_logged_in_at']) AND $last_logged_in_at = $request['last_logged_in_at']) {
-            $query->whereDate('last_logged_in_at', Carbon::parse($last_logged_in_at)->format('Y-m-d'));
-        }
-
-        if (!empty($request['created_at']) AND $created_at = $request['created_at']) {
-            $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
+        if ($request->has('created_at')) {
+            $query->whereDate('created_at', Carbon::parse($request->created_at)->format('Y-m-d'));
         }
     }
 
     public function scopeSorted($query, $request = []): void
-    {
-        if (isset($request['order'])) {
-            $query->orderBy($request['order'], $request['sort']);
-        } else {
-            $query->orderBy('name', 'asc');
-        }
+    {   
+        isset($request['order']) ? $query->orderBy($request['order'], $request['sort']) : $query->orderBy('name', 'asc');
     }
 
     public function status()
     {
         $status = 'aktif';
         if (is_null($this->email_verified_at)) $status = 'tinjau';
-        if (!is_null($this->deleted_at)) $status = 'sampah';
+        if (isset($this->deleted_at)) $status = 'sampah';
 
         return $status;
     }
@@ -174,15 +166,12 @@ class User extends Authenticatable
     {
         $status = $this->status();
 
-        if ($status == 'aktif') {
-            $badge = '<span class="badge bg-success bg-opacity-20 text-success">'.Str::title($status).'</span>';
-        } else if ($status == 'tinjau') {
-            $badge = '<span class="badge bg-warning bg-opacity-20 text-warning">'.Str::title($status).'</span>';
-        } else if ($status == 'sampah') {
-            $badge = '<span class="badge bg-dark bg-opacity-20 text-dark">'.Str::title($status).'</span>';
-        } else {
-            $badge = '<span class="badge bg-light bg-opacity-20 text-light">'.Str::title($status).'</span>';
-        }
+        $badge = match ($status) {
+            'aktif' => '<span class="badge bg-success bg-opacity-20 text-success">'.Str::title($status).'</span>',
+            'tinjau'=> '<span class="badge bg-warning bg-opacity-20 text-warning">'.Str::title($status).'</span>',
+            'sampah'=> '<span class="badge bg-dark bg-opacity-20 text-dark">'.Str::title($status).'</span>',
+            default => '<span class="badge bg-light bg-opacity-20 text-light">'.Str::title($status).'</span>',
+        };
 
         return new Attribute(
             get: fn ($value) => $badge

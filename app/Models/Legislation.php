@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Models\Traits\TimeHelper;
-use App\Models\Traits\HasPublishedAt;
 use App\Models\Traits\HasLegislationDocument;
 use App\Models\Traits\HasUser;
+use App\Models\Traits\Publication;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class Legislation extends Model
 {
-    use HasFactory, SoftDeletes, TimeHelper, HasPublishedAt, HasLegislationDocument, HasUser;
+    use HasFactory, SoftDeletes, TimeFormatter, Publication, HasLegislationDocument, HasUser;
 
     /**
      * The attributes that are mass assignable.
@@ -71,11 +71,6 @@ class Legislation extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function relations(): HasMany
     {
         return $this->hasMany(LegislationRelationship::class);
@@ -84,11 +79,6 @@ class Legislation extends Model
     public function scopeOfRelation($query, $type): void
     {
         $query->whereRelation('relations', 'type', $type);
-    }
-
-    public function documents(): HasMany
-    {
-        return $this->hasMany(LegislationDocument::class);
     }
 
     public function matters(): BelongsToMany
@@ -113,19 +103,16 @@ class Legislation extends Model
 
     public function typeFlatButton(): Attribute
     {
-        if ($this->category->type_id === 1) {
-            $button = '<button type="button" class="btn btn-flat-success rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
-            <i class="ph-scales m-1"></i></button>';
-        } else if ($this->category->type_id === 2) {
-            $button = '<button type="button" class="btn btn-flat-indigo rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
-            <i class="ph-books m-1"></i></button>';
-        } else if ($this->category->type_id === 3) {
-            $button = '<button type="button" class="btn btn-flat-primary rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
-            <i class="ph-newspaper m-1"></i></button>';
-        } else if ($this->category->type_id === 4) {
-            $button = '<button type="button" class="btn btn-flat-danger rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
-            <i class="ph-stamp m-1"></i></button>';
-        }
+        $button = match ($this->category->type_id) {
+            1   => '<button type="button" class="btn btn-flat-success rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            <i class="ph-scales m-1"></i></button>',
+            2   => '<button type="button" class="btn btn-flat-indigo rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            <i class="ph-books m-1"></i></button>',
+            3   => '<button type="button" class="btn btn-flat-primary rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            <i class="ph-newspaper m-1"></i></button>',
+            4   => '<button type="button" class="btn btn-flat-danger rounded-pill p-1 border-0" data-bs-popup="tooltip" title="' . $this->category->type->name . '">
+            <i class="ph-stamp m-1"></i></button>',
+        };
 
         return Attribute::make(
             get: fn ($value) => $button
@@ -215,140 +202,145 @@ class Legislation extends Model
 
     public function scopeFilter($query, $request): void
     {
-        if ($title = $request->title AND $title = $request->title) {
-            $query->where('title', 'LIKE', '%' . $title . '%');
+        if ($request->has('title')) {
+            $query->where('title', 'LIKE', '%' . $request->title . '%');
         }
 
-        if ($type = $request->type AND $type = $request->type) {
-            $query->whereRelation('category', 'type_id', $type);
+        if ($request->has('type')) {
+            $query->whereRelation('category', 'type_id', $request->type);
         }
 
-        if ($types = $request->types AND $types = $request->types) {
+        if ($request->has('types')) {
+            $types = $request->types;
             $query->whereHas('category.type', function (Builder $q) use ($types) {
                 $q->whereIn('slug', $types);
             });
         }
 
-        if ($category = $request->category AND $category = $request->category AND !is_object($category)) {
-            $query->where('category_id', $category);
+        if ($request->has('category')) {
+            $query->where('category_id', $request->category);
         }
 
-        if ($categories = $request->categories AND $categories = $request->categories) {
+        if ($request->has('categories')) {
+            $categories = $request->categories;
             $query->whereHas('category', function (Builder $q) use ($categories) {
                 $q->whereIn('slug', $categories);
             });
         }
 
-        if ($code_number = $request->code_number AND $code_number = $request->code_number) {
-            $query->where('code_number', 'LIKE', '%' . $code_number . '%');
+        if ($request->has('code_number')) {
+            $query->where('code_number', 'LIKE', '%' . $request->code_number . '%');
         }
 
-        if ($number = $request->number AND $number = $request->number) {
-            $query->where('number', $number);
+        if ($request->has('number')) {
+            $query->where('number', $request->number);
         }
 
-        if ($month = $request->month AND $month = $request->month) {
-            $query->whereMonth('published', $month);
+        if ($request->has('month')) {
+            $query->whereMonth('published', $request->month);
         }
 
-        if ($year = $request->year AND $year = $request->year) {
-            $query->where('year', $year);
+        if ($request->has('year')) {
+            $query->where('year', $request->year);
         }
 
-        if ($approved = $request->approved AND $approved = $request->approved) {
-            $query->whereDate('approved', Carbon::parse($approved)->format('Y-m-d'));
+        if ($request->has('approved')) {
+            $query->whereDate('approved', Carbon::parse($request->approved)->format('Y-m-d'));
         }
 
-        if ($rgapproved = $request->rgapproved AND $rgapproved = $request->rgapproved) {
-            $dates = explode(' - ', $rgapproved);
+        if ($request->has('rgapproved')) {
+            $dates = explode(' - ', $request->rgapproved);
             $fromDate = Carbon::createFromFormat('d/m/Y', $dates[0]);
             $toDate = Carbon::createFromFormat('d/m/Y', $dates[1]);
             $query->whereBetween('approved', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         }
 
-        if ($published = $request->published AND $published = $request->published) {
-            $query->whereDate('published', Carbon::parse($published)->format('Y-m-d'));
+        if ($request->has('published')) {
+            $query->whereDate('published', Carbon::parse($request->published)->format('Y-m-d'));
         }
 
-        if ($rgpublished = $request->rgpublished AND $rgpublished = $request->rgpublished) {
-            $dates = explode(' - ', $rgpublished);
+        if ($request->has('rgpublished')) {
+            $dates = explode(' - ', $request->rgpublished);
             $fromDate = Carbon::createFromFormat('d/m/Y', $dates[0]);
             $toDate = Carbon::createFromFormat('d/m/Y', $dates[1]);
             $query->whereBetween('published', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         }
 
-        if ($place = $request->place AND $place = $request->place) {
-            $query->where('place', 'LIKE', '%' . $place . '%');
+        if ($request->has('place')) {
+            $query->where('place', 'LIKE', '%' . $request->place . '%');
         }
 
-        if ($source = $request->source AND $source = $request->source) {
-            $query->where('source', 'LIKE', '%' . $source . '%');
+        if ($request->has('source')) {
+            $query->where('source', 'LIKE', '%' . $request->source . '%');
         }
 
-        if ($subject = $request->subject AND $subject = $request->subject) {
-            $query->where('subject', 'LIKE', '%' . $subject . '%');
+        if ($request->has('subject')) {
+            $query->where('subject', 'LIKE', '%' . $request->subject . '%');
         }
 
-        if ($language = $request->language AND $language = $request->language) {
-            $query->where('language', 'LIKE', '%' . $language . '%');
+        if ($request->has('language')) {
+            $query->where('language', 'LIKE', '%' . $request->language . '%');
         }
 
-        if ($author = $request->author AND $author = $request->author) {
-            $query->where('author', 'LIKE', '%' . $author . '%');
+        if ($request->has('author')) {
+            $query->where('author', 'LIKE', '%' . $request->author . '%');
         }
 
-        if ($institute = $request->institute AND $institute = $request->institute) {
-            $query->where('institute_id', $institute);
+        if ($request->has('institute')) {
+            $query->where('institute_id', $request->institute);
         }
 
-        if ($institutes = $request->institutes AND $institutes = $request->institutes) {
+        if ($request->has('institutes')) {
+            $institutes = $request->institutes;
             $query->whereHas('institute', function (Builder $q) use ($institutes) {
                 $q->whereIn('slug', $institutes);
             });
         }
 
-        if ($field = $request->field AND $field = $request->field) {
-            $query->where('field_id', $field);
+        if ($request->has('field')) {
+            $query->where('field_id', $request->field);
         }
 
-        if ($fields = $request->fields AND $fields = $request->fields) {
+        if ($request->has('fields')) {
+            $fields = $request->fields;
             $query->whereHas('field', function (Builder $q) use ($fields) {
                 $q->whereIn('slug', $fields);
             });
         }
 
-        if ($signer = $request->signer AND $signer = $request->signer) {
-            $query->where('signer', 'LIKE', '%' . $signer . '%');
+        if ($request->has('signer')) {
+            $query->where('signer', 'LIKE', '%' . $request->signer . '%');
         }
 
-        if ($location = $request->location AND $location = $request->location) {
-            $query->where('location', 'LIKE', '%' . $location . '%');
+        if ($request->has('location')) {
+            $query->where('location', 'LIKE', '%' . $request->location . '%');
         }
 
-        if ($status = $request->status AND $status = $request->status) {
-            $query->where('status', $status);
+        if ($request->has('status')) {
+            $query->where('status', $request->enum('status', LegislationStatus::class));
         }
 
-        if ($statuses = $request->statuses AND $statuses = $request->statuses) {
-            $query->whereIn('status', $statuses);
+        if ($request->has('statuses')) {
+            $query->whereIn('status', $request->statuses);
         }
 
-        if ($matter = $request->matter AND $matter = $request->matter) {
-            $query->whereRelation('matters', 'id', $matter);
+        if ($request->has('matter')) {
+            $query->whereRelation('matters', 'id', $request->matter);
         }
 
-        if ($matters = $request->matters AND $matters = $request->matters) {
+        if ($request->has('matters')) {
+            $matters = $request->matters;
             $query->whereHas('matters', function (Builder $q) use ($matters) {
                 $q->whereIn('slug', $matters);
             });
         }
 
-        if ($created_at = $request->created_at AND $created_at = $request->created_at) {
-            $query->whereDate('created_at', Carbon::parse($created_at)->format('Y-m-d'));
+        if ($request->has('created_at')) {
+            $query->whereDate('created_at', Carbon::parse($request->created_at)->format('Y-m-d'));
         }
 
-        if ($user = $request->user AND $user = $request->user) {
-            $query->whereRelation('user', 'id', $user);
+        if ($request->has('user')) {
+            $query->whereRelation('user', 'id', $request->user);
         }
 
         if ($request->no_master) {
@@ -363,53 +355,45 @@ class Legislation extends Model
             });
         }
 
-        if ($isbn = $request->isbn AND $isbn = $request->isbn) {
-            $query->where('isbn', 'LIKE', '%' . $isbn . '%');
+        if ($request->has('isbn')) {
+            $query->where('isbn', 'LIKE', '%' . $request->isbn . '%');
         }
 
-        if ($desc = $request->desc AND $desc = $request->desc) {
-            $query->where('desc', 'LIKE', '%' . $desc . '%');
+        if ($request->has('desc')) {
+            $query->where('desc', 'LIKE', '%' . $request->desc . '%');
         }
 
-        if ($index_number = $request->index_number AND $index_number = $request->index_number) {
-            $query->where('index_number', 'LIKE', '%' . $index_number . '%');
+        if ($request->has('index_number')) {
+            $query->where('index_number', 'LIKE', '%' . $request->index_number . '%');
         }
 
-        if ($publisher = $request->publisher AND $publisher = $request->publisher) {
-            $query->where('publisher', 'LIKE', '%' . $publisher . '%');
+        if ($request->has('publisher')) {
+            $query->where('publisher', 'LIKE', '%' . $request->publisher . '%');
         }
 
-        if ($edition = $request->edition AND $edition = $request->edition) {
-            $query->where('edition', 'LIKE', '%' . $edition . '%');
+        if ($request->has('edition')) {
+            $query->where('edition', 'LIKE', '%' . $request->edition . '%');
         }
 
-        if ($call_number = $request->call_number AND $call_number = $request->call_number) {
-            $query->where('call_number', 'LIKE', '%' . $call_number . '%');
+        if ($request->has('call_number')) {
+            $query->where('call_number', 'LIKE', '%' . $request->call_number . '%');
         }
     }
 
     public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
-            if ($request['order'] === 'category') {
-                $query->orderBy('category_name', $request['sort']);
-            } else if ($request['order'] === 'user') {
-                $query->orderBy('user_name', $request['sort']);
-            } else if ($request['order'] === 'latest') {
-                $query->latest();
-            } else if ($request['order'] === 'latest-approved') {
-                $query->orderBy('published', 'desc');
-            } else if ($request['order'] === 'popular') {
-                $query->orderBy('view', 'desc');
-            } else if ($request['order'] === 'number-asc') {
-                $query->orderBy('number', 'asc');
-            } else if ($request['order'] === 'most-viewed') {
-                $query->orderBy('view', 'desc');
-            } else if ($request['order'] === 'rare-viewed') {
-                $query->orderBy('view', 'asc');
-            } else {
-                $query->orderBy($request['order'], $request['sort']);
-            }
+            match ($request['order']) {
+                'category'  => $query->orderBy('category_name', $request['sort']),
+                'user'      => $query->orderBy('user_name', $request['sort']),
+                'latest'    => $query->latest(),
+                'latest-approved'   => $query->latest('published'),
+                'popular'   => $query->orderBy('view', 'desc'),
+                'number-asc'=> $query->orderBy('number', 'asc'),
+                'most-viewed'   => $query->orderBy('view', 'desc'),
+                'rare-viewed'   => $query->orderBy('view', 'asc'),
+                default     => $query->orderBy($request['order'], $request['sort']),
+            };
         } else {
             $query->latest();
         }

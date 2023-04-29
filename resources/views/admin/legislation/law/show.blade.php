@@ -271,7 +271,7 @@
                                         <div class="flex-fill overflow-hidden">
                                             <a href="{{ $document->media->mediaUrl }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->media->name; }}</a>
                                             <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
-                                                <li class="list-inline-item me-1">{{ $document->typeTranslate }}</li>
+                                                <li class="list-inline-item me-1">{{ $document->type->label() }}</li>
                                                 <li class="list-inline-item ms-1">{{ $document->media->size() }}</li>
                                             </ul>
                                         </div>

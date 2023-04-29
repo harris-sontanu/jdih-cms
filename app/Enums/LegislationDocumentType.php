@@ -12,4 +12,14 @@ enum LegislationDocumentType: string
     case ABSTRACT = 'abstract';
     case ATTACHMENT = 'attachment';
     case COVER = 'cover';
+
+    public function label()
+    {
+        return match ($this) {
+            self::MASTER  => 'Batang Tubuh',
+            self::ABSTRACT => 'Abstrak',
+            self::ATTACHMENT => 'Lampiran',
+            self::COVER => 'Sampul',
+        };
+    }
 }

@@ -3,7 +3,7 @@ namespace App\Models\Traits;
 
 use Illuminate\Support\Carbon;
 
-trait HasPublishedAt
+trait Publication
 {
     public function publicationStatus()
     {

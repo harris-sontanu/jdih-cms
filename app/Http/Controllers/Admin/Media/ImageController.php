@@ -33,10 +33,10 @@ class ImageController extends MediaController
 
         if ($tab = $request->tab)
         {
-            if ($tab == 'tayang') {
+            if ($tab == 'terbit') {
                 $images->published();
-            } else if ($tab == 'tidak tayang') {
-                $images->unpublished();
+            } else if ($tab == 'draf') {
+                $images->draft();
             }
         }
 
@@ -74,13 +74,13 @@ class ImageController extends MediaController
             'total'     => Media::images()->with('user')->latest()
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'   => Media::images()->with('user')->latest()
+            'terbit'    => Media::images()->with('user')->latest()
                                 ->search($request->only(['search']))
                                 ->published()
                                 ->count(),
-            'tidak tayang' => Media::images()->with('user')->latest()
+            'draf'      => Media::images()->with('user')->latest()
                                 ->search($request->only(['search']))
-                                ->unpublished()
+                                ->draft()
                                 ->count(),
         ];
     }
