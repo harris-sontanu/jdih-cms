@@ -23,13 +23,6 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <label class="navbar-nav-link navbar-nav-link-icon rounded-pill cursor-pointer" for="btncheck1" title="Aktifkan mode gelap">
-                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                    <i class="ph-moon"></i>
-                </label>
-            </li>
-
         </ul>
 
         <div class="navbar-collapse justify-content-center flex-lg-1 order-2 order-lg-1 collapse" id="navbar_search">
@@ -44,7 +37,14 @@
             </div>
         </div>
 
-        <ul class="nav flex-row justify-content-end order-1 order-lg-2">
+        <ul class="nav flex-row justify-content-end order-1 order-lg-2">            
+
+            <li class="nav-item">
+                <label class="navbar-nav-link navbar-nav-link-icon rounded-pill cursor-pointer" for="btncheck1" title="Aktifkan mode gelap">
+                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <i class="ph-moon"></i>
+                </label>
+            </li>
 
             <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
                 <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
