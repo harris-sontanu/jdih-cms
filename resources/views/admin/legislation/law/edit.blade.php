@@ -82,7 +82,7 @@
                                             <div class="flex-fill overflow-hidden">
                                                 <a href="{{ $document->media->source }}" class="fw-semibold text-body text-truncate" target="_blank">{{ $document->media->name; }}</a>
                                                 <ul class="list-inline list-inline-bullet fs-sm text-muted mb-0">
-                                                    <li class="list-inline-item me-1">{{ $document->typeTranslate }}</li>
+                                                    <li class="list-inline-item me-1">{{ $document->type->label() }}</li>
                                                     <li class="list-inline-item mx-1">{{ $document->media->size() }}</li>
                                                     <li class="list-inline-item ms-1"><a role="button" class="delete-document" title="Hapus" data-route="{{ route('admin.legislation.document.destroy', $document->media->id) }}">Hapus</a></li>
                                                 </ul>

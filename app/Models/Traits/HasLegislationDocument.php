@@ -1,12 +1,19 @@
 <?php
 namespace App\Models\Traits;
 
+use App\Models\LegislationDocument;
 use App\Enums\LegislationDocumentType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait HasLegislationDocument
 {
+    public function documents(): HasMany
+    {
+        return $this->hasMany(LegislationDocument::class);
+    }
+
     public function masterDocument()
     {
         return $this->documents()

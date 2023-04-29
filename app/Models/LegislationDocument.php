@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Enums\LegislationDocumentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -58,23 +57,6 @@ class LegislationDocument extends Model
         return $this->hasMany(LegislationDownloadLog::class);
     }
 
-    public function typeTranslate(): Attribute
-    {
-        if ($this->type === LegislationDocumentType::MASTER) {
-            $type = 'Batang Tubuh';
-        } else if ($this->type === LegislationDocumentType::ABSTRACT) {
-            $type = 'Abstrak';
-        } else if ($this->type === LegislationDocumentType::ATTACHMENT) {
-            $type = 'Lampiran';
-        } else if ($this->type === LegislationDocumentType::COVER) {
-            $type = 'Sampul';
-        }
-
-        return Attribute::make(
-            get: fn ($value) => $type
-        );
-    }
-
     public function scopeOfType($query, $type): void
     {
         $query->where('type', $type);
@@ -88,4 +70,5 @@ class LegislationDocument extends Model
 
         return $count;
     }
+    
 }

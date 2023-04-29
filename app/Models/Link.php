@@ -4,19 +4,17 @@ namespace App\Models;
 
 use App\Enums\LinkDisplay;
 use App\Enums\LinkType;
-use App\Models\Traits\TimeHelper;
-use App\Models\Traits\HasPublishedAt;
 use App\Models\Traits\HasUser;
+use App\Models\Traits\Publication;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Link extends Model
 {
-    use HasFactory, TimeHelper, HasPublishedAt, HasUser;
+    use HasFactory, TimeFormatter, Publication, HasUser;
 
     /**
      * The attributes that are mass assignable.
@@ -46,26 +44,21 @@ class Link extends Model
         'display'   => LinkDisplay::class,
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function image(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediaable');
     }
 
+    public function youtubeParseUrl()
+    {
+        $url = parse_url($this->url);
+        return isset($url['query']) ? '/' . substr($url['query'], 2) : $url['path'];
+    }
+
     public function youtubeId(): Attribute
     {
-        $components = parse_url($this->url);
-        $v = $components['path'];
-        if ( ! empty($components['query'])) {
-            $v = '/' . substr($components['query'], 2);
-        }
-
         return Attribute::make(
-            get: fn ($value) => $v
+            get: fn ($value) => $this->youtubeParseUrl()
         );
     }
 
@@ -73,63 +66,22 @@ class Link extends Model
     {
         $components = parse_url($this->url);
         $v = $components['path'];
-        if ( ! empty($components['query'])) {
+        if (isset($components['query'])) {
             $v = '/' . substr($components['query'], 2);
         }
 
         return Attribute::make(
-            get: fn ($value) => 'https://www.youtube.com/embed'.$v
+            get: fn ($value) => 'https://www.youtube.com/embed'. $this->youtubeParseUrl()
         );
     }
 
     public function youtubeThumbUrl(): Attribute
     {
-        $components = parse_url($this->url);
-        $v = $components['path'];
-        if ( ! empty($components['query'])) {
-            $v = '/' . substr($components['query'], 2);
-        }
-
-        $youtubeThumbUrl = '<iframe width="240" height="135" src="https://www.youtube.com/embed'.$v.'" class="rounded" allowfullscreen="" frameborder="0" mozallowfullscreen="" webkitallowfullscreen=""></iframe>';
+        $youtubeThumbUrl = '<iframe width="240" height="135" src="https://www.youtube.com/embed'.$this->youtubeParseUrl().'" class="rounded" allowfullscreen="" frameborder="0" mozallowfullscreen="" webkitallowfullscreen=""></iframe>';
 
         return Attribute::make(
             get: fn ($value) => $youtubeThumbUrl
         );
-    }
-
-    protected function publicationStatus()
-    {
-        if (is_null($this->published_at)) {
-            $status = 'unpublish';
-        } else {
-            $status = 'publish';
-        }
-
-        return $status;
-    }
-
-    public function publicationLabel()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'unpublish') {
-            $publicationLabel = '<span class="text-capitalize text-warning d-block">Tidak Tayang</span>';
-        } else if ($status === 'publish')  {
-            $publicationLabel = '<span class="text-capitalize text-success d-block">Tayang</span>';
-        }
-
-        return $publicationLabel;
-    }
-
-    public function publicationBadge()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'unpublish') {
-            $publicationBadge = '<span class="badge bg-warning bg-opacity-20 text-warning">Tidak Tayang</span>';
-        } else if ($status === 'publish') {
-            $publicationBadge = '<span class="badge bg-success bg-opacity-20 text-success">Tayang</span>';
-        }
-
-        return $publicationBadge;
     }
 
     public function scopeYoutubes($query): void
@@ -147,16 +99,6 @@ class Link extends Model
         $query->where('type', LinkType::JDIH);
     }
 
-    public function scopePublished($query): void
-    {
-        $query->where('published_at', '<=', Carbon::now());
-    }
-
-    public function scopeUnpublished($query): void
-    {
-        $query->whereNull('published_at');
-    }
-
     public function scopeSearch($query, $request): void
     {
         if (isset($request['search']) AND $search = $request['search']) {
@@ -168,12 +110,10 @@ class Link extends Model
     public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
-            if ($request['order'] === 'user') {
-                $query->join('users', 'users.id', '=', 'links.user_id')
-                    ->orderBy('users.name', $request['sort']);
-            } else {
-                $query->orderBy($request['order'], $request['sort']);
-            }
+            match ($request['order']) {
+                'user'  => $query->join('users', 'users.id', '=', 'links.user_id')->orderBy('users.name', $request['sort']),
+                default => $query->orderBy($request['order'], $request['sort'])
+            };
         } else {
             $query->orderBy('sort', 'asc');
         }

@@ -27,10 +27,10 @@ class FileController extends MediaController
 
         if ($tab = $request->tab)
         {
-            if ($tab == 'tayang') {
+            if ($tab == 'terbit') {
                 $files->published();
-            } else if ($tab == 'tidak tayang') {
-                $files->unpublished();
+            } else if ($tab == 'draf') {
+                $files->draft();
             }
         }
 
@@ -62,13 +62,13 @@ class FileController extends MediaController
             'total'     => Media::files()->with('user')->latest()
                                 ->search($request->only(['search']))
                                 ->count(),
-            'tayang'   => Media::files()->with('user')->latest()
+            'terbit'    => Media::files()->with('user')->latest()
                                 ->search($request->only(['search']))
                                 ->published()
                                 ->count(),
-            'tidak tayang' => Media::files()->with('user')->latest()
+            'draf'      => Media::files()->with('user')->latest()
                                 ->search($request->only(['search']))
-                                ->unpublished()
+                                ->draft()
                                 ->count(),
         ];
     }

@@ -115,17 +115,14 @@
             </div>
 
             <div class="mb-3">
-                <label for="subject" class="col-form-label">Status</label>
+                <label class="col-form-label">Status</label>
                 <div class="form-check-horizontal">
-                    <label class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="status" value="berlaku" @checked(old('status', (empty($law) OR (!empty($law) AND $law->status === 'berlaku')) ? true : false))>
-                        <span class="form-check-label">Berlaku</span>
-                    </label>
-
-                    <label class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="status" value="tidak berlaku" @checked(old('status', (!empty($law) AND $law->status === 'tidak berlaku') ? true : false))>
-                        <span class="form-check-label">Tidak Berlaku</span>
-                    </label>
+                    @foreach ($lawStatusOptions as $status)                        
+                        <label class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" name="status" value="{{ $status->value }}" @checked(old('status', (empty($law) OR (isset($law) AND $law->status === $status)) ? true : false))>
+                            <span class="form-check-label">{{ $status->label() }}</span>
+                        </label>
+                    @endforeach
                 </div>
             </div>
 

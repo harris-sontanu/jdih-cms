@@ -142,7 +142,7 @@
                                 <div class="col-6">
                                     <h4 class="mb-1 fw-bold">Status</h4>
                                     <p class="mb-0">
-                                        <a href="{{ route('legislation.law.index', ['status' => $legislation->status]) }}" class="text-body">{!! $legislation->statusBadge !!}</a>
+                                        <a href="{{ route('legislation.law.index', ['statuses[]' => $legislation->status->value]) }}" class="text-body">{!! $legislation->status->badge() !!}</a>
                                     </p>
                                 </div>
                             </div>

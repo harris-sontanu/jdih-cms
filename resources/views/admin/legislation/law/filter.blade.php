@@ -104,9 +104,10 @@
             <div class="col-md-3">
                 <div class="mb-3">
                     <select name="status" class="select">
-                        <option value="">Pilih Status</option>    
-                        <option value="berlaku">Berlaku</option>
-                        <option value="tidak berlaku">Tidak Berlaku</option>
+                        <option value="">Pilih Status</option>
+                        @foreach ($lawStatusOptions as $status)                            
+                            <option value="{{ $status->value }}" @selected(Request::get('status') == $status->value)>{{ $status->label() }}</option>
+                        @endforeach
                     </select>  
                 </div>    
             </div> 

@@ -36,13 +36,11 @@ class Visitor extends Model
         $visitor = $query->selectRaw('MAX(ipv4)');
         $dt = Carbon::now();
 
-        if ($subDays === 0) {
-            $visitor->whereDate('created_at', Carbon::today());
-        } else if ($subDays === 1) {
-            $visitor->whereDate('created_at', Carbon::yesterday());
-        } else {
-            $visitor->whereDate('created_at', $dt->subDays($subDays));
-        }
+        match ($subDays) {
+            0   => $visitor->whereDate('created_at', Carbon::today()),
+            1   => $visitor->whereDate('created_at', Carbon::yesterday()),
+            default => $visitor->whereDate('created_at', $dt->subDays($subDays))
+        };
 
         $visitor->groupByRaw('DATE(created_at), ipv4');
     }

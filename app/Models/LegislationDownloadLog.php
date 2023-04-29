@@ -44,12 +44,10 @@ class LegislationDownloadLog extends Model
     {
         $dt = Carbon::now();
 
-        if ($subDays === 0) {
-            $query->whereDate('created_at', Carbon::today());
-        } else if ($subDays === 1) {
-            $query->whereDate('created_at', Carbon::yesterday());
-        } else {
-            $query->whereDate('created_at', $dt->subDays($subDays));
-        }
+        match ($subDays) {
+            0   => $query->whereDate('created_at', Carbon::today()),
+            1   => $query->whereDate('created_at', Carbon::yesterday()),
+            default => $query->whereDate('created_at', $dt->subDays($subDays))
+        };
     }
 }

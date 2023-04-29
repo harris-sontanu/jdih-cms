@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cookie;
-use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasUser;
+use App\Models\Traits\Publication;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, TimeHelper, HasUser;
+    use HasFactory, SoftDeletes, TimeFormatter, Publication, HasUser;
     /**
      * The attributes that are mass assignable.
      *
@@ -41,11 +42,6 @@ class Post extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function taxonomy(): BelongsTo
     {
         return $this->belongsTo(Taxonomy::class);
@@ -66,71 +62,9 @@ class Post extends Model
         return $this->morphMany(Media::class, 'mediaable')->where('id', '<>', $this->cover_id);
     }
 
-    protected function publicationStatus()
-    {
-        if (is_null($this->published_at)) {
-            $status = 'draft';
-        } else if (!is_null($this->published_at) and $this->published_at->isFuture()) {
-            $status = 'schedule';
-        } else if (!is_null($this->deleted_at)) {
-            $status = 'trash';
-        } else {
-            $status = 'publish';
-        }
-
-        return $status;
-    }
-
-    public function publicationLabel()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'draft') {
-            $publicationLabel = '<span class="text-capitalize text-warning d-block">Draf</span>';
-        } else if ($status === 'schedule') {
-            $publicationLabel = '<span class="text-capitalize text-info d-block">Terjadwal</span>';
-        } else if ($status === 'publish')  {
-            $publicationLabel = '<span class="text-capitalize text-success d-block">Terbit</span>';
-        } else if ($status === 'trash')  {
-            $publicationLabel = '<span class="text-capitalize d-block">Sampah</span>';
-        }
-
-        return $publicationLabel;
-    }
-
-    public function publicationBadge()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'draft') {
-            $publicationBadge = '<span class="badge bg-warning bg-opacity-20 text-warning">Draf</span>';
-        } else if ($status === 'schedule') {
-            $publicationBadge = '<span class="badge bg-info bg-opacity-20 text-info">Terjadwal</span>';
-        } else if ($status === 'trash') {
-            $publicationBadge = '<span class="badge bg-dark bg-opacity-20 text-dark">Sampah</span>';
-        } else if ($status === 'publish') {
-            $publicationBadge = '<span class="badge bg-success bg-opacity-20 text-success">Terbit</span>';
-        }
-
-        return $publicationBadge;
-    }
-
     public function scopeOfType($query, $type): void
     {
         $query->whereRelation('taxonomy', 'type', $type);
-    }
-
-    public function scopePublished($query): void
-    {
-        $query->where('published_at', '<=', Carbon::now());
-    }
-
-    public function scopeScheduled($query): void
-    {
-        $query->where('published_at', '>', Carbon::now());
-    }
-
-    public function scopeDraft($query): void
-    {
-        $query->whereNull('published_at');
     }
 
     public function scopeSearch($query, $request): void
@@ -169,11 +103,6 @@ class Post extends Model
         }
     }
 
-    public function scopePopular($query): void
-    {
-        $query->orderBy('view', 'desc');
-    }
-
     public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
@@ -186,11 +115,6 @@ class Post extends Model
         } else {
             $query->latest();
         }
-    }
-
-    public function scopeLatestPublished($query): void
-    {
-        $query->orderBy('published_at', 'desc');
     }
 
     public function incrementViewCount()

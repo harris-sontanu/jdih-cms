@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Legislation;
 use App\Enums\LawRelationshipStatus;
 use App\Enums\LegislationDocumentType;
 use App\Enums\LegislationRelationshipType;
+use App\Enums\LegislationStatus;
 use App\Http\Controllers\Admin\Legislation\LegislationController;
 use App\Models\Category;
 use App\Models\Matter;
@@ -73,6 +74,10 @@ class LawController extends LegislationController
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
         $users = User::sorted()->pluck('name', 'id');
+        $lawStatusOptions = [
+            LegislationStatus::BERLAKU,
+            LegislationStatus::TIDAKBERLAKU
+        ];
 
         $vendors = [
             'assets/admin/js/vendor/notifications/bootbox.min.js',
@@ -95,6 +100,7 @@ class LawController extends LegislationController
             'matters',
             'institutes',
             'fields',
+            'lawStatusOptions',
             'users',
             'tabFilters',
             'vendors'
@@ -167,6 +173,10 @@ class LawController extends LegislationController
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
+        $lawStatusOptions = [
+            LegislationStatus::BERLAKU,
+            LegislationStatus::TIDAKBERLAKU
+        ];
 
         $vendors = [
             'assets/admin/js/vendor/forms/selects/select2.min.js',
@@ -182,6 +192,7 @@ class LawController extends LegislationController
             'matters',
             'institutes',
             'fields',
+            'lawStatusOptions',
             'statusOptions',
             'vendors',
         ));
@@ -373,6 +384,10 @@ class LawController extends LegislationController
         $matters = Matter::sorted()->pluck('name', 'id');
         $institutes = Institute::sorted()->pluck('name', 'id');
         $fields = Field::sorted()->pluck('name', 'id');
+        $lawStatusOptions = [
+            LegislationStatus::BERLAKU,
+            LegislationStatus::TIDAKBERLAKU
+        ];
         
         $relationships = $legislation->relations()->get();
 
@@ -406,6 +421,7 @@ class LawController extends LegislationController
             'matters',
             'institutes',
             'fields',
+            'lawStatusOptions',
             'statusOptions',
             'relationships',
             'showUploadForm',

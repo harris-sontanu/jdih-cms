@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Traits\TimeHelper;
 use App\Models\Traits\HasUser;
+use App\Models\Traits\Publication;
+use App\Models\Traits\TimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class Media extends Model
 {
-    use HasFactory, TimeHelper, HasUser;
+    use HasFactory, TimeFormatter, Publication, HasUser;
 
     /**
      * The attributes that are mass assignable.
@@ -48,11 +48,6 @@ class Media extends Model
         return $this->hasOne(Post::class, 'cover_id');
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function link(): HasOne
     {
         return $this->hasOne(Link::class, 'image_id');
@@ -66,7 +61,7 @@ class Media extends Model
     public function ext(): Attribute
     {
         $file = explode('.', $this->path);
-        $ext = $file[1];
+        $ext = Str::lower($file[1]);
 
         return Attribute::make(
             get: fn ($value) => $ext
@@ -76,7 +71,7 @@ class Media extends Model
     public function extClass(): Attribute
     {
         $file = explode('.', $this->path);
-        $ext = $file[1];
+        $ext = Str::lower($file[1]);
 
         if ($ext === 'pdf') {
             $class = 'ph-file-pdf text-danger';
@@ -102,7 +97,7 @@ class Media extends Model
     public function source(): Attribute
     {
         $source = asset('assets/admin/images/placeholders/placeholder.jpg');
-        if (!empty($this->path)) {
+        if (isset($this->path)) {
             if (Storage::disk('public')->exists($this->path)) $source = Storage::url($this->path);
         }
 
@@ -114,7 +109,7 @@ class Media extends Model
     public function thumbSource(): Attribute
     {
         $thumbSource = asset('assets/admin/images/placeholders/placeholder.jpg');
-        if (!empty($this->path)) {
+        if (isset($this->path)) {
             $ext = substr(strchr($this->path, '.'), 1);
             $thumbnail = str_replace(".{$ext}", "_md.{$ext}", $this->path);
             if (Storage::disk('public')->exists($thumbnail)) $thumbSource = Storage::url($thumbnail);
@@ -128,7 +123,7 @@ class Media extends Model
     public function fitSource(): Attribute
     {
         $fitSource = asset('assets/admin/images/placeholders/placeholder.jpg');
-        if (!empty($this->path)) {
+        if (isset($this->path)) {
             $ext = substr(strchr($this->path, '.'), 1);
             $fit = str_replace(".{$ext}", "_sq.{$ext}", $this->path);
             if (Storage::disk('public')->exists($fit)) $fitSource = Storage::url($fit);
@@ -183,41 +178,6 @@ class Media extends Model
         return round($bytes, $precision) . ' ' . $units[$pow];
     }
 
-    protected function publicationStatus()
-    {
-        if (is_null($this->published_at)) {
-            $status = 'unpublish';
-        } else {
-            $status = 'publish';
-        }
-
-        return $status;
-    }
-
-    public function publicationLabel()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'unpublish') {
-            $publicationLabel = '<span class="text-capitalize text-warning d-block">Tidak Tayang</span>';
-        } else if ($status === 'publish')  {
-            $publicationLabel = '<span class="text-capitalize text-success d-block">Tayang</span>';
-        }
-
-        return $publicationLabel;
-    }
-
-    public function publicationBadge()
-    {
-        $status = $this->publicationStatus();
-        if ($status === 'unpublish') {
-            $publicationBadge = '<span class="badge bg-warning bg-opacity-20 text-warning">Tidak Tayang</span>';
-        } else if ($status === 'publish') {
-            $publicationBadge = '<span class="badge bg-success bg-opacity-20 text-success">Tayang</span>';
-        }
-
-        return $publicationBadge;
-    }
-
     public function scopeImages($query): void
     {
         $query->where('is_image', 1);
@@ -227,16 +187,6 @@ class Media extends Model
     {
         $query->where('is_image', 0)
             ->whereNull('mediaable_id');
-    }
-
-    public function scopePublished($query): void
-    {
-        $query->where('published_at', '<=', Carbon::now());
-    }
-
-    public function scopeUnpublished($query): void
-    {
-        $query->whereNull('published_at');
     }
 
     public function scopeSearch($query, $request): void
@@ -250,12 +200,10 @@ class Media extends Model
     public function scopeSorted($query, $request = []): void
     {
         if (isset($request['order'])) {
-            if ($request['order'] === 'user') {
-                $query->join('users', 'users.id', '=', 'media.user_id')
-                    ->orderBy('users.name', $request['sort']);
-            } else {
-                $query->orderBy($request['order'], $request['sort']);
-            }
+            match ($request['order']) {
+                'user'  => $query->join('users', 'users.id', '=', 'media.user_id')->orderBy('users.name', $request['sort']),
+                default => $query->orderBy($request['order'], $request['sort']),
+            };
         } else {
             $query->latest();
         }

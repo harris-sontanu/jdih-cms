@@ -83,7 +83,7 @@
                                         <tr>
                                             <td class="fw-semibold">Status Putusan</td>
                                             <td width="1">:</td>
-                                            <td>{!! $legislation->statusBadge !!}</td>
+                                            <td>{!! $legislation->status->badge() !!}</td>
                                         </tr>
                                         <tr>
                                             <td class="fw-semibold">Sumber</td>

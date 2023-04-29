@@ -123,8 +123,15 @@
 
                                 <div class="mb-3">
                                     <label for="status" class="col-form-label">Status</label>
-                                    <input type="text" name="status" id="status" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') }}">
-                                    <div class="form-text text-muted">Status putusan pengadilan. Contoh: Tetap.</div>
+                                    <div class="form-check-horizontal">
+                                        @foreach ($judgmentStatusOptions as $status)                        
+                                            <label class="form-check form-check-inline">
+                                                <input type="radio" class="form-check-input" name="status" value="{{ $status->value }}" @checked(old('status', $status->value))>
+                                                <span class="form-check-label">{{ $status->label() }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                    {{-- <div class="form-text text-muted">Status putusan pengadilan. Contoh: Tetap.</div> --}}
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

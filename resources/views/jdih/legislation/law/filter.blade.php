@@ -85,14 +85,12 @@
 
             <div class="collapse show" id="status">
                 <div class="sidebar-section-body">
-                    <label class="form-check mb-2">
-                        <input type="checkbox" name="statuses[]" @checked(Request::get('statuses') AND in_array('berlaku', Request::get('statuses'))) class="form-check-input form-check-input-danger" value="berlaku">
-                        <span class="form-check-label">Berlaku</span>
-                    </label>
-                    <label class="form-check">
-                        <input type="checkbox" name="statuses[]" @checked(Request::get('statuses') AND in_array('tidak berlaku', Request::get('statuses'))) class="form-check-input form-check-input-danger" value="tidak berlaku">
-                        <span class="form-check-label">Tidak Berlaku</span>
-                    </label>
+                    @foreach ($lawStatusOptions as $status)                        
+                        <label class="form-check mb-2">
+                            <input type="checkbox" name="statuses[]" @checked(Request::get('statuses') AND in_array($status->value, Request::get('statuses'))) class="form-check-input form-check-input-danger" value="{{ $status->value }}">
+                            <span class="form-check-label">{{ $status->label() }}</span>
+                        </label>
+                    @endforeach
                 </div>
             </div>
         </div>
